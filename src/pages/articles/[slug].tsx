@@ -2,6 +2,7 @@ import { api } from "@/axios"
 import { BlogDetailContent } from "@/component/blogDetails/BlogDetailContent"
 import { BlogDetailHeader } from "@/component/blogDetails/BlogDetailHeader"
 import { SuggestedArticle } from "@/component/blogDetails/suggestedArticle"
+import { ParsedUrlQuery } from "querystring"
 
 import { Layout } from "@/layout"
 import { Box } from "@chakra-ui/react"
@@ -34,15 +35,19 @@ updatedAt:string
 }
 
  type BlogDetailPage = {
-     article: attribute,
+     article: {attributes:attribute},
      otherArticle: attribute[]
 
  }
 
+  type GetStaticPathsContext = {
+    locales?: string[];
+    defaultLocale?: string;
+  };
 
 
 
-const BlogDetails:NextPage<BlogDetailPage> = ({article,otherArticle}: any) => {
+const BlogDetails:NextPage<BlogDetailPage> = ({article,otherArticle}:BlogDetailPage) => {
   
   
     const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL as string
@@ -90,7 +95,7 @@ const BlogDetails:NextPage<BlogDetailPage> = ({article,otherArticle}: any) => {
 
 
 
-export const getStaticPaths:GetStaticPaths = async(context: any) => {
+export const getStaticPaths:GetStaticPaths = async(context) => {
    const { locales } =context;
 //    const {lang} = context.params
     const allArticles = await api.get(`/api/articles/?populate=*`)
@@ -100,7 +105,7 @@ export const getStaticPaths:GetStaticPaths = async(context: any) => {
   
     allArticles?.data?.data?.map((eachArticle: any) => {
 
-        locales.map((language:any) => {
+        locales!.map((language:any) => {
             path.push({
                 params: {
                     slug: eachArticle?.attributes?.slug
@@ -126,7 +131,7 @@ export const getStaticPaths:GetStaticPaths = async(context: any) => {
 }
  
 
-export const getStaticProps:GetStaticProps = async ({ locale, params }: any) => {
+export const getStaticProps:GetStaticProps = async ({ locale, params }) => {
        
     const [singleArticle, otherArticle] = await Promise.all([
             api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`),
@@ -141,7 +146,7 @@ export const getStaticProps:GetStaticProps = async ({ locale, params }: any) => 
             article: singleArticle?.data.data[0],
             otherArticle: otherArticle?.data.data,
             locale,
-            ...await serverSideTranslations(locale, ['common']),
+            ...await serverSideTranslations(locale!, ['common']),
         },
         revalidate:1
     }
