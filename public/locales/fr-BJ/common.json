@@ -1,0 +1,223 @@
+{
+    "navHeader":{
+        "eventAttendeedTxt":"Pour les participants à l'événement",
+        "eventCreatorsText":"Pour les créateurs d'événements",
+        "blogNav":"Blog",
+        "waitlist":"Rejoindre la liste d'attente"
+    },
+    "hero":{
+        "soonLaunchTxt":"bientôt lancé !",
+      "header":"Trouvez le",
+      "header_event":" un événement",
+      "header_suit":"ça te va !",
+      "info":"Nous sommes une plate-forme Web3 qui vous aide à explorer les événements et à suivre les activités en ligne ou hors ligne - vous pouvez choisir parmi notre liste d'expériences professionnelles, spirituelles, de style de vie et amusantes, toutes conçues pour vous et votre équipe."
+
+    },
+    "heroo":{
+        "soonLaunchTxt":"bientôt lancé !",
+        "info":"Nous faisons de la création d'événements",
+         "lit":"Allumé!",
+         "detail":"Grâce à notre technologie web3, vous bénéficiez d'un avantage lorsque vous hébergez votre événements en ayant un accès complet pour créer de beaux événements des expériences à votre goût tout en servant vos invités sans tracas."
+    },
+    "emailFrm":{
+        "placeholder":"Entrer l'adresse e-mail",
+        "waitlistBtn":"Rejoindre la liste d'attente"
+    },
+    "benefits":{
+        "benefitsText":"Avantages",
+        "benefitsText_2":"De l'utilisation de Gruve pour les créateurs d'événements",
+        "Benefit_overview":"En tant que créateur d'événements, vous pouvez organiser des événements sans stress, partager des expériences et collecter des paiements pour des événements en direct et virtuels grâce à nos outils de billetterie en ligne simples. Découvrez ce que nos outils faciles à utiliser vous permettent de faire",
+        "first_benefit_header":"Suivre tous les détails",
+        "first_benefit_text":"Suivez tous les détails de votre événement, des participants à ceux qui ont enregistré l'événement",
+        "sec_benefit_header":"Tâches simplifiées",
+        "sec_benefit_text":"Dites adieu au processus de création d'événement stressant, ici nous le réalisons en une seule étape",
+        "third_benefit_header":"Promotion d'événements",
+        "third_benefit_text":"Exploitez le plus grand marketing de médias sociaux P2P pour étendre la portée de votre événement.",
+        "frth_benefit_header":"La flexibilité",
+        "frth_benefit_text":"Si vous êtes une organisation, nous vous donnons la possibilité de collaborer avec d'autres utilisateurs pour créer des événements"
+    },
+    "motivation":{
+        "header":"Notre motif",
+        "motive_text_1":"Tout comme vous, les entrepreneurs, les bâtisseurs sociaux, nous aimons la beauté qui vient avec la communauté, la culture explorée et l'interaction sociale et étant également de grands amoureux d'un monde décentralisé, nous avons décidé d'engager le monde de la billetterie afin de créer Gruve qui est fait pour création d'événements facile et anonyme sur la technologie web3.",
+        "motive_text_2":"Notre objectif est de donner aux entrepreneurs, aux créatifs et aux apprenants curieux, ainsi qu'à ceux qui aiment les rassemblements sociaux, les moyens de créer des communautés fortes et une valeur culturelle grâce à des expériences en direct dans un monde décentralisé. Faites plus de ce que vous aimez et possédez-le"
+    },
+    "create":{
+        "ceate_text":"Créer et vendre des billets dans",
+        "three_text":"Trois",
+        "easy_text":"étapes faciles",
+        "waitlist_btn":"Rejoindre la liste d'attente",
+        "first_small_text":"Connecter le portefeuille",
+        "first_text":"Connectez-vous au portefeuille Web3 pris en charge pour commencer en un seul clic",
+        "sec_small_text":"Basculer vers le réseau requis",
+        "sec_text":"Sélectionnez le réseau requis de la plate-forme pour pouvoir obtenir un accès complet à la plate-forme.",
+        "third_small_text":"Configurer l'événement",
+        "third_text":"Créez un ticket et publiez votre événement. Nous vous aiderons à passer le mot."
+        
+    },
+    "platform":{
+        "header_text":"Achetez des billets pour toutes sortes d'événements",
+        "header_small_text":"Trouvez et achetez des billets pour assister à toutes sortes d'événements. Filtrez les événements par lieu et trouvez les événements tendance près de chez vous.",
+        "first_platform_header":"Événements de l'église",
+        "first_Platform_text": "Créez une expérience de culte immersive virtuelle ou physique. installez-le sur Gruve",
+        "sec_platform_header": "Événements virtuels",
+        "sec_platform_text":"Créez des événements en ligne à partir d'espaces Twitter, de discussions Google, nous avons ce qu'il vous faut.",
+        "third_platform_header":"Webinaires",
+        "third_platform_text": "Organisez et participez à des cours interactifs, des discussions, des formations de n'importe où dans le monde",
+        "frth_platform_header":"Santé et remise en forme",
+        "frth_platform_text":"Développez votre communauté en créant des activités pour les autres fitfams, du yoga aux séances de gym.",
+        "fifth_platform_header":"Spectacles de comédie",
+        "fifth_platform_text":"Créez des billets basés sur NFT pour des spectacles d'humour alimentés par le Web3 - le premier du genre.",
+        "sixth_platform_header":"Spectacles musicaux",
+        "sixth_platform_text": "Organisez des concerts, des festivals et des soirées d'écoute en un clin d'œil avec les outils de billetterie Gruve."
+           
+        },
+        "whygruve":{
+            "first_item_header":"Explorez vos événements préférés",
+            "first_item_text":"Participez à tous les événements, du style de vie aux webinaires et concerts dans le monde entier en un clic",
+            "second_item_header":"Créer de nouveaux souvenirs",
+            "second_items_text":"Vous vous sentez aventureux? trouver de nouveaux événements et rencontrer de nouvelles personnes en dehors de votre cercle habituel.",
+            "thrd_item_header":"Tous les types d'événements sur une seule plateforme",
+            "thrd_item_text":"Trouvez tout type d'événement près de chez vous, rencontrez de nouvelles personnes et vivez de belles expériences",
+            "what_text":"Qu'est-ce que",
+            "what_end":"pour vous?",
+            "easy_text":"Nous vous facilitons l'accès aux événements près de chez vous dans ces catégories."
+         },
+         "community":{
+            "socials_twitter_follow":"Suivez-nous pour les dernières nouvelles et mises à jour",
+            "socials_visit":"Visitez maintenant",
+            "socials_discord_follow":"Suivez-nous pour les dernières nouvelles et mises à jour.",
+            "socials_linkedIn_follow":"Mélangez et connectez-vous avec vos collègues Gruvers.",
+           "socials_Instagram_follow":"Mélangez et connectez-vous avec vos collègues Gruvers.",
+          "join_community":"Rejoignez notre communauté",
+          "hype":"Rejoignez le battage médiatique sur nos communautés. Partagez avec vos amis et connectez-vous avec d'autres Gruvers."
+        },
+        "Creates":{
+            "first_card_small_text":"Connecter le portefeuille",
+            "first_card_text":"Connectez-vous au portefeuille Web3 pris en charge pour commencer en un seul clic",
+            "sec_card_small_text":"Basculer vers le réseau requis",
+            "sec_card_text":"Sélectionnez le réseau requis de la plate-forme pour pouvoir obtenir un accès complet à la plate-forme.",
+            "thrd_card_small_text":"Configurer l'événement",
+            "thrd_card_text":"Créez un ticket et publiez votre événement. Nous vous aiderons à passer le mot.",
+            "create_text":"Créer et vendre des billets dans",
+            "three":"Trois",
+            "easy_text":"étapes faciles",
+            "join_waitlist":"Rejoindre la liste d'attente",
+            "gruve_text":"Obtenez votre Gruve dans"
+
+        },
+        "faq":{
+            "header":"Vous avez des questions ?",
+            "small_header":"Voir quelques questions fréquemment posées ici!",
+            "quest_1":"Comment puis-je m'inscrire à Gruve?",
+            "quest_1_answer":"Gruve propose deux options, s'inscrire avec Gmail ou via la connexion d'un portefeuille. Remarque : les deux comptes ne peuvent pas être liés.",
+            "quest_2":"Combien coûte l'utilisation de Gruve ?",
+            "quest_2_answer":"Gruve ne facture que les créateurs d'événements. Pour ceux qui assistent aux événements ou qui échangent des billets, la plateforme est entièrement gratuite.",
+            "quest_3":"Comment payer sur Gruve ?",
+            "quest_3_answer":"Les paiements liés à Gruve se font via stableCoin ; la liste des pièces stables approuvées peut varier de temps à autre. Nous prenons également en charge USDT, USDC et DAI pour le moment.",
+            "quest_4":"Puis-je assister à des événements gratuits ?",
+            "quest_4_answer":"Les événements sur Gruve peuvent être gratuits en fonction des paramètres du créateur de l'événement. Remarque : les coûts de tous les billets sont prédéfinis par les vendeurs et les créateurs d'événements.",
+            "quest_5":"Comment acheter des billets sur Gruve ?",
+            "quest_5_answer":"Vous pouvez acheter des billets sur notre place de marché, faire une offre ou contacter les détenteurs de billets avant l'événement.",
+            "quest_6":"Puis-je obtenir un remboursement si je manque un événement ?",
+            "quest_6_answer":"Non, ce que vous faites après l'achat d'un billet dépend entièrement de vous",
+            "quest_7":"Est-ce que je gagne des références ?",
+            "quest_7_answer":"Non, pour l'instant.",
+            "quest_8":"Puis-je noter un événement ?",
+            "quest_8_answer":"Oui, cela aide le score de crédibilité d'un créateur d'événements et aide à faire vérifier son compte."
+        },
+        "faqc":{
+            "header":"Vous avez des questions ?",
+            "small_header":"Voir quelques questions fréquemment posées ici!",
+            "quest_1":"Qui peut utiliser Gruve ?",
+            "quest_1_answer":"Tout le monde peut utiliser Gruve.",
+            "quest_2":"Combien coûte l'utilisation de Gruve ?",
+            "quest_2_answer": "L'utilisation de Gruve est entièrement gratuite, tout paiement serait payant pour la mise en place d'une transaction sur le réseau sur la blockchain et qui n'est pas contrôlé par Gruve ou payé à Gruve, c'est pour la blockchain. Nous sommes les intermédiaires",
+            "quest_3": "Puis-je mettre en place des événements gratuits sur Gruve ?",
+            "quest_3_answer":"OUI!! vous pouvez, pourquoi ne pas commencer voudriez-vous😉",
+            "quest_4": "Comment vendre des billets sur Gruve ?",
+            "quest_4_answer":"Vous pouvez vendre vos billets sur Grve en créant d'abord un événement, puis en définissant les détails nécessaires, y compris le prix. Une fois créé, votre événement sera répertorié sur un marché en tant que NFT, de sorte que toute personne qui achète aura un NFT pour cet événement qui lui servira de billet.",
+            "quest_5":"Comment puis-je gagner de Gruve?",
+            "quest_5_answer": "Vous pouvez répertorier les billets à vendre ou si vous êtes un créateur d'événements, vous pouvez activer le royaliste sur vos ventes de billets.",
+            "quest_6":"Comment gagner de l'argent avec la vente de billets",
+            "quest_6_answer":"Cela dépend entièrement de vous et de votre équipe. Gruve vous donnerait l'accès à la vente à un plus grand nombre de personnes et nous vous aiderions également à promouvoir votre billet sur certaines annonces payantes en tant que service optionnel."
+        },
+        "motive":{
+            "no_hidden":" Pas de frais cachés, pas de frais supplémentaires",
+            "our_currency":"Notre devise est la confiance et la transparence. Nous croyons en vos expériences et visons à vous donner le meilleur.",
+            "join_hype":"Rejoignez le battage médiatique"
+        },
+        "footer":{
+            "first_footer_items":"Notre blog",
+            "Faq":"FAQ",
+            "about":"À propos de Gruve",
+            "copyright":"Copyright 2023 Mine"
+        },
+        "EmailModal":{
+            "congrats":"Félicitations et bienvenue dans la famille gruvy",
+            "submitting":"Envoi de votre e-mail"
+        },
+        "waitlist":{
+            "ready":"Prêt à prendre le contrôle de vos événements ?"
+
+        },
+        "emailForm":{
+            "placeholder":"Entrer l'adresse e-mail",
+            "join_Waitlist":"Rejoindre la liste d'attente"
+        },
+        "creators":{
+            "header":"Qu'y a-t-il pour les créateurs ?",
+            "small_header":" Nous vous aidons à organiser des événements sans stress, à partager des expériences et à collecter des paiements pour des événements en direct et virtuels grâce à nos outils de billetterie en ligne simples.",
+            "first_item_header":"Expérience événementielle fluide",
+            "first_item_text":"Nous vous aidons à organiser des événements sans stress - de la planification à la vente de billets, tout ce que vous avez à faire est de vous inscrire et nous faisons le travail.",
+            "sec_item_header":"Plateforme décentralisée",
+            "sec_item_text":"Nous enlevons le pouvoir des tiers, vous contrôlez pleinement vos événements et vous obtenez ces événements frappés sur la Blockchain en tant que NFT",
+            "thrd_item_header":"Paiement rapide",
+            "thrd_item_text":"Gagnez de l'argent grâce à la vente de billets sans frais cachés, car les invités d'une plate-forme Web3 peuvent payer les billets directement à l'adresse de votre portefeuille en un clin d'œil.",
+             "frth_item_header":"Anonymat de l'utilisateur",
+             "frth_item_text":"Notre mode de fonctionnement décentralisé vous permet de vous inscrire à Gruve et de rester anonyme. Le web3 s'assure que vos informations personnelles ne sont pas accessibles au public.",
+            "sixth_item_header":"Tableau de bord intelligent",
+            "sixth_item_text":"Notre tableau de bord vous donne un aperçu pour suivre les performances, le paiement, la liste des invités et bien plus encore",
+            "seventh_item_header":"Promotion de l'événement",
+            "seventh_item_text":"Faites la promotion de votre événement, renforcez la notoriété de votre marque et interagissez avec votre invité pour créer le battage médiatique nécessaire autour de votre événement."
+            },
+            "why_gruve":{
+                "benefit_text_1":"Avantages de rejoindre le",
+                "benefit_text_2":"Exploiter",
+                "first_item_header":"Trouvez des événements tendance près de chez vous",
+                "first_item_text":"Synchronisez votre position et accédez aux derniers événements près de chez vous",
+                "sec_item_header": "Fonction de paiement facile",
+                "sec_item_text":"Payez vos billets sur place avec votre portefeuille. notre billet électronique vous évite de perdre vos billets ou de faire de longues files d'attente à la porte",
+                "thrd_item_header":"Améliorez votre vie sociale",
+                "thrd_item_text":"Rencontrez de nouvelles personnes partageant les mêmes intérêts et élargissez votre communauté en ligne et hors ligne",
+                "frth_item_header":"Profitez de nouvelles expériences",
+                "frth_item_text":"Explorez de nouvelles activités, planifiez des aventures et créez des souvenirs inoubliables avec des amis.",
+                "fifth_item_header":"Confidentialité",
+                "fifth_item_text":"Notre système web3 vous garantit une confidentialité totale et vous permet de participer à des événements sans risquer que quiconque découvre qui vous êtes."
+            },
+            "blog":{
+                "blogHeader_1":"Lisez nos informations sur les tendances",
+                "blogHeader_2":"mises à jour",
+                "intro_text":"Des mises à jour qui secouent l'industrie aux conseils des meilleurs spécialistes du web3, nous vous apportons tous ces contenus premium et de précieux conseils - Oui, nous avons ce qu'il vous faut Non, pour l'instant.",
+               "latest_news_header":"Comment connecter un wallet à une plateforme web3",
+               "loop_header":"Rester dans la boucle",
+               "loop_text":"Inscrivez-vous à notre newsletter hebdomadaire pour recevoir des mises à jour sur les nouvelles fonctionnalités et les modifications apportées à notre mandat",
+               "loop_input_placeholder":"Entrez votre adresse email",
+               "loop_form_button_getStarted":"Commencer",
+                 "otherArticle_header":"Autres articles du blog"
+              },
+              "blogDetails":{
+                "blogDetails_header":"Comment connecter un wallet à une plateforme web3",
+                  "blogDetails_text":"Organiser un webinaire réussi n'est pas une tâche impossible une fois que vous avez mis les bonnes choses en place. Lorsqu'ils sont bien faits, les webinaires peuvent vous aider à développer votre marque et à vous établir comme une autorité dans votre secteur. Si vous avez hâte d'organiser un webinaire réussi, voici quelques conseils pour vous guider tout au long du processus.",
+                  "blog_head_1":"Blog",
+                  "blog_head_2":"Détail du blog",
+                  "suggested_article_header":"Vous pourriez également profiter"
+              }
+            
+        
+      
+        
+
+         
+
+
+}

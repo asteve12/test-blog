@@ -1,0 +1,211 @@
+{
+  "navHeader": {
+    "eventAttendeedTxt": "For Event Attendees",
+    "eventCreatorsText": "For Event Creators",
+    "blogNav": "Blog",
+    "waitlist": "Join Waitlist"
+  },
+  "hero": {
+    "soonLaunchTxt": "soon to launch!",
+    "header": "Find the ",
+    "header_event": "  event",
+    "header_suit": "that suits you!",
+    "info": "We're a web3 platform that helps you explore events and keep up with the activities online or offline - you can choose from our list of professional, spiritual, lifestyle and fun experiences  all tailored for you and your squad"
+  },
+  "heroo": {
+    "soonLaunchTxt": "soon to launch!",
+    "info": "We make Event Creation",
+    "lit": "Lit!",
+    "detail": "With our web3 technology, you get an edge when you host your events by having full access to create beautiful event experiences to your taste while catering for your guests without hassle."
+  },
+  "emailFrm": {
+    "placeholder": "Enter Email address",
+    "join_Waitlist": "Join Waitlist"
+  },
+  "benefits": {
+    "benefitsText": "Benefits",
+    "benefitsText_2": "Of Using Gruve For Event Creators",
+    "Benefit_overview": "As an event creator, you get to host stress free events, share experiences and collect payments for both live and virtual events with our simple online ticketing tools. Check out what our easy-to-use tools allows you to do",
+    "first_benefit_header": "Track all details",
+    "first_benefit_text": "Track all details of your event from the attendees to the those who saved the event",
+    "sec_benefit_header": "Simplified tasks",
+    "sec_benefit_text": "Say goodbye to the stressful event creation process, here we get it done in just one step",
+    "third_benefit_header": "Event Promotion",
+    "third_benefit_text": "Tap into the largest P2P social media marketting to expand the reach of your event.",
+    "frth_benefit_header": "Flexibility",
+    "frth_benefit_text": "If you are an organization, we give you the ability to collaborate with others users to create events"
+  },
+  "motivation": {
+    "header": "Our motive",
+    "motive_text_1": "Just like you, the entrepreneurs, social builders we love the beauty that comes with community, explored culture and social interraction and also being strong lovers of a decentralized world we decided to engage the world of ticketing in order to create Gruve which is is made for easy and anonymous event creation on the web3 technology.",
+    "motive_text_2": " Our goal is to empower entrepreneurs, creatives, and curious learners, and those who just love social gatherings to build strong communities and cultural value through live experiences in a decentralized world. Do more of what you love and own it"
+  },
+  "create": {
+    "ceate_text": "Create and sell tickets in",
+    "three_text": "three",
+    "easy_text": "easy steps",
+    "waitlist_btn": "Join Waitlist",
+    "first_small_text": "Connect wallet",
+    "first_text": "Connect to supported web3 wallet to get started in just one click",
+    "sec_small_text": "Switch to the required network",
+    "sec_text": "Select to the required network of the platform to be able to gain full access to the platform.",
+    "third_small_text": "Set Up Event",
+    "third_text": "Create ticket and publish your event. We would help you get the word out."
+  },
+  "platform": {
+    "header_text": "Buy Tickets For All Kinds Of Events",
+    "header_small_text": "Find and Buy tickets to attend all kinds of events. Filter events by location and find trending events near you.",
+    "first_platform_header": "Church Events",
+    "first_Platform_text": "Create an immersive worship experience either virtual or physical. set it up on gruve",
+    "sec_platform_header": "Virtual Events",
+    "sec_platform_text": "Create online events from twitter spaces, to google discussions we've got you covered.",
+    "third_platform_header": "Webinars",
+    "third_platform_text": "Host and engage in interactive classes, discussions, trainings from anywhere in the world",
+    "frth_platform_header": "Health and Fitness",
+    "frth_platform_text": "Build your community by creating activities for fellow fitfams from yoga to gym sessions.",
+    "fifth_platform_header": "Comedy Shows",
+    "fifth_platform_text": "Create NFT based tickets for comedy shows powered by the web3- the first of it's kind.",
+    "sixth_platform_header": "Music Shows",
+    "sixth_platform_text": "Organize concerts, festivals and listening parties in a beat with the gruve ticketing tools."
+  },
+  "whygruve": {
+    "first_item_header": "Explore your favorite Events",
+    "first_item_text": "Engage with all events from lifestyle to webinars and concerts worldwide in one click",
+    "second_item_header": "Create New Memories",
+    "second_items_text": "Feeling adventurous? find new events and ,meet new people outside your usual circle.",
+    "thrd_item_header": "All Kinds Events in one platform",
+    "thrd_item_text": "Find any kind of event near you, meet new people and enjoy beautiful experiences",
+    "what_text": "What's",
+    "what_end": "in it for you?",
+    "easy_text": "We make it super easy for you to access events near you in these categories."
+  },
+  "community": {
+    "socials_twitter_follow": "Follow us for the latest news and updates",
+    "socials_visit": "Visit now",
+    "socials_discord_follow": "Follow us for the latest news and updates.",
+    "socials_linkedIn_follow": "Mix and connect with your fellow Gruvers.",
+    "socials_Instagram_follow": "Mix and connect with your fellow Gruvers.",
+    "join_community": "Join Our Community",
+    "hype": "Join the hype on our communities. Share with friends and connect with other Gruvers."
+  },
+  "Creates": {
+    "first_card_small_text": "Connect wallet",
+    "first_card_text": "Connect to supported web3 wallet to get started in just one click",
+    "sec_card_small_text": "Switch to the required network",
+    "sec_card_text": "Select to the required network of the platform to be able to gain full access to the platform.",
+    "thrd_card_small_text": "Set Up Event",
+    "thrd_card_text": "Create ticket and publish your event. We would help you get the word out.",
+    "create_text": "Create and sell tickets in",
+    "three": "three",
+    "easy_text": "easy steps",
+    "join_waitlist": "Join Waitlist",
+    "gruve_text": " Get your Gruve on in"
+  },
+  "faq": {
+    "header": "Got Questions?",
+    "small_header": "See some frequently asked questions here!",
+    "quest_1": "How do I sign up to gruve?",
+    "quest_1_answer": "Gruve offers two options, signup with Gmail or via connecting a wallet. Please note: both accounts cant be linked.",
+    "quest_2": "How much does it cost to use Gruve?",
+    "quest_2_answer": "Gruve only charges event creators. For those attending the events or trading tickets the platform is completely free.",
+    "quest_3": "How do I pay on Gruve?",
+    "quest_3_answer": "Gruve's related Payments are via stableCoin; the list of approved stablecoins could vary from time to time. We also support USDT, USDC and DAI at this time.",
+    "quest_4": "Can I attend free events?",
+    "quest_4_answer": "Events on Gruve can be free depending on the Event creator's setting. Pease Note: Costs of all Ticket are preset by sellers and Event Creators.",
+    "quest_5": "How do I buy tickets on gruve?",
+    "quest_5_answer": "You could purchase tickets from our marketplace, place a bid, or may contact the ticket holders before the event",
+    "quest_6": "Can I get a refund if I miss an event?",
+    "quest_6_answer": "No, What you do after a ticket purchase is entirely up to you",
+    "quest_7": "Do I earn from referrals?",
+    "quest_7_answer": "No, for now.",
+    "quest_8": "Can I rate an event?",
+    "quest_8_answer": "Yes, This helps an Events Creator's  Credibility score and help get their account verified."
+  },
+  "faqc": {
+    "header": "Got Questions?",
+    "small_header": "See some frequently asked questions here!",
+    "quest_1": "Who can use Gruve?",
+    "quest_1_answer": "Anyone can use gruve.",
+    "quest_2": "How much does it cost to use gruve?",
+    "quest_2_answer": "Using Gruve is completely free, any payments would be fee for setting up a transaction to the network on the blockchain and that is not controlled by Gruve or paid to Gruve, its for the blockchain. We are the middlemen",
+    "quest_3": "Can I set up free events on gruve?",
+    "quest_3_answer": "YES!! you can, why don't you get started would you😉",
+    "quest_4": "How do I sell tickets on gruve?",
+    "quest_4_answer": "You can sell your tickets on Grve by first creating an event then setting your necessary details including price. Once this is created your event would be listed on a marketplace as an NFT so anyone who purchases would have an NFT for that event to serve as their ticket.",
+    "quest_5": "How do I earn from Gruve?",
+    "quest_5_answer": "You could list tickets up for sell or if you are an Event Creator you could enable royalist on your ticket sells",
+    "quest_6": "How do I make money from ticket sales",
+    "quest_6_answer": "This is entirely up to you and your team. Gruve would give you the access to sell to a greater number of people and we would also help you promote your ticket on some paid ads as an optional service."
+  },
+  "motive": {
+    "no_hidden": " No Hidden Charges, No Extra Fees",
+    "our_currency": "Our currency is trust and transparency. We believe in your experiences and aim to give you the best.",
+    "join_hype": "Join The Hype"
+  },
+  "footer": {
+    "first_footer_items": "Our Blog",
+    "Faq": "FAQs",
+    "about": "About Gruve",
+    "copyright": "Copyright 2023 Gruve"
+  },
+  "EmailModal": {
+    "congrats": "Congratulations and welcome to the gruvy family",
+    "submitting": "Submitting your email"
+  },
+  "waitlist": {
+    "ready": "Ready to take control of your events?"
+  },
+  "emailForm": {
+    "placeholder": "Enter Email address",
+    "join_Waitlist": "Join Waitlist"
+  },
+  "creators": {
+    "header": "What's in it for Creators?",
+    "small_header": "  We help you host stress free events, share experiences and collect payments for both live and virtual events with our simple online ticketing tools ",
+    "first_item_header": "Seamless event experience",
+    "first_item_text": "We help you host stress free events- from planning to selling of tickets, all you have to do is sign up and we do the work.",
+    "sec_item_header": "Decentralized platform",
+    "sec_item_text": "We take away the power of third parties, you fully are in control of your events and you get to have these events minted on the Blockchain as NFT's",
+    "thrd_item_header": "Quick payment",
+    "thrd_item_text": "Earn money from the sales of tickets with no hidden charges, as a web3 platform guests can pay for tickets directly to your wallet address in a beat.",
+    "frth_item_header": "User Anonymity",
+    "frth_item_text": "Our decentralized mode of operation allows you sign up to gruve and remain anonymous. The web3 makes sure your personal information is not available to the public.",
+    "sixth_item_header": "Smart dashboard",
+    "sixth_item_text": "Our dashboard gives you insight to track performance, payment, guest list and so much more.",
+    "seventh_item_header": "Event promotion",
+    "seventh_item_text": "Promote your event, build brand awareness and engage with your guest to create the needed hype around your event."
+  },
+  "why_gruve": {
+    "benefit_text_1": "Benefits of joining the",
+    "benefit_text_2": "Gruve",
+    "first_item_header": "Find Trending Events Near You",
+    "first_item_text": "Sync your location and access the lastest events near you",
+    "sec_item_header": "Easy payment feature",
+    "sec_item_text": "Pay for tickets on the spot with your wallet. our e-ticket prevents you from losing your tickets or standing in long queues at the gate",
+    "thrd_item_header": "Improve your social life",
+    "thrd_item_text": "Meet new people with similar interest and expand your community both on and off line",
+    "frth_item_header": "Enjoy New experiences",
+    "frth_item_text": "Explore new activities, plan adventures and make lifelong memories together with friends.",
+    "fifth_item_header": "Privacy",
+    "fifth_item_text": "Our web3 system ensures you have full privacy and can join events without the risk of anyone finding out who you are."
+  },
+  "blog":{
+    "blogHeader_1":"Read up on our trending insights",
+    "blogHeader_2":"updates",
+    "intro_text":" From updates that shake the industry to advices from the best web3 specialists we bring to you all these premium contents and valuable tips - Yes we got you covered No, for now.",
+   "latest_news_header":"  How to connect a wallet to  a web3 platform",
+   "loop_header":"Stay in the loop",
+   "loop_text":"Signup for our weekly newsletter to receive updates of new features and changes to our term ",
+   "loop_input_placeholder":"Enter your email address",
+   "loop_form_button_getStarted":"Get Started",
+     "otherArticle_header":"Other Blog Articles",
+     "loadmore":"Load More"
+  },
+  "blogDetails":{
+    "blogDetails_header":"How to connect a wallet to  a web3 platform",
+      "blogDetails_text":" Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build your brand and establish you as an authority in your industry. If you’re looking forward to hosting a successful webinar, here are some tips to guide you through the process.",
+      "blog_head_1":"Blog",
+      "blog_head_2":"Blog Details",
+      "suggested_article_header":"You might also enjoy"
+  }
+}

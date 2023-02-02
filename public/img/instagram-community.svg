@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" fill="none"><path fill="url(#a)" d="M37 4H19A15 15 0 0 0 4 19v18a15 15 0 0 0 15 15h18a15 15 0 0 0 15-15V19A15 15 0 0 0 37 4Zm10.5 33c0 5.79-4.71 10.5-10.5 10.5H19c-5.79 0-10.5-4.71-10.5-10.5V19c0-5.79 4.71-10.5 10.5-10.5h18c5.79 0 10.5 4.71 10.5 10.5v18Z"/><path fill="url(#b)" d="M28 16a12 12 0 1 0 0 24 12 12 0 0 0 0-24Zm0 19.5a7.5 7.5 0 0 1 0-15 7.5 7.5 0 0 1 0 15Z"/><path fill="url(#c)" d="M40.9 16.7a1.6 1.6 0 1 0 0-3.2 1.6 1.6 0 0 0 0 3.2Z"/><defs>
+        <linearGradient id="a" x1="8.39" x2="47.61" y1="47.61" y2="8.39" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC107"/><stop offset=".51" stop-color="#F44336"/><stop offset=".99" stop-color="#9C27B0"/></linearGradient>
+        <linearGradient id="b" x1="19.52" x2="36.48" y1="36.48" y2="19.52" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC107"/><stop offset=".51" stop-color="#F44336"/><stop offset=".99" stop-color="#9C27B0"/></linearGradient>
+        <linearGradient id="c" x1="39.77" x2="42.03" y1="16.23" y2="13.97" gradientUnits="userSpaceOnUse"><stop stop-color="#FFC107"/><stop offset=".51" stop-color="#F44336"/><stop offset=".99" stop-color="#9C27B0"/></linearGradient>
+    </defs>
+</svg>
