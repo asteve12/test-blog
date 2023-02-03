@@ -7,7 +7,7 @@ import { TimerCard } from "../../shared/TimeCard"
 
 
 type ILatestNews = {
-    estimateArticleReadTime: (article: string) => number, 
+    estimateArticleReadTime: (article: string) => number , 
     latestArticle:any
 }
 
