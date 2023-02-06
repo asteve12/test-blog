@@ -30,9 +30,9 @@ export const ArticleCard = ({
      const timeToRead = estimateArticleReadTime(content)  
   
     return (
-        <Box w={["95%","95%","389px"]} h="542px"    >
+        <Box w={["100%","95%","389px"]} h="542px"    >
             <Image w={"100%"} objectFit="cover" h={["50%","323px"]} borderRadius="16px" src={`${Base_Url}${image}`}/> 
-            <Flex justifyContent="space-between" display={["none","flex"]} mt="10px"  w="100%" >
+            <Flex justifyContent="space-between" display={[null,"flex"]} mt="10px"  w="100%" >
                 <BlogTitle title={title}></BlogTitle>
                 <TimerCard timetoRead={timeToRead}/>
             </Flex>

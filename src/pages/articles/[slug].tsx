@@ -97,7 +97,7 @@ const BlogDetails:NextPage<BlogDetailPage> = ({article,otherArticle}:BlogDetailP
 
 export const getStaticPaths:GetStaticPaths = async(context) => {
    const { locales } =context;
-//    const {lang} = context.params
+
     const allArticles = await api.get(`/api/articles/?populate=*`)
     const path: any[] = []
     

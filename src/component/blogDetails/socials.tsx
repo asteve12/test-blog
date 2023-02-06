@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from "@chakra-ui/react"
+import { Box, Text, Stack } from "@chakra-ui/react"
 import { CustomIcons } from "../../util/customIcon"
 //icons
 import { GrFacebookOption } from "react-icons/gr"
@@ -32,7 +32,7 @@ export const Socials = () => {
 
 
     return (
-        <VStack pl="5%" pt="30px"  gap="10px">
+        <Stack pl="5%" pt="30px"  spacing="10px" direction={['row','row','column' ]}>
         <Text color="#666481" fontWeight="700"  fontSize="20px">
             Share
             </Text>
@@ -44,6 +44,6 @@ export const Socials = () => {
                     }}
                     Icon={eachIcons.icons} ></CustomIcons>)
             }
-    </VStack>
+    </Stack>
     )
 }
