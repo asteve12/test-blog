@@ -24,6 +24,7 @@ export const ArticleCard = ({
     authorName,
     authorImage,
     estimateArticleReadTime
+
 }: ArticleCard) => {
     const Base_Url = process.env.NEXT_PUBLIC_STRAPI_API_URL || "http://localhost:1337"
      const timeToRead = estimateArticleReadTime(content)  

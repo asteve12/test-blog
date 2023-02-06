@@ -7,7 +7,7 @@ import { TimerCard } from "../../shared/TimeCard"
 
 
 type ILatestNews = {
-    estimateArticleReadTime: (article: string) => number, 
+    estimateArticleReadTime: (article: string) => number , 
     latestArticle:any
 }
 
@@ -46,7 +46,7 @@ export const LatestNews = ({latestArticle,estimateArticleReadTime}:ILatestNews) 
                 {articleTitle}
               
             </Heading>
-            <Text  fontWeight="400"  mb="15px" fontSize={["14px","18px"]} color="#666481" fontFamily="satoshi">
+            <Text noOfLines={5} fontWeight="400"  mb="15px" fontSize={["14px","18px"]} color="#666481" fontFamily="satoshi">
             {articleContent}
             </Text>
             <BlogAuthCard  authorImage={authorImage} authorName={author}></BlogAuthCard>
