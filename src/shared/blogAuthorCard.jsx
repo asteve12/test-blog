@@ -7,7 +7,7 @@ export const BlogAuthCard = ({
     authorImage,
     authorName
 }) => {
-   const baseUrl = process.env.REACT_APP_BASE_URL ||   "http://localhost:1337"
+   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL ||   "http://localhost:1337"
 
     console.log("authorImage",`${baseUrl}/${authorImage}`)
 
