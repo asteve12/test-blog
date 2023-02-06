@@ -13,7 +13,7 @@ export const Loop = () => {
     const { t } = useTranslation("common")
     
    return (<Box width="100%" h="900px" position="relative" >
-        <Img w="100%" h="100%" position="absolute" top="0px" src="/blog/loopBg.png"/>
+        <Img w="100%" objectFit="cover" h="100%" position="absolute" top="0px" src="/blog/loopBg.png"/>
         <Flex
             justifyContent="center"
             w="100%" h="100%"

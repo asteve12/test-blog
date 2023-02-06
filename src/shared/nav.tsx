@@ -223,25 +223,25 @@ export const NavHeader = () => {
               <Image  src="/img/navLogo.svg" alt="gruve logo" />
           </Flex>
         
-        <Box p="30px" w="100%" fontFamily="satoshi">
-          <Text  fontSize="25px"   color="#666481">
+        <Box p={["10px","30px"]} w="100%" fontFamily="satoshi">
+          <Text  fontSize={"3rem"}   color="#666481">
           For event attendees
           </Text>
           <Divider  color="#E1E1E8" mt="25px"  mb="25px"></Divider>
           <Text  mb="25px" fontWeight="bold"
-            fontSize="25px" fontFamily="satoshi" color="#EA445A" >
+           fontSize={"3rem"}  fontFamily="satoshi" color="#EA445A" >
               For event creators
           </Text>
 
           <Box w="100%" minH="136px" bg="#FFEFD5" borderRadius="8px"  p="12px"  position="relative">
-            <Heading fontSize="4em" fontWeight="700"  mt="10px"   color="#06060B">
+            <Heading fontSize={"2rem"} fontWeight="700"  mt="10px"   color="#06060B">
             View Blog Articles
             </Heading>
-            <Text  w="190px"  mt="10px"  fontSize="18px" color="#666481">
+            <Text  w="190px"  mt="10px"  fontSize={"2rem"} color="#666481">
                Get the best of articles to help you and also the latest news around events happening around you
             </Text>
             <Box  position="absolute" bottom="0px" right="0px"     >
-              <Image objectFit="cover" width={153} height={153} src="/img/slideImg.svg" alt=""/>
+              <Image objectFit="cover" width={"9.563rem"} height={"9.563rem"} src="/img/slideImg.svg" alt=""/>
             </Box>
             
          

@@ -37,7 +37,7 @@ export const LatestNews = ({latestArticle,estimateArticleReadTime}:ILatestNews) 
             height={["60%","352px"]}
             borderRadius="8px"
             src={`${Base_url}${articleImage}`} alt="" />
-        <Box  ml={["0px","20px"]} mt={["20px"]} width={["100%","560px"]}  >
+        <Box  ml={["0px","20px"]} mt={["20px"]} width={["100%","100%","560px"]}  >
             <Flex justifyContent="space-between" mb="15px">
                 <BlogTitle title={articleTitle}></BlogTitle>
                 <TimerCard timetoRead={timeToRead?.toString()}></TimerCard>
