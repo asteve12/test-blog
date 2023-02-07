@@ -15,7 +15,7 @@ import { Image } from "@chakra-ui/react";
 
 
 const community = () => {
-  const {t} = useTranslation()
+  const {t} = useTranslation("common")
   const communityCard = [
     {
       id: 1,

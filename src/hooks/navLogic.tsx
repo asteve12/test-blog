@@ -7,7 +7,7 @@ import { Option } from "react-dropdown"
 
 export const useNavHeaderLogic = () => {
     const Router = useRouter()
-    const { t } = useTranslation()
+    const { t } = useTranslation("common")
     const languageOption = [{ label: 'en', value: "en" },
     { label: 'fr', value: "fr-BJ" }]
      

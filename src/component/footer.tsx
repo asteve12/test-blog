@@ -13,7 +13,7 @@ import Image from "next/image";
 
 
 const footer = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation("common");
 
   const darkNav = [
     {
