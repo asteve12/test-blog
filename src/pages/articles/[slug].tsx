@@ -1,19 +1,19 @@
-import { api } from "@/axios";
-import { BlogDetailContent } from "@/component/blogDetails/BlogDetailContent";
-import { BlogDetailHeader } from "@/component/blogDetails/BlogDetailHeader";
-import { SuggestedArticle } from "@/component/blogDetails/suggestedArticle";
+import { api } from '@/axios';
+import { BlogDetailContent } from '@/component/blogDetails/BlogDetailContent';
+import { BlogDetailHeader } from '@/component/blogDetails/BlogDetailHeader';
+import { SuggestedArticle } from '@/component/blogDetails/suggestedArticle';
 // import { ParsedUrlQuery } from "querystring"
-import { parseContent } from "@/util/parser";
+import { parseContent } from '@/util/parser';
 
-import { Layout } from "@/layout";
-import { Box } from "@chakra-ui/react";
-import { serverSideTranslations } from "next-i18next/serverSideTranslations";
+import { Layout } from '@/layout';
+import { Box } from '@chakra-ui/react';
+import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 //utils
-import { estimateArticleReadTime } from "@/util/estimateReadTime";
+import { estimateArticleReadTime } from '@/util/estimateReadTime';
 //hooks
-import { useRenderArticles } from "@/hooks/useRenderArticles";
-import Seo from "@/component/seo";
-import { NextPage, GetStaticProps, GetStaticPaths } from "next";
+import { useRenderArticles } from '@/hooks/useRenderArticles';
+import Seo from '@/component/seo';
+import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 
 type attribute = {
   author: string;
@@ -41,10 +41,7 @@ type GetStaticPathsContext = {
   defaultLocale?: string;
 };
 
-const BlogDetails: NextPage<BlogDetailPage> = ({
-  article,
-  otherArticle,
-}: BlogDetailPage) => {
+const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDetailPage) => {
   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL as string;
   const articleContent = article?.attributes?.content;
   const articleHeader = article?.attributes?.title;
@@ -56,17 +53,14 @@ const BlogDetails: NextPage<BlogDetailPage> = ({
     metaTitle: articleHeader,
     metaDescription: articleDescription,
     shareImage: imagePath,
-    article: true,
+    article: true
   };
 
   return (
     <Layout>
       <Seo {...seo} />
       <Box w="100%" pl="5%" pr="5%">
-        <BlogDetailHeader
-          baseUrl={baseUrl}
-          imagePath={imagePath}
-        ></BlogDetailHeader>
+        <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
         <BlogDetailContent
           title={articleHeader}
           content={articleContent}
@@ -88,29 +82,25 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     locales!.map((language: any) => {
       path.push({
         params: {
-          slug: eachArticle?.attributes?.slug,
+          slug: eachArticle?.attributes?.slug
         },
-        locale: language,
+        locale: language
       });
     });
   });
 
-  console.log("path", context);
+  console.log('path', context);
 
   return {
     paths: path,
-    fallback: false,
+    fallback: false
   };
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
   const [singleArticle, otherArticle] = await Promise.all([
-    api.get(
-      `/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`
-    ),
-    api.get(
-      `/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`
-    ),
+    api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`),
+    api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`)
   ]);
 
   const data = singleArticle?.data.data[0];
@@ -125,9 +115,9 @@ export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
       article: data,
       otherArticle: otherArticle?.data.data,
       locale,
-      ...(await serverSideTranslations(locale!, ["common"])),
+      ...(await serverSideTranslations(locale!, ['common']))
     },
-    revalidate: 1,
+    revalidate: 1
   };
 };
 

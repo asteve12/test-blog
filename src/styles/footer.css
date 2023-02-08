@@ -1,154 +1,152 @@
 .footer-container {
-    align-items: center;
-    align-content: center;
-    padding: 0 21rem 0 11.2rem;
-    margin: 15rem 0 10rem;
+  align-items: center;
+  align-content: center;
+  padding: 0 21rem 0 11.2rem;
+  margin: 15rem 0 10rem;
 }
-.footerX{
-    padding: 0 0 2rem 0;
-    display: block;
-    margin: 0 auto;
-    text-align: center;
-    font-size: 2rem;
-    font-family: Aventa;
-    font-weight: 600;
-    background-color: #06060b;
-    color: #fbfbfd;
+.footerX {
+  padding: 0 0 2rem 0;
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 2rem;
+  font-family: Aventa;
+  font-weight: 600;
+  background-color: #06060b;
+  color: #fbfbfd;
 }
 .footer-logo {
-    width: 12rem;
-    height: 5.1rem;
-    margin-bottom: 2.4rem;
+  width: 12rem;
+  height: 5.1rem;
+  margin-bottom: 2.4rem;
 }
 #copyright-sm {
-    display: none;
+  display: none;
 }
 .copyright-h {
-    font-family: Aventa;
-    font-weight: 400;
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    color: #06060b;
+  font-family: Aventa;
+  font-weight: 400;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  color: #06060b;
 }
 .help-section {
-    margin-right: 12.6rem;
+  margin-right: 12.6rem;
 }
 .footer-gruve-color {
-    font-family: Matter;
-    font-weight: 400;
-    font-size: 2rem;
-    line-height: 2.4rem;
-    color: #ea445a;
+  font-family: Matter;
+  font-weight: 400;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  color: #ea445a;
 }
 .footer-community-header {
-    margin-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 .footer-community-h {
-    font-family: GilroyB;
-    font-weight: 800;
-    font-size: 3.2rem;
-    line-height: 4rem;
-    color: #06060b;
+  font-family: GilroyB;
+  font-weight: 800;
+  font-size: 3.2rem;
+  line-height: 4rem;
+  color: #06060b;
 }
 .faq-footer-nav {
-    margin-bottom: 1.6rem;
+  margin-bottom: 1.6rem;
 }
 .footer-p {
-    letter-spacing: 0.005em;
-    color: #06060b;
+  letter-spacing: 0.005em;
+  color: #06060b;
 }
 .footer-dark {
-    background: #06060b;
+  background: #06060b;
 }
 .footer-dark-content {
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    margin: 0 auto;
-    padding: 10rem 0;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 10rem 0;
 }
 .footer-dark-logo {
-    margin: 0 auto;
-    width: 9.5rem;
-    height: 4rem;
+  margin: 0 auto;
+  width: 9.5rem;
+  height: 4rem;
 }
 .dark-footer-h {
-    color: #fbfbfd;
-    letter-spacing: 0.005em;
+  color: #fbfbfd;
+  letter-spacing: 0.005em;
 }
-.dark-footer-icon, .dark-circle {
-    width: 3.2rem;
-    height: 3.2rem;
+.dark-footer-icon,
+.dark-circle {
+  width: 3.2rem;
+  height: 3.2rem;
 }
 .dark-circle {
-    border-radius: 50%;
-    background: #202020;
+  border-radius: 50%;
+  background: #202020;
 }
 .tiktok-dark-container {
-    width: 1.8rem;
-    height: 1.8rem;
-    margin: .7rem 0 0 .7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  margin: 0.7rem 0 0 0.7rem;
 }
 .dark-footer-nav {
-    width: 28.7rem;
-    margin: 4rem auto;
+  width: 28.7rem;
+  margin: 4rem auto;
 }
 .dark-footer-icons {
-    width: 31.2rem;
-    margin: 0 auto;
+  width: 31.2rem;
+  margin: 0 auto;
 }
-
 
 @media screen and (max-width: 1023px) {
-    .footer-container {
-        padding: 0 6rem;
-        margin: 8rem 0 5rem;
-    }
+  .footer-container {
+    padding: 0 6rem;
+    margin: 8rem 0 5rem;
+  }
 }
-
 
 @media screen and (max-width: 650px) {
-    .footer-container {
-        margin: 3rem 0 0 0;
-        padding: 0 3rem;
-    }
-    #copyright-sm {
-        display: block;
-    }
-    #copyright-lg {
-        display: none;
-    }
-    .footer-logo-section {
-        padding-top: 4rem;
-    }
-    .footer-logo {
-        margin-bottom: 3rem;
-        width: 10rem;
-        height: 5rem;
-    }
-    .sm-footer-nav {
-        margin: 3rem auto 5rem;
-    }
-    .footer-nav-icon {
-        margin: 0 1.5rem 3rem 0;
-    }
-    .icon-text {
-        margin-left: 0.5rem;
-    }
-    .icon-text-p {
-        font-family: GilroyB;
-        font-size: 1.6rem;
-        line-height: 2.4rem;
-        font-weight: 400;
-    }
-    .tiktok {
-        padding-right: 0.5rem;
-    }
+  .footer-container {
+    margin: 3rem 0 0 0;
+    padding: 0 3rem;
+  }
+  #copyright-sm {
+    display: block;
+  }
+  #copyright-lg {
+    display: none;
+  }
+  .footer-logo-section {
+    padding-top: 4rem;
+  }
+  .footer-logo {
+    margin-bottom: 3rem;
+    width: 10rem;
+    height: 5rem;
+  }
+  .sm-footer-nav {
+    margin: 3rem auto 5rem;
+  }
+  .footer-nav-icon {
+    margin: 0 1.5rem 3rem 0;
+  }
+  .icon-text {
+    margin-left: 0.5rem;
+  }
+  .icon-text-p {
+    font-family: GilroyB;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 400;
+  }
+  .tiktok {
+    padding-right: 0.5rem;
+  }
 }
 
-
 @media screen and (max-width: 485px) {
-    .footer-container {
-        margin: 1rem 0 0 0;
-    }
+  .footer-container {
+    margin: 1rem 0 0 0;
+  }
 }

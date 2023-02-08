@@ -1,10 +1,10 @@
-import { Box, Flex, Heading, Button } from "@chakra-ui/react";
-import { useTranslation } from "react-i18next";
-import { SkeletonAnime } from "./skeleton";
+import { Box, Flex, Heading, Button } from '@chakra-ui/react';
+import { useTranslation } from 'react-i18next';
+import { SkeletonAnime } from './skeleton';
 //hooks
-import { useRenderArticles } from "@/hooks/useRenderArticles";
-import { useConditionallyRenderElement } from "@/hooks/useConditionallyRenderedElement";
-import { ReactNode } from "react";
+import { useRenderArticles } from '@/hooks/useRenderArticles';
+import { useConditionallyRenderElement } from '@/hooks/useConditionallyRenderedElement';
+import { ReactNode } from 'react';
 
 type OtherArticle = {
   loading: boolean;
@@ -27,12 +27,12 @@ export const OtherArticle = ({
   loadArticles,
   paginationLimit,
   totalArticleCreated,
-  showLoadMoreButton,
+  showLoadMoreButton
 }: OtherArticle) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
 
   const allArticles = useRenderArticles(articles, initialArticle);
-  console.log("allArticles", allArticles);
+  console.log('allArticles', allArticles);
 
   const loadMoreBtn = (
     <Button
@@ -47,7 +47,7 @@ export const OtherArticle = ({
       rounded="25px"
       color="#666481"
     >
-      {t("blog.loadmore")}
+      {t('blog.loadmore')}
     </Button>
   );
   const displayLoadMoreBtn = useConditionallyRenderElement(
@@ -60,19 +60,15 @@ export const OtherArticle = ({
       <Heading
         color="#2D2B4A"
         mb="50px"
-        fontSize={["18px", "44px"]}
+        fontSize={['18px', '44px']}
         fontWeight="900"
         fontFamily="satoshi bold"
         textAlign="center"
       >
-        {t("blog.otherArticle_header")}
+        {t('blog.otherArticle_header')}
       </Heading>
 
-      <Flex
-        w="100%"
-        flexWrap="wrap"
-        justifyContent={["center", "center", "space-between"]}
-      >
+      <Flex w="100%" flexWrap="wrap" justifyContent={['center', 'center', 'space-between']}>
         {allArticles}
         {loading && <SkeletonAnime></SkeletonAnime>}
       </Flex>

@@ -1,77 +1,59 @@
-import React from "react"
+import React from 'react';
 
-import { ArticleCard } from "@/shared/ArticleCard"
-import Link from "next/link"
+import { ArticleCard } from '@/shared/ArticleCard';
+import Link from 'next/link';
 //utils
-import { estimateArticleReadTime } from "@/util/estimateReadTime"
-import { useRouter } from "next-translate-routes"
-import { Box } from "@chakra-ui/react"
+import { estimateArticleReadTime } from '@/util/estimateReadTime';
+import { useRouter } from 'next-translate-routes';
+import { Box } from '@chakra-ui/react';
 
- 
-
- //handle display of all articles
+//handle display of all articles
 export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
-   
-    
-    const Router = useRouter()
+  const Router = useRouter();
 
-if (args.length === 2) {
-         const [articles,initialArticle] = args
-        let articlesArray = [...initialArticle]
+  if (args.length === 2) {
+    const [articles, initialArticle] = args;
+    let articlesArray = [...initialArticle];
     if (articles.length > 0) articlesArray = [...articlesArray, ...articles];
 
-    return articlesArray.map(eachArticle => {
-
-  
-        return (
-            <Box  w={["95%","95%","389px"]}  >
-                <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
-                <ArticleCard
-             estimateArticleReadTime={estimateArticleReadTime}
-             title={eachArticle?.attributes?.title}
-             content={eachArticle?.attributes?.content}
-             image={eachArticle?.attributes?.image?.data?.attributes?.url}
-             authorName={eachArticle?.attributes?.author?.data?.attributes?.name}
-             authorImage={eachArticle?.attributes?.authorImage?.data?.attributes?.url}
-         ></ArticleCard>  
-                      
-                     
-                      
-                 </Link>
-            
-              
-               </Box>
-       )
-        // return ( 
-        //      )
-     } )
-        
-    }
-    else {
-        const [otherArticle] = args;
-        if (otherArticle.length > 0) {
-            return otherArticle.map(eachArticle => { 
-                console.log("hash122",`/${Router.locale}/articles/${eachArticle?.attributes?.slug}`)
-                return (<Box  w={["95%","95%","389px"]} >
-                    <Link
-                    href={`/articles/${eachArticle?.attributes?.slug}`}
-                 
-                >
-                <ArticleCard
-                 estimateArticleReadTime={estimateArticleReadTime}
-                 title={eachArticle?.attributes?.title}
-                 content={eachArticle?.attributes?.content}
-                 image={eachArticle?.attributes?.image?.data?.attributes?.url}
-                 authorName={eachArticle?.attributes?.author?.data?.attributes?.name}
-                 authorImage={eachArticle?.attributes?.authorImage?.data?.attributes?.url}
-             ></ArticleCard>
+    return articlesArray.map((eachArticle) => {
+      return (
+        <Box w={['95%', '95%', '389px']}>
+          <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
+            <ArticleCard
+              estimateArticleReadTime={estimateArticleReadTime}
+              title={eachArticle?.attributes?.title}
+              content={eachArticle?.attributes?.content}
+              image={eachArticle?.attributes?.image?.data?.attributes?.url}
+              authorName={eachArticle?.attributes?.author?.data?.attributes?.name}
+              authorImage={eachArticle?.attributes?.authorImage?.data?.attributes?.url}
+            ></ArticleCard>
           </Link>
-                </Box> )
-            } )
-        }
+        </Box>
+      );
+      // return (
+      //      )
+    });
+  } else {
+    const [otherArticle] = args;
+    if (otherArticle.length > 0) {
+      return otherArticle.map((eachArticle) => {
+        console.log('hash122', `/${Router.locale}/articles/${eachArticle?.attributes?.slug}`);
+        return (
+          <Box w={['95%', '95%', '389px']}>
+            <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
+              <ArticleCard
+                estimateArticleReadTime={estimateArticleReadTime}
+                title={eachArticle?.attributes?.title}
+                content={eachArticle?.attributes?.content}
+                image={eachArticle?.attributes?.image?.data?.attributes?.url}
+                authorName={eachArticle?.attributes?.author?.data?.attributes?.name}
+                authorImage={eachArticle?.attributes?.authorImage?.data?.attributes?.url}
+              ></ArticleCard>
+            </Link>
+          </Box>
+        );
+      });
     }
-   
-    
-            
-    
- }
+  }
+}

@@ -33,29 +33,29 @@ body::-webkit-scrollbar {
 }
 @font-face {
   font-family: Gilroy;
-  src: url("../assets/fonts/gilroy/Gilroy-Light.otf");
+  src: url('../assets/fonts/gilroy/Gilroy-Light.otf');
 }
 @font-face {
   font-family: GilroyB;
-  src: url("../assets/fonts/gilroy/Gilroy-Bold.ttf");
+  src: url('../assets/fonts/gilroy/Gilroy-Bold.ttf');
 }
 @font-face {
   font-family: Matter;
-  src: url("../assets/fonts/matter/Matter-Regular.ttf");
+  src: url('../assets/fonts/matter/Matter-Regular.ttf');
 }
 @font-face {
   font-family: Aventa;
-  src: url("../assets/fonts/aventa/Aventa-Light.otf");
+  src: url('../assets/fonts/aventa/Aventa-Light.otf');
 }
 
 @font-face {
   font-family: satoshi;
-  src: url("../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf");
+  src: url('../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf');
 }
 
 @font-face {
-  font-family: "satoshi bold";
-  src: url("../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf");
+  font-family: 'satoshi bold';
+  src: url('../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf');
 }
 
 .flex {
@@ -210,7 +210,7 @@ input:focus-visible {
   overflow-y: hidden;
   z-index: 10;
   position: fixed;
-  transition: "100ms";
+  transition: '100ms';
 }
 
 .modal-content {

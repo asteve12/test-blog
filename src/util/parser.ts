@@ -1,5 +1,5 @@
-import { remark } from "remark";
-import html from "remark-html";
+import { remark } from 'remark';
+import html from 'remark-html';
 
 export async function parseContent(context: string) {
   // Use remark to convert markdown into HTML string

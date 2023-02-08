@@ -1,8 +1,8 @@
-import React, { useEffect, useRef } from "react";
-import { createPortal } from "react-dom";
+import React, { useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
 
 function ModalElement({ children, onclose }) {
-  const modalRoot = document.getElementById("modal");
+  const modalRoot = document.getElementById('modal');
 
   modalRoot.onclick = function () {
     onclose();
@@ -10,7 +10,7 @@ function ModalElement({ children, onclose }) {
 
   const elRef = useRef(null);
   if (!elRef.current) {
-    const elem = document.createElement("div");
+    const elem = document.createElement('div');
     elRef.current = elem;
   }
 

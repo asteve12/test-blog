@@ -189,23 +189,23 @@
     "fifth_item_header": "Privacy",
     "fifth_item_text": "Our web3 system ensures you have full privacy and can join events without the risk of anyone finding out who you are."
   },
-  "blog":{
-    "blogHeader_1":"Read up on our trending insights",
-    "blogHeader_2":"updates",
-    "intro_text":" From updates that shake the industry to advices from the best web3 specialists we bring to you all these premium contents and valuable tips - Yes we got you covered No, for now.",
-   "latest_news_header":"  How to connect a wallet to  a web3 platform",
-   "loop_header":"Stay in the loop",
-   "loop_text":"Signup for our weekly newsletter to receive updates of new features and changes to our term ",
-   "loop_input_placeholder":"Enter your email address",
-   "loop_form_button_getStarted":"Get Started",
-     "otherArticle_header":"Other Blog Articles",
-     "loadmore":"Load More"
+  "blog": {
+    "blogHeader_1": "Read up on our trending insights",
+    "blogHeader_2": "updates",
+    "intro_text": " From updates that shake the industry to advices from the best web3 specialists we bring to you all these premium contents and valuable tips - Yes we got you covered No, for now.",
+    "latest_news_header": "  How to connect a wallet to  a web3 platform",
+    "loop_header": "Stay in the loop",
+    "loop_text": "Signup for our weekly newsletter to receive updates of new features and changes to our term ",
+    "loop_input_placeholder": "Enter your email address",
+    "loop_form_button_getStarted": "Get Started",
+    "otherArticle_header": "Other Blog Articles",
+    "loadmore": "Load More"
   },
-  "blogDetails":{
-    "blogDetails_header":"How to connect a wallet to  a web3 platform",
-      "blogDetails_text":" Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build your brand and establish you as an authority in your industry. If you’re looking forward to hosting a successful webinar, here are some tips to guide you through the process.",
-      "blog_head_1":"Blog",
-      "blog_head_2":"Blog Details",
-      "suggested_article_header":"You might also enjoy"
+  "blogDetails": {
+    "blogDetails_header": "How to connect a wallet to  a web3 platform",
+    "blogDetails_text": " Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build your brand and establish you as an authority in your industry. If you’re looking forward to hosting a successful webinar, here are some tips to guide you through the process.",
+    "blog_head_1": "Blog",
+    "blog_head_2": "Blog Details",
+    "suggested_article_header": "You might also enjoy"
   }
 }

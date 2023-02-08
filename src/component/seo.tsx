@@ -1,20 +1,13 @@
-
-
-
-import Head from "next/head";
-
-
+import Head from 'next/head';
 
 type ISeo = {
-    metaTitle: string,
-    metaDescription: string,
-    shareImage: string,
-    article:boolean
-}
+  metaTitle: string;
+  metaDescription: string;
+  shareImage: string;
+  article: boolean;
+};
 
-const Seo = (SEO:ISeo) => {
-
-
+const Seo = (SEO: ISeo) => {
   return (
     <Head>
       {SEO.metaTitle && (
