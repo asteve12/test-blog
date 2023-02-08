@@ -1,16 +1,23 @@
 html {
-  font-size: calc(100vw/1440 * 10);
+  font-size: calc(100vw / 1440 * 10);
   scroll-behavior: smooth;
 }
 * {
   box-sizing: border-box;
 }
-h1, h2, h3, h4, h5, h5, p, span {
+h1,
+h2,
+h3,
+h4,
+h5,
+h5,
+p,
+span {
   caret-color: transparent;
 }
 
-main{
-  width:100%;
+main {
+  width: 100%;
 }
 body {
   line-height: 1.5;
@@ -26,24 +33,24 @@ body::-webkit-scrollbar {
 }
 @font-face {
   font-family: Gilroy;
-  src: url('../assets/fonts/gilroy/Gilroy-Light.otf');
+  src: url("../assets/fonts/gilroy/Gilroy-Light.otf");
 }
 @font-face {
   font-family: GilroyB;
-  src: url('../assets/fonts/gilroy/Gilroy-Bold.ttf');
+  src: url("../assets/fonts/gilroy/Gilroy-Bold.ttf");
 }
 @font-face {
   font-family: Matter;
-  src: url('../assets/fonts/matter/Matter-Regular.ttf');
+  src: url("../assets/fonts/matter/Matter-Regular.ttf");
 }
 @font-face {
   font-family: Aventa;
-  src: url('../assets/fonts/aventa/Aventa-Light.otf');
+  src: url("../assets/fonts/aventa/Aventa-Light.otf");
 }
 
 @font-face {
   font-family: satoshi;
-  src: url('../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf');
+  src: url("../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf");
 }
 
 @font-face {
@@ -109,7 +116,8 @@ a {
 .margin-0 {
   margin: 0;
 }
-img, video {
+img,
+video {
   height: 100%;
   width: 100%;
 }
@@ -126,7 +134,8 @@ img, video {
   justify-content: center;
   align-items: center;
 }
-li, ul {
+li,
+ul {
   padding: 0;
   margin: 0;
 }
@@ -168,27 +177,25 @@ input:focus-visible {
   outline: none;
 }
 
-
-
 @media screen and (max-width: 1023px) {
   html {
-      font-size: calc(100vw/1023 * 10);
+    font-size: calc(100vw / 1023 * 10);
   }
 }
 
 @media screen and (max-width: 650px) {
   html {
-      font-size: calc(100vw/650 * 10);
+    font-size: calc(100vw / 650 * 10);
   }
 }
 
 @media screen and (max-width: 485px) {
   html {
-      font-size: calc(100vw/485 * 10);
+    font-size: calc(100vw / 485 * 10);
   }
 }
 
-#modal>div{
+#modal > div {
   top: 0;
   right: 0;
   bottom: 0;
@@ -207,7 +214,7 @@ input:focus-visible {
 }
 
 .modal-content {
-  --bg-color:white;
+  --bg-color: white;
   --radius: 0.75rem;
   position: relative;
   background-color: var(--bg-color, white);
@@ -222,12 +229,12 @@ input:focus-visible {
 @keyframes animateTop {
   from {
     top: 10px;
-    transform:scale(0.75);
+    transform: scale(0.75);
     opacity: 0.6;
   }
   to {
     top: 0;
-    transform:scale(1);
+    transform: scale(1);
     opacity: 1;
   }
 }
@@ -268,3 +275,12 @@ input:focus-visible {
   animation: rotating 2s linear infinite;
 }
 
+.blog p {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.blog a {
+  color: #5d82f1;
+  text-decoration: underline;
+}
