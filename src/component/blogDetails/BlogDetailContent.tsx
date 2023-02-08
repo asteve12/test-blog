@@ -27,10 +27,10 @@ export const BlogDetailContent = ({title,content,timeToRead}:IBlogDetailContent)
     >
         <Socials></Socials>
         <Box pt={"25px"} pl={["0px","0px","35px"]} w={["100%","80%"]}  >
-            <HStack gap="10px" display={["flex"]} flexDirection={["column","column","row"]}>
+            {/* <HStack gap="10px" display={["flex"]} flexDirection={["column","column","row"]}>
                 <BlogTitle title={title}></BlogTitle>
               <TimerCard timetoRead={timeToRead} ></TimerCard>
-            </HStack>
+            </HStack> */}
             <Box width="100%" >
                 <Heading color="#2D2B4A"
                     textAlign={["center","center","left"]}
