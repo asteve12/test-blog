@@ -41,10 +41,16 @@ export const Loop = () => {
         justifyContent="center"
       >
         <Box ml="auto" mr="auto" w="100%">
-          <Heading textAlign="center" fontWeight="900" fontSize="5.5rem">
+          <Heading fontFamily="satoshi black" textAlign="center"
+            fontWeight="900" fontSize={["5rem","5rem","5rem","10rem"]} mb="5px">
             {t('blog.loop_header')}
           </Heading>
-          <Text ml="auto" mr="auto" mb="15px" textAlign="center" fontWeight="400" fontSize="1.3rem">
+          <Text
+            w="566px"
+            maxW="100%"
+            ml="auto" mr="auto" mb="15px"
+            fontFamily="satoshi"
+            textAlign="center" fontWeight="400" fontSize="18px">
             {t('blog.loop_text')}
           </Text>
 
@@ -55,6 +61,8 @@ export const Loop = () => {
               mt="25px"
               ml="auto"
               mr="auto"
+              color="white"
+              
             >
               <Input
                 w="60%"
@@ -62,8 +70,14 @@ export const Loop = () => {
                 rounded="5px"
                 placeholder={`${t('blog.loop_input_placeholder')}`}
                 type="email"
+                fontSize="16px"
+                color="white"
+                _placeholder={{ color: 'white' }}
+                p="16px"
+
               />
-              <Button w={['25%']} h="67px" fontSize="1.25rem" rounded="5px" bg="#EA445A" ml="10px">
+              <Button w={['187px']}  fontFamily="satoshi" h="67px" fontSize="17px"
+                rounded="100px" bg="#EA445A !important" ml="10px">
                 {t('blog.loop_form_button_getStarted')}
               </Button>
             </Flex>

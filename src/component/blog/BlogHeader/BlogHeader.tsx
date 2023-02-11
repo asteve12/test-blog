@@ -5,15 +5,14 @@ export const BlogHeader = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Box>
+    <Box    pt="50px">
       <Heading
-        fontFamily="satoshi bold"
-        mt="30px"
-        maxW="1000px"
+        fontFamily="satoshi black"
+         maxW="1000px"
         fontWeight="900"
         ml="auto"
         mr="auto"
-        fontSize={['5rem', '5rem', '9rem']}
+        fontSize={['5rem','5rem','4rem',"5rem"]}
         color="#2D2B4A"
         textAlign="center"
       >
@@ -21,7 +20,7 @@ export const BlogHeader = () => {
       </Heading>
       <Text
         textAlign="center"
-        fontSize="2em"
+        fontSize={["2.3rem","1.8rem"]}
         fontFamily="satoshi"
         color="#666481"
         fontWeight="400"

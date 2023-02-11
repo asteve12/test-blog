@@ -1,4 +1,5 @@
 import { Box, HStack, Image, Text } from '@chakra-ui/react';
+import {IoIosArrowForward} from "react-icons/io"
 import { useTranslation } from 'next-i18next';
 
 type IBlogDetailHeader = {
@@ -10,19 +11,20 @@ export const BlogDetailHeader = ({ imagePath, baseUrl }: IBlogDetailHeader) => {
   const { t } = useTranslation('common');
 
   return (
-    <Box>
+    <Box w="100%">
       <HStack fontWeight="bold">
-        <Text color="#C2C1CF" fontSize="14px">
-          {' '}
+        <Text color="#C2C1CF" fontSize="14px" >
+         
           {t('blogDetails.blog_head_1')}
-          {'>'}
+          
         </Text>
+        <IoIosArrowForward></IoIosArrowForward>
         <Text fontSize="14px">{t('blogDetails.blog_head_2')}</Text>
       </HStack>
       <Image
         objectFit="cover"
         mt="20px"
-        width="1216px"
+        width="100%"
         h="420px"
         borderRadius="16px"
         src={`${baseUrl}${imagePath}`}

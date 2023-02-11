@@ -27,18 +27,22 @@ export const Socials = () => {
   ];
 
   return (
-    <Stack pl="5%" pt="30px" spacing="10px" direction={['row', 'row', 'column']}>
-      <Text color="#666481" fontWeight="700" fontSize="20px">
+    <Stack  pl={["0px", "0px", "5%"]} pt="0px"
+      spacing="25px" direction={['row', 'row', 'column']} mr={["auto","auto","auto",null]}>
+      <Text textAlign={["left","center","center"]} color="#666481"   fontWeight="700" fontSize="20px" >
         Share
       </Text>
       {socials.map((eachIcons) => (
-        <CustomIcons
+        <Box  textAlign={["left","left","center"]} >
+           <CustomIcons
           style={{
             color: '#666481',
             fontSize: '25px'
           }}
           Icon={eachIcons.icons}
         ></CustomIcons>
+        </Box>
+       
       ))}
     </Stack>
   );

@@ -6,7 +6,7 @@
   font-size: 16px;
   margin-right: 3rem;
   color: #666481;
-  font-family: Gilroy;
+  font-family: satoshi;
 }
 
 .hide-border {
@@ -17,7 +17,7 @@
   font-size: 16px;
   margin-right: 3rem;
   color: #666481;
-  font-family: Gilroy;
+  font-family: satoshi;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -30,8 +30,10 @@
 }
 
 .header-row {
-  padding: 0 8rem 0 9rem;
-  height: 8rem;
+  /* padding: 0 50px 0 50px;
+  height: 8rem; */
+  padding-left: 8%;
+  padding-right: 8%;
 }
 .nav-list {
   background: #fbfbfd;
@@ -57,7 +59,7 @@
   width: 100%;
 }
 .inner-nav-list {
-  font-family: Aventa;
+  font-family: satoshi;
   font-size: 1.6rem;
   line-height: 2rem;
   color: #666481;
@@ -84,7 +86,7 @@
   padding: 10px;
 }
 .hero-btn-p {
-  font-family: Aventa;
+  font-family: satoshi;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 2.4rem;
@@ -93,8 +95,9 @@
 
 @media screen and (max-width: 1023px) {
   .header-row {
-    padding: 0 4.5rem;
+    padding: 0 3.5rem;
   }
+  
 }
 
 @media screen and (max-width: 650px) {

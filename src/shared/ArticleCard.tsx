@@ -24,12 +24,12 @@ export const ArticleCard = ({
   const timeToRead = estimateArticleReadTime(content);
 
   return (
-    <Box w={['100%', '95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']}>
+    <Box  w={['100%', '95%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} ml="auto" mr="auto">
       <Image
         w={'100%'}
         objectFit="cover"
-        h={['30%', '323px']}
-        borderRadius="16px"
+        h={['35%', '323px']}
+        borderRadius="5px"
         src={`${Base_Url}${image}`}
       />
       <Flex justifyContent="space-between" display={['none', 'flex']} mt="10px" w="100%">
@@ -39,18 +39,19 @@ export const ArticleCard = ({
 
       <Heading
         fontFamily="satoshi bold"
-        textAlign={['center', 'left', 'left']}
+        //textAlign={['center', 'center', 'left']}
         mt="10px"
         mb="10px"
         fontSize={['18px', '24px']}
         fontWeight="900"
+        w="100%"
       >
         {title}
       </Heading>
       <Box mb="12px" h="50px">
         <Text
           noOfLines={2}
-          textAlign={['center', 'center', 'left']}
+          //textAlign={['center', 'center', 'left']}
           fontFamily="satoshi"
           mb="10px"
           fontSize="14px"

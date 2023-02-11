@@ -71,12 +71,11 @@ export const NavHeader = () => {
   if (isDesktopScreen)
     return (
       <>
-        <header id="header" className="header-row flex flex-center w-100">
+        <header id="header" className="header-row flex flex-center w-100  ">
           <nav className="header-nav">
             <div className="flex flex-between flex-center">
               <div className="nav-logo">
-                {/* eslint-disable-next-line */}
-                <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
+              <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
                   <span className="nav-logo-link">
                     <Image
                       mt={['25px', '0px']}
@@ -158,7 +157,7 @@ export const NavHeader = () => {
     );
 
   return (
-    <Flex w="100%" justifyContent="space-between" pl="1%" pr="2%">
+    <Flex w="100%" justifyContent="space-between" pl="1%" pr="2%"  fontFamily="satoshi">
       <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
         <Image mt="25px" width="145px" height="60px" src="/img/navLogo.svg" alt="gruve logo" />
       </Link>

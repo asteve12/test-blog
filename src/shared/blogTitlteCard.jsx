@@ -3,7 +3,7 @@ import { Text } from '@chakra-ui/react';
 export const BlogTitle = (props) => {
   return (
     <Text
-      p="3px"
+      p="8px"
       borderRadius="16px"
       background="#F0F4FF"
       minW="125px"
@@ -17,7 +17,7 @@ export const BlogTitle = (props) => {
       cursor="pointer"
     >
       {props.title}
-      {/* What is a defi wallet */}
+    
     </Text>
   );
 };

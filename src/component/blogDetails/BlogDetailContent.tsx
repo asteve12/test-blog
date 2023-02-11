@@ -14,19 +14,25 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
     <Flex
       w="100%"
       flexDirection={['column-reverse', 'column-reverse', 'row']}
-      alignItems={['center', 'center', 'start']}
-      justifyContent={['center', null]}
+      alignItems={['start','start', 'start']}
+      justifyContent={['start', null]}
+      pl={["0px","0px","2%"]}
+      pt="30px"
+      
     >
       <Socials></Socials>
-      <Box pt={'25px'} pl={['0px', '0px', '35px']} w={['100%', '80%']}>
-        <HStack gap="10px" display={['flex']} flexDirection={['column', 'column', 'row']}>
+      <Box ml={["0px", "0px", "0px", "20px"]}
+        
+        pl={['0px', '0px', '0px', '0px']}
+        w={['100%', '100%', '80%']}>
+        <HStack  gap={10} display={["none",'flex']} flexDirection={['row', 'row', 'row']} justifyContent={["space-between","start",null,null]}>
           <BlogTitle title={title}></BlogTitle>
           <TimerCard timetoRead={timeToRead}></TimerCard>
         </HStack>
-        <Box width="100%">
+        <Box width="100%" mt="23px">
           <Heading
             color="#2D2B4A"
-            textAlign={['center', 'center', 'left']}
+            textAlign={'left'}
             mt="10px"
             mb="10px"
             fontFamily="satoshi bold"
@@ -36,6 +42,7 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
             {title}
           </Heading>
           <Box
+            maxW={["100%","100%","90%"]}
             fontWeight="400"
             fontFamily="satoshi"
             className="blog"

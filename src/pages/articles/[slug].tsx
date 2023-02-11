@@ -2,6 +2,7 @@ import { api } from '@/axios';
 import { BlogDetailContent } from '@/component/blogDetails/BlogDetailContent';
 import { BlogDetailHeader } from '@/component/blogDetails/BlogDetailHeader';
 import { SuggestedArticle } from '@/component/blogDetails/suggestedArticle';
+
 // import { ParsedUrlQuery } from "querystring"
 import { parseContent } from '@/util/parser';
 
@@ -57,9 +58,9 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
   };
 
   return (
-    <Layout>
+    <Layout  showHeader={true}>
       <Seo {...seo} />
-      <Box w="100%" pl="5%" pr="5%">
+      <Box w={["95%","95%","90%","83%"]}  ml="auto"  mr="auto" pt="30px">
         <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
         <BlogDetailContent
           title={articleHeader}
