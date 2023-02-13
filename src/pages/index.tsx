@@ -18,8 +18,7 @@ import { useHomeLogic } from '@/hooks/homeLogic';
 
 export default function Home(props: any) {
   const Router = useRouter();
-  console.log('props', props);
-  const currentLanguage = Router.locale as string;
+const currentLanguage = Router.locale as string;
   const { articles, allArticles, homeSEO } = props;
   const paginationData = articles?.meta?.pagination;
 
@@ -32,9 +31,9 @@ export default function Home(props: any) {
   };
 
   return (
-    <Layout>
+    <Layout showHeader={true}>
       <Seo {...SeoData} />
-      <Box w="100%" pl="6%" pr="6%">
+      <Box w="100%" pl="6%" pr="6%" >
         <BlogHeader></BlogHeader>
         <LatestNews
           latestArticle={state?.latestArticle}

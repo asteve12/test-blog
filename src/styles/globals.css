@@ -58,6 +58,11 @@ body::-webkit-scrollbar {
   src: url('../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Bold.otf');
 }
 
+@font-face {
+  font-family: 'satoshi black';
+  src: url('../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Black.otf');
+}
+
 .flex {
   display: flex;
 }
@@ -147,14 +152,14 @@ ul {
 }
 
 .hero-small-p {
-  font-family: Aventa;
+  font-family: satoshi;
   font-weight: 400;
   font-size: 1.6rem;
   line-height: 2.4rem;
   color: #666481;
 }
 .hero-btn-p {
-  font-family: Aventa;
+  font-family: satoshi;
   font-weight: 700;
   font-size: 1.6rem;
   line-height: 2.4rem;
@@ -164,7 +169,7 @@ ul {
   justify-content: center;
 }
 .hero-p {
-  font-family: GilroyB;
+  font-family: satoshi;
   font-size: 6.4rem;
   line-height: 7.9rem;
   font-weight: 700;

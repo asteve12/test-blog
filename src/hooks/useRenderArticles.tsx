@@ -18,7 +18,7 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
 
     return articlesArray.map((eachArticle) => {
       return (
-        <Box w={['95%', '95%', '389px']}>
+        <Box w={["100%","100%","80%",'389px']} mt="10px" mr={["auto","auto","auto","10px"]} ml={["auto","auto","auto"]} >
           <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
@@ -40,7 +40,9 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
       return otherArticle.map((eachArticle) => {
         console.log('hash122', `/${Router.locale}/articles/${eachArticle?.attributes?.slug}`);
         return (
-          <Box w={['95%', '95%', '389px']}>
+          <Box  w={["100%","100%","80%",'389px']} mr={["0px","20px"]} >
+                      
+
             <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
               <ArticleCard
                 estimateArticleReadTime={estimateArticleReadTime}

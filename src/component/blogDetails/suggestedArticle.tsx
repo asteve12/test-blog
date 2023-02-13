@@ -27,7 +27,8 @@ export const SuggestedArticle = ({ otherArticles }: ISuggestedArticle) => {
         mb="30px"
         w="100%"
         flexWrap="wrap"
-        justifyContent={['center !important', 'center !important', 'space-between !important']}
+        
+        justifyContent={['center !important', 'center !important', 'center !important','left !important']}
       >
         {otherArticles}
       </Flex>

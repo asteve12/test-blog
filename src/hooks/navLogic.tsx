@@ -6,8 +6,8 @@ export const useNavHeaderLogic = () => {
   const Router = useRouter();
   const { t } = useTranslation('common');
   const languageOption = [
-    { label: 'en', value: 'en' },
-    { label: 'fr', value: 'fr-BJ' }
+    { label: 'ENG', value: 'en' },
+    { label: 'FR', value: 'fr-BJ' }
   ];
 
   //handle switching of language

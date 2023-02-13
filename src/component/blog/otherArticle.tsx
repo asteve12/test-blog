@@ -46,6 +46,8 @@ export const OtherArticle = ({
       height="50px"
       rounded="25px"
       color="#666481"
+      bg="transparent"
+      border="1px solid #E1E1E8"
     >
       {t('blog.loadmore')}
     </Button>
@@ -56,7 +58,7 @@ export const OtherArticle = ({
   ) as ReactNode;
 
   return (
-    <Box mt="100px">
+    <Box mt="100px" w="100%"  >
       <Heading
         color="#2D2B4A"
         mb="50px"
@@ -68,7 +70,8 @@ export const OtherArticle = ({
         {t('blog.otherArticle_header')}
       </Heading>
 
-      <Flex w="100%" flexWrap="wrap" justifyContent={['center', 'center', 'space-between']}>
+      <Flex w="100%" mb="100px"   flexWrap="wrap"
+        >
         {allArticles}
         {loading && <SkeletonAnime></SkeletonAnime>}
       </Flex>

@@ -1,4 +1,4 @@
-import { withTranslateRoutes } from 'next-translate-routes';
+import localFont from "@next/font/local"
 
 //@ts-ignore
 import type { AppProps } from 'next/app';
@@ -22,6 +22,9 @@ import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePreventHydrationError } from '@/hooks/usePreventHydrationError';
 
+
+const myFont = localFont({src:"../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf"})
+
 function App({ Component, pageProps }: AppProps) {
   const { data } = pageProps;
 
@@ -39,7 +42,10 @@ function App({ Component, pageProps }: AppProps) {
           href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
         />
       </Head>
+      <main className={myFont.className}>
       <Component {...pageProps} />
+      </main>
+      
     </ChakraProvider>
   );
 }
