@@ -18,7 +18,7 @@ export const BlogDetailHeader = ({ imagePath, baseUrl }: IBlogDetailHeader) => {
           {t('blogDetails.blog_head_1')}
           
         </Text>
-        <IoIosArrowForward></IoIosArrowForward>
+        <IoIosArrowForward size="15" color="#C2C1CF"></IoIosArrowForward>
         <Text fontSize="14px">{t('blogDetails.blog_head_2')}</Text>
       </HStack>
       <Image
