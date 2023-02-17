@@ -181,7 +181,7 @@ const footer = () => {
           </div>
         </div>
       </div>
-      <footer className="footerX">&copy; {t('footer.copyright')}</footer>
+      {/* <footer className="footerX">&copy; {t('footer.copyright')}</footer> */}
     </>
   );
 };

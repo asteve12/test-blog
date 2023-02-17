@@ -47,7 +47,7 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
   const articleContent = article?.attributes?.content;
   const articleHeader = article?.attributes?.title;
   const timeToRead = estimateArticleReadTime(articleContent);
-  const imagePath = article?.attributes?.image?.data?.attributes?.url;
+  const imagePath = article?.attributes?.image
   const otherArticleToRead = useRenderArticles(otherArticle);
   const articleDescription = article?.attributes?.description;
   const seo = {
@@ -58,9 +58,12 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
   };
 
   return (
-    <Layout  showHeader={true}>
+    <Layout  showHeader={true} showLoginHeader={false}>
       <Seo {...seo} />
-      <Box w={["95%","95%","90%","83%"]}  ml="auto"  mr="auto" pt="30px">
+      <Box
+        w="100%"  pt="30px" pl="6%" pr="6%"
+        //w={["95%", "95%", "90%", "83%"]} bg="yellow" ml="auto" mr="auto" pt="30px"
+      >
         <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
         <BlogDetailContent
           title={articleHeader}

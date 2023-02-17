@@ -30,10 +30,12 @@ const currentLanguage = Router.locale as string;
     article: false
   };
 
+
+  console.log("props",props)
   return (
-    <Layout showHeader={true}>
+    <Layout showHeader={true}  showLoginHeader={false}>
       <Seo {...SeoData} />
-      <Box w="100%" pl="6%" pr="6%" >
+      <Box w="100%"  pl="6%" pr="6%" >
         <BlogHeader></BlogHeader>
         <LatestNews
           latestArticle={state?.latestArticle}

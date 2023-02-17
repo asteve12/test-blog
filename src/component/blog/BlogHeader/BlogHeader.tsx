@@ -5,7 +5,7 @@ export const BlogHeader = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Box    pt="50px">
+    <Box    pt="50px"  w={["100%","75%"]} ml="auto" mr="auto">
       <Heading
         fontFamily="satoshi black"
          maxW="1000px"

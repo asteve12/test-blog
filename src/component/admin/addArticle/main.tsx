@@ -6,16 +6,22 @@ import {IoIosArrowBack} from "react-icons/io"
 import { BlogForm } from "./form"
 
 
+type IMain = {
+    profilePics: string,
+    username:string
+}
 
 
 
-export const Main = () => {
+
+export const Main = (props:IMain) => {
     
     return (<Box bg="#fbfbfd" w="100%" minH="100vh"  pl="30px" pr="30px">
         <Header></Header>
         <Link href="/admin">
         <HStack gap="10px" mb="15px">
-            <IconButton colorScheme="none" border="1px solid #E5E5E5"  borderRadius="50px" bg="none" aria-label="Take me backTake me back" icon={<IoIosArrowBack  color="#666481" size={25}></IoIosArrowBack>}>
+                <IconButton colorScheme="none" w="40px" h="40px" border="1px solid #E5E5E5"
+                    borderRadius="40px" bg="none" aria-label="Take me backTake me back" icon={<IoIosArrowBack color="#666481" size={25}></IoIosArrowBack>}>
              </IconButton>
             <Text
                 fontWeight="700"
@@ -25,7 +31,7 @@ export const Main = () => {
        </Link>
         
 
-        <BlogForm></BlogForm>
+        <BlogForm  name={props?.username} profilePics={props?.profilePics} />
         
     </Box>)
 }

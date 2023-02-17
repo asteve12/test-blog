@@ -1,41 +1,88 @@
 import { useBlogFormLogic } from "@/hooks/useBlogFormLogic"
-import { FormControl, Heading, Image,Button, FormLabel, Input} from "@chakra-ui/react"
+import { useConditionallyRenderElement } from "@/hooks/useConditionallyRenderedElement"
+import { FormControl, Heading, Image,Button, FormLabel, Input,Box,Flex} from "@chakra-ui/react"
 import { TextEditor } from "./textEditor"
+import { Bars } from "react-loader-spinner"
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
+
+type IBlogForm = {
+    profilePics: string,
+    name:string
+}
 
 
 
 
+export const BlogForm = (props: IBlogForm) => {
+  
+    const { formContainer, isImageUploading, uploadTextEditorImages,
+        updateBlogContent,
+        formikObject, ref,
+        changeImageHandlerBtn,
+        uploadSelectedImage,
+        languageOPtions,
+        setCurrentLanguage,
+        currentLanguage,
+        updateFormikFields
 
-export const BlogForm = () => {
 
-    const { updateBlogContent,formikObject,
-        ref, changeImageHandlerBtn,uploadSelectedImage } = useBlogFormLogic()
+    } = useBlogFormLogic(props)
+    const imageElement  = <Image objectFit="cover"
+    alt="upload image" w="796px" mt="20px" h="320px" borderRadius="8px" maxW="100%"
+        src={formikObject?.values[`${currentLanguage}`]["image"]}/>
+    
+    const changeImageBtn = <Button name="image" onClick={changeImageHandlerBtn} mb="15px" colorScheme="none" fontSize="16px" pt="20px" pb="20px" pl="20px" pr="20px" borderRadius="30px" color="#EA445A" border="solid 1px #EA445A" variant='outline' mt="20px">{formikObject?.values[`${currentLanguage}`]["image"] ? "Change Image":"Upload Image"}</Button>
+    const loader = <Bars height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{}} wrapperClass="" visible={true}/>
+    const elmentToRender = useConditionallyRenderElement(changeImageBtn,!isImageUploading,loader,isImageUploading) as React.ReactNode
+    const renderImageElemetConditionally = useConditionallyRenderElement(imageElement,formikObject?.values[`${currentLanguage}`]["image"]!== "") as React.ReactNode
+    return <form
+        ref={formContainer}
+         onSubmit={formikObject.handleSubmit}>
+        <Heading fontSize="27px"  mt="50px" fontWeight="700" fontFamily="satoshi bold" color="#2D2B4A">Banner Image</Heading>
+        <div data-formName="image">
 
-    return <FormControl  w="100%"  minH="500px"  p="40px" borderRadius="10px" bg="white">
-        <Heading fontSize="27px" fontWeight="700">Banner Image</Heading>
-        <Image
-            
-            objectFit="cover"
-            fallbackSrc="https://www.lifewire.com/thmb/TRGYpWa4KzxUt1Fkgr3FqjOd6VQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/cloud-upload-a30f385a928e44e199a62210d578375a.jpg"
-            alt="upload image" w="796px" mt="20px" h="320px" borderRadius="8px" maxW="100%"
-            src={formikObject?.values?.image}></Image>
-       <Button  onClick={changeImageHandlerBtn} mb="15px" colorScheme="none" fontSize="16px" pt="20px" pb="20px" pl="20px" pr="20px"   borderRadius="30px" color="#EA445A" border="solid 1px #EA445A" variant='outline' mt="20px">
-       Change Image
-        </Button>
-        <Input ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
+        {renderImageElemetConditionally}
+    
+        </div>
+      
+        <div>
+            {elmentToRender} 
+        </div>
+
+        <Flex  alignItems="center" fontSize="12px" mt="10px" mb="10px">
+            Language : <Dropdown
+                options={languageOPtions}
+                onChange={(e) => {
+                   setCurrentLanguage(e?.value)
+                }} value={currentLanguage} />
+        </Flex>
+        <Box  w="796px">
+
+        <Input   ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
         <FormLabel>Title</FormLabel>
-        <Input onBlur={formikObject?.handleBlur} onChange={formikObject.handleChange} name="title" value={formikObject?.values?.title} mb="15px" w="796px" placeholder="Nigeria Report"></Input>
+            <Input data-formName="title" onBlur={formikObject?.handleBlur}
+                onChange={updateFormikFields} name="title" value={formikObject?.values[`${currentLanguage}`]["title"]} mb="15px" w="796px" placeholder="Nigeria Report"></Input>
         <FormLabel>Content</FormLabel>
+        <div data-formName="blogContent">
         <TextEditor
+        uploadImageHandler={uploadTextEditorImages}
         onChange={updateBlogContent}
-        value={formikObject?.values?.blogContent}
+            value={formikObject?.values[`${currentLanguage}`]["blogContent"]}
+            
         ></TextEditor>
+        </div>
+        
 
+        <Button  data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px"  bg="#EA445A"  borderRadius="200px" >Save Changes</Button>
+            
+      </Box>
+    
+       
 
-        <Button  mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px"  bg="#EA445A"  borderRadius="200px" >Save Changes</Button>
         
     
-    </FormControl>
+    </form>
     
 
 }

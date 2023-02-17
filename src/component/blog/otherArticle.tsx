@@ -42,12 +42,14 @@ export const OtherArticle = ({
       ml="auto"
       mr="auto"
       fontSize="16px"
-      w="180px"
+      w="130px"
       height="50px"
       rounded="25px"
       color="#666481"
-      bg="transparent"
+      bg="transparent !important"
       border="1px solid #E1E1E8"
+      
+      
     >
       {t('blog.loadmore')}
     </Button>
@@ -62,15 +64,19 @@ export const OtherArticle = ({
       <Heading
         color="#2D2B4A"
         mb="50px"
-        fontSize={['18px', '44px']}
+        fontSize={['18px','34px', '44px']}
         fontWeight="900"
-        fontFamily="satoshi bold"
+        fontFamily="satoshi black"
         textAlign="center"
       >
         {t('blog.otherArticle_header')}
       </Heading>
 
-      <Flex w="100%" mb="100px"   flexWrap="wrap"
+      <Flex
+        
+        w="100%" mb="50px"
+        justifyContent="space-between" 
+        flexWrap="wrap" 
         >
         {allArticles}
         {loading && <SkeletonAnime></SkeletonAnime>}
