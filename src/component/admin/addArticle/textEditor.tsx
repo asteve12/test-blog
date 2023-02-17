@@ -1,8 +1,15 @@
 import { useMemo } from 'react';
-import SimpleMDE from "react-simplemde-editor";
+import dynamic from "next/dynamic";
+// import SimpleMDE from "react-simplemde-editor";
 import "easymde/dist/easymde.min.css";
  //types
- import {uploadImageHandlerType} from "../../../hooks/useBlogFormLogic"
+import { uploadImageHandlerType } from "../../../hooks/useBlogFormLogic"
+
+
+const SimpleMdeEditor = dynamic(
+	() => import("react-simplemde-editor"),
+	{ ssr: false }
+);
 
 
 type TextEditor = {
@@ -31,7 +38,7 @@ const newOptions = useMemo(() => {
   }, [])
 
 
-    return (<SimpleMDE
+    return (<SimpleMdeEditor
         id="editor"
         //@ts-ignore
          options={newOptions}
