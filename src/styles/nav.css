@@ -30,10 +30,9 @@
 }
 
 .header-row {
-  /* padding: 0 50px 0 50px;
-  height: 8rem; */
-  padding-left: 8%;
-  padding-right: 8%;
+  
+  padding-left: 5%;
+  padding-right: 6%;
 }
 .nav-list {
   background: #fbfbfd;

@@ -27,7 +27,7 @@ export const BlogDetailHeader = ({ imagePath, baseUrl }: IBlogDetailHeader) => {
         width="100%"
         h="420px"
         borderRadius="16px"
-        src={`${baseUrl}${imagePath}`}
+        src={`${imagePath}`}
       ></Image>
     </Box>
   );

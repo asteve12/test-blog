@@ -1,5 +1,6 @@
 import localFont from "@next/font/local"
 
+
 //@ts-ignore
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
@@ -18,22 +19,28 @@ import '../styles/nav.css';
 import { api } from '@/axios';
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
+
 import { Suspense, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { usePreventHydrationError } from '@/hooks/usePreventHydrationError';
+import { SessionProvider } from "next-auth/react";
 
 
 const myFont = localFont({src:"../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf"})
 
 function App({ Component, pageProps }: AppProps) {
-  const { data } = pageProps;
+  const { data, session } = pageProps;
+  const Router = useRouter()
+  console.log("Router",Router,session)
 
   const favIconsPath = data?.data?.attributes?.favicon?.data?.attributes?.url;
   const { initialise } = usePreventHydrationError();
 
   if (!initialise) return <></>;
+  // if(Router.pathname === "/admin" &&  session)
 
   return (
+    <SessionProvider  session={session}>
     <ChakraProvider>
       <Head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,7 +53,8 @@ function App({ Component, pageProps }: AppProps) {
       <Component {...pageProps} />
       </main>
       
-    </ChakraProvider>
+      </ChakraProvider>
+      </SessionProvider>
   );
 }
 //@ts-ignore

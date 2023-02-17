@@ -16,13 +16,15 @@
 .community-header {
   width: 81rem;
   margin: 0 auto;
+
 }
 .community-h {
   font-family: satoshi;
   font-weight: 700;
   line-height: 9rem;
   font-size: 7.2rem;
-  color: #06060b;
+  font-family: "satoshi black";
+  color:#2D2B4A
 }
 .community-p {
   font-family: satoshi;
@@ -42,30 +44,29 @@
   cursor: pointer;
 }
 
-.community-card:hover {
+/* .community-card:hover {
   border: 1px solid #ea445a;
-}
+} */
 .community-card-icon {
   width: 5.6rem;
   height: 5.6rem;
   margin: 0 3rem 2.4rem 4.3rem;
 }
 .community-card-h {
-  font-family: satoshi;
+  font-family: "satoshi black";
   font-size: 2.4rem;
   line-height: 3rem;
   font-weight: 800;
-  color: #06060b;
+  color: #06060B;
 }
 .community-card-text {
   margin: 0.8rem auto 5.2rem;
 }
 .community-card-p {
   font-family: satoshi;
-  font-size: 1.6rem;
+  font-size: 16px;
   line-height: 2.4rem;
-  font-weight: 400;
-  color: #06060b;
+color:  #666481;
 }
 .visit-now {
   align-items: center;
@@ -75,6 +76,13 @@
 }
 .visit-now-text {
   margin-right: 0.8rem;
+  width:110px;
+  height:40px;
+  border:solid 1px red;
+  display:flex;
+  align-items:center;
+  justify-content: center;
+  border-radius: 30px;
 }
 .visit-now-h {
   font-family:satoshi;

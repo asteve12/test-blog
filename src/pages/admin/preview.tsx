@@ -1,4 +1,5 @@
 import { PreviewContainer } from "@/component/admin/Preview/container"
+import { WithAuthenticate } from "@/HOC/authenticate"
 
 
 
@@ -15,4 +16,4 @@ const Preview = () => {
 }
 
 
-export default Preview
+export default WithAuthenticate(Preview)

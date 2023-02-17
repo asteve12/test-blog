@@ -1,23 +1,28 @@
-import { Text } from '@chakra-ui/react';
+import { Text,Box } from '@chakra-ui/react';
 
 export const BlogTitle = (props) => {
   return (
-    <Text
+    <Box
+      mb="8px"
+      mt="4px"
       p="8px"
-      borderRadius="16px"
+      pt="2px"
+      pb="2px"
+       borderRadius="16px"
       background="#F0F4FF"
-      minW="125px"
-      h="24px"
-      display="flex"
-      textAlign="center"
-      alignItems="center"
-      fontSize="12px"
+      maxW="200px"
+      fontFamily="satoshi"
+      fontWeight="normal"
+      fontSize="11px"
       color="#5D82F1"
-      justifyContent="center"
+      textAlign="center"
       cursor="pointer"
+      isTruncated
+  
+      boxSizing='border-box'
     >
       {props.title}
     
-    </Text>
+    </Box>
   );
 };
