@@ -37,7 +37,7 @@ export function injectErrorMessage(errorObj: any,errorMessage?:any) {
 
 //validate form input
 export function validateForm<formType>(values: formType,
-    currentLanguage: string, languageArray: string[],) {
+    currentLanguage?: string, languageArray?: string[],) {
     const errors:{[key:string]:string} = {}
     
     const arrayofFormFields = Object.entries(values)
