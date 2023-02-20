@@ -5,6 +5,7 @@ import { TextEditor } from "./textEditor"
 import { Bars } from "react-loader-spinner"
 import Dropdown from 'react-dropdown';
 import 'react-dropdown/style.css';
+import {ThreeDots}  from "react-loader-spinner"
 
 type IBlogForm = {
     profilePics: string,
@@ -24,10 +25,16 @@ export const BlogForm = (props: IBlogForm) => {
         languageOPtions,
         setCurrentLanguage,
         currentLanguage,
-        updateFormikFields
+        updateFormikFields,
+        isAddingBlog
 
 
     } = useBlogFormLogic(props)
+
+    const uploadBlogBtn =<Button  data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px"  bg="#EA445A"  borderRadius="200px" >
+        
+       {isAddingBlog ? <ThreeDots color="white"></ThreeDots> :"Save Changes"}</Button>
+
     const imageElement  = <Image objectFit="cover"
     alt="upload image" w="796px" mt="20px" h="320px" borderRadius="8px" maxW="100%"
         src={formikObject?.values[`${currentLanguage}`]["image"]}/>
@@ -36,6 +43,7 @@ export const BlogForm = (props: IBlogForm) => {
     const loader = <Bars height="80" width="80" color="#4fa94d" ariaLabel="bars-loading" wrapperStyle={{}} wrapperClass="" visible={true}/>
     const elmentToRender = useConditionallyRenderElement(changeImageBtn,!isImageUploading,loader,isImageUploading) as React.ReactNode
     const renderImageElemetConditionally = useConditionallyRenderElement(imageElement,formikObject?.values[`${currentLanguage}`]["image"]!== "") as React.ReactNode
+
     return <form
         ref={formContainer}
          onSubmit={formikObject.handleSubmit}>
@@ -74,8 +82,7 @@ export const BlogForm = (props: IBlogForm) => {
         </div>
         
 
-        <Button  data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px"  bg="#EA445A"  borderRadius="200px" >Save Changes</Button>
-            
+        {uploadBlogBtn}            
       </Box>
     
        

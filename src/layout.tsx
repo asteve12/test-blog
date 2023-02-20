@@ -26,13 +26,17 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: La
   const isUserAuthenticated = status === "authenticated"
   const LogoutComponent =  <Flex p="10px" justifyContent="right"><Button onClick={()=> signOut()}>Logout</Button></Flex>
   const ElementToRenderWithCondition =  useConditionallyRenderElement(LogoutComponent,isUserAuthenticated) as React.ReactNode
-  const componentWhenshowSideBar_True = <Flex w="100%" justifyContent="space-between"><Box w="220px"><SideBar></SideBar></Box><Box w="90%" >{children}</Box></Flex>
+  const componentWhenshowSideBar_True = <Flex w="100%" justifyContent="space-between"><Box w="220px"><SideBar></SideBar></Box><Box w="90%" >
+    {showLoginHeader && ElementToRenderWithCondition}
+    {children}
+  </Box>
+  </Flex>
   const componentWhenshowSideBar_False = <>{children}<Community></Community><Box display={['none','none', 'block']}><Loop></Loop></Box><Footer />
   </>
   
   return (
     <main >
-       {showLoginHeader && ElementToRenderWithCondition}
+       
      {showHeader && <NavHeader></NavHeader>}
       <Box w="100%"  bg="#fbfbfd">
      

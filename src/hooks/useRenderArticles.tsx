@@ -73,7 +73,7 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
 
 
 export const useRenderAdminArticle = (...args:Array<any | void []>) => {
-  const [article,deleteArticle] = args
+  const [article,deleteArticle,isDeleting] = args
 
   if (article.length > 0) return article.map((eachArticle: any) => {
     console.log("eachArticle",eachArticle)
@@ -94,6 +94,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           type="admin"
           deleteArticle={deleteArticle}
           id={eachArticle?.id}
+          isDeleting={isDeleting}
           
         />
      

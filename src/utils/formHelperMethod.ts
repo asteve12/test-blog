@@ -36,10 +36,9 @@ export function injectErrorMessage(errorObj: any,errorMessage?:any) {
 
 
 //validate form input
-export function validateForm<formType>(values: formType,
-    currentLanguage: string, languageArray: string[],) {
-    const errors:{[key:string]:string} = {}
-    
+export function validateForm<formType>(values: formType,currentLanguage?: string, languageArray?: string[],) {
+    const errors:{[key:string]:string}|null = {}
+    //@ts-ignore
     const arrayofFormFields = Object.entries(values)
     arrayofFormFields.forEach((eachFormField) => {
         const fieldName = eachFormField[0] ;
