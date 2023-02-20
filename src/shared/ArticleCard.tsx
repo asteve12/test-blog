@@ -7,6 +7,8 @@ import { RiDeleteBinLine } from "react-icons/ri"
 import { BiEdit } from "react-icons/bi"
 import { RxEyeOpen } from "react-icons/rx"
 import { useRouter } from 'next-translate-routes';
+import { ThreeDots } from 'react-loader-spinner';
+
 
 
 
@@ -19,7 +21,8 @@ type ArticleCard = {
   estimateArticleReadTime: (article: string) => void;
   type?: string,
   deleteArticle?: (articleId: number) => void,
-  id?:number
+  id?: number,
+  isDeleting?:boolean
 };
 
 export const ArticleCard = ({
@@ -31,12 +34,13 @@ export const ArticleCard = ({
   estimateArticleReadTime,
   type,
   deleteArticle,
-  id
+  id,
+  isDeleting
 }: ArticleCard) => {
 
   const Router = useRouter()
 
-console.log("deleteArticle",deleteArticle,id)
+console.log("deleteArticle",isDeleting)
   const AdminBlogFooterElements = [
     {
     name: "Delete",
@@ -69,9 +73,13 @@ const timeToRead = estimateArticleReadTime(content);
   const isAdmin = type === "admin";
   const blogCardFooterElem =  useConditionallyRenderElement(blogFooter,!isAdmin) as React.ReactNode
   const AdminBlogCardFooterEle = useConditionallyRenderElement(AdminBlogFooter,isAdmin) as React.ReactNode
-console.log("type",type)
+const loaderCard = <Flex  alignItems="center" justifyContent="center" position="absolute" bg="rgba(0,0,0,0.3)" w="100%" h="100%">
+<ThreeDots color='white'></ThreeDots>
+</Flex>
   return (
-    <Box w={['100%', '95%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} ml="auto" mr="auto">
+    <Box position="relative" w={['100%', '95%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} ml="auto" mr="auto">
+      
+      {isDeleting && loaderCard}
       <Image
         w={'100%'}
         objectFit="cover"

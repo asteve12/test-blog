@@ -14,19 +14,26 @@ type IHomeMain = {
 }
 
 export const HomeMain = (props: IHomeMain) => {
-    const {deleteArticle} =useAdminLogic()
+    const {deleteArticle,isDeleting} =useAdminLogic()
 
-    const allArticle = useRenderAdminArticle(props.allArticles,deleteArticle)
+    const allArticle = useRenderAdminArticle(props.allArticles,deleteArticle,isDeleting)
    
 
     return (
-        <Stack w="100%" pl="2%" pr="2%" >
+        <Stack w="100%" pl="2%"  minH="100vh" pr="2%" >
             <Header></Header>
-            <Flex  flexWrap="wrap" width="100%" justifyContent="space-between" >
             {
-                allArticle
+                allArticle?.length > 0  ? <Flex  flexWrap="wrap" width="100%" justifyContent="space-between" >
+                {
+                    allArticle
+               }
+                </Flex> :
+                    <Flex justifyContent="center" alignItems="center">
+                        No Blog Added yet
+
+                    </Flex>
            }
-            </Flex>
+            
             
             
             {/* < BlogCard></BlogCard> */}
