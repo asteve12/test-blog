@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { Inter } from '@next/font/google'
+//import { Inter } from '@next/font/google'
 import { SideBar } from '../../shared/admin/sidebar'
 import { Box, Flex,FlexProps } from '@chakra-ui/react'
 import { Layout } from '../../layout'
@@ -14,7 +14,7 @@ import { WithAuthenticate } from '@/HOC/authenticate'
 
 
 
-const inter = Inter({ subsets: ['latin'] })
+//const inter = Inter({ subsets: ['latin'] })
 
  function Home(props: any) {
   

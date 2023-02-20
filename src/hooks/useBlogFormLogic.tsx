@@ -3,6 +3,7 @@ import { useFormik,} from "formik"
 import React, { useRef, useCallback, useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import { injectErrorMessage, validateForm } from "@/utils/formHelperMethod"
+import slug from "slug"
 
 
 
@@ -170,7 +171,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     description: currentValues?.title,
                     content: currentValues?.blogContent,
                     image: currentValues?.image,
-                    slug: currentValues?.title,
+                    slug: slug(currentValues?.title),
                     authorImage: props?.profilePics,
                     author: props?.name,
                     locale:languageObject[currentLanguage]
@@ -210,7 +211,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 response = await api.post(`/api/articles/${id}/localizations`,data_for_upload)
                 
             }
-            if(edit  )
+            
             if (edit) {
                 response =  await api.put(`/api/articles/${id}`, data_for_upload)
             }
