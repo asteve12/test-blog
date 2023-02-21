@@ -95,6 +95,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           deleteArticle={deleteArticle}
           id={eachArticle?.id}
           isDeleting={isDeleting}
+          slug={eachArticle?.attributes?.slug}
           
         />
      

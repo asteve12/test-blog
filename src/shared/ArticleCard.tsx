@@ -22,7 +22,8 @@ type ArticleCard = {
   type?: string,
   deleteArticle?: (articleId: number) => void,
   id?: number,
-  isDeleting?:boolean
+  isDeleting?: boolean,
+  slug?:string
 };
 
 export const ArticleCard = ({
@@ -35,13 +36,12 @@ export const ArticleCard = ({
   type,
   deleteArticle,
   id,
-  isDeleting
+  isDeleting,
+  slug
 }: ArticleCard) => {
 
   const Router = useRouter()
-
-console.log("deleteArticle",isDeleting)
-  const AdminBlogFooterElements = [
+const AdminBlogFooterElements = [
     {
     name: "Delete",
       icons: RiDeleteBinLine,
@@ -50,7 +50,7 @@ console.log("deleteArticle",isDeleting)
     {
       name: "Edit",
       icons: BiEdit,
-      onClick:()=> Router.push(`/admin/add-article?edit=true&id=${id}`)
+      onClick:()=> Router.push(`/admin/add-article?edit=true&id=${id}&slug=${slug}`)
     },
     {
       name: "Preview",

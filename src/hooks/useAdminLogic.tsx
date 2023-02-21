@@ -11,11 +11,12 @@ export const useAdminLogic = () => {
     const deleteArticle = (articleId: number) => {
         setIsDeleting(true)
         
-        api.delete(`/api/articles/${articleId}`)
+        api.delete(`/api/articles/${articleId}/?locale=all`)
             .then((response) => {
+                console.log("asteve12",response)
                 alert("successfully deleted article")
                 setIsDeleting(false)
-                Router.reload()
+                //Router.reload()
             }).catch((e) => {
                 alert("unable to delete")
                 setIsDeleting(false)
