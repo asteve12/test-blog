@@ -4,6 +4,7 @@ import React, { useRef, useCallback, useState, useEffect } from "react"
 import { useRouter } from "next/router"
 import { injectErrorMessage, validateForm } from "@/utils/formHelperMethod"
 import slug from "slug"
+import { SlowBuffer } from "node:buffer"
 
 
 
@@ -50,7 +51,8 @@ type IimageId = {
 
 
 export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
-    const languageOPtions = ['ENGLISH','FRENCH'];
+    const languageOPtions = ['ENGLISH', 'FRENCH'];
+    const [articleslug, setSlug] = useState<string>("");
     const [currentLanguage,setCurrentLanguage] = useState(languageOPtions[0])
     const [isImageUploading, setIsUploading] = useState(false);
     const [isAddingBlog,setIsAddingBlog]  = useState(false)
@@ -59,6 +61,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const ref = useRef<null | HTMLInputElement>(null)
     const [unfilledLanguageVersion,setUnfilledLangVersion] = useState<string []>()
     const Router = useRouter()
+    
     const languageObject:{[key:string]:string} = {
         ENGLISH: "en",
         FRENCH:"fr-BJ"
@@ -90,25 +93,22 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     )
 
     useEffect(() => {
-        const { edit, id } = Router.query
+        const { edit, id, slug } = Router.query
+        console.log("slug",Router.query)
         if (edit) {
+            if(slug) setSlug(slug as string)
            
-            api.get(`/api/articles/${id}?locale=${languageObject[currentLanguage]}`)
+            //api.get(`/api/articles/${id}?locale=${languageObject[currentLanguage]}`)
+            api.get(`/api/articles?filters[slug][$eq]=${slug}&populate=*&locale=${languageObject[currentLanguage]}`)
                 .then((response) => { 
-                    console.log("response",response,`/api/articles/${id}/?locale=${languageObject[currentLanguage]}`)
-                    const blogData = response?.data?.data?.attributes
-                    if (typeof response?.data?.data === "object" && blogData?.locale === languageObject[currentLanguage] ) {
+                    console.log("response",response?.data.data,`/api/articles/${id}/?locale=${languageObject[currentLanguage]}`)
+                    if (response?.data.data.length === 0) return;
+                    const blogData = response?.data?.data[0]?.attributes
+                    console.log("blogData",blogData)
+                    const currentLanguageArtcicleVersion = response?.data?.data?.filter((eachArticle:any)=>  eachArticle?.locale === languageObject[currentLanguage] )
                         const { content, image, title } = blogData
                         const currentField = formikObject.values[currentLanguage]
                         formikObject.setFieldValue(currentLanguage, {...currentField,blogContent:content, image, title})   
-                    }
-                    else if (Array.isArray(response?.data?.data)) {
-                        const currentLanguageArtcicleVersion = response?.data?.data?.filter((eachArticle:any)=>  eachArticle?.locale === languageObject[currentLanguage] )
-                        const { content, image, title } = currentLanguageArtcicleVersion
-                        const currentField = formikObject.values[currentLanguage]
-                        formikObject.setFieldValue(currentLanguage, {...currentField,blogContent:content, image, title})   
-                    
-                    }
                     
                    
                     
@@ -194,22 +194,31 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             let response 
 
             if (!isLanguageVersionFieldValuesPresent && edit) {
-                alert(`adding ${currentLanguage} version`)
+                
                 const data_for_upload = JSON.stringify( {
                         title: currentValues?.title,
                         description: currentValues?.title,
                         content: currentValues?.blogContent,
                         image: currentValues?.image,
-                        slug: currentValues?.title,
+                        slug: articleslug,
                         authorImage: props?.profilePics,
                         author: props?.name,
-                        locale:languageObject[currentLanguage]
+                    locale: languageObject[currentLanguage],
+                    publishedAt:new Date().toISOString(),
                        
                     }
                 )
-                console.log("data_for_upload",data_for_upload)
-                response = await api.post(`/api/articles/${id}/localizations`,data_for_upload)
                 
+                response = await api.post(`/api/articles/${id}/localizations`,data_for_upload)
+            console.log("response123",response)
+
+                if (response.status === 200) {
+                    setIsAddingBlog(false)
+                    alert("blog added successfully")
+
+                    return
+                    
+                }
             }
             
             if (edit) {
