@@ -5,24 +5,50 @@ import { GrFacebookOption } from 'react-icons/gr';
 import { GrTwitter } from 'react-icons/gr';
 import { AiFillLinkedin } from 'react-icons/ai';
 import { RiWhatsappFill } from 'react-icons/ri';
+import { useRouter } from "next/router"
+import {
+  FacebookShareButton,
+  FacebookIcon,
+  PinterestShareButton,
+  PinterestIcon,
+  RedditShareButton,
+  RedditIcon,
+  WhatsappShareButton,
+  WhatsappIcon,
+  LinkedinShareButton,
+  LinkedinIcon,
+  TwitterShareButton
+} from 'next-share';
+
+
+
 
 export const Socials = () => {
+   const url =  window.location.href
+
+  
   const socials = [
     {
       name: 'facebook',
-      icons: GrFacebookOption
+      icons: GrFacebookOption,
+      shareButton:FacebookShareButton
     },
     {
       name: 'twitter',
-      icons: GrTwitter
+      icons: GrTwitter,
+      shareButton:TwitterShareButton
+
     },
     {
       name: 'linkedIn',
-      icons: AiFillLinkedin
+      icons: AiFillLinkedin,
+      shareButton:LinkedinShareButton
+
     },
     {
       name: 'whatsapp',
-      icons: RiWhatsappFill
+      icons: RiWhatsappFill,
+      shareButton:WhatsappShareButton
     }
   ];
 
@@ -35,14 +61,17 @@ export const Socials = () => {
         Share
       </Text>
       {socials.map((eachIcons) => (
-        <Box  textAlign={["left","left","center","center"]} >
-           <CustomIcons
+        <Box textAlign={["left", "left", "center", "center"]} >
+          <eachIcons.shareButton  url={url} blankTarget={true}>
+          <CustomIcons
           style={{
             color: '#666481',
             fontSize: '25px'
           }}
           Icon={eachIcons.icons}
         ></CustomIcons>
+          </eachIcons.shareButton>
+          
         </Box>
        
       ))}
