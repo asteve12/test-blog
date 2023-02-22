@@ -27,14 +27,18 @@ export const useAdminLogic = () => {
             .then((response) => {
                 console.log("asteve12",response)
                
-                Router.reload()
+    
             }).then(async () => {
 
                 const singleArticle =await api.get(`/api/articles?filters[slug][$eq]=${slug}&populate=*&locale=fr-BJ`)
                 console.log("singleArticle",singleArticle)
                 const dataId = singleArticle?.data.data[0]?.id
-                const deleteRes = await api.delete(`/api/articles/${dataId}`)
-                
+                if (dataId) {
+                    await api.delete(`/api/articles/${dataId}`)
+                }
+              
+
+                Router.reload()
                 
                 alert("successfully deleted article")
                 setIsDeleting(false)
