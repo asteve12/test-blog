@@ -51,6 +51,6 @@ export const getServerSideProps = async ({ locale }: any) => {
       homeSEO: homeSEO?.data,
       ...(await serverSideTranslations(locale, ['common']))
     },
-    revalidate: 1
+    //revalidate: 1
   };
 };
