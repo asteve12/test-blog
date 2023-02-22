@@ -31,7 +31,7 @@ const currentLanguage = Router.locale as string;
   };
 
 
-  console.log("props",props)
+  console.log("pros",props)
   return (
     <Layout showHeader={true}  showLoginHeader={false}>
       <Seo {...SeoData} />
