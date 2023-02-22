@@ -94,11 +94,11 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
 
   return {
     paths: path,
-    fallback: false
+    fallback: "blocking"
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale, params }) => {
+export const getServerSideProps: GetStaticProps = async ({ locale, params }) => {
   const [singleArticle, otherArticle] = await Promise.all([
     api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`),
     api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`)
