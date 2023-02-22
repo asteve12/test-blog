@@ -90,7 +90,7 @@ export const getStaticPaths: GetStaticPaths = async (context) => {
     });
   });
 
-  console.log('path', context);
+  console.log('path', locales);
 
   return {
     paths: path,

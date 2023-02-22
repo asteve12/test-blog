@@ -259,10 +259,10 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             if (response?.status === 200) {
                 setIsAddingBlog(false)
                 alert("blog added successfully")
-                formikObject.resetForm()
-                Router.push("/admin")
                 
+                //Router.push("/admin")
                 
+                Router.replace("/admin")
             
             }
 
