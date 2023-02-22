@@ -29,11 +29,11 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
           <BlogTitle title={title}></BlogTitle>
           <TimerCard timetoRead={timeToRead}></TimerCard>
         </HStack>
-        <Box width="100%" mt="23px">
+        <Box width="100%" mt="18px">
           <Heading
             color="#2D2B4A"
             textAlign={'left'}
-            mt="10px"
+            mt="0px"
             mb="10px"
             fontFamily="satoshi bold"
             fontWeight="900"
