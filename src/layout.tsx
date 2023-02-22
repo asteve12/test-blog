@@ -42,7 +42,7 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: La
   
   return (
     <main >
-       {mode === MODE.Attendees ? (
+       {mode === MODE.Attendees && showHeader ? (
         <NavHeader mode={mode} setMode={setMode}  />
       ) :null}
      {/* {showHeader && <NavHeader></NavHeader>} */}
