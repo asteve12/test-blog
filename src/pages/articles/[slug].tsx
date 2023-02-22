@@ -119,7 +119,7 @@ export const getServerSideProps = async ({ locale, params }) => {
       locale,
       ...(await serverSideTranslations(locale!, ['common']))
     },
-    revalidate: 1
+    //revalidate: 1
   };
 };
 
