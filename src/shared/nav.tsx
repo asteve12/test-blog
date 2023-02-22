@@ -10,6 +10,8 @@ import { Box, Button, Divider, Heading, Image, Text, useMediaQuery } from '@chak
 import { Flex } from '@chakra-ui/react';
 import { slide as Menu } from 'react-burger-menu';
 import { HiMenuAlt2 } from 'react-icons/hi';
+import { MODE } from './enum';
+
 
 const mobilestyles = {
   bmBurgerButton: {
@@ -61,13 +63,18 @@ const mobilestyles = {
   }
 };
 
-export const NavHeader = () => {
+export const NavHeader = ({mode,setMode}:any) => {
   const [isDesktopScreen] = useMediaQuery('(min-width: 823px)', {
     ssr: true,
     fallback: false
   });
   const { changeLanguage, currentLanguage, t, languageOption } = useNavHeaderLogic();
-
+  
+  
+  function changeMode(mode:any) {
+    setMode(mode);
+    localStorage.setItem("mode", mode);
+  }
   if (isDesktopScreen)
     return (
       <>
@@ -87,12 +94,58 @@ export const NavHeader = () => {
                   </span>
                 </Link>
               </div>
+
               <ul className="nav-list attendees-nav-padding flex flex-between">
+
+                <li className="inner-nav-list">
+                < Link  href="https://gruve.events/">
+
+                <div
+                  className="nav-link"
+                  //onClick={() => changeMode(MODE.Attendees)}
+                  >
+                   
+                  <span
+                    className={`event-attendees nav-link-item ${
+                      mode === MODE.Attendees ? "active-event" : ""
+                    }`}
+                    >
+                       {t('navHeader.eventAttendeedTxt')}
+                    {/* <Trans i18nKey="navHeader.eventAttendeedTxt">
+                      For Event Attendees
+                    </Trans> */}
+                  </span>
+                  </div>
+                </Link>
+               
+                
+              </li>
+
+                <li className="inner-nav-list">
+                  <Link href="https://gruve.events/">
+
+                  <div
+                  className="nav-link"
+                  //onClick={() => changeMode(MODE.Creators)}
+                >
+                  <span
+                    className={`event-attendees nav-link-item ${
+                      mode === MODE.Creators ? "active-event" : ""
+                    }`}
+                  >
+                    {t('navHeader.eventCreatorsText')}
+                  </span>
+                </div>
+                  </Link>
+               
+              </li>
+            </ul>
+              {/* <ul className="nav-list attendees-nav-padding flex flex-between">
                 <li className="inner-nav-list">
                   <div className="nav-link">
                     <span className={`event-attendees nav-link-item`}>
                       {t('navHeader.eventAttendeedTxt')}
-                      {/* For Event Attendees */}
+                      
                     </span>
                   </div>
                 </li>
@@ -104,12 +157,12 @@ export const NavHeader = () => {
                     </span>
                   </div>
                 </li>
-              </ul>
+              </ul> */}
 
               <div className="flex">
                 <section className="flex  align-center">
-                  <span className="nav-blog-item">
-                    <Link href="/blog">{t('navHeader.blogNav')}</Link>
+                  <span className="nav-blog-item" style={{color:"#EA445A",fontWeight:"bold"}}>
+                    <Link href="/">{t('navHeader.blogNav')}</Link>
                   </span>
                   <span className="nav-language-items">
                     <Dropdown

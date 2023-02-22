@@ -1,5 +1,5 @@
 import { Box, Flex, useMediaQuery } from '@chakra-ui/react';
-import React from 'react'
+import React, { useState } from 'react'
 import Community from './component/community';
 import Footer from './component/footer';
 import { NavHeader } from './shared/nav';
@@ -8,6 +8,7 @@ import { SideBar } from './shared/admin/sidebar';
 import { signOut,useSession } from 'next-auth/react';
 import { useConditionallyRenderElement } from './hooks/useConditionallyRenderedElement';
 import { Button } from '@chakra-ui/react'
+import { MODE } from './shared/enum';
 
 
 
@@ -23,6 +24,8 @@ type LayoutType = {
 
 export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: LayoutType) => {
   const { data: session, status } = useSession()
+  const [mode, setMode] = useState(MODE.Attendees);
+  
   const isUserAuthenticated = status === "authenticated"
   const LogoutComponent =  <Flex p="10px" justifyContent="right"><Button onClick={()=> signOut()}>Logout</Button></Flex>
   const ElementToRenderWithCondition =  useConditionallyRenderElement(LogoutComponent,isUserAuthenticated) as React.ReactNode
@@ -39,9 +42,11 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: La
   
   return (
     <main >
-       
-     {showHeader && <NavHeader></NavHeader>}
-      <Box w="100%"  bg="#fbfbfd">
+       {mode === MODE.Attendees ? (
+        <NavHeader mode={mode} setMode={setMode}  />
+      ) :null}
+     {/* {showHeader && <NavHeader></NavHeader>} */}
+      <Box w="100%"  bg="#fbfbfd" >
      
       {showSideBar ? componentWhenshowSideBar_True :componentWhenshowSideBar_False }
       </Box>
