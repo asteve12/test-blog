@@ -18,7 +18,7 @@ export const SideBar = () => {
         }
     ]
     return (
-        <Box w="200px" h="100vh" bg="#06060B"  position="fixed">
+        <Box w="200px" h="100vh" bg="#06060B"   position="fixed">
             
             <Image
                 

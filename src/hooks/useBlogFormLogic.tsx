@@ -59,7 +59,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [imageId, setImageId] = useState<IimageId>({[currentLanguage]:""})
     const formContainer = useRef<HTMLFormElement>(null)
     const ref = useRef<null | HTMLInputElement>(null)
-    const [unfilledLanguageVersion,setUnfilledLangVersion] = useState<string []>()
+    const [isDataAvailable,setIsDataAvailable] = useState<boolean>()
+    const [unfilledLanguageVersion, setUnfilledLangVersion] = useState<string[]>()
+    const [currentId,setCurrentId] = useState<number>()
     const Router = useRouter()
     
     const languageObject:{[key:string]:string} = {
@@ -102,8 +104,10 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             api.get(`/api/articles?filters[slug][$eq]=${slug}&populate=*&locale=${languageObject[currentLanguage]}`)
                 .then((response) => { 
                     console.log("response",response?.data.data,`/api/articles/${id}/?locale=${languageObject[currentLanguage]}`)
-                    if (response?.data.data.length === 0) return;
+                    if (response?.data.data.length === 0) return setIsDataAvailable(false);
+                  
                     const blogData = response?.data?.data[0]?.attributes
+                    setCurrentId(response?.data.data[0].id)
                     console.log("blogData",blogData)
                     const currentLanguageArtcicleVersion = response?.data?.data?.filter((eachArticle:any)=>  eachArticle?.locale === languageObject[currentLanguage] )
                         const { content, image, title } = blogData
@@ -178,29 +182,31 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                    
                 }
             })
-            console.log("upload-response", data_for_upload)
+            
             const { edit, id } = Router.query
             const current_language_formik_field = formikObject["values"][currentLanguage]
+            console.log("upload-response", current_language_formik_field)
+            
             let isLanguageVersionFieldValuesPresent;
 
                 Object.entries(current_language_formik_field).forEach((eachField) => {
-                    if(!eachField[1])  return isLanguageVersionFieldValuesPresent = false
+                    if(eachField[1])  isLanguageVersionFieldValuesPresent = true
                 
             })
 
-           
-            
+           console.log("isLanguageVersionFieldValuesPresent",Object.entries(current_language_formik_field))
+           console.log("values123",formikObject["values"])
             
             let response 
 
-            if (!isLanguageVersionFieldValuesPresent && edit) {
+            if (isDataAvailable  === false && edit) {
                 
                 const data_for_upload = JSON.stringify( {
                         title: currentValues?.title,
                         description: currentValues?.title,
                         content: currentValues?.blogContent,
                         image: currentValues?.image,
-                        slug: articleslug,
+                        slug:articleslug,
                         authorImage: props?.profilePics,
                         author: props?.name,
                     locale: languageObject[currentLanguage],
@@ -215,6 +221,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 if (response.status === 200) {
                     setIsAddingBlog(false)
                     alert("blog added successfully")
+                    Router.push("/admin")
 
                     return
                     
@@ -222,7 +229,20 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             }
             
             if (edit) {
-                response =  await api.put(`/api/articles/${id}`, data_for_upload)
+                const data_for_upload = JSON.stringify({
+                    data: {
+                        title: currentValues?.title,
+                        description: currentValues?.title,
+                        content: currentValues?.blogContent,
+                        image: currentValues?.image,
+                        slug,
+                        authorImage: props?.profilePics,
+                        author: props?.name,
+                        locale:languageObject[currentLanguage]
+                       
+                    }
+                })
+                response =  await api.put(`/api/articles/${currentId}`, data_for_upload)
             }
             else {
                 const contentVersionsFilled  =  []
@@ -239,6 +259,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             if (response?.status === 200) {
                 setIsAddingBlog(false)
                 alert("blog added successfully")
+                formikObject.resetForm()
+                Router.push("/admin")
+                
                 
             
             }
@@ -247,6 +270,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             
             
         } catch (e) {
+            console.log("blog error",e)
             alert("error occurred while adding blog")
             setIsAddingBlog(false)
             
