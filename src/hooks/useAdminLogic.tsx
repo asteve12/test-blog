@@ -39,6 +39,7 @@ export const useAdminLogic = () => {
               
 
                 Router.reload()
+                Router.replace(Router.asPath);
                 
                 alert("successfully deleted article")
                 setIsDeleting(false)

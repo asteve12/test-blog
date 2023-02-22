@@ -57,7 +57,7 @@ const currentLanguage = Router.locale as string;
   );
 }
 
-export const getServerSideProps = async ({ locale }: any) => {
+export const getStaticProps = async ({ locale }: any) => {
   const paginationStart = 0;
   const paginationLimit = 3;
   const [articles, homeSEO, allArticles] = await Promise.all([

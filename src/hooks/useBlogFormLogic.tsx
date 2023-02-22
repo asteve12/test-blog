@@ -260,9 +260,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 setIsAddingBlog(false)
                 alert("blog added successfully")
                 
-                Router.push("/admin")
+                //Router.push("/admin")
                 
-                
+                Router.replace("/admin")
             
             }
 
