@@ -73,32 +73,33 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
   );
 };
 
-export const getStaticPaths: GetStaticPaths = async (context) => {
-  const { locales } = context;
+// export const getStaticPaths: GetStaticPaths = async (context) => {
+//   const { locales } = context;
 
-  const allArticles = await api.get(`/api/articles/?populate=*`);
-  const path: any[] = [];
+//   const allArticles = await api.get(`/api/articles/?populate=*`);
+//   const path: any[] = [];
 
-  allArticles?.data?.data?.map((eachArticle: any) => {
-    locales!.map((language: any) => {
-      path.push({
-        params: {
-          slug: eachArticle?.attributes?.slug
-        },
-        locale: language
-      });
-    });
-  });
+//   allArticles?.data?.data?.map((eachArticle: any) => {
+//     locales!.map((language: any) => {
+//       path.push({
+//         params: {
+//           slug: eachArticle?.attributes?.slug
+//         },
+//         locale: language
+//       });
+//     });
+//   });
 
-  console.log('path', locales);
+//   console.log('path', locales);
 
-  return {
-    paths: path,
-    fallback: "blocking"
-  };
-};
-
-export const getServerSideProps: GetStaticProps = async ({ locale, params }) => {
+//   return {
+//     paths: path,
+//     fallback: "blocking"
+//   };
+// };
+//export const getStaticProps: GetStaticProps
+//@ts-ignore
+export const getServerSideProps = async ({ locale, params }) => {
   const [singleArticle, otherArticle] = await Promise.all([
     api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`),
     api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`)
