@@ -20,7 +20,7 @@ type ArticleCard = {
   authorImage: string;
   estimateArticleReadTime: (article: string) => void;
   type?: string,
-  deleteArticle?: (articleId: number) => void,
+  deleteArticle?: (articleId: number,slug:string) => void,
   id?: number,
   isDeleting?: boolean,
   slug?:string
@@ -45,7 +45,7 @@ const AdminBlogFooterElements = [
     {
     name: "Delete",
       icons: RiDeleteBinLine,
-       onClick:() => {if(deleteArticle && id ) return  deleteArticle(id)}
+       onClick:() => {if(deleteArticle && id ) return  deleteArticle(id,`${slug}`)}
     },
     {
       name: "Edit",

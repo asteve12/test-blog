@@ -2,14 +2,17 @@ import React from 'react';
 
 import { ArticleCard } from '@/shared/ArticleCard';
 import Link from 'next/link';
+
 //utils
 import { estimateArticleReadTime } from '@/util/estimateReadTime';
 import { useRouter } from 'next-translate-routes';
 import { Box } from '@chakra-ui/react';
+import { useSession } from 'next-auth/react';
 
 //handle display of all articles
 export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
   const Router = useRouter();
+  const { data, status } = useSession()
   const [type] = args
 
 

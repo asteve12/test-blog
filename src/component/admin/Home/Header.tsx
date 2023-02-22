@@ -8,7 +8,7 @@ import {CiSearch} from "react-icons/ci"
 
 
 export const Header = () => {
-  return <Box pb="24px" w="100%"  minH="56px" pt="24px" display="flex" justifyContent="space-between" alignItems="center" >
+  return <Box  pb="24px" w="100%"  minH="56px" pt="24px" display="flex" justifyContent="space-between" alignItems="center" >
   
      <Text fontSize="32px" fontWeight="700" >
         Blog Articles
