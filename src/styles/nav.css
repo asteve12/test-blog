@@ -75,11 +75,13 @@
   flex-basis: 25%;
 }
 .hero-cta-btn {
-  width: 16.3rem;
+  min-width: 16.3rem;
   height: 5.6rem;
   border-radius: 10rem;
   background: #ea445a;
   gap: 1.6rem;
+  padding: 10px;
+  text-align: center;
 }
 .hero-btn-p {
   font-family: Satoshi;

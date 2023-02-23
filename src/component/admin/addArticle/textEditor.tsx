@@ -38,7 +38,8 @@ const newOptions = useMemo(() => {
   }, [])
 
 
-    return (<SimpleMdeEditor
+  return (<SimpleMdeEditor
+      style={{width:"100%"}}
         id="editor"
         //@ts-ignore
          options={newOptions}

@@ -1,22 +1,36 @@
 import { CustomIcons } from "@/utils/customIcons"
 import { Box, Input, Stack, Text, Button, InputGroup, InputLeftElement } from "@chakra-ui/react"
 import Link from "next/link"
+import React from "react"
 //icons
 import {CiSearch} from "react-icons/ci"
 
 
+type IHeader = {
+  searchForBlog:(e:React.ChangeEvent)=> void
+}
 
 
-export const Header = () => {
-  return <Box  pb="24px" w="100%"  minH="56px" pt="24px" display="flex" justifyContent="space-between" alignItems="center" >
+
+export const Header = ({searchForBlog}:IHeader) => {
+  return <Box
+    flexDirection={["column", "column", "column", "row"]}
+    pb="24px"
+    w="100%"
+    minH="56px"
+    pt="24px"
+    display="flex"
+    justifyContent="space-between"
+    alignItems="center" >
   
-     <Text fontSize="32px" fontWeight="700" >
+    <Text fontSize={["15px", "15px", "15px", "32px"]}
+      display={["none", "none", "none", "flex"]} fontWeight="700" >
         Blog Articles
     </Text>
 
-    <Box h="100%" w="700px" display="flex"  >
-    <Stack spacing="24px">
-            <InputGroup    w="490px" h="56px" mr="15px">
+    <Box h="100%" w={["100%","100%","100%","700px"]} display="flex"  >
+    <Stack spacing="0px" w="100%">
+            <InputGroup    w={["90%","90%","80%","490px"]} h="56px" mr="15px">
           <InputLeftElement
             pointerEvents='none'
             h="100%"
@@ -27,7 +41,7 @@ export const Header = () => {
               marginRight:"16px"
             }} Icon={CiSearch} />}
           />
-          <Input fontSize="16px" pl="30px" display="flex" alignItems="center" borderRadius="50px" w="100%" h="100%" type='tel' placeholder='Search Blog' />
+          <Input onChange={searchForBlog} fontSize="16px" pl="30px"  display="flex" alignItems="center" borderRadius="50px" w="100%" h="100%" type='tel' placeholder='Search Blog' />
         </InputGroup>
       </Stack>
       <Link href="/admin/add-article">

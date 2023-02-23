@@ -105,7 +105,8 @@ export const NavHeader = ({mode,setMode}:any) => {
                   //onClick={() => changeMode(MODE.Attendees)}
                   >
                    
-                  <span
+                      <div
+                         style={{textAlign:"center"}}
                     className={`event-attendees nav-link-item ${
                       mode === MODE.Attendees ? "active-event" : ""
                     }`}
@@ -114,7 +115,7 @@ export const NavHeader = ({mode,setMode}:any) => {
                     {/* <Trans i18nKey="navHeader.eventAttendeedTxt">
                       For Event Attendees
                     </Trans> */}
-                  </span>
+                  </div>
                   </div>
                 </Link>
                
@@ -128,13 +129,14 @@ export const NavHeader = ({mode,setMode}:any) => {
                   className="nav-link"
                   //onClick={() => changeMode(MODE.Creators)}
                 >
-                  <span
+                      <div
+                        style={{textAlign:"center"}}
                     className={`event-attendees nav-link-item ${
                       mode === MODE.Creators ? "active-event" : ""
                     }`}
                   >
                     {t('navHeader.eventCreatorsText')}
-                  </span>
+                  </div>
                 </div>
                   </Link>
                

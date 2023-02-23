@@ -5,7 +5,7 @@ export const Loop = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Box width="100%" h="900px" position="relative">
+    <Box width="100%" h="900px" position="relative" >
       <Img
         w="100%"
         objectFit="cover"
@@ -41,11 +41,12 @@ export const Loop = () => {
         justifyContent="center"
       >
         <Box ml="auto" mr="auto" w="100%">
-          <Heading fontFamily="satoshi black" textAlign="center"
+          <Heading id="join-the-hype" fontFamily="satoshi black" textAlign="center"
             fontWeight="900" fontSize={["5rem","5rem","5rem","10rem"]} mb="5px">
             {t('blog.loop_header')}
           </Heading>
           <Text
+            
             w="566px"
             maxW="100%"
             ml="auto" mr="auto" mb="15px"
@@ -54,7 +55,7 @@ export const Loop = () => {
             {t('blog.loop_text')}
           </Text>
 
-          <FormControl>
+          <FormControl >
             <Flex
               w={['100%', '100%', '100%', '100%', '692px']}
               justifyContent="center"

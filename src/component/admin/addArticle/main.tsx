@@ -16,7 +16,7 @@ type IMain = {
 
 export const Main = (props:IMain) => {
     
-    return (<Box bg="#fbfbfd" w="100%" minH="100vh"  pl="30px" pr="30px">
+    return (<Box bg="#fbfbfd" w="100%" minH="100vh"  pl={["0px","0px","10px","30px"]} pr={["12px","12px","12px","30px"]}>
         <Header></Header>
         <Link href="/admin">
         <HStack gap="10px" mb="15px">
@@ -30,8 +30,11 @@ export const Main = (props:IMain) => {
         </HStack>
        </Link>
         
-
+        <Box w="100%">
         <BlogForm  name={props?.username} profilePics={props?.profilePics} />
+            
+</Box>
+       
         
     </Box>)
 }

@@ -23,7 +23,9 @@ type ArticleCard = {
   deleteArticle?: (articleId: number,slug:string) => void,
   id?: number,
   isDeleting?: boolean,
-  slug?:string
+  slug?: string,
+  itemIdToDelete?: number,
+  setItemsIdToDelete?:(itemId:number)=> void
 };
 
 export const ArticleCard = ({
@@ -37,7 +39,9 @@ export const ArticleCard = ({
   deleteArticle,
   id,
   isDeleting,
-  slug
+  slug,
+  itemIdToDelete,
+  setItemsIdToDelete
 }: ArticleCard) => {
 
   const Router = useRouter()
@@ -45,7 +49,12 @@ const AdminBlogFooterElements = [
     {
     name: "Delete",
       icons: RiDeleteBinLine,
-       onClick:() => {if(deleteArticle && id ) return  deleteArticle(id,`${slug}`)}
+    onClick: () => {
+      if (deleteArticle && id && setItemsIdToDelete) {
+        setItemsIdToDelete(id)
+        return deleteArticle(id, `${slug}`)
+      }; 
+    }
     },
     {
       name: "Edit",
@@ -79,7 +88,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
   return (
     <Box position="relative" w={['100%', '95%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} ml="auto" mr="auto">
       
-      {isDeleting && loaderCard}
+      {isDeleting && itemIdToDelete=== id && loaderCard}
       <Image
         w={'100%'}
         objectFit="cover"
@@ -99,6 +108,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
         fontSize={['18px', '24px']}
         fontWeight="900"
         w="100%"
+        noOfLines={2}
       >
         {title}
       </Heading>

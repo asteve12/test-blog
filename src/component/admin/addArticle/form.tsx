@@ -65,14 +65,14 @@ export const BlogForm = (props: IBlogForm) => {
                    setCurrentLanguage(e?.value)
                 }} value={currentLanguage} />
         </Flex>
-        <Box  w="796px">
+        <Box fontSize="15px" w={["100%","100%","796px"]}>
 
-        <Input   ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
-        <FormLabel>Title</FormLabel>
-            <Input data-formName="title" onBlur={formikObject?.handleBlur}
-                onChange={updateFormikFields} name="title" value={formikObject?.values[`${currentLanguage}`]["title"]} mb="15px" w="796px" placeholder="Nigeria Report"></Input>
+        <Input fontSize="15px"  w="100%"  ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
+        <FormLabel fontSize="15px">Title</FormLabel>
+            <Input  fontSize="15px" w="100%" data-formName="title" onBlur={formikObject?.handleBlur}
+                onChange={updateFormikFields} name="title" value={formikObject?.values[`${currentLanguage}`]["title"]} mb="15px" placeholder="Nigeria Report"></Input>
         <FormLabel>Content</FormLabel>
-        <div data-formName="blogContent">
+        <div  data-formName="blogContent">
         <TextEditor
         uploadImageHandler={uploadTextEditorImages}
         onChange={updateBlogContent}
