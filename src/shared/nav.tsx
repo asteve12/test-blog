@@ -217,7 +217,19 @@ export const NavHeader = ({mode,setMode}:any) => {
         <Image mt="25px" width="145px" height="60px" src="/img/navLogo.svg" alt="gruve logo" />
       </Link>
 
-      <div>
+      
+      
+      <div style={{ display: "flex"}}>
+          <span className="nav-language-items" style={{paddingTop:"15px"}}>
+                    <Dropdown
+                      className="hide-border align-center"
+                      controlClassName="hide-border align-center"
+                      options={languageOption}
+                      onChange={(selectedLanguage) => changeLanguage(selectedLanguage)}
+                      value={currentLanguage}
+                    />
+                  </span>
+     
         <Menu styles={mobilestyles} customBurgerIcon={<HiMenuAlt2></HiMenuAlt2>}>
           <Flex pl="30px" w="200px" h="90px">
             <Image src="/img/navLogo.svg" alt="gruve logo" />
