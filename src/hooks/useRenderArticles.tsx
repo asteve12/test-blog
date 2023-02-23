@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ArticleCard } from '@/shared/ArticleCard';
 import Link from 'next/link';
@@ -76,7 +76,8 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
 
 
 export const useRenderAdminArticle = (...args:Array<any | void []>) => {
-  const [article,deleteArticle,isDeleting] = args
+  const [article, deleteArticle, isDeleting] = args
+  const [itemIdToDelete,setItemsIdToDelete] = useState<number>()
 
   if (article.length > 0) return article.map((eachArticle: any) => {
     console.log("eachArticle",eachArticle)
@@ -99,7 +100,8 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           id={eachArticle?.id}
           isDeleting={isDeleting}
           slug={eachArticle?.attributes?.slug}
-          
+          itemIdToDelete={itemIdToDelete}
+          setItemsIdToDelete={setItemsIdToDelete}
         />
      
     </Box>

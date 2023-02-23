@@ -14,14 +14,25 @@ type IHomeMain = {
 }
 
 export const HomeMain = (props: IHomeMain) => {
-    const {deleteArticle,isDeleting} =useAdminLogic()
+    const { deleteArticle, isDeleting, searchForBlog, searchBlogRes, inputFieldValue } = useAdminLogic()
+    console.log("test234",searchBlogRes.length > 0 && inputFieldValue )
+    let allArticle  = useRenderAdminArticle(searchBlogRes.length >= 0 && inputFieldValue ? searchBlogRes:props.allArticles,deleteArticle,isDeleting)
 
-    const allArticle = useRenderAdminArticle(props.allArticles,deleteArticle,isDeleting)
+    // if (searchBlogRes.length > 0 && inputFieldValue) {
+    //     console.log("searchBlogRes123",searchBlogRes)
+        
+    // }
+    // else {
+    //     allArticle = useRenderAdminArticle(props.allArticles,deleteArticle,isDeleting)
+        
+    // }
+     
+    
    
 
     return (
         <Stack w="100%" pl="2%"  minH="100vh" pr="2%" >
-            <Header></Header>
+            <Header searchForBlog={searchForBlog}></Header>
             {
                 allArticle?.length > 0  ? <Flex  flexWrap="wrap" width="100%" justifyContent="space-between" >
                 {
@@ -29,7 +40,7 @@ export const HomeMain = (props: IHomeMain) => {
                }
                 </Flex> :
                     <Flex justifyContent="center" alignItems="center">
-                        No Blog Added yet
+                       {inputFieldValue ?  "No blog found":"No Blog Added yet"}
 
                     </Flex>
            }
