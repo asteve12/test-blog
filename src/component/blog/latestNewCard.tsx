@@ -25,26 +25,31 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
   return (
     <Link href={`/articles/${slug}`}>
       <Flex
+        
+        boxSizing='border-box'
         w="100%"
-        pl={['0%', '0%']}
-        pr={['0%', '3%']}
+         pl={["0px","0px",'3%', '2%']}
+        //pr={['0%',null,null, '3%']}
         mt="80px"
-        justifyContent="center"
+        justifyContent="space-between"
         alignItems="center"
         flexDirection={['column', 'column', null, 'row']}
       >
         <Image
-          width={['100%', '100%', '80%','552px']}
-          height={['60%', '352px']}
+          width={['100%', '100%', '70%','552px']}
+          h={['280px',null,null, '323px']}
           borderRadius="8px"
           src={`${articleImage}`}
           alignSelf="left"
           alt=""
           objectFit="cover"
         />
-        <Box ml={['0px', '20px']} mt={['20px']} width={['100%', '100%', '80%','552px']}>
-          <Heading fontWeight="900"  noOfLines={2} fontSize={['18px','18px',"30px", '44px']} mb="15px" fontFamily="satoshi black">
-            <Flex justifyContent="space-between" display={["none","flex"]} mb="15px">
+        <Box ml={['0px', "0px","0px",'20px']} mt={['20px']} width={['100%', '100%', '70%','50%']}>
+          <Heading fontWeight="900" noOfLines={2}
+            color="#2D2B4A"
+            fontSize={["24px","24px",'24px', '44px']}
+            mb="15px" fontFamily="satoshi black">
+            <Flex w="100%" justifyContent="space-between" display={["none","flex"]} mb="15px">
             <BlogTitle title={articleTitle}></BlogTitle>
             <TimerCard timetoRead={timeToRead?.toString()}></TimerCard>
           </Flex>

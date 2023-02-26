@@ -10,6 +10,10 @@ import qs from 'qs';
 
 import '@/styles/globals.css';
 
+
+//testEditorstyle
+//import "../styles/editorStyle.css"
+
 //footer
 import '../styles/footer.css';
 //community style
@@ -20,7 +24,7 @@ import { api } from '@/axios';
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 
-import { Suspense, useEffect, useState } from 'react';
+
 import { useRouter } from 'next/router';
 import { usePreventHydrationError } from '@/hooks/usePreventHydrationError';
 import { SessionProvider } from "next-auth/react";

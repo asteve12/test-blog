@@ -95,7 +95,7 @@ export const NavHeader = ({mode,setMode}:any) => {
                 </Link>
               </div>
 
-              <ul className="nav-list attendees-nav-padding flex flex-between">
+              {/* <ul className="nav-list attendees-nav-padding flex flex-between">
 
                 <li className="inner-nav-list">
                 < Link  href="https://gruve.events/">
@@ -114,7 +114,7 @@ export const NavHeader = ({mode,setMode}:any) => {
                        {t('navHeader.eventAttendeedTxt')}
                     {/* <Trans i18nKey="navHeader.eventAttendeedTxt">
                       For Event Attendees
-                    </Trans> */}
+                    </Trans> 
                   </div>
                   </div>
                 </Link>
@@ -141,8 +141,8 @@ export const NavHeader = ({mode,setMode}:any) => {
                   </Link>
                
               </li>
-            </ul>
-              {/* <ul className="nav-list attendees-nav-padding flex flex-between">
+            </ul> */}
+               <ul className="nav-list attendees-nav-padding flex flex-between">
                 <li className="inner-nav-list">
                   <div className="nav-link">
                     <span className={`event-attendees nav-link-item`}>
@@ -159,7 +159,7 @@ export const NavHeader = ({mode,setMode}:any) => {
                     </span>
                   </div>
                 </li>
-              </ul> */}
+              </ul> 
 
               <div className="flex">
                 <section className="flex  align-center">

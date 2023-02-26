@@ -35,6 +35,7 @@ export const useHomeLogic = (
 
   //fetch more articles  for display
   const loadArticles = async (paginationLimit: number, totalArticleCreated: number) => {
+
     const totalArticleFetched = state?.articles?.length;
     const isArticlesStillAvailableForFetch = totalArticleFetched < totalArticleCreated;
     const newPaginationStart = 3;
@@ -44,13 +45,13 @@ export const useHomeLogic = (
       dispatch({ type: ActionTypes.FECTH_ARTICLE, payload: { loading: true } });
       api
         .get(
-          `/api/articles/?populate=*&pagination[start]=${newPaginationStart}&pagination[limit]=${newPaginationLimit}&locale=${currentLanguage}`
+          `/api/articles/?populate=*&pagination[start]=${newPaginationStart}&pagination[limit]=${newPaginationLimit}&locale=${currentLanguage}_sort=_id:desc&_limit=-2
+          `
         )
         .then((response) => {
           const { data } = response;
           const fetchedArticles = [...data.data, ...state.articles];
-          console.log('my-fetcher', fetchedArticles, totalArticleCreated);
-          const noArticleIsAvailableForFetch = fetchedArticles.length + 3 >= totalArticleCreated;
+         const noArticleIsAvailableForFetch = fetchedArticles.length + 3 >= totalArticleCreated;
           if (noArticleIsAvailableForFetch)
             dispatch({
               type: ActionTypes.SHOW_LOAD_MORE_BTN,

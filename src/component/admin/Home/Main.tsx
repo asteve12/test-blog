@@ -2,9 +2,10 @@ import { OtherArticle } from '@/component/blog/otherArticle'
 import { useHomeLogic } from '@/hooks/homeLogic'
 import { useAdminLogic } from '@/hooks/useAdminLogic'
 import { useRenderArticles,useRenderAdminArticle } from '@/hooks/useRenderArticles'
-import { Flex, Stack } from '@chakra-ui/react'
+import { Flex, SimpleGrid, Stack } from '@chakra-ui/react'
 import { BlogCard } from './blogcard'
 import { Header } from './Header'
+
 
 
 
@@ -34,11 +35,9 @@ export const HomeMain = (props: IHomeMain) => {
         <Stack w="100%" pl="2%"  minH="100vh" pr="2%" >
             <Header searchForBlog={searchForBlog}></Header>
             {
-                allArticle?.length > 0  ? <Flex  flexWrap="wrap" width="100%" justifyContent="space-between" >
-                {
-                    allArticle
-               }
-                </Flex> :
+                allArticle?.length > 0  ?  <SimpleGrid w="100%" minChildWidth={["100%","100%","389px","389px"]} >
+                {allArticle}
+              </SimpleGrid> :
                     <Flex justifyContent="center" alignItems="center">
                        {inputFieldValue ?  "No blog found":"No Blog Added yet"}
 

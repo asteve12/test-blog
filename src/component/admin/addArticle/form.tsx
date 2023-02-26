@@ -65,7 +65,7 @@ export const BlogForm = (props: IBlogForm) => {
                    setCurrentLanguage(e?.value)
                 }} value={currentLanguage} />
         </Flex>
-        <Box fontSize="15px" w={["100%","100%","796px"]}>
+        <Box  w={["100%","100%","796px"]}>
 
         <Input fontSize="15px"  w="100%"  ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
         <FormLabel fontSize="15px">Title</FormLabel>

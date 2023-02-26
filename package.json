@@ -12,6 +12,7 @@
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc"
   },
   "dependencies": {
+    "@babel/runtime": "^7.21.0",
     "@chakra-ui/icons": "^2.0.17",
     "@chakra-ui/react": "^2.4.9",
     "@emotion/react": "^11.10.5",
@@ -24,9 +25,11 @@
     "@types/slug": "^5.0.3",
     "axios": "^1.2.3",
     "codemirror": "^6.0.1",
+    "easymd": "^1.0.2",
     "easymde": "^2.18.0",
     "formik": "^2.2.9",
     "framer-motion": "^8.5.2",
+    "hoist-non-react-statics": "^3.3.2",
     "i18next": "^22.4.9",
     "i18next-browser-languagedetector": "^7.0.1",
     "next": "13.1.4",
@@ -43,6 +46,7 @@
     "react-i18next": "^12.1.4",
     "react-icons": "^4.7.1",
     "react-loader-spinner": "^5.3.4",
+    "react-quill": "^2.0.0",
     "react-router-dom": "^6.7.0",
     "react-simplemde-editor": "^5.2.0",
     "remark": "^14.0.2",

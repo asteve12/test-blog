@@ -19,7 +19,8 @@ import { useHomeLogic } from '@/hooks/homeLogic';
 export default function Home(props: any) {
   const Router = useRouter();
 const currentLanguage = Router.locale as string;
-  const { articles, allArticles, homeSEO } = props;
+  let { articles, allArticles, homeSEO } = props;
+  //articles = articles?.data?.pop(0);
   const paginationData = articles?.meta?.pagination;
 
   const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage, allArticles);
@@ -31,7 +32,7 @@ const currentLanguage = Router.locale as string;
   };
 
 
-  console.log("pro",props)
+
   return (
     <Layout showHeader={true}  showLoginHeader={false}>
       <Seo {...SeoData} />

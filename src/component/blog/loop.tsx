@@ -5,15 +5,19 @@ export const Loop = () => {
   const { t } = useTranslation('common');
 
   return (
-    <Box width="100%" h="900px" position="relative" >
+    <Box width="100%" h={["auto","auto","600px","900px"]} position="relative" >
+      <Box  position="absolute" h="100%"   w="100%" >
       <Img
         w="100%"
-        objectFit="cover"
+       objectFit="cover"
         h="100%"
-        position="absolute"
+       
         top="0px"
         src="/blog/loopBg.png"
       />
+
+      </Box>
+      
       <Flex
         justifyContent="center"
         w="100%"

@@ -8,6 +8,9 @@ import { BiEdit } from "react-icons/bi"
 import { RxEyeOpen } from "react-icons/rx"
 import { useRouter } from 'next-translate-routes';
 import { ThreeDots } from 'react-loader-spinner';
+import { parseContent } from '@/util/parser';
+import { useLayoutEffect, useState } from 'react';
+
 
 
 
@@ -43,8 +46,17 @@ export const ArticleCard = ({
   itemIdToDelete,
   setItemsIdToDelete
 }: ArticleCard) => {
-
+  const [cardContent, setContent] = useState("")
   const Router = useRouter()
+  useLayoutEffect(() => {
+    parseContent(content).then((response)=> setContent(response))
+
+  },[])
+
+  // let cardContent;
+  // parseContent(content).then((response) => cardContent = response)
+  // if (!cardContent) return;
+  
 const AdminBlogFooterElements = [
     {
     name: "Delete",
@@ -64,10 +76,10 @@ const AdminBlogFooterElements = [
     {
       name: "Preview",
       icons: RxEyeOpen,
-      onClick:()=> alert("preview clicked")
+      onClick:()=> Router.replace(`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/articles/${slug}`)
     }
   ]
-const timeToRead = estimateArticleReadTime(content);
+  const timeToRead = estimateArticleReadTime(content);
   
   const blogFooter = <BlogAuthCard authorName={authorName} authorImage={authorImage}></BlogAuthCard>;
 
@@ -92,7 +104,8 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
       <Image
         w={'100%'}
         objectFit="cover"
-        h={['35%', '323px']}
+        h={['280px',null,null, '323px']}
+        //h='323px'
         borderRadius="5px"
         src={`${image}`}
       />
@@ -114,14 +127,17 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
       </Heading>
       <Box mb="12px" h="50px">
         <Text
+          
           noOfLines={2}
-          fontFamily="satoshi  "
+          fontFamily="satoshi"
           mb="10px"
           fontSize="14px"
           color="#666481"
-        >
-          {content}
-        </Text>
+          dangerouslySetInnerHTML={{ __html: cardContent }}
+          
+        />
+          {/* {content}
+        </Text> */}
       </Box>
       {blogCardFooterElem}
       {AdminBlogCardFooterEle}

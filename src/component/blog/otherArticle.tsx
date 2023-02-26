@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, Button } from '@chakra-ui/react';
+import { Box, Flex, Heading, Button,SimpleGrid } from '@chakra-ui/react';
 import { useTranslation } from 'react-i18next';
 import { SkeletonAnime } from './skeleton';
 //hooks
@@ -32,7 +32,7 @@ export const OtherArticle = ({
   const { t } = useTranslation('common');
 
   const allArticles = useRenderArticles(articles, initialArticle);
-  console.log('allArticles', allArticles);
+  
 
   const loadMoreBtn = (
     <Button
@@ -42,7 +42,7 @@ export const OtherArticle = ({
       ml="auto"
       mr="auto"
       fontSize="16px"
-      w="130px"
+      w={["100%","130px","130px","130px"]}
       height="50px"
       rounded="25px"
       color="#666481"
@@ -54,35 +54,26 @@ export const OtherArticle = ({
       {t('blog.loadmore')}
     </Button>
   );
-  const displayLoadMoreBtn = useConditionallyRenderElement(
-    loadMoreBtn,
-    showLoadMoreButton
-  ) as ReactNode;
+  const displayLoadMoreBtn = useConditionallyRenderElement(loadMoreBtn,showLoadMoreButton) as ReactNode;
 
   return (
-    <Box mt="100px" w="100%"  >
+    <Box mt={["50px",null,null,"100px"]}   w="100%" pl="1%"    >
       <Heading
         color="#2D2B4A"
-        mb="50px"
-        fontSize={['18px','34px', '44px']}
+        mb={["25px",null,null,"50px"]}
+        fontSize={["24px",'34px', '44px']}
         fontWeight="900"
         fontFamily="satoshi black"
-        textAlign="center"
+        textAlign={["left","center","center","center"]}
+        
       >
         {t('blog.otherArticle_header')}
       </Heading>
-
-      <Flex
-        
-        w="100%" mb="50px"
-        justifyContent="space-between" 
-        flexWrap="wrap" 
-        >
-        {allArticles}
-        {loading && <SkeletonAnime></SkeletonAnime>}
-      </Flex>
-
-      {displayLoadMoreBtn}
+      <SimpleGrid  minChildWidth={["100%","100%","389px","389px"]} spacing={["0px",null,"0px","5px"]} pl={[null,null,"0%","0%"]}>
+              {allArticles}
+      </SimpleGrid>
+      
+     {displayLoadMoreBtn}
     </Box>
   );
 };

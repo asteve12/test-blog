@@ -12,7 +12,7 @@ export const BlogHeader = () => {
         fontWeight="900"
         ml="auto"
         mr="auto"
-        fontSize={['5rem','5rem','4rem',"5rem"]}
+        fontSize={['5rem','5rem','4rem',"71px"]}
         color="#2D2B4A"
         textAlign="center"
       >

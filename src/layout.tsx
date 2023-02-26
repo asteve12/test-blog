@@ -37,7 +37,7 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: La
     
   </Box>
   </Flex>
-  const componentWhenshowSideBar_False = <>{children}<Community></Community><Box display={['none','none', 'block']}><Loop></Loop></Box><Footer />
+  const componentWhenshowSideBar_False = <>{children}<Box mb={["150px",null,null,null]}><Community></Community></Box><Box display={['none','none', 'block']}><Loop></Loop></Box><Footer />
   </>
   
   return (
@@ -45,7 +45,7 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: La
        {mode === MODE.Attendees && showHeader ? (
         <NavHeader mode={mode} setMode={setMode}  />
       ) :null}
-     {/* {showHeader && <NavHeader></NavHeader>} */}
+    
       <Box w="100%"  bg="#fbfbfd" >
      
       {showSideBar ? componentWhenshowSideBar_True :componentWhenshowSideBar_False }

@@ -3,11 +3,13 @@ import React, { useState } from 'react';
 import { ArticleCard } from '@/shared/ArticleCard';
 import Link from 'next/link';
 
+
 //utils
 import { estimateArticleReadTime } from '@/util/estimateReadTime';
 import { useRouter } from 'next-translate-routes';
 import { Box } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+
 
 //handle display of all articles
 export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
@@ -22,12 +24,18 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
     if (articles.length > 0) articlesArray = [...articlesArray, ...articles];
 
     return articlesArray.map((eachArticle) => {
-
+      // let content
+            
+      // parseContent().then((response) => content = response);
+      
+      
+      //console.log("content",content)
       return (
-        <Box w={["100%", "100%", "80%", '389px']} mt="10px"
-          // mr={["auto", "auto", "auto", null]}
-          // ml={["auto", "auto", "auto"]}
+        <Box w={["100%", "100%", "70%", '389px']} mt="10px"
+           mr={[null, null, "auto", null]}
+           ml={[null, null, "auto",null]}
         >
+         
           <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
@@ -47,15 +55,19 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
     const [otherArticle] = args;
     if (otherArticle.length > 0) {
       return otherArticle.map((eachArticle) => {
+        
+        let content:string ="" ;
+            
+        
         console.log('hash122', `/${Router.locale}/articles/${eachArticle?.attributes?.slug}`);
         return (
-          <Box  w={["100%", "100%", "80%", '389px']} mt="10px"
-          //   w={["100%", "100%", "80%", '389px']} mt="10px"
-          // mr={["auto", "auto", "auto", null]}
-          // ml={["auto", "auto", "auto"]}
+          <Box   w={["100%", "100%", "70%", '389px']} mt="10px"
+          mr={[null, null, "auto", "0px"]}
+          ml={[null, null, "auto","0px"]}
           
           >
-            
+                     
+
           <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
@@ -80,12 +92,17 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
   const [itemIdToDelete,setItemsIdToDelete] = useState<number>()
 
   if (article.length > 0) return article.map((eachArticle: any) => {
-    console.log("eachArticle",eachArticle)
+    console.log("eachArticle", eachArticle)
+    let content:string ="" ;
+            
+        //(async () => content = await parseContent(eachArticle?.attributes?.content))()
     return (
-      <Box  w={["100%", "100%", "80%", '389px']} mt="10px"
+      <Box  w={["100%", "100%", "90%", '389px']} mt="10px"
       //   w={["100%", "100%", "80%", '389px']} mt="10px"
       // mr={["auto", "auto", "auto", null]}
       // ml={["auto", "auto", "auto"]}
+      mr={[null, null, "auto", "0px"]}
+      ml={[null, null, "auto","0px"]}
       
       >
          <ArticleCard

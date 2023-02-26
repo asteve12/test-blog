@@ -1,4 +1,4 @@
-import { Box, Flex, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack} from '@chakra-ui/react';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
 import { Socials } from './socials';
