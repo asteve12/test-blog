@@ -166,7 +166,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     //event handler handle for unLoad
     function unLoadHandler(event: BeforeUnloadEvent) {
        
-        if (edit && convertEditToDraft === true) {
+        if (edit && convertEditToDraft === true && draftArticleId) {
             alert("saving article as draft")
             deleteArticle(id!.toString())    
         }
