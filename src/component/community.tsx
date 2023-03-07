@@ -76,7 +76,7 @@ const community = () => {
           return (
             <Link href={socialLink} key={id} className="community-card">
               <div className="community-card-icon twitter-card-icon">
-                <Image src={image} alt="socials logo 12" />
+                <Image  w="40px" h="40px" ml="auto" mr="auto" src={image} alt="socials logo 12" />
               </div>
 
               <div className="community-card-header center">

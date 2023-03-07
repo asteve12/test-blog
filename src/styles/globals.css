@@ -1,11 +1,13 @@
 html {
-  font-size: calc(100vw / 1440 * 10);
+  font-size: 10px;
   scroll-behavior: smooth;
+ 
 }
 * {
   box-sizing: border-box;
+  user-select: auto;
 }
-h1,
+/* h1,
 h2,
 h3,
 h4,
@@ -14,6 +16,16 @@ h5,
 p,
 span {
   caret-color: transparent;
+} */
+
+
+.editorBox{
+  user-select: auto;
+}
+
+button{
+  user-select: auto  !important;
+
 }
 
 main {
@@ -182,7 +194,7 @@ input:focus-visible {
   outline: none;
 }
 
-@media screen and (max-width: 1023px) {
+/* @media screen and (max-width: 1023px) {
   html {
     font-size: calc(100vw / 1023 * 10);
   }
@@ -198,7 +210,7 @@ input:focus-visible {
   html {
     font-size: calc(100vw / 485 * 10);
   }
-}
+} */
 
 #modal > div {
   top: 0;
@@ -288,4 +300,122 @@ input:focus-visible {
 .blog a {
   color: #5d82f1;
   text-decoration: underline;
+}
+
+.ql-size-large{
+  font-size: 50px !important;
+  font-family: inherit;
+}
+.ql-size-small{
+  font-size: 20px  !important;
+  font-family: inherit;
+  
+  font-weight: normal;
+}
+
+.blogContainer p{
+   font-size: 20px  !important;
+  font-family: inherit;
+  
+  font-weight: normal;
+
+}
+
+
+
+.ql-size-huge{
+  font-size: 60px  !important;
+  font-family: inherit;
+}
+
+.blogContainer  h1{
+  /* font-size: header; */
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-bottom: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+  
+}
+
+.ql-editor strong{
+  font-weight:bold;
+}
+
+.blogContainer h2 {
+  display: block;
+  font-size: 1.5em;
+  margin-top: 0.83em;
+  margin-bottom: 0.83em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+} 
+
+.blogContainer h3 {
+  display: block;
+  font-size: 1.17em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+
+.blogContainer h4 {
+  display: block;
+  font-size: 1em;
+  margin-top: 1.33em;
+  margin-bottom: 1.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+
+.blogContainer video {
+  width:100%;
+  height: 40%;
+}
+
+.ql-video {
+  width:100%;
+  height: 350px;
+}
+
+.blogContainer h5 {
+  display: block;
+  font-size: .83em;
+  margin-top: 1.67em;
+  margin-bottom: 1.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+
+.blogContainer h6 {
+  display: block;
+  font-size: .67em;
+  margin-top: 2.33em;
+  margin-bottom: 2.33em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  font-family: inherit;
+}
+
+
+.DraftEditor-root{
+
+  width:100%;
+  min-height: 400px;
 }

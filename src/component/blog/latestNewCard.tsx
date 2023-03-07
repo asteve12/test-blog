@@ -1,8 +1,10 @@
+import { extractTextFromHtmlStringToText } from '@/utils/extractText';
 import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BlogAuthCard } from '../../shared/blogAuthorCard';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
+
 
 type ILatestNews = {
   estimateArticleReadTime: (article: string) => number;
@@ -14,7 +16,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
   const author = latestArticle?.attributes?.author;
   const authorImage = latestArticle?.attributes?.authorImage;
   const articleImage = latestArticle?.attributes?.image;
-  const articleContent = latestArticle?.attributes?.content;
+  const articleContent = extractTextFromHtmlStringToText(latestArticle?.attributes?.content);
   const articleTitle = latestArticle?.attributes?.title;
   const slug = latestArticle?.attributes?.slug;
   const timeToRead: number = estimateArticleReadTime(articleContent);
@@ -36,7 +38,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
         flexDirection={['column', 'column', null, 'row']}
       >
         <Image
-          width={['100%', '100%', '70%','552px']}
+          width={['100%', '100%', '100%','552px']}
           h={['280px',null,null, '323px']}
           borderRadius="8px"
           src={`${articleImage}`}
@@ -44,7 +46,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
           alt=""
           objectFit="cover"
         />
-        <Box ml={['0px', "0px","0px",'20px']} mt={['20px']} width={['100%', '100%', '70%','50%']}>
+        <Box ml={['0px', "0px","0px",'20px']} mt={['20px']} width={['100%', '100%', '100%','50%']}>
           <Heading fontWeight="900" noOfLines={2}
             color="#2D2B4A"
             fontSize={["24px","24px",'24px', '44px']}

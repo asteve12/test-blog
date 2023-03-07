@@ -16,16 +16,16 @@ const AddArticle = (props: any) => {
     console.log("Router",Router)
    
        const loginUser  = props?.user?.singleUserData
-     let profilePics = loginUser?.image?.url as string
+     let profilePics = loginUser?.authorImage?.url as string
      profilePics = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${profilePics}`
      const name = loginUser?.username as string
 
-     console.log("Add-article-props", profilePics,name)
+     console.log("Add-article-props", loginUser)
 
 
 
     return (
-        <Layout  showSideBar={true} showHeader={false} showLoginHeader={true}  >
+        <Layout  draft={[]} showSideBar={true} showHeader={false} showLoginHeader={true}  >
             <Box w="100%" bg="#fbfbfd">
                 <Main  profilePics={profilePics} username={name}/> 
             </Box>

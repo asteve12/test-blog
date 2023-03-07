@@ -48,8 +48,9 @@ export const ArticleCard = ({
 }: ArticleCard) => {
   const [cardContent, setContent] = useState("")
   const Router = useRouter()
+  
   useLayoutEffect(() => {
-    parseContent(content).then((response)=> setContent(response))
+     setContent(content)
 
   },[])
 
@@ -98,7 +99,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
 <ThreeDots color='white'></ThreeDots>
 </Flex>
   return (
-    <Box position="relative" w={['100%', '95%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} ml="auto" mr="auto">
+    <Box position="relative" w={['100%', '100%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} >
       
       {isDeleting && itemIdToDelete=== id && loaderCard}
       <Image

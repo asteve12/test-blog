@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+
 import { ArticleCard } from '@/shared/ArticleCard';
 import Link from 'next/link';
 
@@ -9,6 +10,7 @@ import { estimateArticleReadTime } from '@/util/estimateReadTime';
 import { useRouter } from 'next-translate-routes';
 import { Box } from '@chakra-ui/react';
 import { useSession } from 'next-auth/react';
+import { extractTextFromHtmlStringToText } from '@/utils/extractText';
 
 
 //handle display of all articles
@@ -21,26 +23,22 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
   if (args.length === 2) {
     const [articles, initialArticle] = args;
     let articlesArray = [...initialArticle];
-    if (articles.length > 0) articlesArray = [...articlesArray, ...articles];
+    if (articles.length > 0) articlesArray = [...articlesArray, ...articles];;
 
     return articlesArray.map((eachArticle) => {
-      // let content
-            
-      // parseContent().then((response) => content = response);
       
-      
-      //console.log("content",content)
       return (
-        <Box w={["100%", "100%", "70%", '389px']} mt="10px"
-           mr={[null, null, "auto", null]}
-           ml={[null, null, "auto",null]}
+        <Box  w={["100%", "100%", "100%", '389px']}  mt="10px"
+        mr={["auto", "auto", "auto", "0px"]}
+        ml={["auto", "auto", "auto","0px"]}
         >
+        
          
-          <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
+          <Link href={`/articles/${eachArticle?.attributes?.slug}`} style={{display:"flex",justifyContent:"center"}}>
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
               title={eachArticle?.attributes?.title}
-              content={eachArticle?.attributes?.content}
+              content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
               image={eachArticle?.attributes?.image}
               authorName={eachArticle?.attributes?.author}
               authorImage={eachArticle?.attributes?.authorImage}
@@ -72,7 +70,7 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
               title={eachArticle?.attributes?.title}
-              content={eachArticle?.attributes?.content}
+              content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
               image={eachArticle?.attributes?.image}
               authorName={eachArticle?.attributes?.author}
               authorImage={eachArticle?.attributes?.authorImage}
@@ -89,7 +87,8 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
 
 export const useRenderAdminArticle = (...args:Array<any | void []>) => {
   const [article, deleteArticle, isDeleting] = args
-  const [itemIdToDelete,setItemsIdToDelete] = useState<number>()
+  const [itemIdToDelete, setItemsIdToDelete] = useState<number>()
+  
 
   if (article.length > 0) return article.map((eachArticle: any) => {
     console.log("eachArticle", eachArticle)
@@ -108,7 +107,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
          <ArticleCard
           estimateArticleReadTime={estimateArticleReadTime}
           title={eachArticle?.attributes?.title}
-          content={eachArticle?.attributes?.content}
+          content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
           image={eachArticle?.attributes?.image}
           authorName={eachArticle?.attributes?.author}
           authorImage={eachArticle?.attributes?.authorImage}

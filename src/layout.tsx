@@ -17,19 +17,20 @@ type LayoutType = {
   children: React.ReactNode,
   showHeader?: boolean,
   showSideBar?: boolean,
-  showLoginHeader?:boolean
+  showLoginHeader?: boolean,
+  draft?:any
 }
 
 
 
-export const Layout = ({ showLoginHeader,children, showHeader, showSideBar }: LayoutType) => {
+export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft }: LayoutType) => {
   const { data: session, status } = useSession()
   const [mode, setMode] = useState(MODE.Attendees);
   
   const isUserAuthenticated = status === "authenticated"
   const LogoutComponent =  <Flex p="10px" justifyContent="right"><Button onClick={()=> signOut()}>Logout</Button></Flex>
   const ElementToRenderWithCondition =  useConditionallyRenderElement(LogoutComponent,isUserAuthenticated) as React.ReactNode
-  const componentWhenshowSideBar_True = <Flex w="100%"   justifyContent="space-between"><Box w="220px" display={["none","none","none","block"]}><SideBar></SideBar></Box><Box w={["100%","100%","100%","90%"]} >
+  const componentWhenshowSideBar_True = <Flex w="100%"   justifyContent="space-between"><Box w="220px" display={["none","none","none","block"]}><SideBar draft={draft}></SideBar></Box><Box w={["100%","100%","100%","90%"]} >
     <Box>
     {showLoginHeader && ElementToRenderWithCondition}
     {children}

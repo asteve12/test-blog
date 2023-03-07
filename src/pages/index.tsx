@@ -19,23 +19,25 @@ import { useHomeLogic } from '@/hooks/homeLogic';
 export default function Home(props: any) {
   const Router = useRouter();
 const currentLanguage = Router.locale as string;
-  let { articles, allArticles, homeSEO } = props;
+  let { articles, allArticles,
+   // homeSEO
+  } = props;
   //articles = articles?.data?.pop(0);
   const paginationData = articles?.meta?.pagination;
 
-  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage, allArticles);
-  const SeoData = {
-    metaTitle: homeSEO?.data?.attributes?.seo?.metaTitle,
-    metaDescription: homeSEO?.data?.attributes?.seo?.metaDescription,
-    shareImage: '',
-    article: false
-  };
+  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage,allArticles);
+  // const SeoData = {
+  //   metaTitle: homeSEO?.data?.attributes?.seo?.metaTitle,
+  //   metaDescription: homeSEO?.data?.attributes?.seo?.metaDescription,
+  //   shareImage: '',
+  //   article: false
+  // };
 
 
 
   return (
-    <Layout showHeader={true}  showLoginHeader={false}>
-      <Seo {...SeoData} />
+    <Layout draft={[]} showHeader={true}  showLoginHeader={false}>
+      {/* <Seo {...SeoData} /> */}
       <Box w="100%"  pl="6%" pr="6%" >
         <BlogHeader></BlogHeader>
         <LatestNews
@@ -61,11 +63,13 @@ const currentLanguage = Router.locale as string;
 export const getServerSideProps = async ({ locale }: any) => {
   const paginationStart = 0;
   const paginationLimit = 3;
-  const [articles, homeSEO, allArticles] = await Promise.all([
+  const [articles,
+    //homeSEO,
+    allArticles] = await Promise.all([
     api.get(
       `/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&locale=${locale}`
     ),
-    api.get(`/api/homepage?locale=${locale}&populate=*`),
+    //api.get(`/api/homepage?locale=${locale}&populate=*`),
     api.get(`/api/articles?locale=${locale}&populate=*`)
   ]);
 
@@ -73,7 +77,7 @@ export const getServerSideProps = async ({ locale }: any) => {
     props: {
       articles: articles?.data,
       allArticles: allArticles.data,
-      homeSEO: homeSEO?.data,
+      //homeSEO: homeSEO?.data,
       ...(await serverSideTranslations(locale, ['common']))
     },
     //revalidate: 1

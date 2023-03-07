@@ -58,7 +58,7 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
   };
 
   return (
-    <Layout  showHeader={true} showLoginHeader={false}>
+    <Layout  draft={[]} showHeader={true} showLoginHeader={false}>
       <Seo {...seo} />
       <Box  w="100%"  pt="30px" pl="7.5%" pr="6%">
         <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
@@ -107,9 +107,8 @@ export const getServerSideProps = async ({ locale, params }) => {
 
   const data = singleArticle?.data.data[0];
   if (singleArticle?.data.data[0]?.attributes?.content) {
-    singleArticle.data.data[0].attributes.content = await parseContent(
-      singleArticle?.data.data[0]?.attributes?.content
-    );
+    singleArticle.data.data[0].attributes.content = singleArticle?.data.data[0]?.attributes?.content
+    
   }
 
   return {

@@ -32,6 +32,7 @@ export const OtherArticle = ({
   const { t } = useTranslation('common');
 
   const allArticles = useRenderArticles(articles, initialArticle);
+  console.log('allArticles', allArticles);
   
 
   const loadMoreBtn = (
@@ -69,7 +70,11 @@ export const OtherArticle = ({
       >
         {t('blog.otherArticle_header')}
       </Heading>
-      <SimpleGrid  minChildWidth={["100%","100%","389px","389px"]} spacing={["0px",null,"0px","5px"]} pl={[null,null,"0%","0%"]}>
+
+        {/*minChildWidth={["100%","100%","389px","389px"]} spacing={["0px","15px","15px","6px"]}*/}
+      <SimpleGrid  minChildWidth={["100%","100%","389px","389px"]} 
+      //minChildWidth={["100%", "100%", "389px", "389px"]} spacing={["0px", null, "0px", "5px"]}
+      >
               {allArticles}
       </SimpleGrid>
       

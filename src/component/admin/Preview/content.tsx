@@ -7,6 +7,9 @@ import { GrFacebookOption } from "react-icons/gr"
 import { GrTwitter } from "react-icons/gr"
 import { AiFillLinkedin } from "react-icons/ai"
 import { RiWhatsappFill } from "react-icons/ri"
+import { estimateArticleReadTime } from "@/util/estimateReadTime"
+//styles
+import styles from "./style/content.module.css"
 
 
 
@@ -14,15 +17,27 @@ import { RiWhatsappFill } from "react-icons/ri"
 
 
 
+type Content = {
+   BannerImg: string,
+    blogHeader: string,
+    blogContent:string
+}
 
 
-export const Content = () => {
+
+
+
+
+export const Content = ({ BannerImg, blogHeader, blogContent }: Content) => {
+    console.log("Asteve12",blogContent)
+
+    const timeToRead = estimateArticleReadTime(blogContent)
     const socials = [{
         name: "facebook",
         icons:GrFacebookOption
     },
     {
-        name: "twitter",
+        name: "twitter",    
         icons:GrTwitter
         },
         {
@@ -39,37 +54,12 @@ export const Content = () => {
     ]
 
 
-    const Blogs = [
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        },
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        },
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        }
-    ]
+  
 
 
     return (
-        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  minH="100vh">
-            <Image  w="1216px"  h="420px"  borderRadius="16px"  objectFit="cover"  maxW="100%" alt="preview" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe5dr3-AcwXUWan1KdkGnXSynd2QgiOu6pdnYNdrJDjA&s"></Image>
+        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  h="100%">
+            <Image  w="1216px"  h="420px"  borderRadius="16px"  objectFit="cover"  maxW="100%" alt="preview" src={BannerImg}></Image>
             <Flex>
             <VStack pl="5%" pt="30px"  gap="10px">
                     <Text color="#666481" fontWeight="700"  fontSize="20px">
@@ -88,24 +78,14 @@ export const Content = () => {
 
                 <Box pl="5%" pt="30px">
                     <HStack>
-                        <BlogTitle  title="What is a defi wallet"></BlogTitle>
-                        <TimerCard timetoRead="5"></TimerCard>
+                        <BlogTitle  title={blogHeader}></BlogTitle>
+                        <TimerCard timetoRead={timeToRead}></TimerCard>
                     </HStack>
+                    <Box    className="blogContainer"   dangerouslySetInnerHTML={{ __html: blogContent }}/>
 
-                    <VStack gap="20px" mt="20px" w="802px">
-                        {
-                            Blogs.map((eachBlog) => (
-                                <Box>
-                                    <Heading  fontSize="36px" mb="10px">
-                                        {eachBlog.Header}
-                                    </Heading>
-                                    <Text  color="#666481" fontSize="21px">
-                                        {eachBlog.Content}
-                                    </Text>
-                            </Box>
-                            ))
-                        }
-                </VStack>
+                
+
+                   
                 </Box>
             </Flex>
         
