@@ -42,7 +42,7 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
   </>
   
   return (
-    <main >
+    <Box w="100%" >
        {mode === MODE.Attendees && showHeader ? (
         <NavHeader mode={mode} setMode={setMode}  />
       ) :null}
@@ -54,6 +54,6 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
       
     
     
-    </main>
+    </Box>
   );
 };

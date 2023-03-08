@@ -119,7 +119,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
         fontFamily="satoshi black"
          mt="10px"
         mb="10px"
-        fontSize={['18px', '24px']}
+        fontSize={['1.8rem',"1.9rem","2.1rem",'2.4rem']}
         fontWeight="900"
         w="100%"
         noOfLines={2}

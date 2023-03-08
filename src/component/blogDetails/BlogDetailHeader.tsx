@@ -29,7 +29,7 @@ export const BlogDetailHeader = ({ imagePath, baseUrl }: IBlogDetailHeader) => {
         objectFit="cover"
         mt="20px"
         width="100%"
-        h="420px"
+        h={["250px","320px","420px","420px"]}
         borderRadius="16px"
         src={`${imagePath}`}
       ></Image>

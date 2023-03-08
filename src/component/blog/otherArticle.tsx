@@ -31,7 +31,7 @@ export const OtherArticle = ({
 }: OtherArticle) => {
   const { t } = useTranslation('common');
 
-  const allArticles = useRenderArticles(articles, initialArticle);
+  const allArticles = useRenderArticles(articles, initialArticle.length >= 2  ?  initialArticle.pop():initialArticle );
   console.log('allArticles', allArticles);
   
 
@@ -62,7 +62,7 @@ export const OtherArticle = ({
       <Heading
         color="#2D2B4A"
         mb={["25px",null,null,"50px"]}
-        fontSize={["24px",'34px', '44px']}
+        fontSize={["2.4rem",'3rem',"3.9rem" ,'4.4rem']}
         fontWeight="900"
         fontFamily="satoshi black"
         textAlign={["left","center","center","center"]}
@@ -72,7 +72,8 @@ export const OtherArticle = ({
       </Heading>
 
         {/*minChildWidth={["100%","100%","389px","389px"]} spacing={["0px","15px","15px","6px"]}*/}
-      <SimpleGrid  minChildWidth={["100%","100%","389px","389px"]} 
+      <SimpleGrid spacingX={["42rem"]} columns={[1,1,1,4]}
+        //minChildWidth={["100%", "100%", "389px", "389px"]} 
       //minChildWidth={["100%", "100%", "389px", "389px"]} spacing={["0px", null, "0px", "5px"]}
       >
               {allArticles}

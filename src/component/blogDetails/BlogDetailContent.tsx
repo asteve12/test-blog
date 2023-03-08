@@ -35,9 +35,9 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
             textAlign={'left'}
             mt="0px"
             mb="10px"
-            fontFamily="satoshi bold"
+            fontFamily="satoshi black"
             fontWeight="900"
-            fontSize={['24px', '44px']}
+            fontSize={['2.4rem',"3.4rem",'4rem', '4.4rem']}
           >
             {title}
           </Heading>
@@ -48,7 +48,7 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
             className="blog"
             color="#666481"
             fontSize="18px"
-            textAlign={['center', 'center', 'left']}
+            //textAlign={[ 'left']}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </Box>

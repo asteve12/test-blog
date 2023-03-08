@@ -75,6 +75,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [deleteDraftStatus, setDeleteDraftStatus] = useState(false)
     const [convertEditToDraft, setConvertEditToDraft] = useState(true)
     const [isEditRenderSucess, setEditRenderSucess] = useState(false)
+    const publish = useRef(false)
+    const stopFurtherDraftSave = useRef(false)
     const Router = useRouter()
     const { id, edit, draft } = Router.query
      useLeavePageConfirm(Boolean(edit) === true && convertEditToDraft  === true)
@@ -166,7 +168,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     //event handler handle for unLoad
     function unLoadHandler(event: BeforeUnloadEvent) {
        
-        if (edit && convertEditToDraft === true && draftArticleId) {
+        if (edit && convertEditToDraft === true && !publish.current) {
+            stopFurtherDraftSave.current = true
             alert("saving article as draft")
             deleteArticle(id!.toString())    
         }
@@ -238,12 +241,28 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         console.log("hello",e)
         const fieldName = e.target.name;
         const enteredValue = e.target.value
+
         
         
-        console.log("before",formikObject.values[currentLanguage])
+        
+        console.log("before", formikObject.values[currentLanguage])
+        const currentValues = formikObject.values[currentLanguage]
         const fieldValue = {...formikObject.values[currentLanguage],[fieldName]:enteredValue}
-        console.log("hello",fieldValue,currentLanguage)
+        console.log("hello", fieldValue, currentLanguage)
         formikObject.setFieldValue(currentLanguage, fieldValue)
+     
+        if (fieldName === "image" || "title") {
+            if (saveDraftCallCount === 1 && !draftArticleId) return;
+
+
+            //alert("update")
+          
+            saveAsDraftHandler("", currentValues)()
+            
+            setSaveDraftCallCount((prev)=> prev +1)
+            
+            
+        }
       
         
         
@@ -254,11 +273,13 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     
     //handle saving article as draft
     const saveAsDraftHandler = (value:any, currentValues:any)=>debounce(async () => {
-        const {  id, draft,edit } = Router.query
+        const { id, draft, edit } = Router.query
+    
        
         if (endDraft === true) return
         if (edit && !currentId) return;
         if (draft && !draftArticleId) return;
+        if (stopFurtherDraftSave.current === true) return;
         //alert("debouncing ")
         setSaveAsDraft(true)
 
@@ -393,6 +414,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     async function onSubmit(values: formTypes, actions: any) {
         setIsAddingBlog(true)
         setConvertEditToDraft(false)
+        publish.current = true
         const currentValues = values[currentLanguage]
         
         try {

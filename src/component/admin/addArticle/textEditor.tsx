@@ -1,7 +1,7 @@
 import React,{ useMemo, useRef,useEffect, useState } from 'react';
 import dynamic from "next/dynamic";
 import {BiBold} from "react-icons/bi"
-import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.bubble.css';
 import { BiItalic } from "react-icons/bi"
 import {AiOutlineUnderline} from "react-icons/ai"
 //types
@@ -66,6 +66,8 @@ const CustomToolBar = () => {
     {/* <button className='ql-underline' /> */}
     <button className='ql-image' />
     <button className='ql-video' /> 
+
+    {/* <button className='ql-outline' />  */}
     <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
     <option value="1" />
       <option value="2" />
@@ -332,7 +334,8 @@ export const TextEditor = (props: TextEditor) => {
     "image",
     "color",
     "video",
-    "header"
+    "header",
+    
    
   ];
 
@@ -343,7 +346,7 @@ export const TextEditor = (props: TextEditor) => {
     <CustomToolBar></CustomToolBar>
     <ReactQuill
       value={props.value}
-      theme="snow"
+      theme="bubble"
      formats={formats}
     modules={modules}
       onChange={props.onChange}

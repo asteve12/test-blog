@@ -46,10 +46,11 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
           alt=""
           objectFit="cover"
         />
-        <Box ml={['0px', "0px","0px",'20px']} mt={['20px']} width={['100%', '100%', '100%','50%']}>
+        <Box   ml={['0px', "0px", "0px", '20px']}  pl="10px"
+          mt={['20px']} width={['100%', '100%', '100%', '50%']}>
           <Heading fontWeight="900" noOfLines={2}
             color="#2D2B4A"
-            fontSize={["24px","24px",'24px', '44px']}
+            fontSize={["1.8rem","2.8rem",'3.8rem', '4.4rem']}
             mb="15px" fontFamily="satoshi black">
             <Flex w="100%" justifyContent="space-between" display={["none","flex"]} mb="15px">
             <BlogTitle title={articleTitle}></BlogTitle>
@@ -61,7 +62,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
             noOfLines={2}
             fontWeight="400"
             mb="15px"
-            fontSize={['14px', '18px']}
+            fontSize={['1.4rem',"1.6rem","2rem", '1.8rem']}
             color="#666481"
             fontFamily="satoshi"
             // textAlign={["center","center","left","left"]}

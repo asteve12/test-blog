@@ -38,7 +38,7 @@ const currentLanguage = Router.locale as string;
   return (
     <Layout draft={[]} showHeader={true}  showLoginHeader={false}>
       {/* <Seo {...SeoData} /> */}
-      <Box w="100%"  pl="6%" pr="6%" >
+      <Box w="100%"  pl="7%" pr="7%" >
         <BlogHeader></BlogHeader>
         <LatestNews
           latestArticle={state?.latestArticle}
