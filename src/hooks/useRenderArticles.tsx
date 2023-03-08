@@ -22,7 +22,8 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
 
   if (args.length === 2) {
     const [articles, initialArticle] = args;
-    let articlesArray = [...initialArticle];
+    let articlesArray = initialArticle.length > 0 ? [...initialArticle]:[];
+
     if (articles.length > 0) articlesArray = [...articlesArray, ...articles];;
 
     return articlesArray.map((eachArticle) => {
