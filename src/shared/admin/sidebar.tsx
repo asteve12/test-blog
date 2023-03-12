@@ -14,7 +14,7 @@ export const SideBar = ({ draft }: ISideBar) => {
 
     const arrayOfDraft = draft.map((eachDraft: any) => <Link href={`/admin/add-article?id=${eachDraft?.id}&slug=${eachDraft?.attributes?.slug}&draft=true`}  >
         <Box mt="10px" >
-            <Text  noOfLines={1} fontSize="20px"  color="white">
+            <Text  noOfLines={1} fontSize="13px"  color="white">
 
             {eachDraft?.attributes?.title}
             </Text>
@@ -64,11 +64,12 @@ export const SideBar = ({ draft }: ISideBar) => {
                 </Link>))
             }
 
-            <Text color="white" mt="10px" fontSize="16px">
-                Drafts
-            </Text>
+            <Box ml="40px" color="white" mt="40px" fontSize="14px">
+                <Text>Drafts</Text>
+                {arrayOfDraft}
+            </Box>
 
-            {arrayOfDraft}
+            
            
         </Box>
 

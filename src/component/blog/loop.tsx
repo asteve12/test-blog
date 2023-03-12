@@ -1,8 +1,32 @@
-import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 
-export const Loop = () => {
+import { useConditionallyRenderElement } from '@/hooks/useConditionallyRenderedElement';
+import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chakra-ui/react';
+import React, { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import { BeatLoader } from 'react-spinners';
+
+
+
+
+type ILoop = {
+  onChange: (e: React.ChangeEvent) => void,
+  formValue: string | undefined,
+  handleSubsribeRequest: (e: React.MouseEvent) => void,
+  isSubmitting:"SUBMITTING" | "SUCCESS" | "FAILURE" | undefined
+  errorMessage:string | undefined
+}
+
+export const Loop = (props:ILoop) => {
   const { t } = useTranslation('common');
+
+  const Loader = <BeatLoader color="white" />
+
+const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} fontFamily="satoshi" h="67px" fontSize="17px"
+  rounded="100px" bg="#EA445A !important" ml="10px">
+  {props.isSubmitting === "SUBMITTING" ? Loader:t('blog.loop_form_button_getStarted')}
+</Button>
+
+  //const renderSubSubmitWithCondtion = useConditionallyRenderElement(submitBtn,props.isSubmitting === "SUBMITTING") as ReactNode
 
   return (
     <Box width="100%" h={["auto","auto","600px","900px"]} position="relative" >
@@ -68,6 +92,7 @@ export const Loop = () => {
               mr="auto"
               color="white"
               
+              
             >
               <Input
                 w="60%"
@@ -77,18 +102,27 @@ export const Loop = () => {
                 type="email"
                 fontSize="16px"
                 color="white"
+                onChange={props.onChange}
+                value={props.formValue}
                 _placeholder={{ color: 'white' }}
                 p="16px"
+                data-formName="subscribe"
 
               />
-              <Button w={['187px']}  fontFamily="satoshi" h="67px" fontSize="17px"
-                rounded="100px" bg="#EA445A !important" ml="10px">
-                {t('blog.loop_form_button_getStarted')}
-              </Button>
+              {/* render subit button */}
+              {submitBtn}
+              {  props.errorMessage && <Text ml="10px" w="auto" fontSize="15px" color="white !important" >
+              {props.errorMessage}</Text>}
+
             </Flex>
+           
+
           </FormControl>
+         
         </Box>
+      
       </Flex>
+      
     </Box>
   );
 };

@@ -32,10 +32,12 @@ export const HomeMain = (props: IHomeMain) => {
    
 
     return (
-        <Stack w="100%" pl="2%"  minH="100vh" pr="2%" >
+        <Stack w="100%" pl="2%"  minH="100vh" pr="2%"  >
             <Header searchForBlog={searchForBlog}></Header>
             {
-                allArticle?.length > 0  ?  <SimpleGrid w="100%" minChildWidth={["100%","100%","389px","389px"]} >
+                allArticle?.length > 0 ? <SimpleGrid       spacingX={["0rem"]} columns={[1,1,2,2]}
+                    //w="100%" minChildWidth={["100%", "100%", "389px", "389px"]}
+                >
                 {allArticle}
               </SimpleGrid> :
                     <Flex justifyContent="center" alignItems="center">

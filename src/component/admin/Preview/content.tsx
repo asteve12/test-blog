@@ -1,4 +1,4 @@
-import { Box, Image, Flex, VStack, Text,HStack, Heading } from "@chakra-ui/react"
+import { Box, Image, Flex, VStack, Text,HStack, Heading} from "@chakra-ui/react"
 import { BlogTitle } from "@/shared/blogTitlteCard"
 import { TimerCard } from "@/shared/TimeCard"
 import { CustomIcons } from "@/util/customIcon"
@@ -9,7 +9,7 @@ import { AiFillLinkedin } from "react-icons/ai"
 import { RiWhatsappFill } from "react-icons/ri"
 import { estimateArticleReadTime } from "@/util/estimateReadTime"
 //styles
-import styles from "./style/content.module.css"
+// import styles from "./style/content.module.css"
 
 
 
@@ -20,7 +20,24 @@ import styles from "./style/content.module.css"
 type Content = {
    BannerImg: string,
     blogHeader: string,
-    blogContent:string
+    blogContent: string,
+    summary: string,
+    category:string
+}
+
+
+const styles = {
+    previewHeaderStyle: {
+        fontSize: "7rem",
+        marginBottom:"0px"
+        
+    },
+    previewHeaderSummaryStyle: {
+        fontSize: "2rem",
+        mb: "20px",
+        mt:"10px"
+        
+    }
 }
 
 
@@ -28,7 +45,7 @@ type Content = {
 
 
 
-export const Content = ({ BannerImg, blogHeader, blogContent }: Content) => {
+export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }: Content) => {
     console.log("Asteve12",blogContent)
 
     const timeToRead = estimateArticleReadTime(blogContent)
@@ -77,10 +94,14 @@ export const Content = ({ BannerImg, blogHeader, blogContent }: Content) => {
                 
 
                 <Box pl="5%" pt="30px">
+                   
                     <HStack>
-                        <BlogTitle  title={blogHeader}></BlogTitle>
+                        <BlogTitle  title={summary}></BlogTitle>
                         <TimerCard timetoRead={timeToRead}></TimerCard>
                     </HStack>
+
+                    <Heading  {...styles.previewHeaderStyle} >{blogHeader}</Heading>
+                    <Text   {...styles.previewHeaderSummaryStyle} >{summary}</Text>
                     <Box    className="blogContainer"   dangerouslySetInnerHTML={{ __html: blogContent }}/>
 
                 

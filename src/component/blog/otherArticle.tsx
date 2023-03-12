@@ -31,7 +31,7 @@ export const OtherArticle = ({
 }: OtherArticle) => {
   const { t } = useTranslation('common');
 
-  const allArticles = useRenderArticles(articles, initialArticle.length >= 2  ?  initialArticle.pop():initialArticle );
+  const allArticles = useRenderArticles(articles,initialArticle);
   console.log('allArticles', allArticles);
   
 

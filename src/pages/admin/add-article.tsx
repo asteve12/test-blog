@@ -12,15 +12,12 @@ import {useRouter} from "next/router"
 
 const AddArticle = (props: any) => {
     const Router = useRouter()
-    const queryObject = Router.query
-    console.log("Router",Router)
-   
-       const loginUser  = props?.user?.singleUserData
+    const loginUser  = props?.user?.singleUserData
      let profilePics = loginUser?.authorImage?.url as string
      profilePics = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${profilePics}`
      const name = loginUser?.username as string
 
-     console.log("Add-article-props", loginUser)
+    
 
 
 

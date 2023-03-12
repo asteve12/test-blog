@@ -9,6 +9,12 @@ type IBlogDetailContent = {
   timeToRead: number | void;
 };
 
+const styles = {
+  socialContainerStyle: {
+    
+  }
+}
+
 export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailContent) => {
   return (
     <Flex
@@ -18,10 +24,14 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
       justifyContent={['start', null]}
       pl={["0px","0px","2%"]}
       pt="30px"
+      position="relative"
+      h="auto"
+      
       
     >
-      <Socials></Socials>
-      <Box ml={["0px", "0px", "0px", "20px"]}
+ <Socials></Socials>
+     
+      <Box   mb={["50px","30px","0px","0px"]} ml={["0px", "0px", "0px", "20px"]}
         
         pl={['0px', '0px', '0px', '0px']}
         w={['100%', '100%', '80%']}>
@@ -42,10 +52,11 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
             {title}
           </Heading>
           <Box
+            
             maxW={["100%","100%","90%"]}
             fontWeight="400"
             fontFamily="satoshi"
-            className="blog"
+            className="blogContainer"
             color="#666481"
             fontSize="18px"
             //textAlign={[ 'left']}

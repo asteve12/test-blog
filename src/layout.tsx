@@ -9,6 +9,7 @@ import { signOut,useSession } from 'next-auth/react';
 import { useConditionallyRenderElement } from './hooks/useConditionallyRenderedElement';
 import { Button } from '@chakra-ui/react'
 import { MODE } from './shared/enum';
+import { userLayoutLogic } from './hooks/useLayoutLogic';
 
 
 
@@ -26,11 +27,19 @@ type LayoutType = {
 export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft }: LayoutType) => {
   const { data: session, status } = useSession()
   const [mode, setMode] = useState(MODE.Attendees);
+  const { handleSubscribeBxChange,
+    handleSubsribeRequest,
+    subscribeValue,
+    isSubmitting,
+    errorMsg
+  } = userLayoutLogic()
   
   const isUserAuthenticated = status === "authenticated"
   const LogoutComponent =  <Flex p="10px" justifyContent="right"><Button onClick={()=> signOut()}>Logout</Button></Flex>
   const ElementToRenderWithCondition =  useConditionallyRenderElement(LogoutComponent,isUserAuthenticated) as React.ReactNode
-  const componentWhenshowSideBar_True = <Flex w="100%"   justifyContent="space-between"><Box w="220px" display={["none","none","none","block"]}><SideBar draft={draft}></SideBar></Box><Box w={["100%","100%","100%","90%"]} >
+  
+  
+  const componentWhenshowSideBar_True = <Flex w="100%" justifyContent="space-between"><Box w="220px" display={["none", "none", "none", "block"]}><SideBar draft={draft}></SideBar></Box><Box w={["100%", "100%", "100%", "86%"]} >
     <Box>
     {showLoginHeader && ElementToRenderWithCondition}
     {children}
@@ -38,7 +47,14 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
     
   </Box>
   </Flex>
-  const componentWhenshowSideBar_False = <>{children}<Box mb={["150px",null,null,null]}><Community></Community></Box><Box display={['none','none', 'block']}><Loop></Loop></Box><Footer />
+
+  const componentWhenshowSideBar_False = <>{children}<Box mb={["150px", null, null, null]}><Community></Community></Box><Box display={['none', 'none', 'block']}><Loop
+    onChange={handleSubscribeBxChange}
+    formValue={subscribeValue}
+    handleSubsribeRequest={handleSubsribeRequest}
+    isSubmitting={isSubmitting}
+    errorMessage={errorMsg}
+  ></Loop></Box><Footer />
   </>
   
   return (

@@ -57,6 +57,8 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
     article: true
   };
 
+  console.log("otherArticle",otherArticle)
+
   return (
     <Layout  draft={[]} showHeader={true} showLoginHeader={false}>
       <Seo {...seo} />
@@ -114,7 +116,7 @@ export const getServerSideProps = async ({ locale, params }) => {
   return {
     props: {
       article: data,
-      otherArticle: otherArticle?.data.data,
+      otherArticle: otherArticle.data.data,
       locale,
       ...(await serverSideTranslations(locale!, ['common']))
     },

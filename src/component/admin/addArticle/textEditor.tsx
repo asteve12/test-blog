@@ -1,13 +1,17 @@
 import React,{ useMemo, useRef,useEffect, useState } from 'react';
 import dynamic from "next/dynamic";
 import {BiBold} from "react-icons/bi"
-import 'react-quill/dist/quill.bubble.css';
+import 'react-quill/dist/quill.snow.css';
 import { BiItalic } from "react-icons/bi"
 import {AiOutlineUnderline} from "react-icons/ai"
 //types
 import { uploadImageHandlerType } from "../../../hooks/useBlogFormLogic"
-import { Box,Text,Modal} from '@chakra-ui/react';
+import { Box,Text,Modal, ChakraProps} from '@chakra-ui/react';
 import { api } from '@/axios';
+import { BooleanLiteral } from 'typescript';
+//utils
+import { validDateFileSize } from '@/utils/textEditor';
+
 
 const ReactQuill = dynamic(
   async () => {
@@ -19,6 +23,33 @@ const ReactQuill = dynamic(
     ssr: false
   }
 );
+
+
+
+const styles = {
+  editorWrapperStyles: {
+    position:"relative",
+    
+
+  },
+  editorInnerWrapper: {
+    h:"300px",
+    minHeight:"100%",
+  overflowY:"auto",
+   marginTop:"0px"
+    
+  },
+  editorContainerStyle: {
+    minHeight:"100%",
+    h: ""
+  },
+  editorStyle: {
+    height: "100%",
+    paddingTop:"5rem"
+    
+    
+  }
+}
 
 
 
@@ -42,20 +73,7 @@ const CustomItalicBtn = ()=> <BiItalic size="25"/>
 
 const CustomToolBar = () => {
 
-  // "header",
-  // "size",
-  // "bold",
-  // "italic",
-  // "underline",
-  // "strike",
-  // "blockquote",
-  // "list",
-  // "bullet",
-  // "indent",
-  // "link",
-  // "image",
-  // "color",
-  // " video",
+ 
  
   
 
@@ -71,6 +89,8 @@ const CustomToolBar = () => {
     <select className="ql-header" defaultValue={""} onChange={e => e.persist()}>
     <option value="1" />
       <option value="2" />
+      <option value="3" />
+      <option value="4" />
       
     </select>
     {/* <button className='ql-heading' />  */}
@@ -141,30 +161,22 @@ function customUnderline() {
 
 export const TextEditor = (props: TextEditor) => {
 
-  const [uploading,setUploading] = useState<boolean>()
+  const [uploading, setUploading] = useState<boolean>()
+  const [uploadVid, setUploadingVideo] = useState<boolean>()
 
    const quillRef = useRef();
 
-
- 
-
-
-  // useEffect(() => {
-  //   if (!quillRef.current) return;
-
-  //   console.log("ref",quillRef.current)
-  //   //@ts-ignore
-    
-  // }, [quillRef])
-
-
-  async function uploadFiles(uploadFileObj: File, quillObj: any,type:string) {
-    
-    let uplaodResponse :boolean; 
-
+  
+  
+  async function uploadFiles(uploadFileObj: File, quillObj: any, type: string) {
+    let uplaodResponse:boolean;
+    const ifFileSizeIsNotAllowed = !validDateFileSize(uploadFileObj);
+           
   
 
     try {
+      if (ifFileSizeIsNotAllowed) throw new Error("file size too large");
+      
                 
       const upload_response =  await props.uploadImageHandler(uploadFileObj)
       const { data } = upload_response;
@@ -172,13 +184,20 @@ export const TextEditor = (props: TextEditor) => {
       const image_url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${ImagePath}`
       const range = quillObj.getEditorSelection();  
 
-     quillObj.getEditor().insertEmbed(range.index, 'image', image_url) 
+      quillObj.getEditor().insertEmbed(range.index, 'image', image_url) 
+      console.log("upload_response",upload_response)
      
      //onSuccess(image_url)
      return  uplaodResponse = true;
 
-    } catch (errorMessage) {
-      setUploading(false)
+    } catch (error) {
+      //@ts-ignore
+      error!.message === "file size too large" ? alert("fileSize  is too large") :
+        alert("error occuured, try again")
+      
+      //@ts-ignore
+      console.log("errorMessage12",error.message)
+      // setUploading(false)
       //onError("")
       
   }
@@ -189,9 +208,12 @@ export const TextEditor = (props: TextEditor) => {
   } 
 
 
-  function uploadVideo(videoData:File,quillObj: any) {
+  function uploadVideo(videoData: File, quillObj: any) {
+    
+
+  
     // Define the Cloudinary API URL for image uploads
-  const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dy9d8uotq/video/upload';;
+    const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dy9d8uotq/video/upload';;
   
     
   
@@ -206,26 +228,27 @@ export const TextEditor = (props: TextEditor) => {
       // Return the secure URL of the uploaded image
       const range = quillObj.getEditorSelection(); 
       quillObj.getEditor().insertEmbed(range.index, 'video', data.data.secure_url)
+     
       return data.data.secure_url;
 
-      
+    
 
       
     })
     .catch(error => {
-      console.error(error);
+      console.error("video upload error",error);
     });
   }
 
 
   async function imageHandler() { 
     
-   
+    setUploading(true)
     
     const input = document.createElement('input');  
   
     input.setAttribute('type', 'file');  
-    input.setAttribute('accept', 'image/*');  
+    input.setAttribute('accept', 'image/*,.gif');  
     input.click();  
   
     input.onchange = async () => {  
@@ -249,8 +272,19 @@ export const TextEditor = (props: TextEditor) => {
       if (res) { 
         //@ts-ignore
         const currentPosition = this.quill.getSelection().index;
-      //@ts-ignore  
-      this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+         //@ts-ignore  
+         this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+        setUploading(false)
+     
+       
+      }
+      else {
+          //@ts-ignore
+        const currentPosition = this.quill.getSelection()?.index;
+         //@ts-ignore  
+         this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length)
+        setUploading(false)
+        
       }
       
       console.log("upload image response",res)
@@ -260,6 +294,8 @@ export const TextEditor = (props: TextEditor) => {
 
   async function videoHandler() { 
     
+    
+    setUploadingVideo(true)
    
     
     const input = document.createElement('input');  
@@ -271,7 +307,7 @@ export const TextEditor = (props: TextEditor) => {
     input.onchange = async () => {  
 
        //@ts-ignore
-    var currentPosition = this.quill.getSelection().index;
+    var currentPosition = quillRef.current.getEditorSelection().index;
 
     //@ts-ignore
     this.quill.insertText(currentPosition, 'Uploading....', 'bold', true);
@@ -288,20 +324,32 @@ export const TextEditor = (props: TextEditor) => {
       console.log("video-upload-respoonse",res)
       //@ts-ignore
       if (res) { 
+        setUploadingVideo(false)
         //@ts-ignore
-        const currentPosition = this.quill.getSelection().index;
+        const currentPosition = quillRef.current.getEditorSelection()?.index;
       //@ts-ignore  
-      this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+        this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+       
       }
       else {
-        //alert("an error occured")
-        //@ts-ignore 
-        this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+  //@ts-ignore
+  const currentPosition = this.quill.getSelection()?.index;
+  //@ts-ignore  
+    this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length)
+     setUploadingVideo(false)
 
+   
+       
+        alert("error uploading video, try again")
+        
+        //alert("an error occured")
+        
+       
       }
-      
+      setUploadingVideo(false)
       console.log("upload image response", res)
-      alert("vids")
+    
+
     };  
   }  
 
@@ -339,21 +387,28 @@ export const TextEditor = (props: TextEditor) => {
    
   ];
 
-  return <div className="text-editor" >
-    
-    
-    
-    <CustomToolBar></CustomToolBar>
-    <ReactQuill
-      value={props.value}
-      theme="bubble"
-     formats={formats}
-    modules={modules}
-      onChange={props.onChange}
-      placeholder="Content goes here..."
-      forwardedRef={quillRef}
+  return <Box  {...styles.editorWrapperStyles as ChakraProps}>
+  <Box id="editorcontainer"  {...styles.editorInnerWrapper as ChakraProps}   >
+      <Box   {...styles.editorInnerWrapper as ChakraProps}  >
+        
+            
+     <CustomToolBar></CustomToolBar>
+     <ReactQuill
+       value={props.value}
+       theme="snow"
+      formats={formats}
+     modules={modules}
+          onChange={props.onChange}
+          readOnly={uploadVid  === true  || uploading === true  ? true :false}
+       placeholder="Content goes here..."
+          forwardedRef={quillRef}
+          style={{ ...styles.editorStyle }}
+          
     />
-  </div>
+     </Box>
+  </Box>
+</Box>
+  
   
 }
 

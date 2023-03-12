@@ -19,6 +19,8 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
   const articleContent = extractTextFromHtmlStringToText(latestArticle?.attributes?.content);
   const articleTitle = latestArticle?.attributes?.title;
   const slug = latestArticle?.attributes?.slug;
+   const summary = latestArticle?.attributes?.summary
+  const category = latestArticle?.attributes?.category
   const timeToRead: number = estimateArticleReadTime(articleContent);
 
 
@@ -53,7 +55,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
             fontSize={["1.8rem","2.8rem",'3.8rem', '4.4rem']}
             mb="15px" fontFamily="satoshi black">
             <Flex w="100%" justifyContent="space-between" display={["none","flex"]} mb="15px">
-            <BlogTitle title={articleTitle}></BlogTitle>
+            <BlogTitle title={category}></BlogTitle>
             <TimerCard timetoRead={timeToRead?.toString()}></TimerCard>
           </Flex>
             {articleTitle}
@@ -67,7 +69,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
             fontFamily="satoshi"
             // textAlign={["center","center","left","left"]}
           >
-            {articleContent}
+            {summary}
           </Text>
           <BlogAuthCard authorImage={authorImage} authorName={author}></BlogAuthCard>
         </Box>

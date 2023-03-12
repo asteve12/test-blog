@@ -7,6 +7,7 @@ import { HomeMain } from '../../component/admin/Home/Main'
 import { api } from '@/axios'
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { WithAuthenticate } from '@/HOC/authenticate'
+import { useRouter } from 'next-translate-routes'
 
 
 
@@ -16,11 +17,14 @@ import { WithAuthenticate } from '@/HOC/authenticate'
 
 //const inter = Inter({ subsets: ['latin'] })
 
- function Home(props: any) {
+function Home(props: any) {
+   
+  const Router = useRouter()
+  const previousPart = Router.asPath.split('/')[Router.asPath.split('/').length - 2];
   
   
    const { allArticles, draft } = props;
-   console.log("draft",draft)
+   console.log("draft",previousPart)
 
   
  

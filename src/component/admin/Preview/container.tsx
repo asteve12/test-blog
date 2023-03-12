@@ -37,14 +37,16 @@ type PreviewContainer = {
     closePreview: React.Dispatch<React.SetStateAction<boolean>>,
     BannerImg: string,
     blogHeader: string,
-    blogContent:string
+    blogContent: string,
+    summary: string,
+    category:string
 }
 
 
 
 
 
-export const PreviewContainer = ({closePreview,BannerImg,blogHeader,blogContent}:PreviewContainer) => {
+export const PreviewContainer = ({closePreview,BannerImg,blogHeader,blogContent,category,summary}:PreviewContainer) => {
 
   
     
@@ -52,12 +54,12 @@ export const PreviewContainer = ({closePreview,BannerImg,blogHeader,blogContent}
 
     return (
         <Box   {...styles.containerStyle}>
-            {/* <PreviewHeader></PreviewHeader> */}
+        
             <Flex justifyContent="right" >
             <Button  {...styles.closePreviewStyle  as ChakraProps}  onClick={()=>closePreview(false)}> Close Preview </Button>
             </Flex>
             
-            <Content BannerImg={BannerImg} blogHeader={blogHeader} blogContent={blogContent}></Content>
+            <Content category={category} summary={summary} BannerImg={BannerImg} blogHeader={blogHeader} blogContent={blogContent}></Content>
           
     </Box>
 )
