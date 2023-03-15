@@ -79,6 +79,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [convertEditToDraft, setConvertEditToDraft] = useState(true)
     const [isEditRenderSucess, setEditRenderSucess] = useState(false)
     const [category, setAllCategory] = useState<any[]>([])
+   
     //const [selectedCategory, setSelectedCategory] = useState<string | null>();
     const publish = useRef(false)
     const refDraftId = useRef<null>()
@@ -693,14 +694,18 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     } 
 
     //upload image to strapi backend
-    const uploadImageToStrapiBackedn =  async (fileToUpload: File) => {
+    const uploadImageToCloudinary = async (fileToUpload: File) => {
+        
           const formData = new FormData()
-            formData.append("files", fileToUpload)
-           const image_upload_response = await api.post("/api/upload",formData,{
+        formData.append("file", fileToUpload)
+        formData.append('upload_preset', "asteve_test");
+           const image_upload_response = await api.post("https://api.cloudinary.com/v1_1/dy9d8uotq/image/upload",formData,{
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
            })
+        
+        console.log("testing",image_upload_response)
         
          return image_upload_response;
     
@@ -709,20 +714,27 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     
 
 //delete image 
-const deleteImage = async (uniqueImageId:string) => {
-        const delete_image_response = await api.delete(`/api/upload/files/${uniqueImageId}`)
+    async function deleteImage<imgadataType>(imageData: imgadataType) {
+         const timestamp = Math.floor(Date.now() / 1000);
+        // const params = {
+        //     api_key: apiKey,
+        //     public_id: publicId,
+        //     timestamp: timestamp,
+        // }
+        const delete_image_response = await api.post(`https://api.cloudinary.com/v1_1/dy9d8uotq/image/destroy`)
         return delete_image_response
 } 
 
      //update image data
     const addImageData = (responseObject:any) => {
         const { data } = responseObject;
-        const imageId = data[0]?.id;
-        const ImagePath = data[0]?.url 
+        console.log("data",data)
+        const imageId = data.id;
+        const ImagePath = data.url 
         const formObj = {
             target: {
                 name: "image",
-                value:`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${ImagePath}`
+                value:`${ImagePath}`
             }
         }
         updateFormikFields(formObj)
@@ -738,21 +750,23 @@ const deleteImage = async (uniqueImageId:string) => {
         const selectedImage = e.target   as HTMLInputElement;
         const fileList = selectedImage?.files as FileList;
         const ifFileSizeIsNotAllowed = !validDateFileSize(fileList[0]);
+
          
         if (ifFileSizeIsNotAllowed) return alert("file size is too large")
            
         setIsUploading(true)
         try {
             const uniqueImageId = imageId[currentLanguage];
+            
 
             if (uniqueImageId) {
                 await deleteImage(uniqueImageId)
-                const upload_response = await uploadImageToStrapiBackedn(fileList[0]);
+                const upload_response = await uploadImageToCloudinary(fileList[0]);
                 setIsUploading(false)
                 addImageData(upload_response)
             }
             else {
-                const upload_response = await uploadImageToStrapiBackedn(fileList[0]);
+                const upload_response = await uploadImageToCloudinary(fileList[0]);
                 addImageData(upload_response)
                 
                 setIsUploading(false)
@@ -797,10 +811,10 @@ const deleteImage = async (uniqueImageId:string) => {
 const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSuccess, onError) => {
            try {
                 
-                const upload_response = await uploadImageToStrapiBackedn(image)
+                const upload_response = await uploadImageToCloudinary(image)
                 const { data } = upload_response;
-                const ImagePath = data[0]?.url 
-                const image_url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${ImagePath}`
+                const ImagePath = data.url 
+                const image_url = `${ImagePath}`
                onSuccess(image_url)
                 
 
@@ -847,7 +861,7 @@ const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSucce
         preview,
         setPreview,
         parsedBlogContentValue,
-        uploadImageToStrapiBackedn,
+        uploadImageToCloudinary,
         saveAsDraft,
         draftArticleId,
         deleteDraftStatus,

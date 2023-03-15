@@ -9,7 +9,7 @@ export const userLayoutLogic = () => {
     const [subscribeValue, setSUbScribeValue] = useState<string>()
     const [isSubmitting, setIsSubmitting] = useState<"SUBMITTING" | "SUCCESS" | "FAILURE">()
     const [errorMsg,setErrorMsg] = useState<string | undefined>()
-
+    const [showSubscribeModal,setShowSubscribeModal] = useState<true | false >(false)
       
 function handleSubscribeBxChange(e: React.ChangeEvent) {
         const inputElemnent = e.target as HTMLInputElement
@@ -21,17 +21,23 @@ function handleSubscribeBxChange(e: React.ChangeEvent) {
     
     function handleSubsribeRequest(e: React.MouseEvent) {
         setIsSubmitting("SUBMITTING")
-        axios.post(`${process.env.NEXT_PUBLIC_SUBCRIBE_URL}`)
+        const inputField = e.target as HTMLInputElement
+        
+
+                axios.post(`${process.env.NEXT_PUBLIC_SUBCRIBE_URL}`, {
+            email:subscribeValue
+        })
             .then(response => {
                 setIsSubmitting("SUCCESS")
                 setTimeout(() => {
                     setIsSubmitting(undefined)
-                  }, 3000);
+                }, 3000);
+                setShowSubscribeModal(true)
             
             }).catch((e) => {
 
                 console.log("errorMsg",e.response.data.message)
-
+                //setShowSubscribeModal(true)
                 setIsSubmitting("FAILURE")
                 setTimeout(() => {
                     setErrorMsg(undefined)
@@ -45,12 +51,18 @@ function handleSubscribeBxChange(e: React.ChangeEvent) {
     }
 
 
+    const closeSubscribeModal = () =>  setShowSubscribeModal(false)
+
+
     return {
         handleSubscribeBxChange,
         handleSubsribeRequest,
         subscribeValue,
         isSubmitting,
-        errorMsg
+        errorMsg,
+        showSubscribeModal,
+        closeSubscribeModal,
+        
     
 }
 

@@ -30,7 +30,8 @@ function Home(props: any) {
  
 
   return (
-    <Layout draft={draft.data} showSideBar={true} showHeader={false} showLoginHeader={true}>
+    <Layout draft={draft.data} showSideBar={true}
+      showHeader={false} showLoginHeader={true}>
     <HomeMain allArticles={allArticles?.data}></HomeMain>
   </Layout>
   )

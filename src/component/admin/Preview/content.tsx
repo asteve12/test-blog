@@ -96,7 +96,7 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
                 <Box pl="5%" pt="30px">
                    
                     <HStack>
-                        <BlogTitle  title={summary}></BlogTitle>
+                        <BlogTitle  title={category}></BlogTitle>
                         <TimerCard timetoRead={timeToRead}></TimerCard>
                     </HStack>
 

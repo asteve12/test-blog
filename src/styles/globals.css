@@ -337,7 +337,7 @@ input:focus-visible {
   margin-left: 0;
   margin-right: 0;
   font-weight: bold !important;
-  font-family: inherit;
+  font-family: "satoshi black";
   color:black !important;
   
 }
@@ -354,7 +354,7 @@ input:focus-visible {
   margin-left: 0;
   margin-right: 0;
   font-weight: bold  !important;
-  font-family: inherit;
+  font-family: "satoshi black";
   color:black !important;
 } 
 
@@ -366,7 +366,7 @@ input:focus-visible {
   margin-left: 0;
   margin-right: 0;
   font-weight: bold !important;
-  font-family: inherit;
+  font-family: "satoshi black";
   color:black !important;
 }
 
@@ -379,7 +379,7 @@ input:focus-visible {
   margin-left: 0;
   margin-right: 0;
   font-weight: bold !important;
-  font-family: inherit;
+  font-family: "satoshi black";
   color:black !important;
 }
 
@@ -394,7 +394,7 @@ input:focus-visible {
   height: 350px;
 }
 
-.blogContainer h5 {
+/* .blogContainer h5 {
   display: block;
   font-size: .83em;
   margin-top: 1.67em;
@@ -415,7 +415,7 @@ input:focus-visible {
   margin-right: 0;
   font-weight: bold;
   font-family: inherit;
-}
+} */
 
 
 .DraftEditor-root{

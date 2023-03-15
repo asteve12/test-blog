@@ -121,7 +121,7 @@ export const BlogForm = (props: IBlogForm) => {
         preview,
         setPreview,
         parsedBlogContentValue,
-        uploadImageToStrapiBackedn,
+        uploadImageToCloudinary,
         saveAsDraft,
         draftArticleId,
         deleteDraftStatus,
@@ -166,8 +166,10 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
     
     const changeImageBtn = <Button name="image" onClick={changeImageHandlerBtn} mb="15px" colorScheme="none" fontSize="16px" pt="20px" pb="20px" pl="20px" pr="20px" borderRadius="30px" color="#EA445A" border="solid 1px #EA445A" variant='outline' mt="20px">{formikObject?.values[`${currentLanguage}`]["image"] ? "Change Image":"Upload Image"}</Button>
     const loader = <ThreeDots color="#EA445A"></ThreeDots>
+
     const elmentToRender = useConditionallyRenderElement(changeImageBtn,!isImageUploading,loader,isImageUploading && !isImageAvailable) as React.ReactNode
-    const renderImageElemetConditionally = useConditionallyRenderElement(imageElement,formikObject?.values[`${currentLanguage}`]["image"]!== "") as React.ReactNode
+    
+    const renderImageElemetConditionally = useConditionallyRenderElement(imageElement, formikObject?.values[`${currentLanguage}`]["image"] !== "") as React.ReactNode
     
     const renderPreviewComponentWithCondition = useConditionallyRenderElement(<Box {...styles.previewstyle as ChakraProps} ><PreviewContainer blogContent={parsedBlogContentValue} BannerImg={formikObject?.values[`${currentLanguage}`]["image"]} blogHeader={formikObject?.values[`${currentLanguage}`]["title"]}
   summary={formikObject?.values[`${currentLanguage}`]["summary"]}
@@ -235,7 +237,7 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
             <FormLabel fontSize="15px">Content</FormLabel>
         <div  data-formName="blogContent">
         <TextEditor
-        uploadImageHandler={uploadImageToStrapiBackedn}
+        uploadImageHandler={uploadImageToCloudinary}
         onChange={updateBlogContent}
             value={formikObject?.values[`${currentLanguage}`]["blogContent"]}
             

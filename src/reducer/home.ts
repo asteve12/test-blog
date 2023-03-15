@@ -11,17 +11,18 @@ type paginationData = {
 type IAction =
   | { type: typeof actionTypes.FECTH_ARTICLE; payload: { loading: boolean } }
   | {
-      type: typeof actionTypes.FETCH_ARTICLE_FAILURE;
-      payload: { loading: boolean; error: boolean; message: string };
-    }
+    type: typeof actionTypes.FETCH_ARTICLE_FAILURE;
+    payload: { loading: boolean; error: boolean; message: string };
+  }
   | {
-      type: typeof actionTypes.FETCH_ARTICLE_SUCCESS;
-      payload: { loading: boolean; articles: any[] };
-    }
+    type: typeof actionTypes.FETCH_ARTICLE_SUCCESS;
+    payload: { loading: boolean; articles: any[] };
+  }
   | { type: typeof actionTypes.ADD_PAGINATION_DATA; payload: { paginationData: paginationData } }
   | { type: typeof actionTypes.ADD_LATEST_ARTICLE; payload: { article: any } }
-  | { type: typeof actionTypes.SHOW_LOAD_MORE_BTN; payload: { showLoadMoreBtn: boolean } };
-
+  | { type: typeof actionTypes.SHOW_LOAD_MORE_BTN; payload: { showLoadMoreBtn: boolean } }
+  | { type: typeof actionTypes.ADD_TOTAL_ARTICLE_FETCHED; payload:{ totalAricleFetched:number }}
+  | { type: typeof actionTypes.UPDATE_PAGINATION_COUNT;  payload:{paginationState:null | number}}
 type intialState = {
   loading: boolean;
   error: boolean;
@@ -30,6 +31,8 @@ type intialState = {
   paginationData: paginationData | null;
   latestArticle: any;
   showLoadMoreBtn: boolean;
+  totalAricleFetched: number,
+  paginationState:null | number
 };
 
 export const initialState: intialState = {
@@ -39,7 +42,9 @@ export const initialState: intialState = {
   articles: [],
   paginationData: null,
   latestArticle: null,
-  showLoadMoreBtn: true
+  showLoadMoreBtn: true,
+  totalAricleFetched: 0,
+  paginationState:null
 };
 
 export const homeReducer = (state: typeof initialState, actions: IAction): typeof initialState => {
@@ -78,6 +83,18 @@ export const homeReducer = (state: typeof initialState, actions: IAction): typeo
         ...state,
         showLoadMoreBtn: actions.payload.showLoadMoreBtn
       };
+    case actionTypes.ADD_TOTAL_ARTICLE_FETCHED:
+      return {
+        ...state,
+        totalAricleFetched:state.totalAricleFetched + actions.payload.totalAricleFetched
+      }
+    
+    case actionTypes.UPDATE_PAGINATION_COUNT:
+      return {
+        ...state,
+        paginationState:actions.payload.paginationState
+      }
+   
     default:
       return {
         ...state

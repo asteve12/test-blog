@@ -4,6 +4,7 @@ import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chak
 import React, { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BeatLoader } from 'react-spinners';
+import { WaitlistModal } from '../waitlistModal';
 
 
 
@@ -13,7 +14,10 @@ type ILoop = {
   formValue: string | undefined,
   handleSubsribeRequest: (e: React.MouseEvent) => void,
   isSubmitting:"SUBMITTING" | "SUCCESS" | "FAILURE" | undefined
-  errorMessage:string | undefined
+  errorMessage: string | undefined,
+  showSubscribeModal: true | false,
+  closeSubscribeModal: () => void,
+  handleSubscribeBxChange:(e:React.ChangeEvent) => void
 }
 
 export const Loop = (props:ILoop) => {
@@ -26,10 +30,13 @@ const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} 
   {props.isSubmitting === "SUBMITTING" ? Loader:t('blog.loop_form_button_getStarted')}
 </Button>
 
-  //const renderSubSubmitWithCondtion = useConditionallyRenderElement(submitBtn,props.isSubmitting === "SUBMITTING") as ReactNode
 
   return (
-    <Box width="100%" h={["auto","auto","600px","900px"]} position="relative" >
+    <>
+      {props.showSubscribeModal === true && <WaitlistModal 
+        closeSubscribeModal={props.closeSubscribeModal} ></WaitlistModal>}
+    <Box width="100%"  zIndex="1"  h={["auto", "auto", "600px", "900px"]} position="relative" >
+   
       <Box  position="absolute" h="100%"   w="100%" >
       <Img
         w="100%"
@@ -102,10 +109,11 @@ const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} 
                 type="email"
                 fontSize="16px"
                 color="white"
-                onChange={props.onChange}
+                onChange={props.handleSubscribeBxChange}
                 value={props.formValue}
                 _placeholder={{ color: 'white' }}
-                p="16px"
+                  p="16px"
+                  
                 data-formName="subscribe"
 
               />
@@ -123,6 +131,7 @@ const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} 
       
       </Flex>
       
-    </Box>
+      </Box>
+      </>
   );
 };

@@ -23,7 +23,7 @@ const styles = {
     },
     containerStyle: {
         w:"100%",
-        h:"100%",
+        minH:"100%",
         bg:"#FBFBFD"
         
     }

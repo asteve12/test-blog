@@ -53,7 +53,8 @@ export const Socials = () => {
   ];
 
   return (
-    <Box  w="100px" minHeight={["0px","0px","0px","350vh" ]} mt={["30px","30px","30px","0px"]}>
+    <Box display="block" w="100px" position="relative"  minHeight={["0px", "0px", "0px", "100vh"]}
+      h="100%" mt={["30px", "30px", "30px", "0px"]}>
        <Stack  position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
       spacing="25px" direction={['row', 'row', 'column']}     mr="30px">
       

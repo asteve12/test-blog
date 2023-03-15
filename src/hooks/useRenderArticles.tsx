@@ -27,11 +27,14 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
     if (articles.length > 0) articlesArray = [...articlesArray, ...articles];;
 
     return articlesArray.map((eachArticle) => {
+      console.log("article",eachArticle)
       
       return (
         <Box  w={["100%", "100%", "100%", '389px']}  mt="10px"
         mr={["auto", "auto", "auto", "0px"]}
         ml={["auto", "auto", "auto","0px"]}
+
+          
         >
         
          
@@ -39,10 +42,12 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
             <ArticleCard
               estimateArticleReadTime={estimateArticleReadTime}
               title={eachArticle?.attributes?.title}
+              category={eachArticle?.attributes?.category}
               content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
               image={eachArticle?.attributes?.image}
               authorName={eachArticle?.attributes?.author}
               authorImage={eachArticle?.attributes?.authorImage}
+              summary={eachArticle?.attributes?.summary}
             ></ArticleCard>
           </Link>
         </Box>
@@ -68,13 +73,16 @@ export function useRenderArticles(...args: Array<any[]>): React.ReactNode {
                      
 
           <Link href={`/articles/${eachArticle?.attributes?.slug}`}>
-            <ArticleCard
+              <ArticleCard
+                
               estimateArticleReadTime={estimateArticleReadTime}
               title={eachArticle?.attributes?.title}
               content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
               image={eachArticle?.attributes?.image}
               authorName={eachArticle?.attributes?.author}
-              authorImage={eachArticle?.attributes?.authorImage}
+                authorImage={eachArticle?.attributes?.authorImage}
+                summary={eachArticle?.attributes?.summary}
+                category={eachArticle?.attributes?.category}
             ></ArticleCard>
           </Link>
         </Box>
@@ -119,6 +127,8 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           slug={eachArticle?.attributes?.slug}
           itemIdToDelete={itemIdToDelete}
           setItemsIdToDelete={setItemsIdToDelete}
+          summary={eachArticle?.attributes?.summary}
+          category={eachArticle?.attributes?.category}
         />
      
     </Box>

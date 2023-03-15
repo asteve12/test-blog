@@ -173,15 +173,15 @@ export const TextEditor = (props: TextEditor) => {
     const ifFileSizeIsNotAllowed = !validDateFileSize(uploadFileObj);
            
   
-
+    console.log("uploadFileObj",uploadFileObj)
     try {
       if (ifFileSizeIsNotAllowed) throw new Error("file size too large");
       
                 
       const upload_response =  await props.uploadImageHandler(uploadFileObj)
       const { data } = upload_response;
-      const ImagePath = data[0]?.url 
-      const image_url = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${ImagePath}`
+      const ImagePath = data.url 
+      const image_url = `${ImagePath}`
       const range = quillObj.getEditorSelection();  
 
       quillObj.getEditor().insertEmbed(range.index, 'image', image_url) 
@@ -194,6 +194,8 @@ export const TextEditor = (props: TextEditor) => {
       //@ts-ignore
       error!.message === "file size too large" ? alert("fileSize  is too large") :
         alert("error occuured, try again")
+        
+        setUploading(false)
       
       //@ts-ignore
       console.log("errorMessage12",error.message)

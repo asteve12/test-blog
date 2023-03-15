@@ -31,7 +31,10 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
     handleSubsribeRequest,
     subscribeValue,
     isSubmitting,
-    errorMsg
+    errorMsg,
+    closeSubscribeModal,
+    showSubscribeModal
+    
   } = userLayoutLogic()
   
   const isUserAuthenticated = status === "authenticated"
@@ -49,11 +52,14 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
   </Flex>
 
   const componentWhenshowSideBar_False = <>{children}<Box mb={["150px", null, null, null]}><Community></Community></Box><Box display={['none', 'none', 'block']}><Loop
+  showSubscribeModal={showSubscribeModal}
     onChange={handleSubscribeBxChange}
     formValue={subscribeValue}
     handleSubsribeRequest={handleSubsribeRequest}
     isSubmitting={isSubmitting}
     errorMessage={errorMsg}
+    closeSubscribeModal={closeSubscribeModal}
+    handleSubscribeBxChange={handleSubscribeBxChange}
   ></Loop></Box><Footer />
   </>
   
