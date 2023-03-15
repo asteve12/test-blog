@@ -15,6 +15,7 @@ import { estimateArticleReadTime } from '@/util/estimateReadTime';
 import { useRenderArticles } from '@/hooks/useRenderArticles';
 import Seo from '@/component/seo';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
+import { useArticleDetailsLogic } from '@/hooks/articleDetailsLogic';
 
 type attribute = {
   author: string;
@@ -33,8 +34,9 @@ type attribute = {
 };
 
 type BlogDetailPage = {
-  article: { attributes: attribute };
+  article: { attributes: attribute,id:number };
   otherArticle: attribute[];
+  singleArticleCategory:string
 };
 
 type GetStaticPathsContext = {
@@ -42,13 +44,13 @@ type GetStaticPathsContext = {
   defaultLocale?: string;
 };
 
-const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDetailPage) => {
+const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArticleCategory}: BlogDetailPage) => {
   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL as string;
   const articleContent = article?.attributes?.content;
-  const articleHeader = article?.attributes?.title;
+  const articleHeader = article?.attributes?.category;
   const timeToRead = estimateArticleReadTime(articleContent);
   const imagePath = article?.attributes?.image
-  const otherArticleToRead = useRenderArticles(otherArticle);
+
   const articleDescription = article?.attributes?.description;
   const seo = {
     metaTitle: articleHeader,
@@ -57,7 +59,18 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
     article: true
   };
 
-  console.log("otherArticle",otherArticle)
+  const useArticleDetailsLogicParams = {
+    paginationInterval: 9,
+    totalRelatedArticleAvailable: otherArticle.length,
+    totalArticleAvailable: otherArticle,
+    singleArticleCategory
+  }
+
+  const {loadArticles,otherArticleFetched } = useArticleDetailsLogic<typeof otherArticle>(useArticleDetailsLogicParams)
+
+  
+    const otherArticleToRead = useRenderArticles(otherArticleFetched);
+
 
   return (
     <Layout  draft={[]} showHeader={true} showLoginHeader={false}>
@@ -69,7 +82,13 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
           content={articleContent}
           timeToRead={timeToRead}
         ></BlogDetailContent>
-        <SuggestedArticle otherArticles={otherArticleToRead}></SuggestedArticle>
+        <SuggestedArticle
+          paginationInterval={9}
+          articleIdToExclude={article?.id}
+          loadArticles={loadArticles}
+          otherArticles={otherArticleToRead}
+          totalRelatedArticleAvailable={otherArticle.length}
+        ></SuggestedArticle>
       </Box>
     </Layout>
   );
@@ -102,10 +121,17 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle }: BlogDe
 //export const getStaticProps: GetStaticProps
 //@ts-ignore
 export const getServerSideProps = async ({ locale, params }) => {
-  const [singleArticle, otherArticle] = await Promise.all([
-    api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`),
-    api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`)
-  ]);
+  const paginationStart = 0;
+  const paginationLimit = 9;
+
+
+  const  singleArticle = await api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`)
+  
+
+  const singleArticleCategory = singleArticle?.data.data[0]?.attributes?.category
+  const otherArticle = await  api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[category][$eq]=${singleArticleCategory}`)
+  
+
 
   const data = singleArticle?.data.data[0];
   if (singleArticle?.data.data[0]?.attributes?.content) {
@@ -117,6 +143,7 @@ export const getServerSideProps = async ({ locale, params }) => {
     props: {
       article: data,
       otherArticle: otherArticle.data.data,
+      singleArticleCategory,
       locale,
       ...(await serverSideTranslations(locale!, ['common']))
     },

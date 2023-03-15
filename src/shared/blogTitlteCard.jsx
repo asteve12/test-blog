@@ -13,11 +13,12 @@ export const BlogTitle = (props) => {
       maxW="200px"
       fontFamily="satoshi"
       fontWeight="normal"
-      fontSize="11px"
+     
       color="#5D82F1"
       textAlign="center"
       cursor="pointer"
       isTruncated
+      fontSize="12px"
   
       boxSizing='border-box'
     >

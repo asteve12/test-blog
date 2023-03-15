@@ -28,7 +28,9 @@ type ArticleCard = {
   isDeleting?: boolean,
   slug?: string,
   itemIdToDelete?: number,
-  setItemsIdToDelete?:(itemId:number)=> void
+  setItemsIdToDelete?: (itemId: number) => void,
+  summary: string,
+  category:string
 };
 
 export const ArticleCard = ({
@@ -44,7 +46,9 @@ export const ArticleCard = ({
   isDeleting,
   slug,
   itemIdToDelete,
-  setItemsIdToDelete
+  setItemsIdToDelete,
+  summary,
+  category
 }: ArticleCard) => {
   const [cardContent, setContent] = useState("")
   const Router = useRouter()
@@ -111,7 +115,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
         src={`${image}`}
       />
       <Flex justifyContent="space-between" display={['none', 'flex']} mt="10px" w="100%">
-        <BlogTitle title={title}></BlogTitle>
+        <BlogTitle title={category}></BlogTitle>
         <TimerCard timetoRead={timeToRead} />
       </Flex>
 
@@ -134,11 +138,11 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
           mb="10px"
           fontSize="14px"
           color="#666481"
-          dangerouslySetInnerHTML={{ __html: cardContent }}
+          //dangerouslySetInnerHTML={{ __html: cardContent }}
           
-        />
-          {/* {content}
-        </Text> */}
+        >
+           {summary}
+        </Text>
       </Box>
       {blogCardFooterElem}
       {AdminBlogCardFooterEle}

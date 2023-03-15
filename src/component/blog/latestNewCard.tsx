@@ -13,6 +13,7 @@ type ILatestNews = {
 
 export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNews) => {
   const Base_url = process.env.NEXT_PUBLIC_STRAPI_API_URL;
+  console.log("authorImage",latestArticle?.attributes?.authorImage)
   const author = latestArticle?.attributes?.author;
   const authorImage = latestArticle?.attributes?.authorImage;
   const articleImage = latestArticle?.attributes?.image;
@@ -23,10 +24,7 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
   const category = latestArticle?.attributes?.category
   const timeToRead: number = estimateArticleReadTime(articleContent);
 
-
-  console.log("articleImage",latestArticle)
-
-  return (
+return (
     <Link href={`/articles/${slug}`}>
       <Flex
         

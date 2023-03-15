@@ -23,9 +23,9 @@ const currentLanguage = Router.locale as string;
 
   const paginationData = articles?.meta?.pagination;
 
-  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage,allArticles);
+  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage,allArticles,articles);
  
-
+console.log("latestId",lastArticle?.data[0])
 
 
   return (
@@ -37,6 +37,7 @@ const currentLanguage = Router.locale as string;
           estimateArticleReadTime={estimateArticleReadTime}
         />
         <OtherArticle
+          articleIdToExclude={lastArticle?.data[0]?.id}
           loading={state.loading}
           error={state.error}
           errorMessage={state.message}
@@ -54,7 +55,7 @@ const currentLanguage = Router.locale as string;
 
 export const getServerSideProps = async ({ locale }: any) => {
   const paginationStart = 0;
-  const paginationLimit = 3;
+  const paginationLimit = 9;
 
   const lastArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=createdAt&:DESC&pagination[start]=0&pagination[limit]=1`)
   const lastArtcilesId = lastArticle.data.data[0]?.id;

@@ -14,11 +14,14 @@ type IuseHomeLogic = {
 export const useHomeLogic = (
   paginationData: IuseHomeLogic,
   currentLanguage: string,
-  allArticles: any
+  allArticles: any,
+  articles:any
 ) => {
   const [state, dispatch] = useReducer(homeReducer, initialState);
 
+
   useEffect(() => {
+    
     dispatch({
       type: ActionTypes.ADD_PAGINATION_DATA,
       payload: { paginationData: paginationData }
@@ -34,29 +37,34 @@ export const useHomeLogic = (
   }
 
   //fetch more articles  for display
-  const loadArticles = async (paginationLimit: number, totalArticleCreated: number) => {
-
-    const totalArticleFetched = state?.articles?.length;
+  const loadArticles = async (paginationLimit: number, totalArticleCreated: number, articleIdToExclude:number) => {
+  
+    const totalArticleFetched = state.articles.length
     const isArticlesStillAvailableForFetch = totalArticleFetched < totalArticleCreated;
-    const newPaginationStart = 3;
-    const newPaginationLimit = totalArticleFetched + paginationLimit;
+    const newPaginationStart =  state.paginationState ? state.paginationState+paginationLimit : paginationLimit 
+    const newPaginationLimit = newPaginationStart + paginationLimit;
 
     if (isArticlesStillAvailableForFetch) {
+
+      console.log("numbersgame", paginationLimit,totalArticleFetched < totalArticleCreated)
+
       dispatch({ type: ActionTypes.FECTH_ARTICLE, payload: { loading: true } });
       api
         .get(
-          `/api/articles/?populate=*&pagination[start]=${newPaginationStart}&pagination[limit]=${newPaginationLimit}&locale=${currentLanguage}_sort=_id:desc&_limit=-2
-          `
+          `/api/articles/?populate=*&pagination[start]=${newPaginationStart}&pagination[limit]=${newPaginationLimit}&locale=${currentLanguage}&filters[id][$ne]=${articleIdToExclude}`
         )
         .then((response) => {
           const { data } = response;
-          const fetchedArticles = [...data.data, ...state.articles];
-         const noArticleIsAvailableForFetch = fetchedArticles.length + 3 >= totalArticleCreated;
-          if (noArticleIsAvailableForFetch)
-            dispatch({
-              type: ActionTypes.SHOW_LOAD_MORE_BTN,
-              payload: { showLoadMoreBtn: false }
-            });
+        dispatch({type:ActionTypes.UPDATE_PAGINATION_COUNT, payload:{paginationState:state.paginationState ?  state.paginationState+paginationLimit: paginationLimit }})
+          const fetchedArticles = [...state.articles,...data.data];
+         
+          console.log("fetch12",[...articles.data,...data.data])  
+          dispatch({ type: ActionTypes.ADD_TOTAL_ARTICLE_FETCHED, payload: { totalAricleFetched: fetchedArticles.length } })
+          console.log("helloworld",fetchedArticles.length,totalArticleCreated - 1)
+          
+          const noArticleIsAvailableForFetch = fetchedArticles.length === totalArticleCreated - 1;
+          
+           
           dispatch({
             type: ActionTypes.FETCH_ARTICLE_SUCCESS,
             payload: { loading: false, articles: fetchedArticles }

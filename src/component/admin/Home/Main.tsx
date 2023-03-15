@@ -34,15 +34,16 @@ export const HomeMain = (props: IHomeMain) => {
     return (
         <Stack w="100%" pl="2%"  minH="100vh" pr="2%"  >
             <Header searchForBlog={searchForBlog}></Header>
+
+           
+            
             {
-                allArticle?.length > 0 ? <SimpleGrid       spacingX={["0rem"]} columns={[1,1,2,2]}
-                    //w="100%" minChildWidth={["100%", "100%", "389px", "389px"]}
-                >
-                {allArticle}
+                allArticle?.length > 0 ? <SimpleGrid      minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}>
+                {allArticle} 
               </SimpleGrid> :
                     <Flex justifyContent="center" alignItems="center">
                        {inputFieldValue ?  "No blog found":"No Blog Added yet"}
-
+                    
                     </Flex>
            }
             

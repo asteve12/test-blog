@@ -17,6 +17,8 @@ const AddArticle = (props: any) => {
      profilePics = `${process.env.NEXT_PUBLIC_STRAPI_API_URL}${profilePics}`
      const name = loginUser?.username as string
 
+    console.log("loginUser",loginUser)
+
     
 
 

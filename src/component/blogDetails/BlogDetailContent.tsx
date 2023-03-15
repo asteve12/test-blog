@@ -29,7 +29,8 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
       
       
     >
- <Socials></Socials>
+     <Socials></Socials>
+
      
       <Box   mb={["50px","30px","0px","0px"]} ml={["0px", "0px", "0px", "20px"]}
         

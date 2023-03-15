@@ -12,10 +12,11 @@ type OtherArticle = {
   errorMessage: string;
   articles: any[];
   initialArticle: any[];
-  loadArticles: (paginationLimit: number, totalArticleCreated: number) => void;
+  loadArticles: (paginationLimit: number, totalArticleCreated: number,articleIdToExclude:number) => void;
   paginationLimit: number;
   totalArticleCreated: number;
   showLoadMoreButton: boolean;
+  articleIdToExclude:number
 };
 
 export const OtherArticle = ({
@@ -27,17 +28,22 @@ export const OtherArticle = ({
   loadArticles,
   paginationLimit,
   totalArticleCreated,
-  showLoadMoreButton
+  showLoadMoreButton,
+  articleIdToExclude
 }: OtherArticle) => {
   const { t } = useTranslation('common');
+  
+  const allArticles = useRenderArticles(articles, initialArticle);
 
-  const allArticles = useRenderArticles(articles,initialArticle);
-  console.log('allArticles', allArticles);
+  //@ts-ignore
+  const ifArticleIsNotAvailable = allArticles!.length === 0;
+  
+  if (ifArticleIsNotAvailable) return <Box mb="30px"  mt="30px"></Box>
   
 
   const loadMoreBtn = (
     <Button
-      onClick={() => loadArticles(paginationLimit, totalArticleCreated)}
+      onClick={() => loadArticles(paginationLimit, totalArticleCreated, articleIdToExclude)}
       mb="30px"
       display="block"
       ml="auto"
@@ -56,10 +62,12 @@ export const OtherArticle = ({
     </Button>
   );
   const displayLoadMoreBtn = useConditionallyRenderElement(loadMoreBtn,showLoadMoreButton) as ReactNode;
-
+console.log("allArticles",allArticles)
   return (
     <Box mt={["50px",null,null,"100px"]}   w="100%" pl="1%"    >
-      <Heading
+
+       {/* @ts-ignore */}
+       {allArticles.length > 0 &&  <Heading
         color="#2D2B4A"
         mb={["25px",null,null,"50px"]}
         fontSize={["2.4rem",'3rem',"3.9rem" ,'4.4rem']}
@@ -69,17 +77,23 @@ export const OtherArticle = ({
         
       >
         {t('blog.otherArticle_header')}
-      </Heading>
+      </Heading>  }
+     
 
         {/*minChildWidth={["100%","100%","389px","389px"]} spacing={["0px","15px","15px","6px"]}*/}
-      <SimpleGrid spacingX={["42rem"]} columns={[1,1,1,4]}
+      <SimpleGrid
+        //spacingX={["2rem"]} columns={[1, 1, 1, 3]}
         //minChildWidth={["100%", "100%", "389px", "389px"]} 
-      //minChildWidth={["100%", "100%", "389px", "389px"]} spacing={["0px", null, "0px", "5px"]}
+      minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
       >
               {allArticles}
       </SimpleGrid>
-      
-     {displayLoadMoreBtn}
+
+      <div>
+    
+      </div>
+     {/* @ts-ignore */}
+      {allArticles.length > paginationLimit && displayLoadMoreBtn}
     </Box>
   );
 };
