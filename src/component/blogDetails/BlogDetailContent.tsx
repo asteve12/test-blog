@@ -1,12 +1,16 @@
-import { Box, Flex, Heading, HStack} from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Text} from '@chakra-ui/react';
+import React, { useEffect, useRef,useState } from 'react';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
 import { Socials } from './socials';
+
 
 type IBlogDetailContent = {
   title: string;
   content: string;
   timeToRead: number | void;
+  category: string,
+  summary:string
 };
 
 const styles = {
@@ -15,7 +19,24 @@ const styles = {
   }
 }
 
-export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailContent) => {
+export const BlogDetailContent = ({ title, content, timeToRead,category,summary}: IBlogDetailContent) => {
+  const currentRef = useRef<HTMLDivElement>(null)
+  const [height,setHeight] = useState<string>()
+
+
+  useEffect(() => {
+    if (currentRef.current) {
+      const contentContStyle = window.getComputedStyle(currentRef.current)
+      //const contentContHeight = 
+      setHeight(contentContStyle.getPropertyValue("height"))
+    //console.log("height12",)
+      
+    } 
+  },[])
+  
+
+ 
+
   return (
     <Flex
       w="100%"
@@ -29,10 +50,10 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
       
       
     >
-     <Socials></Socials>
-
+     <Socials containerHeight={height}></Socials>
      
-      <Box   mb={["50px","30px","0px","0px"]} ml={["0px", "0px", "0px", "20px"]}
+
+     <Box   ref={currentRef}   mb={["50px","30px","0px","0px"]} ml={["0px", "0px", "0px", "20px"]}
         
         pl={['0px', '0px', '0px', '0px']}
         w={['100%', '100%', '80%']}>
@@ -52,8 +73,13 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
           >
             {title}
           </Heading>
+          <Text
+            mb="35px"
+            color="#666481"
+            fontSize={["1.2rem","1.4rem","1.6rem","1.8rem"]}
+          >{summary}</Text>
           <Box
-            
+          
             maxW={["100%","100%","90%"]}
             fontWeight="400"
             fontFamily="satoshi"
