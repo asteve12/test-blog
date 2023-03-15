@@ -22,9 +22,14 @@ import {
 
 
 
+type Socials = {
+  containerHeight:string | undefined
+}
 
-export const Socials = () => {
+
+export const Socials = (props:Socials) => {
    const url =  window.location.href
+console.log("contHeight",props.containerHeight)
 
   
   const socials = [
@@ -53,7 +58,7 @@ export const Socials = () => {
   ];
 
   return (
-    <Box display="block" w="100px" position="relative"  minHeight={["0px", "0px", "0px", "100vh"]}
+    <Box display="block" w="100px" position="relative" minH={props.containerHeight && parseInt(props.containerHeight)} height={props.containerHeight && parseInt(props.containerHeight)}
       h="100%" mt={["30px", "30px", "30px", "0px"]}>
        <Stack  position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
       spacing="25px" direction={['row', 'row', 'column']}     mr="30px">

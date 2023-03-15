@@ -31,6 +31,7 @@ type attribute = {
   slug: string;
   title: string;
   updatedAt: string;
+  summary:string
 };
 
 type BlogDetailPage = {
@@ -47,13 +48,15 @@ type GetStaticPathsContext = {
 const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArticleCategory}: BlogDetailPage) => {
   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL as string;
   const articleContent = article?.attributes?.content;
-  const articleHeader = article?.attributes?.category;
+  const category = article?.attributes?.category;
+  const title = article?.attributes?.title;
+  const summary =  article?.attributes?.summary;
   const timeToRead = estimateArticleReadTime(articleContent);
   const imagePath = article?.attributes?.image
 
   const articleDescription = article?.attributes?.description;
   const seo = {
-    metaTitle: articleHeader,
+    metaTitle: title,
     metaDescription: articleDescription,
     shareImage: imagePath,
     article: true
@@ -78,7 +81,10 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArt
       <Box  w="100%"  pt="30px" pl="7.8%" pr="7%" >
         <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
         <BlogDetailContent
-          title={articleHeader}
+          title={title}
+          category={category}
+          summary={summary}
+
           content={articleContent}
           timeToRead={timeToRead}
         ></BlogDetailContent>
