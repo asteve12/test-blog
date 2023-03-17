@@ -1,3 +1,5 @@
+
+
 import React,{ useMemo, useRef,useEffect, useState } from 'react';
 import dynamic from "next/dynamic";
 import {BiBold} from "react-icons/bi"
@@ -413,4 +415,144 @@ export const TextEditor = (props: TextEditor) => {
   
   
 }
+
+// import React,{ useMemo, useRef, useState } from 'react';
+// import dynamic from "next/dynamic";
+// import { CustomToolBar } from './customToolBar';
+// import 'react-quill/dist/quill.snow.css';
+
+// //types
+// import { uploadImageHandlerType } from "../../../hooks/useBlogFormLogic"
+// import { Box,Text,Modal, ChakraProps} from '@chakra-ui/react';
+// import { api } from '@/axios';
+// import { BooleanLiteral } from 'typescript';
+// //utils
+// import { validDateFileSize } from '@/utils/textEditor';
+// import { useTextEditorLogic } from '@/hooks/textEditorLogic';
+
+
+
+// const ReactQuill = dynamic(
+//   async () => {
+//     const { default: RQ } = await import("react-quill");
+
+//     return ({ forwardedRef, ...props }:any) => <RQ ref={forwardedRef} {...props} />;
+//   },
+//   {
+//     ssr: false
+//   }
+// );
+
+
+
+// const styles = {
+//   editorWrapperStyles: {
+//     position:"relative",
+    
+
+//   },
+//   editorInnerWrapper: {
+//     h:"300px",
+//     minHeight:"100%",
+//   overflowY:"auto",
+//    marginTop:"0px"
+    
+//   },
+//   editorContainerStyle: {
+//     minHeight:"100%",
+//     h: ""
+//   },
+//   editorStyle: {
+//     height: "100%",
+//     paddingTop:"5rem"
+    
+    
+//   }
+// }
+
+
+
+
+
+
+ 
+// type TextEditor = {
+//     value: string,
+//     onChange: (value: string) => void,
+//     uploadImageHandler:(imageToUpload:File)=>  Promise<any>
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// export const TextEditor = (props: TextEditor) => {
+//   const quillRef = useRef();
+//   const { modules,uploading } =useTextEditorLogic({...props,quillObj:quillRef.current})
+
+  
+
+ 
+
+  
+  
+ 
+
+ 
+  
+
+//   const formats = [
+    
+//     "size",
+//     "bold",
+//     "italic",
+//     "underline",
+//     "strike",
+//     "blockquote",
+//     "list",
+//     "bullet",
+//     "indent",
+//     "link",
+//     "image",
+//     "color",
+//     "video",
+//     "header",
+    
+   
+//   ];
+
+//   return <Box  {...styles.editorWrapperStyles as ChakraProps}>
+//   <Box id="editorcontainer"  {...styles.editorInnerWrapper as ChakraProps}   >
+//       <Box   {...styles.editorInnerWrapper as ChakraProps}  >
+        
+            
+//      <CustomToolBar></CustomToolBar>
+//      <ReactQuill
+//        value={props.value}
+//        theme="snow"
+//       formats={formats}
+//      modules={modules}
+//           onChange={props.onChange}
+//           readOnly={uploading === true  ? true :false}
+//        placeholder="Content goes here..."
+//           forwardedRef={quillRef}
+//           style={{ ...styles.editorStyle }}
+          
+//     />
+//      </Box>
+//   </Box>
+// </Box>
+  
+  
+// }
 

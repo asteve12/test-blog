@@ -57,7 +57,7 @@ export const getServerSideProps = async ({ locale }: any) => {
   const paginationStart = 0;
   const paginationLimit = 9;
 
-  const lastArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=createdAt&:ASC&pagination[start]=0&pagination[limit]=1`)
+  const lastArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=id:desc`)
   const lastArtcilesId = lastArticle.data.data[0]?.id;
   const articles =   await api.get(`/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[id][$ne]=${lastArtcilesId}`)
   const allArticles = await api.get(`/api/articles?locale=${locale}&populate=*&filters[id][$ne]=${lastArtcilesId}`)

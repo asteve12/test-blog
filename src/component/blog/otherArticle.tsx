@@ -16,7 +16,8 @@ type OtherArticle = {
   paginationLimit: number;
   totalArticleCreated: number;
   showLoadMoreButton: boolean;
-  articleIdToExclude:number
+  articleIdToExclude: number,
+
 };
 
 export const OtherArticle = ({
@@ -29,11 +30,15 @@ export const OtherArticle = ({
   paginationLimit,
   totalArticleCreated,
   showLoadMoreButton,
-  articleIdToExclude
+  articleIdToExclude,
+
 }: OtherArticle) => {
   const { t } = useTranslation('common');
+
+  
   
   const allArticles = useRenderArticles(articles, initialArticle);
+  //console.log("test34",allArticles.length > paginationLimit,allArticles.length,paginationLimit)
 
   //@ts-ignore
   const ifArticleIsNotAvailable = allArticles!.length === 0;
@@ -93,7 +98,7 @@ console.log("allArticles",allArticles)
     
       </div>
      {/* @ts-ignore */}
-      {allArticles.length > paginationLimit && displayLoadMoreBtn}
+      {totalArticleCreated > paginationLimit && totalArticleCreated !== allArticles.length && displayLoadMoreBtn}
     </Box>
   );
 };

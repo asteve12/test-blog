@@ -141,7 +141,9 @@ const isImageAvailable = formikObject?.values[`${currentLanguage}`]["image"]!== 
 
 
 const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator" >
-        <Button  data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px"  bg="#EA445A"  borderRadius="200px" >
+    <Button
+        isDisabled={isAddingBlog && !saveAsDraft || saveAsDraft && !isAddingBlog ? true : false}
+        data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px" bg="#EA445A" borderRadius="200px" >
             {isAddingBlog  && !saveAsDraft && <ThreeDots color="white"></ThreeDots> }
             {saveAsDraft && !isAddingBlog &&   <Flex color="white" alignItems="center">...saving as draft  </Flex>}
             {!isAddingBlog && !saveAsDraft && "Publish"}
@@ -149,7 +151,7 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
         <Button fontSize="16px" mt="10px" colorScheme="none" w="173px"  h="56px" color="#EA445A"   onClick={()=> setPreview(true)}>
             preview
         </Button>
-        {draftArticleId &&  <Button   fontSize="16px" mt="10px" colorScheme="none" w="173px"  h="56px" color="#EA445A"  onClick={()=> deleteDraft(draftArticleId.toString(),true)} >{deleteDraftStatus ? "deleting....":"delete draft"}</Button>}
+        {draftArticleId &&  <Button  isDisabled={deleteDraftStatus  && true} fontSize="16px" mt="10px" colorScheme="none" w="173px"  h="56px" color="#EA445A"  onClick={()=> deleteDraft(draftArticleId.toString(),true)} >{deleteDraftStatus ? "deleting....":"delete draft"}</Button>}
       
 </Flex>
     

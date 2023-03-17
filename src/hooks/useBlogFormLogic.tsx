@@ -274,7 +274,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
      //event handler handle for unLoad
      async function unLoadHandler(event: BeforeUnloadEvent) {
        
-         if (edit && convertEditToDraft === true && !publish.current && refDraftId.current) {
+         if (edit && convertEditToDraft === true && !publish.current && refDraftId.current && !deleteDraftStatus) {
             console.log("refDraftId",refDraftId)
             stopFurtherDraftSave.current = true
             alert("saving article as draft")
@@ -306,7 +306,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         const categoryArray = categoryObj.map((category:any) => {
                    const id = category.id
                    const categoryName = category?.attributes?.category
-            return { id, label: categoryName }
+                return { id, label: categoryName }
         })
 
 
@@ -351,7 +351,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
     const currentValues = formikObject.values[currentLanguage]
         const fieldValue = {...formikObject.values[currentLanguage],[fieldName]:enteredValue}
-        console.log("hello", fieldValue, currentLanguage)
+
+        console.log("testing blog",fieldValue,)
+        
         formikObject.setFieldValue(currentLanguage, fieldValue)
      
         if (fieldName === "image" || "title"  || "category" || "summary" || "blogContent") {
@@ -510,12 +512,13 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
     const deleteDraft = async (draftId:string,onPageCall?:boolean) => {
         try {
-
-            const response = await api.delete(`/api/drafts/${draftId}`)
             if (onPageCall) {
                 setDeleteDraftStatus(true)
                 
             }
+
+            const response = await api.delete(`/api/drafts/${draftId}`)
+           
             if (response.status === 200) { 
        
 

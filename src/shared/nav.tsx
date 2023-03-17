@@ -6,11 +6,17 @@ import 'react-dropdown/style.css';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useNavHeaderLogic } from '@/hooks/navLogic';
-import { Box, Button, Divider, Heading, Image, Text, useMediaQuery } from '@chakra-ui/react';
+import { Box, Button, Divider, Heading, Image, propNames, Text, useMediaQuery } from '@chakra-ui/react';
 import { Flex } from '@chakra-ui/react';
 import { slide as Menu } from 'react-burger-menu';
 import { HiMenuAlt2 } from 'react-icons/hi';
 import { MODE } from './enum';
+import { JoinWaitlist } from './joinWaitlist';
+import { BeatLoader } from 'react-spinners';
+import { WaitlistModal } from '@/component/waitlistModal';
+
+
+
 
 
 const mobilestyles = {
@@ -63,12 +69,53 @@ const mobilestyles = {
   }
 };
 
-export const NavHeader = ({mode,setMode}:any) => {
+
+type NavHeader = {
+  mode: any,
+  setMode: any,
+  handleSubscribeBxChange: (e: React.ChangeEvent) => void,
+  formValue: string | undefined,
+  isSubmitting:"SUBMITTING" | "SUCCESS" | "FAILURE" | undefined
+  errorMessage: string | undefined,
+  handleSubsribeRequest: (e: React.MouseEvent) => void,
+  closeSubscribeModal: () => void,
+  showSubscribeModal:boolean
+
+  
+ 
+  
+}
+
+export const NavHeader = ({ handleSubsribeRequest,
+  errorMessage, isSubmitting, formValue,
+  mode, setMode, handleSubscribeBxChange,closeSubscribeModal,showSubscribeModal }: NavHeader) => {
   const [isDesktopScreen] = useMediaQuery('(min-width: 823px)', {
     ssr: true,
     fallback: false
   });
   const { changeLanguage, currentLanguage, t, languageOption } = useNavHeaderLogic();
+  const isEmailValid =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValue as string)
+  const Loader = <BeatLoader color="white" />
+
+  const submitBtn =  <Flex display="flex !important" justifyContent="center" mt="40px" w="100%">
+    <Button
+      isDisabled={!isEmailValid}
+      colorScheme="none"
+      position="relative"
+      display="inline"
+      fontSize="14px"
+      bg="#DF374D"
+      w={["100%","80%"]}
+      h="56px"
+      borderRadius="1000px"
+      color="white"
+      onClick={handleSubsribeRequest}
+    >
+
+{isSubmitting === "SUBMITTING" ? Loader:t('navHeader.waitlist')}
+
+    </Button>
+  </Flex>
   
   
   function changeMode(mode:any) {
@@ -212,14 +259,19 @@ export const NavHeader = ({mode,setMode}:any) => {
     );
 
   return (
-    <Flex w="100%" justifyContent="space-between" pl="1%" pr="2%"  fontFamily="satoshi">
+    
+    <Flex w="100%" justifyContent="space-between" pl="1%" pr="2%"  fontFamily="satoshi"  position="relative">
+      <Box zIndex={1000} w="100%" h="auto"  position="absolute">
+      {showSubscribeModal === true && <WaitlistModal closeSubscribeModal={closeSubscribeModal}></WaitlistModal>}
+
+     </Box>
       <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
         <Image mt="25px" width="145px" height="60px" src="/img/navLogo.svg" alt="gruve logo" />
       </Link>
 
       
       
-      <div style={{ display: "flex"}}>
+      <div style={{ display: "flex",zIndex:"10",position:"relative"}}>
           <span className="nav-language-items" style={{paddingTop:"15px"}}>
                     <Dropdown
                       className="hide-border align-center"
@@ -234,8 +286,37 @@ export const NavHeader = ({mode,setMode}:any) => {
           <Flex pl="30px" w="200px" h="90px">
             <Image src="/img/navLogo.svg" alt="gruve logo" />
           </Flex>
+        
+          <JoinWaitlist
+            handleSubscribeBxChange={handleSubscribeBxChange}
+            formValue={formValue}
+            isSubmitting={isSubmitting}
+            errorMessage={errorMessage}
+            handleSubsribeRequest={handleSubsribeRequest}
+            placeholderStyle={{
+              color:"#666481"
+            }}
+            styles={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              color:"#666481",
+              maxW: "100%",
+              width:"100%"
+              
+              
+            }}
+            inputBxStyle={{
+              color: "#666481",
+              w:["100%","80%"]
+            }}
 
-          <Box p={['10px', '30px']} w="100%" fontFamily="satoshi">
+            customSubmitComponent={submitBtn}
+            
+          />
+
+          {/* <Box p={['10px', '30px']} w="100%" fontFamily="satoshi">
             <Text fontSize={'3rem'} color="#666481">
               For event attendees
             </Text>
@@ -268,21 +349,8 @@ export const NavHeader = ({mode,setMode}:any) => {
                 />
               </Box>
             </Box>
-          </Box>
-          <Flex display="flex !important" justifyContent="center" w="100%">
-            <Button
-              position="relative"
-              display="inline"
-              fontSize="14px"
-              bg="#DF374D"
-              w="343px"
-              h="56px"
-              borderRadius="1000px"
-              color="white"
-            >
-              Join waitlist
-            </Button>
-          </Flex>
+          </Box> */}
+         
         </Menu>
       </div>
     </Flex>

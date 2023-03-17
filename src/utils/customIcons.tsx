@@ -9,7 +9,6 @@ type ICustomIcons = {
     
 
 }
-
 export const CustomIcons = (props:ICustomIcons) => {
     return(<Icon style={props.style} as={props.Icon}/>)
 

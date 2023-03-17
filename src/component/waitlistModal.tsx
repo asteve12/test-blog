@@ -1,18 +1,19 @@
-import { Box, Image,Flex,Button, ChakraProps} from "@chakra-ui/react";
+import React, { useEffect } from "react";
+import { Box, Image, Flex, Button, ChakraProps } from "@chakra-ui/react";
 import { animated, AnimatedProps, useSpring } from "@react-spring/web";
 import { FaFacebookF } from "react-icons/fa"
 import {TfiTwitterAlt} from "react-icons/tfi"
 import { AiFillInstagram, AiFillLinkedin } from "react-icons/ai"
-import {IoCloseOutline} from "react-icons/io5"
-
-
-//icons
-//import  SuccessLogo from "../../public/images/Loop/successIcon.svg"
-
-
-
-import React, { useEffect } from "react";
+import { IoCloseOutline } from "react-icons/io5"
+import {BsDiscord} from "react-icons/bs"
 import Link from "next/link";
+
+
+
+
+
+
+
  
 const styles = {
     modalContainerStyle: {
@@ -25,6 +26,7 @@ const styles = {
         alignItems: "center",
         justifyContent: "center",
         color: "white",
+        
         
         
 
@@ -55,10 +57,9 @@ export const WaitlistModal = (props:Iwaitlist) => {
     }))
 
     const socialMediaIcons = [
-        <FaFacebookF color="#EA445A" size="20px" ></FaFacebookF>,
-        <TfiTwitterAlt color="#EA445A" size="20px"></TfiTwitterAlt>,
-        <AiFillInstagram color="#EA445A" size="20px"></AiFillInstagram>,
-        <AiFillLinkedin color="#EA445A" size="20px"></AiFillLinkedin>
+            <Link  target="_blank" rel="noopener noreferrer" href="https://twitter.com/gruvetickets"><TfiTwitterAlt color="#EA445A" size="20px"></TfiTwitterAlt></Link>,
+        <Link target="_blank" rel="noopener noreferrer" href="https://discord.com/invite/PYzVKPJ6"><BsDiscord color="#EA445A" size="20px"></BsDiscord></Link>,
+        <Link  target="_blank" rel="noopener noreferrer"  href="https://www.linkedin.com/company/gruve-tickets/"><AiFillLinkedin color="#EA445A" size="20px"></AiFillLinkedin></Link>
     ]
     
 
@@ -81,16 +82,19 @@ export const WaitlistModal = (props:Iwaitlist) => {
         <Box {...styles.innerModCont  as ChakraProps}>
 
         <animated.div style={{ ...styles.modalContainerStyle, ...springs }}>
-        <Button  outline="none" onClick={props.closeSubscribeModal} position="absolute"  colorScheme="none" top="7%" left="65%">
+        
+                <Box w="510px" padding="4%" maxW="90%" h="auto" bg="white"
+                    position="relative" borderRadius="16px">
+            <Button  outline="none" onClick={props.closeSubscribeModal} position="absolute"  colorScheme="none" top="7%" right="1%">
             <IoCloseOutline color="black" size="30px"></IoCloseOutline>
         </Button>
-            <Box  w="510px" padding="4%"  maxW="90%"  h="560px"  bg="white"  borderRadius="16px">
-                <Flex justifyContent="center" w="100%">
+                    
+                    <Flex justifyContent="center" w="100%">
                     <Image  w="120px" maxW="50%"  maxH="50%" h="120px" src="/images/Loop/successIcon.svg"/>
                 </Flex>
 
                 <Flex justifyContent="center"  fontFamily="satoshi black" mt="30px" w="100%">
-                    <Box display="block"  w="284px" textAlign="center"  fontWeight="bold"  color="black" fontSize={["1.2rem","1.8","2.2rem","2.4rem"]}  >
+                    <Box display="block"  w="284px" textAlign="center"  fontWeight="bold"  color="black" fontSize={["1.8rem","1.8rem","2.2rem","2.4rem"]}  >
                     Welcome to the Gruve Family
                     </Box>
 
@@ -106,11 +110,9 @@ export const WaitlistModal = (props:Iwaitlist) => {
                 <Flex justifyContent="center" mt="50px">
                     
                     {
-                        socialMediaIcons.map((socialIcons) => <Link  href="/">
-                        <Button colorScheme="none"  bg="#FFF6F8"  w="50px" h="50px" borderRadius="50px">
-                   {socialIcons}
-            </Button>
-                        </Link>)
+                        socialMediaIcons.map((socialIcons) =>    <Button colorScheme="none"  bg="#FFF6F8"  w="50px" h="50px" borderRadius="50px">
+                        {socialIcons}
+                 </Button>)
                     }
 
                     

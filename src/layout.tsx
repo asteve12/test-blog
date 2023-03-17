@@ -33,7 +33,8 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
     isSubmitting,
     errorMsg,
     closeSubscribeModal,
-    showSubscribeModal
+    showSubscribeModal,
+    isFormFilled
     
   } = userLayoutLogic()
   
@@ -60,13 +61,23 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
     errorMessage={errorMsg}
     closeSubscribeModal={closeSubscribeModal}
     handleSubscribeBxChange={handleSubscribeBxChange}
+    isFormFilled={isFormFilled}
   ></Loop></Box><Footer />
   </>
   
   return (
     <Box w="100%" >
        {mode === MODE.Attendees && showHeader ? (
-        <NavHeader mode={mode} setMode={setMode}  />
+        <NavHeader
+          showSubscribeModal={showSubscribeModal}
+          formValue={subscribeValue}
+          handleSubscribeBxChange={handleSubscribeBxChange}
+          isSubmitting={isSubmitting}
+          errorMessage={errorMsg}
+          handleSubsribeRequest={handleSubsribeRequest}
+          closeSubscribeModal={closeSubscribeModal}
+          mode={mode}
+          setMode={setMode} />
       ) :null}
     
       <Box w="100%"  bg="#fbfbfd" >
