@@ -1,10 +1,11 @@
 
 import { useConditionallyRenderElement } from '@/hooks/useConditionallyRenderedElement';
+import { JoinWaitlist } from '@/shared/joinWaitlist';
 import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chakra-ui/react';
 import React, { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BeatLoader } from 'react-spinners';
 import { WaitlistModal } from '../waitlistModal';
+
 
 
 
@@ -17,18 +18,16 @@ type ILoop = {
   errorMessage: string | undefined,
   showSubscribeModal: true | false,
   closeSubscribeModal: () => void,
-  handleSubscribeBxChange:(e:React.ChangeEvent) => void
+  handleSubscribeBxChange: (e: React.ChangeEvent) => void,
+  isFormFilled:boolean | undefined
 }
 
 export const Loop = (props:ILoop) => {
   const { t } = useTranslation('common');
 
-  const Loader = <BeatLoader color="white" />
+  
 
-const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} fontFamily="satoshi" h="67px" fontSize="17px"
-  rounded="100px" bg="#EA445A !important" ml="10px">
-  {props.isSubmitting === "SUBMITTING" ? Loader:t('blog.loop_form_button_getStarted')}
-</Button>
+
 
 
   return (
@@ -88,46 +87,16 @@ const submitBtn =  <Button w={['187px']}  onClick={props.handleSubsribeRequest} 
             fontFamily="satoshi"
             textAlign="center" fontWeight="400" fontSize="18px">
             {t('blog.loop_text')}
-          </Text>
-
-          <FormControl >
-            <Flex
-              w={['100%', '100%', '100%', '100%', '692px']}
-              justifyContent="center"
-              mt="25px"
-              ml="auto"
-              mr="auto"
-              color="white"
-              
-              
-            >
-              <Input
-                w="60%"
-                h="67px"
-                rounded="5px"
-                placeholder={`${t('blog.loop_input_placeholder')}`}
-                type="email"
-                fontSize="16px"
-                color="white"
-                onChange={props.handleSubscribeBxChange}
-                value={props.formValue}
-                _placeholder={{ color: 'white' }}
-                  p="16px"
-                  
-                data-formName="subscribe"
-
-              />
-              {/* render subit button */}
-              {submitBtn}
-              {  props.errorMessage && <Text ml="10px" w="auto" fontSize="15px" color="white !important" >
-              {props.errorMessage}</Text>}
-
-            </Flex>
-           
-
-          </FormControl>
-         
-        </Box>
+            </Text>
+            
+            <JoinWaitlist
+              handleSubscribeBxChange={props.handleSubscribeBxChange}
+              formValue={props.formValue}
+              isSubmitting={props.isSubmitting}
+              errorMessage={props.errorMessage}
+              handleSubsribeRequest={props.handleSubsribeRequest}
+            ></JoinWaitlist>
+</Box>
       
       </Flex>
       

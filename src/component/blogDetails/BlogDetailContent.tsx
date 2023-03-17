@@ -1,5 +1,5 @@
 import { Box, Flex, Heading, HStack, Text} from '@chakra-ui/react';
-import React, { useEffect, useRef,useState } from 'react';
+import React, { useLayoutEffect, useRef,useState } from 'react';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
 import { Socials } from './socials';
@@ -24,7 +24,7 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
   const [height,setHeight] = useState<string>()
 
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (currentRef.current) {
       const contentContStyle = window.getComputedStyle(currentRef.current)
       //const contentContHeight = 
@@ -32,7 +32,7 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
     //console.log("height12",)
       
     } 
-  },[])
+  })
   
 
  
@@ -49,16 +49,20 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
       h="auto"
       
       
+      
     >
      <Socials containerHeight={height}></Socials>
      
 
-     <Box   ref={currentRef}   mb={["50px","30px","0px","0px"]} ml={["0px", "0px", "0px", "20px"]}
-        
+      <Box 
+        mb={["50px", "30px", "0px", "0px"]}
+        ml={["0px", "0px", "0px", "20px"]}
         pl={['0px', '0px', '0px', '0px']}
-        w={['100%', '100%', '80%']}>
+        w={['100%', '100%', '80%']}
+        ref={currentRef}
+      >
         <HStack  gap={10} display={["none",'flex']} flexDirection={['row', 'row', 'row']} justifyContent={["space-between","start",null,null]}>
-          <BlogTitle title={title}></BlogTitle>
+          <BlogTitle title={category}></BlogTitle>
           <TimerCard timetoRead={timeToRead}></TimerCard>
         </HStack>
         <Box width="100%" mt="18px">
@@ -79,6 +83,7 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
             fontSize={["1.2rem","1.4rem","1.6rem","1.8rem"]}
           >{summary}</Text>
           <Box
+         
           
             maxW={["100%","100%","90%"]}
             fontWeight="400"

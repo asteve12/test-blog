@@ -26,6 +26,8 @@ export const useHomeLogic = (
       type: ActionTypes.ADD_PAGINATION_DATA,
       payload: { paginationData: paginationData }
     });
+
+    console.log("paginationData",paginationData)
     obtainLatestArticle(allArticles);
   }, [currentLanguage]);
 

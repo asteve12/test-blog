@@ -10,12 +10,14 @@ export const userLayoutLogic = () => {
     const [isSubmitting, setIsSubmitting] = useState<"SUBMITTING" | "SUCCESS" | "FAILURE">()
     const [errorMsg,setErrorMsg] = useState<string | undefined>()
     const [showSubscribeModal,setShowSubscribeModal] = useState<true | false >(false)
-      
-function handleSubscribeBxChange(e: React.ChangeEvent) {
+    const [isFormFilled,setisFormFilled] = useState<true | false>()  
+
+
+
+    function handleSubscribeBxChange(e: React.ChangeEvent) {
         const inputElemnent = e.target as HTMLInputElement
-        setSUbScribeValue(inputElemnent.value )
-        
-      
+        setSUbScribeValue(inputElemnent.value)
+        setisFormFilled(true)
 }
     
     
@@ -62,7 +64,7 @@ function handleSubscribeBxChange(e: React.ChangeEvent) {
         errorMsg,
         showSubscribeModal,
         closeSubscribeModal,
-        
+        isFormFilled
     
 }
 
