@@ -132,9 +132,8 @@ export const BlogForm = (props: IBlogForm) => {
         springs,
         category,
         onCategoryChange,
-        //selectedCategory
-        
-    } = useBlogFormLogic(props)
+          uploading
+     } = useBlogFormLogic(props)
 
      const allAvailableCategory = <Dropdown value={formikObject?.values[`${currentLanguage}`]["category"]  ? formikObject?.values[`${currentLanguage}`]["category"]  :""} options={category}  onChange={onCategoryChange} />
     
@@ -257,7 +256,7 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
         
             <FormLabel fontSize="15px">Content</FormLabel>
         <div  data-formName="blogContent">
-        <TextEditor  uploadImageHandler={uploadImageToCloudinary} onChange={updateBlogContent} value={formikObject?.values[`${currentLanguage}`]["blogContent"]}></TextEditor>
+        <TextEditor  uploading={uploading} uploadImageHandler={uploadImageToCloudinary} onChange={updateBlogContent} value={formikObject?.values[`${currentLanguage}`]["blogContent"]}></TextEditor>
             </div>
             
 

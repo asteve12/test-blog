@@ -95,7 +95,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const { id, edit, draft } = Router.query
     const draftData = useRef({});
      useLeavePageConfirm(Boolean(edit) === true && convertEditToDraft  === true && draftArticleId.current as undefined)
-       const madeUpdate = useRef(false)
+    const madeUpdate = useRef(false)
+   const uploading = useRef<"UPLOADING" | "SUCCESS" | "ERROR">()
     
     const languageObject:{[key:string]:string} = {
         ENGLISH: "en",
@@ -138,6 +139,11 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     },
    
     )
+
+    //remove uploading text
+    useEffect(() => {
+        
+    },[formikObject.values[currentLanguage]["blogContent"]])
 
 
     //listen for banner image upload 
@@ -574,17 +580,33 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
        
     },1000)
 
+
+    const removeUnwantedString = (value: string, unwantedString: string): string => {
+        console.log("un2",value,unwantedString)
+    
+        let htmlString = value.replace(unwantedString,"")
+
+        return  htmlString
+          
+        
+    }
+
    
 
     //update blog content
     async function updateBlogContent(value: string) {
         const { id, draft } = Router.query
         const defaultTextEditorFieldValue = "<p><br></p>";
-       const currentValues = formikObject.values[currentLanguage]
-           const fieldObject = {
+        const currentValues = formikObject.values[currentLanguage]
+        const uploadingText = `Uploading....`
+        console.log("my-upload",uploading.current)
+        let newString = uploading.current === "SUCCESS" ? removeUnwantedString(value, uploadingText):value
+        newString = newString ? newString : value;
+      
+        const fieldObject = {
             target: {
                 name: "blogContent",
-                value:value === defaultTextEditorFieldValue ? "":value,
+                value:value === defaultTextEditorFieldValue ? "":newString,
             }
 
            }
@@ -662,6 +684,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         setConvertEditToDraft(false)
         publish.current = true
         const currentValues = values[currentLanguage]
+        console.log("testPayload",currentValues)
         
         try {
             const data_for_upload = JSON.stringify({
@@ -1035,6 +1058,7 @@ const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSucce
         springs,
         category,
         onCategoryChange,
+        uploading
        
         
     

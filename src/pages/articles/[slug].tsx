@@ -132,7 +132,7 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article,info,otherArticle,singl
 //export const getStaticProps: GetStaticProps
 //@ts-ignore
 export const getServerSideProps = async ({ locale, params }) => {
-  const paginationStart = 1;
+  const paginationStart = 0;
   const paginationLimit = 3;
 
 
