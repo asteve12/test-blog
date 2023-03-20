@@ -129,6 +129,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           setItemsIdToDelete={setItemsIdToDelete}
           summary={eachArticle?.attributes?.summary}
           category={eachArticle?.attributes?.category}
+          featuredArticle={eachArticle?.attributes?.featured}
         />
      
     </Box>

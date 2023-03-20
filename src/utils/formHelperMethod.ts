@@ -56,8 +56,10 @@ export function validateForm<formType>(values: formType,currentLanguage?: string
     //@ts-ignore
     const arrayofFormFields = Object.entries(values)
     arrayofFormFields.forEach((eachFormField) => {
-        const fieldName = eachFormField[0] ;
+       const fieldName = eachFormField[0];
         const fieldValue = eachFormField[1] 
+        if (fieldName === "featured") return;
+       
         const isFieldValueNotDefined = !fieldValue;
         if(isFieldValueNotDefined)  errors[fieldName] = "required"
     })

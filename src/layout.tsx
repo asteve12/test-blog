@@ -19,7 +19,8 @@ type LayoutType = {
   showHeader?: boolean,
   showSideBar?: boolean,
   showLoginHeader?: boolean,
-  draft?:any
+  draft?: any,
+  featuredArticleId?:any
 }
 
 

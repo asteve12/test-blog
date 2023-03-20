@@ -1,6 +1,6 @@
 import { useBlogFormLogic } from "@/hooks/useBlogFormLogic"
 import { useConditionallyRenderElement } from "@/hooks/useConditionallyRenderedElement"
-import {  Textarea,Heading, Image,Button,Box, FormLabel, Input,Flex, ChakraProps,Text, TextProps, ImageProps} from "@chakra-ui/react"
+import {  Textarea,Heading, Image,Button,Box, FormLabel, Input,Flex, ChakraProps,Text, TextProps, ImageProps, Checkbox} from "@chakra-ui/react"
 import { TextEditor } from "./textEditor"
 import { Bars } from "react-loader-spinner"
 import Dropdown from 'react-dropdown';
@@ -20,9 +20,11 @@ import { ImageUploadOverlay } from "./imageUploadOverlay"
 
 
 
+
 type IBlogForm = {
     profilePics: string,
-    name:string
+    name: string,
+    featuredArticleId:number
 }
 
 
@@ -214,13 +216,30 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
 
         <Input fontSize="15px"  w="100%"  ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
         <FormLabel fontSize="15px">Title</FormLabel>
-            <Input  h="40px" fontSize="15px" w="100%" data-formName="title" onBlur={formikObject?.handleBlur}
-                onChange={updateFormikFields} name="title" value={formikObject?.values[`${currentLanguage}`]["title"]} mb="15px" placeholder="Enter blog title"></Input>
+            <Input
+                h="40px"
+                fontSize="15px"
+                w="100%"
+                data-formName="title" 
+                onChange={updateFormikFields}
+                name="title" value={formikObject?.values[`${currentLanguage}`]["title"]}
+                mb="15px"
+                placeholder="Enter blog title"
+            ></Input>
         
             <FormLabel fontSize="15px">Category</FormLabel>
             <Box   data-formName="category" {...styles.CategoryStyle}>
                     {allAvailableCategory}
             </Box>
+            
+            
+          
+            <Checkbox size="lg" mt="10px" mb="20px" onChange={updateFormikFields}
+                name="featured"
+
+                isChecked={formikObject?.values[`${currentLanguage}`]["featured"] === "Yes" ? true:false}
+               
+            >  <Text fontSize="15px" >Featured</Text> </Checkbox>
 
             <FormLabel fontSize="15px">Summary</FormLabel>
             <Textarea
@@ -238,13 +257,10 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
         
             <FormLabel fontSize="15px">Content</FormLabel>
         <div  data-formName="blogContent">
-        <TextEditor
-        uploadImageHandler={uploadImageToCloudinary}
-        onChange={updateBlogContent}
-            value={formikObject?.values[`${currentLanguage}`]["blogContent"]}
+        <TextEditor  uploadImageHandler={uploadImageToCloudinary} onChange={updateBlogContent} value={formikObject?.values[`${currentLanguage}`]["blogContent"]}></TextEditor>
+            </div>
             
-        ></TextEditor>
-        </div>
+
         
 
         {uploadBlogBtn}            

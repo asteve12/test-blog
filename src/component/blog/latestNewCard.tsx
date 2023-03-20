@@ -1,9 +1,11 @@
+import { Featured } from '@/shared/Featured';
 import { extractTextFromHtmlStringToText } from '@/utils/extractText';
 import { Box, Flex, Heading, Image, Stack, Text } from '@chakra-ui/react';
 import Link from 'next/link';
 import { BlogAuthCard } from '../../shared/blogAuthorCard';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
+
 
 
 type ILatestNews = {
@@ -23,6 +25,8 @@ export const LatestNews = ({ latestArticle, estimateArticleReadTime }: ILatestNe
    const summary = latestArticle?.attributes?.summary
   const category = latestArticle?.attributes?.category
   const timeToRead: number = estimateArticleReadTime(articleContent);
+  const isFeatured = latestArticle?.attributes.featured === "Yes" ? true : false;
+
 
 return (
     <Link href={`/articles/${slug}`}>
@@ -35,8 +39,11 @@ return (
         mt="80px"
         justifyContent="space-between"
         alignItems="center"
-        flexDirection={['column', 'column', null, 'row']}
-      >
+      flexDirection={['column', 'column', null, 'row']}
+    position="relative"
+    >
+      {isFeatured === true && <Featured></Featured>}
+      
         <Image
           width={['100%', '100%', '100%','552px']}
           h={['280px',null,null, '323px']}

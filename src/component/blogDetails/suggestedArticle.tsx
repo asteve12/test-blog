@@ -8,18 +8,24 @@ type ISuggestedArticle = {
   loadArticles:(paginationInterval:number, totalRelatedArticleAvailable:number,articleIdToExclude:number)=> void
   paginationInterval: number,
   articleIdToExclude: number,
-  totalRelatedArticleAvailable:number
+  totalRelatedArticleAvailable: number,
+  totalArticleCreated:number
   
 
 };
 
-export const SuggestedArticle = ({totalRelatedArticleAvailable,articleIdToExclude,paginationInterval, otherArticles, loadArticles}: ISuggestedArticle) => {
+export const SuggestedArticle = ({
+  totalRelatedArticleAvailable, articleIdToExclude,
+  paginationInterval,
+  otherArticles,
+  totalArticleCreated,
+  loadArticles }: ISuggestedArticle) => {
   const { t } = useTranslation('common');
 
 
   const loadMoreBtn = (
     <Button
-      onClick={() => loadArticles(paginationInterval,totalRelatedArticleAvailable,articleIdToExclude)}
+      onClick={() => loadArticles(paginationInterval,totalArticleCreated,articleIdToExclude)}
       mb="30px"
       display="block"
       ml="auto"
@@ -38,7 +44,7 @@ export const SuggestedArticle = ({totalRelatedArticleAvailable,articleIdToExclud
     </Button>
   );
 
-  console.log("otherArticles",otherArticles)
+  console.log("otherArticles",otherArticles,paginationInterval)
 
   return (
     <Box w="100%">
@@ -56,16 +62,21 @@ export const SuggestedArticle = ({totalRelatedArticleAvailable,articleIdToExclud
       </Heading>}
       
 
+      {/* @ts-ignore */}
+      {otherArticles?.length === 2 ? <SimpleGrid spacingX={"10%"}  columns={3}
+     >
+             {otherArticles}
+           </SimpleGrid> :<SimpleGrid
+        minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
+     >
+             {otherArticles}
+           </SimpleGrid>
+        
+}
       
 
-      <SimpleGrid
-         minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
-      >
-              {otherArticles}
-            </SimpleGrid>
-
       {/* @ts-ignore */}
-      {otherArticles?.length >  paginationInterval &&  loadMoreBtn}
+      {totalArticleCreated-1 > otherArticles?.length  &&  loadMoreBtn}
 
     </Box>
   );
