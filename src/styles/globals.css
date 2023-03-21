@@ -314,7 +314,7 @@ input:focus-visible {
 }
 
 .blogContainer p{
-   font-size: 20px  !important;
+   font-size: 2rem  !important;
   font-family: inherit;
   
   font-weight: normal;
@@ -324,7 +324,7 @@ input:focus-visible {
 
 
 .ql-size-huge{
-  font-size: 60px  !important;
+  font-size: 10rem  !important;
   font-family: inherit;
 }
 
@@ -333,7 +333,7 @@ input:focus-visible {
   display: block;
   font-size: 6rem !important;
   margin-top: 0.5rem;
-  margin-bottom: 0.5rem;;
+  margin-bottom: 0.5rem;
   margin-left: 0;
   margin-right: 0;
   font-weight: bold !important;
@@ -430,4 +430,57 @@ input:focus-visible {
   background-color: white;
   z-index: 30;
   
+}
+
+
+
+
+
+@media (max-width:768px){
+  .ql-editor  h1,.blogContainer h1{
+    font-size: 4.5rem !important;
+
+  }
+
+  .ql-editor h2,.blogContainer h2{
+    font-size: 3.5rem !important;
+
+  }
+
+  .ql-editor h3, .blogContainer h3{
+    font-size: 2.5rem !important;
+
+  }
+
+  .blogContainer h4,.ql-editor h4{
+    font-size: 1.5rem !important;
+
+
+  }
+
+}
+
+
+@media (max-width:480px){
+  .ql-editor  h1,.blogContainer h1{
+    font-size: 3.8rem !important;
+
+  }
+
+  .ql-editor h2,.blogContainer h2{
+    font-size: 2.5rem !important;
+
+  }
+
+  .ql-editor h3, .blogContainer h3{
+    font-size: 1.9rem !important;
+
+  }
+
+  .blogContainer h4,.ql-editor h4{
+    font-size: 1.5rem !important;
+
+
+  }
+
 }
