@@ -10,6 +10,8 @@ import { useRouter } from 'next-translate-routes';
 import { ThreeDots } from 'react-loader-spinner';
 import { parseContent } from '@/util/parser';
 import { useLayoutEffect, useState } from 'react';
+import { Featured } from './Featured';
+
 
 
 
@@ -30,7 +32,8 @@ type ArticleCard = {
   itemIdToDelete?: number,
   setItemsIdToDelete?: (itemId: number) => void,
   summary: string,
-  category:string
+  category: string,
+  featuredArticle?:string
 };
 
 export const ArticleCard = ({
@@ -48,7 +51,8 @@ export const ArticleCard = ({
   itemIdToDelete,
   setItemsIdToDelete,
   summary,
-  category
+  category,
+  featuredArticle
 }: ArticleCard) => {
   const [cardContent, setContent] = useState("")
   const Router = useRouter()
@@ -104,7 +108,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
 </Flex>
   return (
     <Box position="relative" w={['100%', '100%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} >
-      
+      {featuredArticle === "Yes" && <Featured style={{left:"20px"}}></Featured>}
       {isDeleting && itemIdToDelete=== id && loaderCard}
       <Image
         w={'100%'}

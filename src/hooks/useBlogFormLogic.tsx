@@ -1,6 +1,6 @@
 import { api } from "@/axios"
 import { useFormik,} from "formik"
-import React, { useRef, useCallback, useState, useLayoutEffect ,useEffect} from "react"
+import React, { useRef, useCallback, useState, useLayoutEffect ,useEffect,useMemo} from "react"
 import { useRouter } from "next/router"
 import { validateForm } from "@/utils/formHelperMethod"
 import slug from "slug"
@@ -46,7 +46,8 @@ type IuploadBackendFunc = {
 
 type IuseBlogFormLogic = {
     profilePics: string,
-    name:string
+    name: string,
+    featuredArticleId:number
 }
 
 
@@ -62,7 +63,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [currentLanguage,setCurrentLanguage] = useState(languageOPtions[0])
     const [isImageUploading, setIsUploading] = useState(false);
     const [isAddingBlog,setIsAddingBlog]  = useState(false)
-    const [imageId, setImageId] = useState<IimageId>({[currentLanguage]:""})
+    //const [imageId, setImageId] = useState<IimageId>({[currentLanguage]:""})
+    const imageId = useRef({[currentLanguage]:""});
     const formContainer = useRef<HTMLFormElement>(null)
     const ref = useRef<null | HTMLInputElement>(null)
     const [isDataAvailable,setIsDataAvailable] = useState<boolean>()
@@ -71,23 +73,30 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [preview, setPreview] = useState(false)
     const [parsedBlogContentValue, setparsedBlogContentValue] = useState("");
     const [saveAsDraft, setSaveAsDraft] = useState(false)
-    const [draftArticleId, setDraftArticleId] = useState<number | null| undefined>()
-    let [saveDraftCallCount, setSaveDraftCallCount] = useState(0)
+    //const [draftArticleId, setDraftArticleId] = useState<number | null| undefined>()
+    const draftArticleId = useRef<string | null>()
+    //let [saveDraftCallCount, setSaveDraftCallCount] = useState(0)
+     const saveDraftCallCount = useRef(0)
+    
     const [endDraft, setEndDraft] = useState<null | boolean>(null)
     const [isDraftRenderSuccess, setIsDraftRenderSucces] = useState(false)
     const [deleteDraftStatus, setDeleteDraftStatus] = useState(false)
     const [convertEditToDraft, setConvertEditToDraft] = useState(true)
     const [isEditRenderSucess, setEditRenderSucess] = useState(false)
+    const trackDraft =  useRef(false)
+    //const [currentFieldValue, setCurrentField] = useState({})
+    
+    const currentFieldValue  = useRef({})
     const [category, setAllCategory] = useState<any[]>([])
-   
-    //const [selectedCategory, setSelectedCategory] = useState<string | null>();
-    const publish = useRef(false)
+     const publish = useRef(false)
     const refDraftId = useRef<null>()
     const stopFurtherDraftSave = useRef(false)
     const Router = useRouter()
     const { id, edit, draft } = Router.query
-     useLeavePageConfirm(Boolean(edit) === true && convertEditToDraft  === true && draftArticleId as undefined)
-       
+    const draftData = useRef({});
+     useLeavePageConfirm(Boolean(edit) === true && convertEditToDraft  === true && draftArticleId.current as undefined)
+    const madeUpdate = useRef(false)
+   const uploading = useRef<"UPLOADING" | "SUCCESS" | "ERROR">()
     
     const languageObject:{[key:string]:string} = {
         ENGLISH: "en",
@@ -110,14 +119,16 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 image: "",
                 blogContent: "",
                 category: "",
-                summary:""
+                summary: "",
+                featured:""
             },
             FRENCH: {
                 title: "",
                 image: "",
                 blogContent: "",
                 category: "",
-                 summary:""
+                summary: "",
+                featured:""
                 
             }
             
@@ -128,6 +139,12 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     },
    
     )
+
+    //remove uploading text
+    useEffect(() => {
+        
+    },[formikObject.values[currentLanguage]["blogContent"]])
+
 
     //listen for banner image upload 
     useEffect(() => {
@@ -151,17 +168,15 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                       console.log("response",)
                     if (response.status === 200) {
                         const blogData = response?.data?.data[0]?.attributes
-                        setDraftArticleId(response?.data.data[0].id)
+                        draftArticleId.current = response?.data.data[0].id
                         refDraftId.current = response?.data.data[0].id
-                        
                         console.log("blogData", blogData)
-                      
-                        const { content, image, title,summary,category } = blogData
+                        const { content, image, title,summary,category,featured} = blogData
                         // alert("draft")
                       
                         const currentField = formikObject.values[currentLanguage]
                         console.log("draft error  344", currentField,{blogContent:content, image, title})
-                            formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category})   
+                            formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category,featured})   
                             setIsDraftRenderSucces(true)
                     }
                     
@@ -195,26 +210,29 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
 
   //get and populate article field to edit 
-    useEffect(() => {
+  useLayoutEffect(() => {
         const { edit, id, slug} = Router.query
-        console.log("slug", Router.query)
+        console.log("slug12234", Router.query)
         
         if (edit  ) {
             if(slug) setSlug(slug as string)
           
-           
+            stopFurtherDraftSave.current = false;
             api.get(`/api/articles?filters[slug][$eq]=${slug}&populate=*&locale=${languageObject[currentLanguage]}`)
                 .then((response) => { 
-                    console.log("response",response?.data.data,`/api/articles/${id}/?locale=${languageObject[currentLanguage]}`)
+                   
+                    
+                    console.log("responseneeded", response?.data.data, `/api/articles/${id}/?locale=${languageObject[currentLanguage]}`)
                     if (response?.data.data.length === 0) return setIsDataAvailable(false);
                   
                     const blogData = response?.data?.data[0]?.attributes
                     setCurrentId(response?.data.data[0].id)
                   
-                        const { content, image, title,summary,category } = blogData
-                        const currentField = formikObject.values[currentLanguage]
-                        formikObject.setFieldValue(currentLanguage, {...currentField,blogContent:content, image, title,summary,category})   
+                    const { content, image, title, summary, category, featured } = blogData
                     
+                        const currentField = formikObject.values[currentLanguage]
+                        formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category,featured})   
+                     console.log("testingEdit",currentLanguage, {blogContent:content, image, title,summary,category,featured},currentField)
                    
                         setEditRenderSucess(true)
                 })
@@ -272,13 +290,73 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
    }
  
      //event handler handle for unLoad
-     async function unLoadHandler(event: BeforeUnloadEvent) {
+    async function unLoadHandler(event: BeforeUnloadEvent) {
+       const isEligibleForDraft =  madeUpdate.current === true || refDraftId.current ? true :false
        
-         if (edit && convertEditToDraft === true && !publish.current && refDraftId.current && !deleteDraftStatus) {
+         if (edit && convertEditToDraft === true && !publish.current && isEligibleForDraft && !deleteDraftStatus) {
             console.log("refDraftId",refDraftId)
             stopFurtherDraftSave.current = true
-            alert("saving article as draft")
-             const status = await deleteArticle(id!.toString())
+             alert("saving article as draft")
+             saveDraftCallCount.current = 0;
+             draftArticleId.current = undefined;
+             if(id) await deleteArticle(id!.toString())
+           
+             console.log("madeUpdate.current",madeUpdate.current,draftArticleId,{ ...formikObject.values[currentLanguage] })
+             if (madeUpdate.current === true && !refDraftId.current) { 
+                 const currentValues = draftData.current
+                 
+                 const data_for_upload = JSON.stringify({
+                     data: {
+                    //@ts-ignore
+                         title: currentValues?.title || "Untitled",
+                         //@ts-ignore
+                         description: currentValues?.title,
+                    //@ts-ignore
+                         content: currentValues?.blogContent, 
+                    //@ts-ignore
+                         image: currentValues?.image,
+                    //@ts-ignore
+                         featured: currentValues?.featured,
+                    //@ts-ignore
+                         slug: articleslug,
+                    //@ts-ignore
+                         category: currentValues?.category,
+                    //@ts-ignore
+                         summary: currentValues?.summary,
+                    //@ts-ignore
+                         authorImage: props?.profilePics,
+                    
+                    author: props?.name ,
+                    publishedAt:new Date().toISOString() ,
+                    locale: languageObject[currentLanguage] ,
+                   
+                }}
+                )
+               const  response = await api.post(`/api/drafts`, data_for_upload,{
+                    headers: {
+                      'Content-Type': 'application/json'
+                    }
+                  })
+                
+                 
+                 //const response = await deleteArticle(id!.toString())
+
+                 
+                
+               
+                
+
+             } 
+             else {
+               
+                 
+             }
+             
+             
+
+             console.log("refDraftId",madeUpdate.current,draftArticleId)
+           
+             
             
              
         }
@@ -345,24 +423,55 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
     //update formik field
     const updateFormikFields = (e: any) => {
-       
+         
+        madeUpdate.current = true;
         const fieldName = e.target.name;
-        const enteredValue = e.target.value
+        let enteredValue = e.target.value;
 
-    const currentValues = formikObject.values[currentLanguage]
-        const fieldValue = {...formikObject.values[currentLanguage],[fieldName]:enteredValue}
+      console.log("hi steve",e.target.checked )
 
-        console.log("testing blog",fieldValue,)
+        if (fieldName === "featured") {
+            if (!e.target.checked && e.target.checked === false  ) enteredValue = "No";
+            else if (e.target.checked && e.target.checked === true) enteredValue = "Yes";
+            
+        }
+          
+       
+        const currentValues = formikObject.values[currentLanguage]
+        console.log("formikText",enteredValue )
+        const fieldValue = {...currentValues, [fieldName]: enteredValue }
+         
         
-        formikObject.setFieldValue(currentLanguage, fieldValue)
-     
-        if (fieldName === "image" || "title"  || "category" || "summary" || "blogContent") {
-            if (saveDraftCallCount === 1 && !draftArticleId) return;
-            saveAsDraftHandler("", currentValues)()
-            setSaveDraftCallCount((prev)=> prev +1)
+
+        console.log("checkForm",saveDraftCallCount.current,!draftArticleId.current)
+    
+        if (fieldName === "image" || "title" || "category" || "summary" || "blogContent" || "featured") {
+            if (saveDraftCallCount.current === 1 && !draftArticleId.current) return;
+           
+            console.log("values,")
+            saveAsDraftHandler("",{...formikObject.values[currentLanguage], [fieldName]: enteredValue })()
+            saveDraftCallCount.current = saveDraftCallCount.current + 1
+            //draftData.current = {...formikObject.values[currentLanguage], [fieldName]: enteredValue }
+            console.log("valuestestingedit33",{...formikObject.values[currentLanguage], [fieldName]: enteredValue })
+            //setSaveDraftCallCount((prev)=> prev +1)
+           
             
             
         }
+
+        if (fieldName !== "image") currentFieldValue.current = fieldValue; 
+        if (fieldName === "image") {
+            
+            const fieldValue = { ...currentFieldValue.current, [fieldName]: enteredValue }
+            draftData.current = fieldValue;
+            formikObject.setFieldValue(currentLanguage, fieldValue)
+
+            return;
+            
+            
+        }
+        draftData.current = fieldValue;
+        formikObject.setFieldValue(currentLanguage, fieldValue)
       
         
         
@@ -376,22 +485,24 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         const { id, draft, edit } = Router.query
         try {
 
-
+          console.log("checkStopper",endDraft,edit,currentId,draft,draftArticleId.current,stopFurtherDraftSave.current)
         if (endDraft === true) return
         if (edit && !currentId) return;
-        if (draft && !draftArticleId) return;
-        if (stopFurtherDraftSave.current === true) return;
+        if (draft && !draftArticleId.current) return;
+        if (stopFurtherDraftSave.current === true  ) return;
         //alert("debouncing ")
-        setSaveAsDraft(true)
+            setSaveAsDraft(true)
+            trackDraft.current = true
 
         console.log("dogo123",currentValues,!currentValues?.title)
         
-
+       
         const data_for_upload = JSON.stringify( {data:{
             title: currentValues?.title || "Untitled",
             description: currentValues?.title ,
             content: currentValues?.blogContent , 
-            image: currentValues?.image ,
+            image: currentValues?.image,
+            featured:currentValues?.featured,
             slug: slug(articleslug),
             category: currentValues?.category,
             summary:currentValues?.summary,
@@ -407,7 +518,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
        
         
         
-        if (draftArticleId) {
+        if (draftArticleId.current) {
             
 
             const data_for_upload = JSON.stringify({
@@ -420,18 +531,20 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     summary:currentValues?.summary,
                     authorImage: props?.profilePics,
                     author: props?.name,
+                    featured:currentValues?.featured,
                     locale:languageObject[currentLanguage]
                    
                 }
             })
 
             console.log("response123", data_for_upload,currentValues)
-             response = await api.put(`/api/drafts/${draftArticleId}`, data_for_upload,{
+             response = await api.put(`/api/drafts/${draftArticleId.current}`, data_for_upload,{
                 headers: {
                   'Content-Type': 'application/json'
                 }
               })
             setSaveAsDraft(false)
+            trackDraft.current = false
 
             return;
         }
@@ -450,8 +563,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     
        console.log("ided",id)
         setSaveAsDraft(false)
+        trackDraft.current = false
         refDraftId.current = id
-        setDraftArticleId(id)
+        draftArticleId.current=id
        
     
 
@@ -466,17 +580,33 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
        
     },1000)
 
+
+    const removeUnwantedString = (value: string, unwantedString: string): string => {
+        console.log("un2",value,unwantedString)
+    
+        let htmlString = value.replace(unwantedString,"")
+
+        return  htmlString
+          
+        
+    }
+
    
 
     //update blog content
     async function updateBlogContent(value: string) {
         const { id, draft } = Router.query
         const defaultTextEditorFieldValue = "<p><br></p>";
-       const currentValues = formikObject.values[currentLanguage]
-           const fieldObject = {
+        const currentValues = formikObject.values[currentLanguage]
+        const uploadingText = `Uploading....`
+        console.log("my-upload",uploading.current)
+        let newString = uploading.current === "SUCCESS" ? removeUnwantedString(value, uploadingText):value
+        newString = newString ? newString : value;
+      
+        const fieldObject = {
             target: {
                 name: "blogContent",
-                value:value === defaultTextEditorFieldValue ? "":value,
+                value:value === defaultTextEditorFieldValue ? "":newString,
             }
 
            }
@@ -554,6 +684,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         setConvertEditToDraft(false)
         publish.current = true
         const currentValues = values[currentLanguage]
+        console.log("testPayload",currentValues)
         
         try {
             const data_for_upload = JSON.stringify({
@@ -567,9 +698,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     slug: slug(currentValues?.title),
                     authorImage: props?.profilePics,
                     author: props?.name,
-                    locale:languageObject[currentLanguage]
-                   
-                }
+                    locale: languageObject[currentLanguage],
+                    featured:currentValues?.featured
+            }
             })
             
             const { edit, id,draft } = Router.query
@@ -585,6 +716,32 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
           
             let response 
+            //update featured article 
+
+            
+            if (currentValues?.featured === "Yes" && props.featuredArticleId) {
+
+                const data_for_upload = JSON.stringify({
+                    data: {
+                        
+                        featured:"No",
+                      
+                       
+                    }
+                })
+          
+                
+                try {
+
+                   const response =  await api.put(`/api/articles/${props.featuredArticleId}`, data_for_upload)
+                    
+                }
+                catch (e) {
+                    
+                }
+                
+                
+            }
 
             if (isDataAvailable  === false && edit) {
                 
@@ -598,7 +755,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                         slug:articleslug,
                         authorImage: props?.profilePics,
                     author: props?.name,
-                        
+                    featured:currentValues?.featured,
                     locale: languageObject[currentLanguage],
                     publishedAt:new Date().toISOString(),
                        
@@ -610,7 +767,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
                 if (response.status === 200) {
                     setIsAddingBlog(false)
-                    setDraftArticleId(null)
+                    if(draftArticleId.current)  await deleteDraft(draftArticleId.current as string)
+                    //@ts-ignore
+                    draftArticleId.current =null
                     refDraftId.current = null
                     alert("blog added successfully")
                     Router.push("/admin")
@@ -632,6 +791,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                         summary:currentValues?.summary,
                         authorImage: props?.profilePics,
                         author: props?.name,
+                        featured:currentValues?.featured,
                         locale:languageObject[currentLanguage]
                        
                     }
@@ -649,19 +809,28 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 if (draft && id) {
                     // saveAsDraftHandler.cancel();
                     setEndDraft(true)
-                    deleteDraft(id.toString())
+                    if(id)deleteDraft(id.toString())
+                    
                 };
                 response = await api.post("/api/articles", data_for_upload)
-                refDraftId.current = null
-                setDraftArticleId(null);
-                setSaveDraftCallCount(0)
+                // refDraftId.current = null
+                // draftArticleId.current =null;
+                // setSaveDraftCallCount(0)
+
                 // saveAsDraftHandler.flush()
             }
            
             if (response?.status === 200) {
                 setIsAddingBlog(false)
-                if (!draft ) {
-                     deleteDraft(draftArticleId!.toString())
+                if (!draft) {
+                
+                    //draftArticleId.current
+                    console.log("do me", draftArticleId.current)
+                    if(draftArticleId.current)deleteDraft(draftArticleId.current as string)
+                    refDraftId.current = null
+                draftArticleId.current =null;
+                //setSaveDraftCallCount(0)
+                    saveDraftCallCount.current = 0;
                 }
                
                 alert("blog added successfully")
@@ -678,7 +847,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             
         } catch (e) {
             console.log("blog error",e)
-            alert("error occurred while adding blog")
+            alert("error occurred , refresh your browser")
             setIsAddingBlog(false)
             
         }
@@ -732,7 +901,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const addImageData = (responseObject:any) => {
         const { data } = responseObject;
         console.log("data",data)
-        const imageId = data.id;
+        const id = data.id;
         const ImagePath = data.url 
         const formObj = {
             target: {
@@ -741,7 +910,12 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             }
         }
         updateFormikFields(formObj)
-        setImageId((prev)=> ({...prev,[currentLanguage]:imageId}))
+       
+       
+        console.log("formed", formikObject.values[currentLanguage])
+    
+        imageId.current =  {...imageId.current,[currentLanguage]:id}
+        //setImageId((prev)=> ({...prev,[currentLanguage]:imageId}))
         if (ref.current) {
             ref.current.value = ""
         }
@@ -759,20 +933,31 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
            
         setIsUploading(true)
         try {
-            const uniqueImageId = imageId[currentLanguage];
+            console.log("current12",imageId.current)
+            const uniqueImageId = imageId?.current[currentLanguage];
             
 
             if (uniqueImageId) {
                 await deleteImage(uniqueImageId)
                 const upload_response = await uploadImageToCloudinary(fileList[0]);
-                setIsUploading(false)
-                addImageData(upload_response)
+                if (upload_response.status === 200) {
+                    addImageData(upload_response)
+                    setIsUploading(false)
+                    
+                }
+               
+                
+               
             }
             else {
                 const upload_response = await uploadImageToCloudinary(fileList[0]);
-                addImageData(upload_response)
+                if (upload_response.status === 200) { 
+                    addImageData(upload_response)
+                    setIsUploading(false)
+                }
                 
-                setIsUploading(false)
+               
+                
                 
             }
           }
@@ -866,13 +1051,14 @@ const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSucce
         parsedBlogContentValue,
         uploadImageToCloudinary,
         saveAsDraft,
-        draftArticleId,
+        draftArticleId:draftArticleId.current,
         deleteDraftStatus,
         deleteDraft,
         BannerImageMouseEnterAndExitHandler,
         springs,
         category,
         onCategoryChange,
+        uploading
        
         
     

@@ -14,18 +14,18 @@ import { api } from '@/axios';
 import { useRouter } from 'next/router';
 import { useHomeLogic } from '@/hooks/homeLogic';
 
-// type InitialProps = PromiseSettledResult<typeof getInitialProps>
+
 
 export default function Home(props: any) {
   const Router = useRouter();
 const currentLanguage = Router.locale as string;
-  let { articles, allArticles,lastArticle} = props;
+  let { articles, allArticles,featuredArticle} = props;
 
   const paginationData = articles?.meta?.pagination;
 
   const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage,allArticles,articles);
  
-console.log("latestId",lastArticle?.data[0])
+
 
 
   return (
@@ -33,11 +33,11 @@ console.log("latestId",lastArticle?.data[0])
      <Box w="100%"  pl="7%" pr="7%" >
         <BlogHeader></BlogHeader>
         <LatestNews
-          latestArticle={lastArticle?.data[0]}
+          latestArticle={featuredArticle?.data[0]}
           estimateArticleReadTime={estimateArticleReadTime}
         />
         <OtherArticle
-          articleIdToExclude={lastArticle?.data[0]?.id}
+          articleIdToExclude={featuredArticle?.data[0]?.id}
           loading={state.loading}
           error={state.error}
           errorMessage={state.message}
@@ -57,10 +57,14 @@ export const getServerSideProps = async ({ locale }: any) => {
   const paginationStart = 0;
   const paginationLimit = 9;
 
-  const lastArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=id:desc`)
-  const lastArtcilesId = lastArticle.data.data[0]?.id;
-  const articles =   await api.get(`/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[id][$ne]=${lastArtcilesId}`)
-  const allArticles = await api.get(`/api/articles?locale=${locale}&populate=*&filters[id][$ne]=${lastArtcilesId}`)
+  let featuredArticle;
+  featuredArticle = await api.get(`/api/articles?locale=${locale}&populate=*&filters[featured][$eq]=Yes`)
+  if (featuredArticle.data.data.length === 0) featuredArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=id:desc`);
+
+
+  const featuredArticleId = featuredArticle.data.data[0]?.id;
+  const articles =   await api.get(`/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[id][$ne]=${featuredArticleId}`)
+  const allArticles = await api.get(`/api/articles?locale=${locale}&populate=*&filters[id][$ne]=${featuredArticleId}`)
   
   
 
@@ -68,7 +72,7 @@ export const getServerSideProps = async ({ locale }: any) => {
     props: {
       articles: articles?.data,
       allArticles: allArticles.data,
-      lastArticle:lastArticle.data,
+      featuredArticle:featuredArticle.data,
      ...(await serverSideTranslations(locale, ['common']))
     },
    

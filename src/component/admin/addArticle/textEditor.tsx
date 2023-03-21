@@ -62,7 +62,8 @@ const styles = {
 type TextEditor = {
     value: string,
     onChange: (value: string) => void,
-    uploadImageHandler:(imageToUpload:File)=>  Promise<any>
+    uploadImageHandler: (imageToUpload: File) => Promise<any>,
+    uploading:any
 }
 
 
@@ -122,7 +123,7 @@ function custombold() {
   const selectionRange = this.quill.getSelection();
    const isBold = format['bold'];
   //@ts-ignore
-  this.quill.formatText(selectionRange.index, selectionRange.length,{'bold': !isBold}); 
+  this.quill.formatText(selectionRange?.index, selectionRange.length,{'bold': !isBold}); 
 
   
 }
@@ -137,7 +138,7 @@ function customItalic() {
   //@ts-ignore
   const selectionRange = this.quill.getSelection();
   //@ts-ignore
-  isItalic === true ? this.quill.formatText(selectionRange.index, selectionRange.length, 'italic', false) :this.quill.formatText(selectionRange.index, selectionRange.length, 'italic', true)
+  isItalic === true ? this.quill.formatText(selectionRange?.index, selectionRange.length, 'italic', false) :this.quill.formatText(selectionRange?.index, selectionRange.length, 'italic', true)
   
   
 } 
@@ -178,15 +179,15 @@ export const TextEditor = (props: TextEditor) => {
     console.log("uploadFileObj",uploadFileObj)
     try {
       if (ifFileSizeIsNotAllowed) throw new Error("file size too large");
-      
+    
                 
       const upload_response =  await props.uploadImageHandler(uploadFileObj)
       const { data } = upload_response;
       const ImagePath = data.url 
       const image_url = `${ImagePath}`
-      const range = quillObj.getEditorSelection();  
-
-      quillObj.getEditor().insertEmbed(range.index, 'image', image_url) 
+      const range = quillObj?.getEditorSelection();  
+      props.uploading.current = "SUCCESS"
+      quillObj?.getEditor()?.insertEmbed(range?.index, 'image', image_url) 
       console.log("upload_response",upload_response)
      
      //onSuccess(image_url)
@@ -195,7 +196,8 @@ export const TextEditor = (props: TextEditor) => {
     } catch (error) {
       //@ts-ignore
       error!.message === "file size too large" ? alert("fileSize  is too large") :
-        alert("error occuured, try again")
+        alert("error uploading image, try again")
+        props.uploading.current = "SUCCESS"
         
         setUploading(false)
       
@@ -219,7 +221,7 @@ export const TextEditor = (props: TextEditor) => {
     // Define the Cloudinary API URL for image uploads
     const cloudinaryUrl = 'https://api.cloudinary.com/v1_1/dy9d8uotq/video/upload';;
   
-    
+   props.uploading.current =  "UPLOADING"
   
     // Make a POST request to the Cloudinary API to upload the image
     return api.post(cloudinaryUrl,videoData,{
@@ -230,9 +232,9 @@ export const TextEditor = (props: TextEditor) => {
     .then(response => response)
     .then(data => {
       // Return the secure URL of the uploaded image
-      const range = quillObj.getEditorSelection(); 
-      quillObj.getEditor().insertEmbed(range.index, 'video', data.data.secure_url)
-     
+      const range = quillObj?.getEditorSelection(); 
+      quillObj.getEditor().insertEmbed(range?.index, 'video', data.data.secure_url)
+      props.uploading.current = "SUCCESS"
       return data.data.secure_url;
 
     
@@ -248,6 +250,7 @@ export const TextEditor = (props: TextEditor) => {
   async function imageHandler() { 
     
     setUploading(true)
+    props.uploading.current = "UPLOADING"
     
     const input = document.createElement('input');  
   
@@ -258,7 +261,7 @@ export const TextEditor = (props: TextEditor) => {
     input.onchange = async () => {  
 
        //@ts-ignore
-    var currentPosition = this.quill.getSelection().index;
+    var currentPosition = this.quill?.getSelection()?.index;
 
     //@ts-ignore
     this.quill.insertText(currentPosition, 'Uploading....', 'bold', true);
@@ -275,19 +278,23 @@ export const TextEditor = (props: TextEditor) => {
       //@ts-ignore
       if (res) { 
         //@ts-ignore
-        const currentPosition = this.quill.getSelection().index;
+        const currentPosition = this.quill.getSelection()?.index;
+        props.uploading.current = "SUCCESS";
          //@ts-ignore  
-         this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+         this.quill?.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
         setUploading(false)
+      
      
        
       }
       else {
           //@ts-ignore
         const currentPosition = this.quill.getSelection()?.index;
+        props.uploading.current = "SUCCESS"
          //@ts-ignore  
          this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length)
         setUploading(false)
+      
         
       }
       
@@ -311,7 +318,7 @@ export const TextEditor = (props: TextEditor) => {
     input.onchange = async () => {  
 
        //@ts-ignore
-    var currentPosition = quillRef.current.getEditorSelection().index;
+    var currentPosition = quillRef.current?.getEditorSelection()?.index;
 
     //@ts-ignore
     this.quill.insertText(currentPosition, 'Uploading....', 'bold', true);

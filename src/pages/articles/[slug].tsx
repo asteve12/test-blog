@@ -37,7 +37,8 @@ type attribute = {
 type BlogDetailPage = {
   article: { attributes: attribute,id:number };
   otherArticle: attribute[];
-  singleArticleCategory:string
+  singleArticleCategory: string,
+  info:any
 };
 
 type GetStaticPathsContext = {
@@ -45,7 +46,9 @@ type GetStaticPathsContext = {
   defaultLocale?: string;
 };
 
-const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArticleCategory}: BlogDetailPage) => {
+const BlogDetails: NextPage<BlogDetailPage> = ({ article,info,otherArticle,singleArticleCategory}: BlogDetailPage) => {
+  
+  console.log("info",info)
   const baseUrl = process.env.NEXT_PUBLIC_STRAPI_API_URL as string;
   const articleContent = article?.attributes?.content;
   const category = article?.attributes?.category;
@@ -53,6 +56,7 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArt
   const summary =  article?.attributes?.summary;
   const timeToRead = estimateArticleReadTime(articleContent);
   const imagePath = article?.attributes?.image
+  const totalArticleCreated = info?.meta?.pagination?.total
 
   const articleDescription = article?.attributes?.description;
   const seo = {
@@ -63,8 +67,8 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArt
   };
 
   const useArticleDetailsLogicParams = {
-    paginationInterval: 9,
-    totalRelatedArticleAvailable: otherArticle.length,
+    paginationInterval: 3,
+    totalRelatedArticleAvailable: totalArticleCreated,
     totalArticleAvailable: otherArticle,
     singleArticleCategory
   }
@@ -89,11 +93,12 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArt
           timeToRead={timeToRead}
         ></BlogDetailContent>
         <SuggestedArticle
-          paginationInterval={9}
+          paginationInterval={3}
           articleIdToExclude={article?.id}
           loadArticles={loadArticles}
           otherArticles={otherArticleToRead}
-          totalRelatedArticleAvailable={otherArticle.length}
+          totalRelatedArticleAvailable={totalArticleCreated}
+          totalArticleCreated={totalArticleCreated}
         ></SuggestedArticle>
       </Box>
     </Layout>
@@ -128,14 +133,14 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article, otherArticle,singleArt
 //@ts-ignore
 export const getServerSideProps = async ({ locale, params }) => {
   const paginationStart = 0;
-  const paginationLimit = 9;
+  const paginationLimit = 3;
 
 
   const  singleArticle = await api.get(`/api/articles?filters[slug][$eq]=${params?.slug}&populate=*&locale=${locale}`)
   
 
   const singleArticleCategory = singleArticle?.data.data[0]?.attributes?.category
-  const otherArticle = await  api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[category][$eq]=${singleArticleCategory}`)
+  const otherArticle = await  api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}`)
   
 
 
@@ -147,6 +152,7 @@ export const getServerSideProps = async ({ locale, params }) => {
 
   return {
     props: {
+      info:otherArticle.data,
       article: data,
       otherArticle: otherArticle.data.data,
       singleArticleCategory,
