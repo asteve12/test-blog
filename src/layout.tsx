@@ -81,7 +81,7 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
           setMode={setMode} />
       ) :null}
     
-      <Box w="100%"  bg="#fbfbfd" >
+      <Box w="100%"   >
      
       {showSideBar ? componentWhenshowSideBar_True :componentWhenshowSideBar_False }
       </Box>

@@ -63,9 +63,9 @@ const community = () => {
   ];
 
   return (
-    <Box className="community-container"  fontFamily="satoshi"  > 
+    <Box className="community-container"  fontFamily="satoshi" mt="50px"  > 
       <div className="community-header center">
-        <Heading className="margin-0 community-h"  textAlign="center" fontFamily="satoshi bold" fontSize={['3.2rem','4.2rem','5.2rem','7.2rem']}>{t('community.join_community')}</Heading>
+        <Heading className="margin-0 community-h"  textAlign="center" fontFamily="satoshi black" fontSize={['3.2rem','4.2rem','5.2rem','7.2rem']}>{t('community.join_community')}</Heading>
       </div>
 
       <div  className="community-text center">
@@ -78,9 +78,12 @@ const community = () => {
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
           return (
             <Link href={socialLink} key={id} className="community-card">
-              <div className="community-card-icon twitter-card-icon">
-                <Image  w="40px" h="40px" ml="auto" mr="auto" src={image} alt="socials logo 12" />
-              </div>
+              <Flex alignItems="center" justifyContent="center" w="100%" mb="10px"
+                
+              >
+              
+                <Image  w="40px" h="40px" mb="10px" ml="auto" mr="auto" src={image} alt="socials logo 12" />
+              </Flex>
 
               <div className="community-card-header center">
                 <h3 className="margin-0 community-card-h">{header}</h3>
