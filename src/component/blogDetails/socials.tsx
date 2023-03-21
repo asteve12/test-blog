@@ -59,6 +59,7 @@ console.log("contHeight",props.containerHeight)
 
   return (
     <Box display="block" w="100px" position="relative"
+   
     // @ts-ignore
       h={["auto", "auto",props.containerHeight && parseInt(props.containerHeight)]}
        mt={["30px", "30px", "30px", "0px"]}>

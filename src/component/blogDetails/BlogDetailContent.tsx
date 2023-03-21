@@ -60,6 +60,7 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
         pl={['0px', '0px', '0px', '0px']}
         w={['100%', '100%', '80%']}
         ref={currentRef}
+        
       >
         <HStack  gap={10} display={["none",'flex']} flexDirection={['row', 'row', 'row']} justifyContent={["space-between","start",null,null]}>
           <BlogTitle title={category}></BlogTitle>
