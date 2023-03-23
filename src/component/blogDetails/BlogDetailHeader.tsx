@@ -9,6 +9,7 @@ type IBlogDetailHeader = {
 };
 
 export const BlogDetailHeader = ({ imagePath, baseUrl }: IBlogDetailHeader) => {
+  console.log("cloudinaryImage12",imagePath)
   const { t } = useTranslation('common');
 
   return (

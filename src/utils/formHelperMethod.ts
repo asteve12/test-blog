@@ -1,4 +1,6 @@
-export function injectErrorMessage(errorObj: any,errorMessage?:any) {
+import crypto from "crypto";
+
+export function injectErrorMessage(errorObj: any, errorMessage?: any) {
     const array_error_element = document.getElementsByClassName("errorElement")
     const ErrrorBox =  document.getElementById("errorElement") as HTMLElement
     const doesErrorElementExist = array_error_element.length > 0;
@@ -78,3 +80,25 @@ export function validateForm<formType>(values: formType,currentLanguage?: string
     
     
 }
+
+
+
+export const generateSHA1 =(data: any) => {
+    const hash = crypto.createHash("sha1");
+    hash.update(data);
+    return hash.digest("hex");
+}
+
+
+export const  generateSignature = (publicId: string, apiSecret: string) => {
+	const timestamp = new Date().getTime();
+	return `public_id=${publicId}&timestamp=${timestamp}${apiSecret}`;
+};
+
+
+export const getPublicIdFromUrl = (url:string) => {
+    const regex = /\/v\d+\/([^/]+)\.\w{3,4}/;
+    const match = url.match(regex);
+    return match ? match[1] : null;
+  };
+  

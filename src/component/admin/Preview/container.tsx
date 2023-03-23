@@ -39,6 +39,14 @@ const styles = {
         right: "1%",
         ml: "0px",
         pb: "10%",
+        //w:"1",
+        flexDirection:['column-reverse', 'column-reverse', 'row'],
+        alignItems:['start','start', 'start'],
+        justifyContent:['start', null],
+        pl:["0px","0px","2%"],
+        //pt:"30px",
+        //position:"relative",
+        //h:"auto",
         
         
     }

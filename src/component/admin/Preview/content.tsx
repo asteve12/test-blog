@@ -1,4 +1,4 @@
-import { Box, Image, Flex, VStack, Text,HStack, Heading} from "@chakra-ui/react"
+import { Box, Image, Flex, VStack, Text,HStack, Heading,Stack} from "@chakra-ui/react"
 import { BlogTitle } from "@/shared/blogTitlteCard"
 import { TimerCard } from "@/shared/TimeCard"
 import { CustomIcons } from "@/util/customIcon"
@@ -8,8 +8,7 @@ import { GrTwitter } from "react-icons/gr"
 import { AiFillLinkedin } from "react-icons/ai"
 import { RiWhatsappFill } from "react-icons/ri"
 import { estimateArticleReadTime } from "@/util/estimateReadTime"
-//styles
-// import styles from "./style/content.module.css"
+
 
 
 
@@ -28,8 +27,15 @@ type Content = {
 
 const styles = {
     previewHeaderStyle: {
-        fontSize: "7rem",
-        marginBottom:"0px"
+        
+        marginBottom: "0px",
+        color:"#2D2B4A",
+        textAlign:'left',
+        mt:"0px",
+        mb:"10px",
+        fontFamily:"satoshi black",
+        fontWeight:"900",
+        fontSize:["4rem",'5rem', '6rem']
         
     },
     previewHeaderSummaryStyle: {
@@ -79,8 +85,21 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
             <Image
                 //w="1216px"
                 h={["250px", "320px", "420px", "420px"]} borderRadius="16px" objectFit="cover" maxW="100%" alt="preview" src={BannerImg}></Image>
-            <Flex>
-            <VStack pl="5%" pt="30px"  gap="10px">
+            <Flex
+             w="100%"
+             flexDirection={['column-reverse', 'column-reverse', 'row']}
+             alignItems={['start','start', 'start']}
+             justifyContent={['start', null]}
+             pl={["0px","0px","2%"]}
+             pt="30px"
+             position="relative"
+             h="auto"
+            >
+                <Stack
+                    ml={["30px"]}
+                 position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
+                 spacing="25px" direction={['row', 'row', 'column']}     mr="30px"
+                >
                     <Text color="#666481" fontWeight="700"  fontSize="20px">
                         Share
                         </Text>
@@ -92,7 +111,7 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
                                 }}
                                 Icon={eachIcons.icons} ></CustomIcons>)
                         }
-                </VStack>
+                </Stack>
                 
 
                 <Box pl="5%" pt="30px">
@@ -101,8 +120,8 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
                         <BlogTitle  title={category}></BlogTitle>
                         <TimerCard timetoRead={timeToRead}></TimerCard>
                     </HStack>
-
-                    <Heading  {...styles.previewHeaderStyle} >{blogHeader}</Heading>
+                        {/* @ts-ignore */}
+                    <Heading  {...styles.previewHeaderStyle as HeadingProps} >{blogHeader}</Heading>
                     <Text   {...styles.previewHeaderSummaryStyle} >{summary}</Text>
                     <Box    className="blogContainer"   dangerouslySetInnerHTML={{ __html: blogContent }}/>
 
