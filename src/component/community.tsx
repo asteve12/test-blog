@@ -72,8 +72,17 @@ const community = () => {
         <Text  textAlign="center" w={["60%","55%","40%"]}  color="#666481" ml="auto"  mr="auto"  display="block"  fontSize={["1.4rem","1.5rem","1.6rem","1.8rem"]}>{t('community.hype')}</Text>
       </div>
 
-      <Box  id="cards-none" className="community-cards-container flex" display="flex" justifyContent="center"  w="90%" ml="auto" mr="auto">
-      <SimpleGrid  columns={[1,3,3,4]}  spacing={["0rem","8rem","8rem","10rem"]}  >
+      <Box
+        
+        display="flex"
+         justifyContent="center" w="100%" >
+        <SimpleGrid columns={[1, 3, 3, 4]}
+          spacing={["0rem", "8rem", "8rem", "10rem"]}
+          justifyContent="center"
+          alignItems="center"
+          w="51%"
+          
+        >
         
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
           return (

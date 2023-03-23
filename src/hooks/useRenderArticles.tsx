@@ -116,7 +116,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
          <ArticleCard
           estimateArticleReadTime={estimateArticleReadTime}
           title={eachArticle?.attributes?.title}
-          content={extractTextFromHtmlStringToText(eachArticle?.attributes?.content)}
+          content={eachArticle?.attributes?.content}
           image={eachArticle?.attributes?.image}
           authorName={eachArticle?.attributes?.author}
           authorImage={eachArticle?.attributes?.authorImage}

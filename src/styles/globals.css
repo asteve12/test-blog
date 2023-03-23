@@ -331,7 +331,7 @@ input:focus-visible {
 .ql-editor  h1,.blogContainer h1{
   /* font-size: header; */
   display: block;
-  font-size: 6rem !important;
+  font-size: 7rem !important;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 0;
@@ -348,7 +348,7 @@ input:focus-visible {
 
 .ql-editor h2,.blogContainer h2{
   display: block;
-  font-size: 5rem  !important;
+  font-size: 6rem  !important;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 0;
@@ -360,7 +360,7 @@ input:focus-visible {
 
 .ql-editor h3, .blogContainer h3{
   display: block;
-  font-size: 3rem !important;
+  font-size: 4rem !important;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 0;
@@ -373,7 +373,7 @@ input:focus-visible {
 
 .blogContainer h4,.ql-editor h4 {
   display: block;
-  font-size: 2rem  !important;
+  font-size: 3rem  !important;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
   margin-left: 0;
@@ -436,6 +436,28 @@ input:focus-visible {
 
 
 
+.ql-editor  h1,.blogContainer h1{
+  font-size: 5rem !important;
+
+}
+
+.ql-editor h2,.blogContainer h2{
+  font-size: 4rem !important;
+
+}
+
+.ql-editor h3, .blogContainer h3{
+  font-size: 3rem !important;
+
+}
+
+.blogContainer h4,.ql-editor h4{
+  font-size: 2.5rem !important;
+
+
+}
+
+
 @media (max-width:768px){
   .ql-editor  h1,.blogContainer h1{
     font-size: 4.5rem !important;
@@ -453,7 +475,7 @@ input:focus-visible {
   }
 
   .blogContainer h4,.ql-editor h4{
-    font-size: 1.5rem !important;
+    font-size: 2.3rem !important;
 
 
   }
@@ -473,12 +495,12 @@ input:focus-visible {
   }
 
   .ql-editor h3, .blogContainer h3{
-    font-size: 1.9rem !important;
+    font-size: 2.3rem !important;
 
   }
 
   .blogContainer h4,.ql-editor h4{
-    font-size: 1.5rem !important;
+    font-size: 2.2rem !important;
 
 
   }
