@@ -30,7 +30,7 @@ const styles = {
     adminStyle: {
         position:"fixed",
         zIndex: "10",
-        w: ["100%","100%","100%"],
+        w: ["100%","100%","100%","85%"],
         top: "0px",
         pt: "10px",
         overflowY: "scroll",
@@ -75,6 +75,7 @@ export const PreviewContainer = ({ closePreview,
 
 
     }
+    //@ts-ignore
     if(type === "admin")  containerStyle = {...styles.containerStyle,...styles.adminStyle}
 
   
