@@ -2,12 +2,15 @@ import { api } from "@/axios"
 import { useFormik,} from "formik"
 import React, { useRef, useCallback, useState, useLayoutEffect ,useEffect,useMemo} from "react"
 import { useRouter } from "next/router"
-import { validateForm } from "@/utils/formHelperMethod"
+import { generateSHA1, generateSignature, getPublicIdFromUrl, validateForm } from "@/utils/formHelperMethod"
 import slug from "slug"
 import { debounce } from "lodash"
 import { useLeavePageConfirm } from "../hooks/useLeave"
 import { useSpring } from "@react-spring/web";
 import { validDateFileSize } from "@/utils/textEditor"
+import axios from "axios"
+
+
 
 
 
@@ -675,6 +678,33 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         
     }
 
+  //delete image from cloudinary
+    const handleDeleteImage = async (imageUrl:string) => {
+        const cloudName =process.env.NEXT_CLOUD_NAME;
+        const timestamp = new Date().getTime();
+        const apiKey = process.env.NEXT_API_KEY;
+        const apiSecret = process.env.NEXT_API_SECRET
+        const publicId = getPublicIdFromUrl(imageUrl)
+        //@ts-ignore
+        const signature = generateSHA1(generateSignature(publicId, apiSecret));
+        const url = `https://api.cloudinary.com/v1_1/dy9d8uotq/image/destroy`
+      
+        try {
+          const response = await axios.post(url, {
+            public_id: publicId,
+            signature: signature,
+            api_key: apiKey,
+            timestamp: timestamp,
+          });
+      
+          console.error(response);
+        
+        } catch (error) {
+            alert("error deleting cloudinary image")
+          console.error(error);
+        }
+      };
+
     
    
 
@@ -933,12 +963,16 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
            
         setIsUploading(true)
         try {
-            console.log("current12",imageId.current)
+          
             const uniqueImageId = imageId?.current[currentLanguage];
             
 
             if (uniqueImageId) {
-                await deleteImage(uniqueImageId)
+                console.log("current1245",imageId.current)
+                //await deleteImage(uniqueImageId)
+                const image_url = formikObject.values[currentLanguage]["image"]
+
+                await handleDeleteImage(image_url)
                 const upload_response = await uploadImageToCloudinary(fileList[0]);
                 if (upload_response.status === 200) {
                     addImageData(upload_response)
