@@ -27,9 +27,8 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
   useLayoutEffect(() => {
     if (currentRef.current) {
       const contentContStyle = window.getComputedStyle(currentRef.current)
-      //const contentContHeight = 
       setHeight(contentContStyle.getPropertyValue("height"))
-    //console.log("height12",)
+ 
       
     } 
   })

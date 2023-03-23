@@ -75,8 +75,10 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
 
 
     return (
-        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  h="100%">
-            <Image  w="1216px"  h="420px"  borderRadius="16px"  objectFit="cover"  maxW="100%" alt="preview" src={BannerImg}></Image>
+        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  minH="100vh">
+            <Image
+                //w="1216px"
+                h={["250px", "320px", "420px", "420px"]} borderRadius="16px" objectFit="cover" maxW="100%" alt="preview" src={BannerImg}></Image>
             <Flex>
             <VStack pl="5%" pt="30px"  gap="10px">
                     <Text color="#666481" fontWeight="700"  fontSize="20px">

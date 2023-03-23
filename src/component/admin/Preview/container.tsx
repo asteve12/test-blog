@@ -26,6 +26,21 @@ const styles = {
         minH:"100%",
         bg:"#FBFBFD"
         
+    },
+    adminStyle: {
+        position:"fixed",
+        zIndex: "10",
+        w: ["100%","100%","100%","85%"],
+        top: "0px",
+        pt: "10px",
+        overflowY: "scroll",
+        h: "100vh",
+        left: "auto",
+        right: "1%",
+        ml: "0px",
+        pb: "10%",
+        
+        
     }
 }
 
@@ -39,27 +54,46 @@ type PreviewContainer = {
     blogHeader: string,
     blogContent: string,
     summary: string,
-    category:string
+    category: string,
+    type?:string
+
+    
 }
 
 
 
 
 
-export const PreviewContainer = ({closePreview,BannerImg,blogHeader,blogContent,category,summary}:PreviewContainer) => {
+
+
+export const PreviewContainer = ({ closePreview,
+    BannerImg, blogHeader,
+    blogContent, category, summary, type }: PreviewContainer) => {
+    let containerStyle = {
+        ...styles.containerStyle,
+       
+
+
+    }
+    //@ts-ignore
+    if(type === "admin")  containerStyle = {...styles.containerStyle,...styles.adminStyle}
 
   
     
-  console.log("preview",blogContent)
+  
 
     return (
-        <Box   {...styles.containerStyle}>
+        <Box  {...containerStyle}>
         
-            <Flex justifyContent="right" >
+            { <Flex justifyContent="right" >
             <Button  {...styles.closePreviewStyle  as ChakraProps}  onClick={()=>closePreview(false)}> Close Preview </Button>
-            </Flex>
+            </Flex>}
             
-            <Content category={category} summary={summary} BannerImg={BannerImg} blogHeader={blogHeader} blogContent={blogContent}></Content>
+            <Content
+                category={category}
+                summary={summary}
+                BannerImg={BannerImg} blogHeader={blogHeader}
+                blogContent={blogContent}></Content>
           
     </Box>
 )

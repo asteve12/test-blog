@@ -11,6 +11,8 @@ import { ThreeDots } from 'react-loader-spinner';
 import { parseContent } from '@/util/parser';
 import { useLayoutEffect, useState } from 'react';
 import { Featured } from './Featured';
+import { PreviewContainer } from '@/component/admin/Preview/container';
+
 
 
 
@@ -55,16 +57,18 @@ export const ArticleCard = ({
   featuredArticle
 }: ArticleCard) => {
   const [cardContent, setContent] = useState("")
+  const [preview, setPreview] = useState(false)
+  const [currentId,setCurrentId] = useState<number | undefined>()
   const Router = useRouter()
   
   useLayoutEffect(() => {
      setContent(content)
 
-  },[])
+  })
 
-  // let cardContent;
-  // parseContent(content).then((response) => cardContent = response)
-  // if (!cardContent) return;
+  const closePreview = (value:any) => {
+   setPreview((prev)=> value)
+ }
   
 const AdminBlogFooterElements = [
     {
@@ -85,7 +89,10 @@ const AdminBlogFooterElements = [
     {
       name: "Preview",
       icons: RxEyeOpen,
-      onClick:()=> Router.replace(`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/articles/${slug}`)
+      onClick: () => {
+        setPreview((prev) => true);
+        setCurrentId(id)
+ }
     }
   ]
   const timeToRead = estimateArticleReadTime(content);
@@ -107,6 +114,17 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
 <ThreeDots color='white'></ThreeDots>
 </Flex>
   return (
+    <>
+      {isAdmin && currentId === id && preview=== true && < PreviewContainer
+        blogContent={content}
+        BannerImg={`${image}`}
+        blogHeader={title}
+        summary={summary}
+        category={category}
+        closePreview={closePreview}
+        type="admin"
+      />}
+
     <Box position="relative" w={['100%', '100%','95%', '389px']} h={['auto', '542px']} mb={['30px', '0px']} >
       {featuredArticle === "Yes" && <Featured style={{left:"20px"}}></Featured>}
       {isDeleting && itemIdToDelete=== id && loaderCard}
@@ -151,6 +169,7 @@ const loaderCard = <Flex  alignItems="center" justifyContent="center" position="
       {blogCardFooterElem}
       {AdminBlogCardFooterEle}
      
-    </Box>
+      </Box>
+      </>
   );
 };
