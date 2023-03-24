@@ -73,21 +73,25 @@ const community = () => {
       </div>
 
       <Box
+      id="cards-none"
+      className="community-cards-container flex"
         
         display="flex"
-         justifyContent="center" w="100%" >
+         justifyContent="center" w="100%" flexWrap="nowrap" >
         <SimpleGrid columns={[1, 3, 3, 4]}
-          spacing={["0rem", "8rem", "8rem", "10rem"]}
+          spacing={["0rem", "8rem", "20px", "10rem"]}
           justifyContent="center"
           alignItems="center"
-          w="51%"
-          
+          w={["100%","90%","90%","53%"]}
+          ml={["auto",null,null,null]}
+          mr={["auto",null,null,null]}
         >
         
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
           return (
             <Link href={socialLink} key={id} className="community-card">
-              <Flex alignItems="center" justifyContent="center" w="100%" mb="10px"
+              <Flex alignItems="center" justifyContent="center" w="100%"
+                mb="10px"
                 
               >
               

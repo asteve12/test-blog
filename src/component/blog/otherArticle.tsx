@@ -67,7 +67,8 @@ export const OtherArticle = ({
     </Button>
   );
   const displayLoadMoreBtn = useConditionallyRenderElement(loadMoreBtn,showLoadMoreButton) as ReactNode;
-console.log("allArticles",allArticles)
+  console.log("allArticles", allArticles)
+ 
   return (
     <Box mt={["50px",null,null,"100px"]}   w="100%" pl="1%"    >
 
@@ -82,17 +83,27 @@ console.log("allArticles",allArticles)
         
       >
         {t('blog.otherArticle_header')}
-      </Heading>  }
+      </Heading>}
+      
+      {/* @ts-ignore */}
      
-
-        {/*minChildWidth={["100%","100%","389px","389px"]} spacing={["0px","15px","15px","6px"]}*/}
-      <SimpleGrid
-        //spacingX={["2rem"]} columns={[1, 1, 1, 3]}
-        //minChildWidth={["100%", "100%", "389px", "389px"]} 
-      minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
+      { allArticles.length === 2 ? <Flex
+        
+        flexWrap="wrap"
+        justifyContent={["center","left"]}
       >
-              {allArticles}
-      </SimpleGrid>
+        {/* @ts-ignore */}
+        {allArticles.map((eachArticle) => <Box
+          w={["100%", "100%", "100%", '389px']}
+          mr={["0px", "0px", "auto", "20px"]}
+          ml={["0%","0%","5%","0%"]}>{eachArticle}</Box>)}
+        </Flex> :<SimpleGrid
+        
+        minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
+        >
+                {allArticles}
+        </SimpleGrid> }
+      
 
       <div>
     

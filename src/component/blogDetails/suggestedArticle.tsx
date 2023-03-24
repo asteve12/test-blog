@@ -63,10 +63,24 @@ export const SuggestedArticle = ({
       
 
       {/* @ts-ignore */}
-      {otherArticles?.length === 2 ? <SimpleGrid spacingX={"10%"}  columns={3}
-     >
-             {otherArticles}
-           </SimpleGrid> :<SimpleGrid
+      {otherArticles?.length === 2 ? <Flex
+        flexWrap="wrap"
+        justifyContent={["center","left"]}
+      
+        
+        //columns={[2,3]}
+        //minChildWidth={["100%", "100%", "389px", "350px"]}
+        //spacingX={"5% !important"}
+        
+      >   
+        {/* @ts-ignore */}
+        {otherArticles.map((eachItems) => <Box
+          w={["100%", "100%", "100%", '389px']}
+          mr={["0px", "0px", "auto", "20px"]}
+          ml={["0%","0%","5%","0%"]}
+
+        >{eachItems}</Box>)}
+           </Flex> :<SimpleGrid
         minChildWidth={["100%", "100%", "389px", "350px"]} spacingX={"50px !important"}
      >
              {otherArticles}

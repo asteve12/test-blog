@@ -73,14 +73,14 @@ export const BlogDetailContent = ({ title, content, timeToRead,category,summary}
             mb="10px"
             fontFamily="satoshi black"
             fontWeight="900"
-            fontSize={["4rem",'5rem', '6rem']}
+            fontSize={["3.5rem","4rem",'5rem', '6rem']}
           >
             {title}
           </Heading>
           <Text
             mb="35px"
             color="#666481"
-            fontSize={"2rem"}
+            fontSize={"1.8rem"}
           >{summary}</Text>
           <Box
          
