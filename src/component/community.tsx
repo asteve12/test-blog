@@ -63,28 +63,47 @@ const community = () => {
   ];
 
   return (
-    <Box className="community-container"  fontFamily="satoshi" mt="50px"  > 
-      <div className="community-header center">
-        <Heading className="margin-0 community-h"  textAlign="center" fontFamily="satoshi black" fontSize={['3.2rem','4.2rem','5.2rem','7.2rem']}>{t('community.join_community')}</Heading>
-      </div>
+    <Box className="community-container" fontFamily="satoshi" mt="50px"  boxSizing='border-box' > 
+      <Heading
+        //className="margin-0 community-h"
+        textAlign="center"
+       
+        fontFamily="satoshi black"
+        fontSize={['3.2rem', '4.2rem', '5.2rem', '7.2rem']}>{t('community.join_community')}</Heading>
 
-      <div  className="community-text center">
-        <Text  textAlign="center" w={["60%","55%","40%"]}  color="#666481" ml="auto"  mr="auto"  display="block"  fontSize={["1.4rem","1.5rem","1.6rem","1.8rem"]}>{t('community.hype')}</Text>
-      </div>
+      {/* <div className="community-header center">
+      </div> */}
+
+      <Text 
+        ml="auto"
+        mr="auto"
+        mb="30px"
+      textAlign="center"
+        w={["60%", "55%", "40%"]} color="#666481" 
+         display="block" fontSize={["1.4rem", "1.5rem", "1.6rem", "1.8rem"]}>{t('community.hype')}</Text>
+
+
+      {/* <div  className="community-text center">
+      </div> */}
 
       <Box
-      id="cards-none"
-      className="community-cards-container flex"
+        id="cards-none"
+        //className="community-cards-container flex"
         
         display="flex"
-         justifyContent="center" w="100%" flexWrap="nowrap" >
-        <SimpleGrid columns={[1, 3, 3, 4]}
+        justifyContent="center" 
+        w="100%" flexWrap="nowrap"
+      >
+        <SimpleGrid 
           spacing={["0rem", "8rem", "20px", "10rem"]}
-          justifyContent="center"
+         
           alignItems="center"
-          w={["100%","90%","90%","53%"]}
-          ml={["auto",null,null,null]}
-          mr={["auto",null,null,null]}
+          w={["100%", "80%", "80%", "52%"]}
+          minChildWidth={["389px","100px","200px","100px"]}
+          ml="auto"
+          mr="auto"
+         
+          
         >
         
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {

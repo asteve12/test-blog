@@ -37,6 +37,7 @@
 }
 .community-card {
   width: 183px;
+  max-width: 200px;
   min-height: 31.3rem;
   background: #fbfbfd;
   border-radius: 0.8rem;
@@ -44,6 +45,7 @@
   transition: all 500ms ease;
   border: 1px solid transparent;
   cursor: pointer;
+  margin-right:20px ;
 }
 
 /* .community-card:hover {

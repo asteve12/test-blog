@@ -87,7 +87,7 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
                 h={["250px", "320px", "420px", "420px"]} borderRadius="16px" objectFit="cover" maxW="100%" alt="preview" src={BannerImg}></Image>
             <Flex
              w="100%"
-             flexDirection={['column-reverse', 'column-reverse', 'row']}
+             flexDirection={['column-reverse', 'column-reverse','column-reverse' ,'row']}
              alignItems={['start','start', 'start']}
              justifyContent={['start', null]}
              pl={["0px","0px","2%"]}
@@ -97,8 +97,9 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
             >
                 <Stack
                     ml={["30px"]}
-                 position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
-                 spacing="25px" direction={['row', 'row', 'column']}     mr="30px"
+                 position="sticky" top="0px" pl={["0px", "0px", "0%"]} 
+                    spacing="25px" direction={['row', 'row', 'row', 'column']} mr="30px"
+                    pt="30px"
                 >
                     <Text color="#666481" fontWeight="700"  fontSize="20px">
                         Share
