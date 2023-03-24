@@ -59,10 +59,11 @@ console.log("contHeight",props.containerHeight)
 
   return (
     <Box display="block" w="100px" position="relative"
+    
    
     // @ts-ignore
       h={["auto", "auto",props.containerHeight && parseInt(props.containerHeight)]}
-       mt={["30px", "30px", "30px", "0px"]}>
+       mt={["30px", "30px", "0px", "0px"]}>
        <Stack  position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
       spacing="25px" direction={['row', 'row', 'column']}     mr="30px">
       
