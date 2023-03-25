@@ -99,7 +99,7 @@ const community = () => {
          
           alignItems="center"
           w={["100%", "80%", "80%", "52%"]}
-          minChildWidth={["389px","100px","200px","100px"]}
+          minChildWidth={["389px","100px","160px","100px"]}
           ml="auto"
           mr="auto"
          
