@@ -83,8 +83,7 @@ const CustomToolBar = () => {
   return <div id="toolbar">
     
     <select className='ql-size'/>
-    {/* <select className="ql-align" /> */}
-    {/* <button className='ql-underline' /> */}
+   
     <button className='ql-image' />
     <button className='ql-video' /> 
 
@@ -94,6 +93,7 @@ const CustomToolBar = () => {
       <option value="2" />
       <option value="3" />
       <option value="4" />
+      <option value=""></option>
       
     </select>
     {/* <button className='ql-heading' />  */}
@@ -116,43 +116,43 @@ const CustomToolBar = () => {
 
 
 
-function custombold() {
-  //@ts-ignore
+function custombold(this:any) {
+  
   const format = this.quill.getFormat();
-  //@ts-ignore
+  
   const selectionRange = this.quill.getSelection();
    const isBold = format['bold'];
-  //@ts-ignore
+
   this.quill.formatText(selectionRange?.index, selectionRange.length,{'bold': !isBold}); 
 
   
 }
 
 
-function customItalic() {
+function customItalic(this:any) {
 
-    //@ts-ignore
+  
   const format = this.quill.getFormat();
   
    const isItalic = format["italic"]  // check for default or custom italic format
-  //@ts-ignore
+  
   const selectionRange = this.quill.getSelection();
-  //@ts-ignore
+  
   isItalic === true ? this.quill.formatText(selectionRange?.index, selectionRange.length, 'italic', false) :this.quill.formatText(selectionRange?.index, selectionRange.length, 'italic', true)
   
   
 } 
 
 
-function customUnderline() {
+function customUnderline(this:any) {
 
-   //@ts-ignore
+   
    const format = this.quill.getFormat();
   
-   const isUnderline = format["underline"]  // check for default or custom italic format
-  //@ts-ignore
+   const isUnderline = format["underline"]  
+  
   const selectionRange = this.quill.getSelection();
-  //@ts-ignore
+  
   isUnderline === true ? this.quill.formatText(selectionRange.index, selectionRange.length, "underline", false) :this.quill.formatText(selectionRange.index, selectionRange.length, "underline", true)
 
   
@@ -247,7 +247,7 @@ export const TextEditor = (props: TextEditor) => {
   }
 
 
-  async function imageHandler() { 
+  async function imageHandler(this:any) { 
     
     setUploading(true)
     props.uploading.current = "UPLOADING"
@@ -260,10 +260,10 @@ export const TextEditor = (props: TextEditor) => {
   
     input.onchange = async () => {  
 
-       //@ts-ignore
+       
     var currentPosition = this.quill?.getSelection()?.index;
 
-    //@ts-ignore
+    
     this.quill.insertText(currentPosition, 'Uploading....', 'bold', true);
       //@ts-ignore
       var file: any = input.files[0];  
@@ -277,10 +277,10 @@ export const TextEditor = (props: TextEditor) => {
       const res = await uploadFiles(file, quillRef.current); 
       //@ts-ignore
       if (res) { 
-        //@ts-ignore
+        
         const currentPosition = this.quill.getSelection()?.index;
         props.uploading.current = "SUCCESS";
-         //@ts-ignore  
+        
          this.quill?.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
         setUploading(false)
       
@@ -288,10 +288,10 @@ export const TextEditor = (props: TextEditor) => {
        
       }
       else {
-          //@ts-ignore
+         
         const currentPosition = this.quill.getSelection()?.index;
         props.uploading.current = "SUCCESS"
-         //@ts-ignore  
+         
          this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length)
         setUploading(false)
       
@@ -303,7 +303,7 @@ export const TextEditor = (props: TextEditor) => {
   }  
 
 
-  async function videoHandler() { 
+  async function videoHandler(this:any) { 
     
     
     setUploadingVideo(true)
@@ -320,7 +320,7 @@ export const TextEditor = (props: TextEditor) => {
        //@ts-ignore
     var currentPosition = quillRef.current?.getEditorSelection()?.index;
 
-    //@ts-ignore
+    
     this.quill.insertText(currentPosition, 'Uploading....', 'bold', true);
       //@ts-ignore
       var file: any = input.files[0];  
@@ -338,14 +338,14 @@ export const TextEditor = (props: TextEditor) => {
         setUploadingVideo(false)
         //@ts-ignore
         const currentPosition = quillRef.current.getEditorSelection()?.index;
-      //@ts-ignore  
-        this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
+     
+    this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length);
        
       }
       else {
-  //@ts-ignore
+  
   const currentPosition = this.quill.getSelection()?.index;
-  //@ts-ignore  
+  
     this.quill.deleteText(currentPosition - 'Uploading....'.length, 'Uploading....'.length)
      setUploadingVideo(false)
 
@@ -379,21 +379,15 @@ export const TextEditor = (props: TextEditor) => {
   }),[]);
 
   const formats = [
-    
     "size",
     "bold",
     "italic",
     "underline",
-    "strike",
-    "blockquote",
-    "list",
-    "bullet",
-    "indent",
-    "link",
     "image",
-    "color",
     "video",
     "header",
+   
+    
     
    
   ];
@@ -422,144 +416,4 @@ export const TextEditor = (props: TextEditor) => {
   
   
 }
-
-// import React,{ useMemo, useRef, useState } from 'react';
-// import dynamic from "next/dynamic";
-// import { CustomToolBar } from './customToolBar';
-// import 'react-quill/dist/quill.snow.css';
-
-// //types
-// import { uploadImageHandlerType } from "../../../hooks/useBlogFormLogic"
-// import { Box,Text,Modal, ChakraProps} from '@chakra-ui/react';
-// import { api } from '@/axios';
-// import { BooleanLiteral } from 'typescript';
-// //utils
-// import { validDateFileSize } from '@/utils/textEditor';
-// import { useTextEditorLogic } from '@/hooks/textEditorLogic';
-
-
-
-// const ReactQuill = dynamic(
-//   async () => {
-//     const { default: RQ } = await import("react-quill");
-
-//     return ({ forwardedRef, ...props }:any) => <RQ ref={forwardedRef} {...props} />;
-//   },
-//   {
-//     ssr: false
-//   }
-// );
-
-
-
-// const styles = {
-//   editorWrapperStyles: {
-//     position:"relative",
-    
-
-//   },
-//   editorInnerWrapper: {
-//     h:"300px",
-//     minHeight:"100%",
-//   overflowY:"auto",
-//    marginTop:"0px"
-    
-//   },
-//   editorContainerStyle: {
-//     minHeight:"100%",
-//     h: ""
-//   },
-//   editorStyle: {
-//     height: "100%",
-//     paddingTop:"5rem"
-    
-    
-//   }
-// }
-
-
-
-
-
-
- 
-// type TextEditor = {
-//     value: string,
-//     onChange: (value: string) => void,
-//     uploadImageHandler:(imageToUpload:File)=>  Promise<any>
-// }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// export const TextEditor = (props: TextEditor) => {
-//   const quillRef = useRef();
-//   const { modules,uploading } =useTextEditorLogic({...props,quillObj:quillRef.current})
-
-  
-
- 
-
-  
-  
- 
-
- 
-  
-
-//   const formats = [
-    
-//     "size",
-//     "bold",
-//     "italic",
-//     "underline",
-//     "strike",
-//     "blockquote",
-//     "list",
-//     "bullet",
-//     "indent",
-//     "link",
-//     "image",
-//     "color",
-//     "video",
-//     "header",
-    
-   
-//   ];
-
-//   return <Box  {...styles.editorWrapperStyles as ChakraProps}>
-//   <Box id="editorcontainer"  {...styles.editorInnerWrapper as ChakraProps}   >
-//       <Box   {...styles.editorInnerWrapper as ChakraProps}  >
-        
-            
-//      <CustomToolBar></CustomToolBar>
-//      <ReactQuill
-//        value={props.value}
-//        theme="snow"
-//       formats={formats}
-//      modules={modules}
-//           onChange={props.onChange}
-//           readOnly={uploading === true  ? true :false}
-//        placeholder="Content goes here..."
-//           forwardedRef={quillRef}
-//           style={{ ...styles.editorStyle }}
-          
-//     />
-//      </Box>
-//   </Box>
-// </Box>
-  
-  
-// }
 

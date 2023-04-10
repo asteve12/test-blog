@@ -117,7 +117,7 @@ export const useRenderAdminArticle = (...args:Array<any | void []>) => {
           estimateArticleReadTime={estimateArticleReadTime}
           title={eachArticle?.attributes?.title}
           content={eachArticle?.attributes?.content}
-          image={eachArticle?.attributes?.image}
+          image={eachArticle?.attributes?.thumbNail}
           authorName={eachArticle?.attributes?.author}
           authorImage={eachArticle?.attributes?.authorImage}
           type="admin"

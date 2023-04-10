@@ -58,6 +58,17 @@ type IimageId = {
     [key:string]:string
 }
 
+type currentValue = {
+    title: string,
+    image:  string,
+    blogContent: string,
+    category:string,
+    summary: string ,
+    featured: string,
+    thumbNail: string
+
+}
+
 
 
 export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
@@ -65,11 +76,14 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [articleslug, setSlug] = useState<string>("");
     const [currentLanguage,setCurrentLanguage] = useState(languageOPtions[0])
     const [isImageUploading, setIsUploading] = useState(false);
+    const [isUploadingThumbNail,setIsUploadingThumbNail] = useState(false)
     const [isAddingBlog,setIsAddingBlog]  = useState(false)
     //const [imageId, setImageId] = useState<IimageId>({[currentLanguage]:""})
-    const imageId = useRef({[currentLanguage]:""});
+    const imageId = useRef({ [currentLanguage]: "" });
+    const thumbNailId = useRef({[currentLanguage]:""});
     const formContainer = useRef<HTMLFormElement>(null)
     const ref = useRef<null | HTMLInputElement>(null)
+    const thumbNailRef = useRef<null | HTMLInputElement>(null)
     const [isDataAvailable,setIsDataAvailable] = useState<boolean>()
     const [unfilledLanguageVersion, setUnfilledLangVersion] = useState<string[]>()
     const [currentId, setCurrentId] = useState<number>()
@@ -79,7 +93,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     //const [draftArticleId, setDraftArticleId] = useState<number | null| undefined>()
     const draftArticleId = useRef<string | null>()
     //let [saveDraftCallCount, setSaveDraftCallCount] = useState(0)
-     const saveDraftCallCount = useRef(0)
+    const saveDraftCallCount = useRef(0)
+   
     
     const [endDraft, setEndDraft] = useState<null | boolean>(null)
     const [isDraftRenderSuccess, setIsDraftRenderSucces] = useState(false)
@@ -89,14 +104,22 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const trackDraft =  useRef(false)
     //const [currentFieldValue, setCurrentField] = useState({})
     
-    const currentFieldValue  = useRef({})
+    const currentFieldValue = useRef({
+        title: "",
+        image: "",
+        blogContent: "",
+        category: "",
+        summary: "",
+        featured: "",
+        thumbNail:""
+    })
     const [category, setAllCategory] = useState<any[]>([])
      const publish = useRef(false)
     const refDraftId = useRef<null>()
     const stopFurtherDraftSave = useRef(false)
     const Router = useRouter()
     const { id, edit, draft } = Router.query
-    const draftData = useRef({});
+    const draftData = useRef<currentValue | undefined >();
      useLeavePageConfirm(Boolean(edit) === true && convertEditToDraft  === true && draftArticleId.current as undefined)
     const madeUpdate = useRef(false)
    const uploading = useRef<"UPLOADING" | "SUCCESS" | "ERROR">()
@@ -111,6 +134,11 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
        
       }))
 
+      const [springsThumb, springThumbApi] = useSpring(() => ({
+        opacity: 0,
+        
+       }))
+
     
    
      
@@ -123,7 +151,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 blogContent: "",
                 category: "",
                 summary: "",
-                featured:""
+                featured: "",
+                thumbNail:""
             },
             FRENCH: {
                 title: "",
@@ -131,7 +160,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                 blogContent: "",
                 category: "",
                 summary: "",
-                featured:""
+                featured: "",
+                thumbNail:""
                 
             }
             
@@ -296,7 +326,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     async function unLoadHandler(event: BeforeUnloadEvent) {
        const isEligibleForDraft =  madeUpdate.current === true || refDraftId.current ? true :false
        
-         if (edit && convertEditToDraft === true && !publish.current && isEligibleForDraft && !deleteDraftStatus) {
+         if (edit && convertEditToDraft === true && !publish.current && isEligibleForDraft && deleteDraftStatus) {
             console.log("refDraftId",refDraftId)
             stopFurtherDraftSave.current = true
              alert("saving article as draft")
@@ -304,31 +334,21 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
              draftArticleId.current = undefined;
              if(id) await deleteArticle(id!.toString())
            
-             console.log("madeUpdate.current",madeUpdate.current,draftArticleId,{ ...formikObject.values[currentLanguage] })
-             if (madeUpdate.current === true && !refDraftId.current) { 
-                 const currentValues = draftData.current
+             if (madeUpdate.current === true && !refDraftId.current) {
+                 const currentValues: currentValue | undefined = draftData.current
                  
                  const data_for_upload = JSON.stringify({
                      data: {
-                    //@ts-ignore
-                         title: currentValues?.title || "Untitled",
-                         //@ts-ignore
-                         description: currentValues?.title,
-                    //@ts-ignore
-                         content: currentValues?.blogContent, 
-                    //@ts-ignore
-                         image: currentValues?.image,
-                    //@ts-ignore
-                         featured: currentValues?.featured,
-                    //@ts-ignore
-                         slug: articleslug,
-                    //@ts-ignore
-                         category: currentValues?.category,
-                    //@ts-ignore
-                         summary: currentValues?.summary,
-                    //@ts-ignore
-                         authorImage: props?.profilePics,
-                    
+                      title: currentValues?.title || "Untitled",
+                    description: currentValues?.title,
+                    content: currentValues?.blogContent, 
+                    image: currentValues?.image,
+                    featured: currentValues?.featured,
+                    slug: articleslug,
+                    category: currentValues?.category,
+                    summary: currentValues?.summary,
+                    authorImage: props?.profilePics,
+                    thumbNail:currentValues?.thumbNail,
                     author: props?.name ,
                     publishedAt:new Date().toISOString() ,
                     locale: languageObject[currentLanguage] ,
@@ -342,7 +362,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                   })
                 
                  
-                 //const response = await deleteArticle(id!.toString())
+              
 
                  
                 
@@ -448,7 +468,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 
         console.log("checkForm",saveDraftCallCount.current,!draftArticleId.current)
     
-        if (fieldName === "image" || "title" || "category" || "summary" || "blogContent" || "featured") {
+        if (fieldName === "image" || "title" || "category" || "summary" || "blogContent" || "featured"  || "thumbNail") {
             if (saveDraftCallCount.current === 1 && !draftArticleId.current) return;
            
             console.log("values,")
@@ -462,18 +482,19 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             
         }
 
-        if (fieldName !== "image") currentFieldValue.current = fieldValue; 
+        if (fieldName !== "image") currentFieldValue.current = fieldValue  as currentValue ; 
         if (fieldName === "image") {
+            const isThumbNailIMageAdded = formikObject.values[currentLanguage]["thumbNail"]
             
             const fieldValue = { ...currentFieldValue.current, [fieldName]: enteredValue }
-            draftData.current = fieldValue;
+            draftData.current = fieldValue as currentValue;
             formikObject.setFieldValue(currentLanguage, fieldValue)
 
             return;
             
             
         }
-        draftData.current = fieldValue;
+        draftData.current = fieldValue  as currentValue ;
         formikObject.setFieldValue(currentLanguage, fieldValue)
       
         
@@ -488,7 +509,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         const { id, draft, edit } = Router.query
         try {
 
-          console.log("checkStopper",endDraft,edit,currentId,draft,draftArticleId.current,stopFurtherDraftSave.current)
+         
         if (endDraft === true) return
         if (edit && !currentId) return;
         if (draft && !draftArticleId.current) return;
@@ -497,7 +518,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             setSaveAsDraft(true)
             trackDraft.current = true
 
-        console.log("dogo123",currentValues,!currentValues?.title)
+  
         
        
         const data_for_upload = JSON.stringify( {data:{
@@ -511,7 +532,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             summary:currentValues?.summary,
             authorImage: props?.profilePics ,
             author: props?.name ,
-            publishedAt:new Date().toISOString() ,
+            publishedAt: new Date().toISOString(),
+            thumbNail:currentValues?.thumbNail,
             locale: languageObject[currentLanguage] ,
            
         }}
@@ -534,7 +556,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     summary:currentValues?.summary,
                     authorImage: props?.profilePics,
                     author: props?.name,
-                    featured:currentValues?.featured,
+                    featured: currentValues?.featured,
+                    thumbNail:currentValues?.thumbNail,
                     locale:languageObject[currentLanguage]
                    
                 }
@@ -728,6 +751,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     slug: slug(currentValues?.title),
                     authorImage: props?.profilePics,
                     author: props?.name,
+                    thumbNail:currentValues?.thumbNail,
                     locale: languageObject[currentLanguage],
                     featured:currentValues?.featured
             }
@@ -785,6 +809,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                         slug:articleslug,
                         authorImage: props?.profilePics,
                     author: props?.name,
+                    thumbNail:currentValues?.thumbNail,
                     featured:currentValues?.featured,
                     locale: languageObject[currentLanguage],
                     publishedAt:new Date().toISOString(),
@@ -821,6 +846,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                         summary:currentValues?.summary,
                         authorImage: props?.profilePics,
                         author: props?.name,
+                        thumbNail:currentValues?.thumbNail,
                         featured:currentValues?.featured,
                         locale:languageObject[currentLanguage]
                        
@@ -895,6 +921,14 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         
     } 
 
+     //open file to upload thumbbail
+     const changeThumbHandlerBtn = (e: React.MouseEvent) => {
+        const currentInputELement = thumbNailRef.current;
+       currentInputELement?.click();
+
+       
+   } 
+
     //upload image to strapi backend
     const uploadImageToCloudinary = async (fileToUpload: File) => {
         
@@ -950,6 +984,89 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             ref.current.value = ""
         }
     }
+
+
+       //update thumNail data
+       const addThumbNailData = (responseObject:any) => {
+        const { data } = responseObject;
+        console.log("data",data)
+        const id = data.id;
+        const ImagePath = data.url 
+        const formObj = {
+            target: {
+                name: "thumbNail",
+                value:`${ImagePath}`
+            }
+        }
+        updateFormikFields(formObj);
+        thumbNailId.current =  {...thumbNailId.current,[currentLanguage]:id}
+       if (thumbNailRef.current) {
+            thumbNailRef.current.value = ""
+        }
+    }
+
+
+
+      //handle upload thumnNail image;
+      const uploadSelectedThumbNail = async (e: React.ChangeEvent) => {
+      
+        const selectedImage = e.target   as HTMLInputElement;
+        const fileList = selectedImage?.files as FileList;
+        const ifFileSizeIsNotAllowed = !validDateFileSize(fileList[0]);
+
+         
+        if (ifFileSizeIsNotAllowed) return alert("file size is too large")
+           
+        setIsUploadingThumbNail(true)
+        try {
+          
+            const uniqueImageId = thumbNailId?.current[currentLanguage];
+            
+
+            if (uniqueImageId) {
+                console.log("current1245",imageId.current)
+                //await deleteImage(uniqueImageId)
+                const image_url = formikObject.values[currentLanguage]["thumbNail"]
+
+                await handleDeleteImage(image_url)
+                const upload_response = await uploadImageToCloudinary(fileList[0]);
+                if (upload_response.status === 200) {
+                    addThumbNailData(upload_response)
+                    setIsUploadingThumbNail(false)
+                    
+                }
+               
+                
+               
+            }
+            else {
+                const upload_response = await uploadImageToCloudinary(fileList[0]);
+                if (upload_response.status === 200) { 
+                    addThumbNailData(upload_response)
+                    setIsUploadingThumbNail(false)
+                }
+                
+               
+                
+                
+            }
+          }
+        catch (errorMessage) {
+            setIsUploadingThumbNail(false)
+            console.log("upload_failure", errorMessage)
+            alert("upload  fail")
+            
+        }
+
+
+
+       
+       
+    
+
+
+    }
+
 
     //handle uploaded image;
     const uploadSelectedImage = async (e: React.ChangeEvent) => {
@@ -1048,15 +1165,22 @@ const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSucce
         }
     //mouse enter and mouse leave animation
     const BannerImageMouseEnterAndExitHandler = (e: React.MouseEvent, type: string) => {
-       
         const isEventMouseOver = type === "Over"
         const isEventMouseLeave = type === "leave"
         if (isEventMouseOver) return springApi.start({  opacity: 8  })
         else if(isEventMouseLeave)  return  springApi.start({  opacity: 0 })
         
+}
 
-    
-    }
+      //mouse enter and mouse leave animation
+      const ThumbNailImageMouseEnterAndExitHandler = (e: React.MouseEvent, type: string) => {
+        const isEventMouseOver = type === "Over"
+        const isEventMouseLeave = type === "leave"
+        if (isEventMouseOver) return springThumbApi.start({  opacity: 8  })
+        else if(isEventMouseLeave)  return  springThumbApi.start({  opacity: 0 })
+        
+}
+
 
 
 
@@ -1092,10 +1216,14 @@ const uploadTextEditorImages:uploadImageHandlerType = async (image:File, onSucce
         springs,
         category,
         onCategoryChange,
-        uploading
-       
+        uploading,
+        springsThumb,
+        ThumbNailImageMouseEnterAndExitHandler,
+        changeThumbHandlerBtn,
+        thumbNailRef,
+        uploadSelectedThumbNail,
+        isUploadingThumbNail
         
-    
     }
 
 

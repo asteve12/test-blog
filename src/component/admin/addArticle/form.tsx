@@ -20,7 +20,6 @@ import { ImageUploadOverlay } from "./imageUploadOverlay"
 
 
 
-
 type IBlogForm = {
     profilePics: string,
     name: string,
@@ -40,6 +39,16 @@ const styles = {
     headerTextStyle: {
         fontSize:"27px", 
         mt: "50px",
+        fontWeight: "700",
+        fontFamily: "satoshi bold",
+        color: "#2D2B4A",
+        zIndex:"-100"
+    
+        
+    },
+    thumbHeaderTextStyle: {
+        fontSize:"27px", 
+        mt: "10px",
         fontWeight: "700",
         fontFamily: "satoshi bold",
         color: "#2D2B4A",
@@ -79,6 +88,15 @@ const styles = {
         w:"796px", 
         mt:"20px", 
         h:"320px",
+        maxW:"100%",
+        position: "relative",
+        cursor:"pointer"
+        
+    },
+    thumbNailContStyle: {
+        w:"343px", 
+        mt:"20px", 
+        h:"280px",
         maxW:"100%",
         position: "relative",
         cursor:"pointer"
@@ -132,16 +150,25 @@ export const BlogForm = (props: IBlogForm) => {
         springs,
         category,
         onCategoryChange,
-          uploading
+        uploading,
+        springsThumb,
+        ThumbNailImageMouseEnterAndExitHandler,
+        changeThumbHandlerBtn,
+        thumbNailRef,
+        uploadSelectedThumbNail,
+        isUploadingThumbNail
      } = useBlogFormLogic(props)
+
+    console.log("yam",formikObject?.values)
 
      const allAvailableCategory = <Dropdown value={formikObject?.values[`${currentLanguage}`]["category"]  ? formikObject?.values[`${currentLanguage}`]["category"]  :""} options={category}  onChange={onCategoryChange} />
     
 
-const isImageAvailable = formikObject?.values[`${currentLanguage}`]["image"]!== ""
+            const isImageAvailable = formikObject?.values[`${currentLanguage}`]["image"] !== ""
+            const isthumbNailAvailable = formikObject?.values[`${currentLanguage}`]["thumbNail"] !== ""
 
 
-const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator" >
+        const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator" >
     <Button
         isDisabled={isAddingBlog && !saveAsDraft || saveAsDraft && !isAddingBlog ? true : false}
         data-formName="unfilled" type="submit" mt="10px" fontSize="16px" colorScheme="none" w="173px" border="solid 1px #EA445A" h="56px" bg="#EA445A" borderRadius="200px" >
@@ -162,25 +189,50 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
     const imageElement = <Box
         onMouseLeave={(e)=> BannerImageMouseEnterAndExitHandler(e,"leave")}
         onMouseOver={(e)=> BannerImageMouseEnterAndExitHandler(e,"Over")}
-        {...styles.BannerContStyle as ChakraProps}>
-        <ImageUploadOverlay   uploadStatus={isImageUploading}  changeImageHandlerBtn={changeImageHandlerBtn} spring={springs}/>
+        {...styles.BannerContStyle as ChakraProps}
+    >
+        <ImageUploadOverlay uploadStatus={isImageUploading}
+            changeImageHandlerBtn={changeImageHandlerBtn}
+            spring={springs} />
         <Image {...styles.BannerImageStyle as ImageProps} alt="upload image" src={formikObject?.values[`${currentLanguage}`]["image"]} />
     </Box> 
+
+    
+        const thumbNail = <Box
+        onMouseLeave={(e)=> ThumbNailImageMouseEnterAndExitHandler(e,"leave")}
+        onMouseOver={(e)=> ThumbNailImageMouseEnterAndExitHandler(e,"Over")}
+            {...styles.thumbNailContStyle as ChakraProps}
+        >
+            <ImageUploadOverlay
+                uploadStatus={isUploadingThumbNail}
+                changeImageHandlerBtn={changeThumbHandlerBtn}
+                spring={springsThumb}
+            />
+            <Image
+                {...styles.BannerImageStyle as ImageProps}
+                alt="upload thumbNail image"
+                src={formikObject?.values[`${currentLanguage}`]["thumbNail"]} />
+            </Box> 
     
     const changeImageBtn = <Button name="image" onClick={changeImageHandlerBtn} mb="15px" colorScheme="none" fontSize="16px" pt="20px" pb="20px" pl="20px" pr="20px" borderRadius="30px" color="#EA445A" border="solid 1px #EA445A" variant='outline' mt="20px">{formikObject?.values[`${currentLanguage}`]["image"] ? "Change Image":"Upload Image"}</Button>
     const loader = <ThreeDots color="#EA445A"></ThreeDots>
+    const changeThumbNailsBtn = <Button name="thumbNail" onClick={changeThumbHandlerBtn} mb="15px" colorScheme="none" fontSize="16px" pt="20px" pb="20px" pl="20px" pr="20px" borderRadius="30px" color="#EA445A" border="solid 1px #EA445A" variant='outline' mt="20px">{formikObject?.values[`${currentLanguage}`]["thumbNail"] ? "Change thumbNail":"thumbNail"}</Button>
+
 
     const elmentToRender = useConditionallyRenderElement(changeImageBtn,!isImageUploading,loader,isImageUploading && !isImageAvailable) as React.ReactNode
-    
+    const renderThumbNailImage = useConditionallyRenderElement(changeThumbNailsBtn,!isUploadingThumbNail,loader,isUploadingThumbNail && !isthumbNailAvailable) as React.ReactNode
     const renderImageElemetConditionally = useConditionallyRenderElement(imageElement, formikObject?.values[`${currentLanguage}`]["image"] !== "") as React.ReactNode
-    
+    const renderthumbNailConditionally = useConditionallyRenderElement(thumbNail, formikObject?.values[`${currentLanguage}`]["thumbNail"] !== "" ) as React.ReactNode
+
+console.log("currentthumbNailValue",formikObject?.values[`${currentLanguage}`]["thumbNail"])
+
     const renderPreviewComponentWithCondition = useConditionallyRenderElement(<Box {...styles.previewstyle as ChakraProps} ><PreviewContainer blogContent={parsedBlogContentValue} BannerImg={formikObject?.values[`${currentLanguage}`]["image"]} blogHeader={formikObject?.values[`${currentLanguage}`]["title"]}
-  summary={formikObject?.values[`${currentLanguage}`]["summary"]}
+    summary={formikObject?.values[`${currentLanguage}`]["summary"]}
         category={formikObject?.values[`${currentLanguage}`]["category"]}
         closePreview={setPreview}></PreviewContainer></Box>, preview) as React.ReactNode
     
     const renderHeaderTextWithCondition = useConditionallyRenderElement(<Heading  {...styles.headerTextStyle}>Banner Image</Heading>, !preview) as React.ReactNode
-   
+    const renderThumbNailHeaderTextWithCondition = useConditionallyRenderElement(<Heading  {...styles.thumbHeaderTextStyle}>Thumbnail</Heading>, !preview) as React.ReactNode
     
     
     return <form
@@ -204,6 +256,21 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
           
         </div>
 
+
+        
+        {renderThumbNailHeaderTextWithCondition}
+
+        <div data-formName="thumbNail"  >
+            {renderthumbNailConditionally}
+        </div>
+
+        <div>
+            { !isthumbNailAvailable || isUploadingThumbNail ? renderThumbNailImage:""}
+        </div>
+        <div>
+            {!isthumbNailAvailable} {isUploadingThumbNail}
+       </div>
+
         <Flex  alignItems="center" fontSize="12px" mt="10px" mb="10px">
             Language : <Dropdown
                 options={languageOPtions}
@@ -214,7 +281,8 @@ const uploadBlogBtn = <Flex alignItems="center"  data-formName="error-indicator"
         <Box  w={["100%","100%","796px"]}>
 
         <Input fontSize="15px"  w="100%"  ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
-        <FormLabel fontSize="15px">Title</FormLabel>
+        <Input fontSize="15px"  w="100%"  ref={thumbNailRef} onChange={uploadSelectedThumbNail} type="file" visibility="hidden"></Input>
+            <FormLabel fontSize="15px">Title</FormLabel>
             <Input
                 h="40px"
                 fontSize="15px"

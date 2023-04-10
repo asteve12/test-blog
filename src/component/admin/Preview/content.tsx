@@ -81,10 +81,37 @@ export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }:
 
 
     return (
-        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  minH="100vh">
-            <Image
-                //w="1216px"
-                h={["250px", "320px", "420px", "420px"]} borderRadius="16px" objectFit="cover" maxW="100%" alt="preview" src={BannerImg}></Image>
+        <Box w="100%"
+            pt="1%" pl="5%" pr="5%"
+            bg="#fbfbfd" minH="100vh">
+            <Box
+                w="100%"
+                paddingTop="40%"
+                position="relative"
+            
+                boxSizing="border-box"
+                
+                
+            >
+
+                <Image
+                    position="absolute"
+                    top="0" 
+                    bottom= "0"
+                    left= "0"
+                    right ="0"
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    borderRadius="10px"
+              //h={["250px", "320px", "420px", "100%"]}
+                //paddingBottom="66.7%"
+                //borderRadius="16px" objectFit="cover"
+                    //maxW="100%"
+                    alt="preview"
+                src={BannerImg}></Image>
+            </Box>
+           
             <Flex
              w="100%"
              flexDirection={['column-reverse', 'column-reverse','column-reverse' ,'row']}
