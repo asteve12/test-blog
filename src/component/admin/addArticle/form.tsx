@@ -159,7 +159,7 @@ export const BlogForm = (props: IBlogForm) => {
         isUploadingThumbNail
      } = useBlogFormLogic(props)
 
-    console.log("yam",formikObject?.values)
+    console.log("currentLanguage",currentLanguage)
 
      const allAvailableCategory = <Dropdown value={formikObject?.values[`${currentLanguage}`]["category"]  ? formikObject?.values[`${currentLanguage}`]["category"]  :""} options={category}  onChange={onCategoryChange} />
     
@@ -224,7 +224,7 @@ export const BlogForm = (props: IBlogForm) => {
     const renderImageElemetConditionally = useConditionallyRenderElement(imageElement, formikObject?.values[`${currentLanguage}`]["image"] !== "") as React.ReactNode
     const renderthumbNailConditionally = useConditionallyRenderElement(thumbNail, formikObject?.values[`${currentLanguage}`]["thumbNail"] !== "" ) as React.ReactNode
 
-console.log("currentthumbNailValue",formikObject?.values[`${currentLanguage}`]["thumbNail"])
+
 
     const renderPreviewComponentWithCondition = useConditionallyRenderElement(<Box {...styles.previewstyle as ChakraProps} ><PreviewContainer blogContent={parsedBlogContentValue} BannerImg={formikObject?.values[`${currentLanguage}`]["image"]} blogHeader={formikObject?.values[`${currentLanguage}`]["title"]}
     summary={formikObject?.values[`${currentLanguage}`]["summary"]}
