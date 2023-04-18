@@ -35,7 +35,7 @@ export const useAdminLogic = () => {
            
     //         api.get(`/api/articles?filters[slug][$ne]=${params?.slug}&populate=*&locale=${locale}`)
     //       ]);
-        api.delete(`/api/articles/${articleId}/?locale=all`)
+        api.delete(`/api/articles/${articleId}`)
             .then((response) => {
                 console.log("asteve12",response)
                

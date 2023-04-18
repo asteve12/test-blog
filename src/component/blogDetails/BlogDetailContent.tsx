@@ -1,15 +1,41 @@
-import { Box, Flex, Heading, HStack, Image, Text } from '@chakra-ui/react';
+import { Box, Flex, Heading, HStack, Text} from '@chakra-ui/react';
+import React, { useLayoutEffect, useRef,useState } from 'react';
 import { BlogTitle } from '../../shared/blogTitlteCard';
 import { TimerCard } from '../../shared/TimeCard';
 import { Socials } from './socials';
+
 
 type IBlogDetailContent = {
   title: string;
   content: string;
   timeToRead: number | void;
+  category: string,
+  summary:string
 };
 
-export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailContent) => {
+const styles = {
+  socialContainerStyle: {
+    
+  }
+}
+
+export const BlogDetailContent = ({ title, content, timeToRead,category,summary}: IBlogDetailContent) => {
+  const currentRef = useRef<HTMLDivElement>(null)
+  const [height,setHeight] = useState<string>()
+
+
+  useLayoutEffect(() => {
+    if (currentRef.current) {
+      const contentContStyle = window.getComputedStyle(currentRef.current)
+      setHeight(contentContStyle.getPropertyValue("height"))
+ 
+      
+    } 
+  })
+  
+
+ 
+
   return (
     <Flex
       w="100%"
@@ -18,15 +44,25 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
       justifyContent={['start', null]}
       pl={["0px","0px","2%"]}
       pt="30px"
+      position="relative"
+      h="auto"
+      
+      
       
     >
-      <Socials></Socials>
-      <Box ml={["0px", "0px", "0px", "20px"]}
-        
+     <Socials containerHeight={height}></Socials>
+     
+
+      <Box 
+        mb={["50px", "30px", "0px", "0px"]}
+        ml={["0px", "0px", "0px", "20px"]}
         pl={['0px', '0px', '0px', '0px']}
-        w={['100%', '100%', '80%']}>
+        w={['100%', '100%', '80%']}
+        ref={currentRef}
+        
+      >
         <HStack  gap={10} display={["none",'flex']} flexDirection={['row', 'row', 'row']} justifyContent={["space-between","start",null,null]}>
-          <BlogTitle title={title}></BlogTitle>
+          <BlogTitle title={category}></BlogTitle>
           <TimerCard timetoRead={timeToRead}></TimerCard>
         </HStack>
         <Box width="100%" mt="18px">
@@ -35,20 +71,27 @@ export const BlogDetailContent = ({ title, content, timeToRead }: IBlogDetailCon
             textAlign={'left'}
             mt="0px"
             mb="10px"
-            fontFamily="satoshi bold"
+            fontFamily="satoshi black"
             fontWeight="900"
-            fontSize={['24px', '44px']}
+            fontSize={["3.5rem","4rem",'5rem', '6rem']}
           >
             {title}
           </Heading>
+          <Text
+            mb="35px"
+            color="#666481"
+            fontSize={"1.8rem"}
+          >{summary}</Text>
           <Box
+         
+          
             maxW={["100%","100%","90%"]}
             fontWeight="400"
             fontFamily="satoshi"
-            className="blog"
+            className="blogContainer"
             color="#666481"
             fontSize="18px"
-            textAlign={['center', 'center', 'left']}
+            //textAlign={[ 'left']}
             dangerouslySetInnerHTML={{ __html: content }}
           />
         </Box>

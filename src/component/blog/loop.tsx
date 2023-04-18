@@ -1,19 +1,53 @@
-import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chakra-ui/react';
-import { useTranslation } from 'react-i18next';
 
-export const Loop = () => {
+import { useConditionallyRenderElement } from '@/hooks/useConditionallyRenderedElement';
+import { JoinWaitlist } from '@/shared/joinWaitlist';
+import { Box, Button, Flex, FormControl, Img, Input, Text, Heading } from '@chakra-ui/react';
+import React, { ReactNode } from 'react';
+import { useTranslation } from 'react-i18next';
+import { WaitlistModal } from '../waitlistModal';
+
+
+
+
+
+type ILoop = {
+  onChange: (e: React.ChangeEvent) => void,
+  formValue: string | undefined,
+  handleSubsribeRequest: (e: React.MouseEvent) => void,
+  isSubmitting:"SUBMITTING" | "SUCCESS" | "FAILURE" | undefined
+  errorMessage: string | undefined,
+  showSubscribeModal: true | false,
+  closeSubscribeModal: () => void,
+  handleSubscribeBxChange: (e: React.ChangeEvent) => void,
+  isFormFilled:boolean | undefined
+}
+
+export const Loop = (props:ILoop) => {
   const { t } = useTranslation('common');
 
+  
+
+
+
+
   return (
-    <Box width="100%" h="900px" position="relative" >
+    <>
+      {props.showSubscribeModal === true && <WaitlistModal 
+        closeSubscribeModal={props.closeSubscribeModal} ></WaitlistModal>}
+    <Box width="100%"  zIndex="1"  h={["auto", "auto", "600px", "900px"]} position="relative" >
+   
+      <Box  position="absolute" h="100%"   w="100%" >
       <Img
         w="100%"
-        objectFit="cover"
+       objectFit="cover"
         h="100%"
-        position="absolute"
+       
         top="0px"
         src="/blog/loopBg.png"
       />
+
+      </Box>
+      
       <Flex
         justifyContent="center"
         w="100%"
@@ -53,38 +87,20 @@ export const Loop = () => {
             fontFamily="satoshi"
             textAlign="center" fontWeight="400" fontSize="18px">
             {t('blog.loop_text')}
-          </Text>
-
-          <FormControl >
-            <Flex
-              w={['100%', '100%', '100%', '100%', '692px']}
-              justifyContent="center"
-              mt="25px"
-              ml="auto"
-              mr="auto"
-              color="white"
-              
-            >
-              <Input
-                w="60%"
-                h="67px"
-                rounded="5px"
-                placeholder={`${t('blog.loop_input_placeholder')}`}
-                type="email"
-                fontSize="16px"
-                color="white"
-                _placeholder={{ color: 'white' }}
-                p="16px"
-
-              />
-              <Button w={['187px']}  fontFamily="satoshi" h="67px" fontSize="17px"
-                rounded="100px" bg="#EA445A !important" ml="10px">
-                {t('blog.loop_form_button_getStarted')}
-              </Button>
-            </Flex>
-          </FormControl>
-        </Box>
+            </Text>
+            
+            <JoinWaitlist
+              handleSubscribeBxChange={props.handleSubscribeBxChange}
+              formValue={props.formValue}
+              isSubmitting={props.isSubmitting}
+              errorMessage={props.errorMessage}
+              handleSubsribeRequest={props.handleSubsribeRequest}
+            ></JoinWaitlist>
+</Box>
+      
       </Flex>
-    </Box>
+      
+      </Box>
+      </>
   );
 };

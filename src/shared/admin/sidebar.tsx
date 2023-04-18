@@ -5,10 +5,22 @@ import Link from "next/link"
 import {BiGridAlt} from "react-icons/bi"
 
 
+type ISideBar = {
+    draft:any
+}
 
 
+export const SideBar = ({ draft }: ISideBar) => {
 
-export const SideBar = () => {
+    const arrayOfDraft = draft.map((eachDraft: any) => <Link href={`/admin/add-article?id=${eachDraft?.id}&slug=${eachDraft?.attributes?.slug}&draft=true`}  >
+        <Box mt="10px" >
+            <Text  noOfLines={1} fontSize="13px"  color="white">
+
+            {eachDraft?.attributes?.title}
+            </Text>
+        
+        
+     </Box></Link> )
 
     const Items = [
         
@@ -51,6 +63,13 @@ export const SideBar = () => {
                   </Button>
                 </Link>))
             }
+
+            <Box ml="40px" color="white" mt="40px" fontSize="14px">
+                <Text>Drafts</Text>
+                {arrayOfDraft}
+            </Box>
+
+            
            
         </Box>
 

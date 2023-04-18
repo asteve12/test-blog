@@ -14,39 +14,35 @@ import { api } from '@/axios';
 import { useRouter } from 'next/router';
 import { useHomeLogic } from '@/hooks/homeLogic';
 
-// type InitialProps = PromiseSettledResult<typeof getInitialProps>
+
 
 export default function Home(props: any) {
   const Router = useRouter();
 const currentLanguage = Router.locale as string;
-  const { articles, allArticles, homeSEO } = props;
+  let { articles, allArticles,featuredArticle} = props;
+
   const paginationData = articles?.meta?.pagination;
 
-  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage, allArticles);
-  const SeoData = {
-    metaTitle: homeSEO?.data?.attributes?.seo?.metaTitle,
-    metaDescription: homeSEO?.data?.attributes?.seo?.metaDescription,
-    shareImage: '',
-    article: false
-  };
+  const { state, loadArticles } = useHomeLogic(paginationData, currentLanguage,allArticles,articles);
+ 
 
 
-  console.log("pro",props)
+
   return (
-    <Layout showHeader={true}  showLoginHeader={false}>
-      <Seo {...SeoData} />
-      <Box w="100%"  pl="6%" pr="6%" >
+    <Layout draft={[]} showHeader={true}  showLoginHeader={false}>
+     <Box w="100%"  pl="7%" pr="7%" >
         <BlogHeader></BlogHeader>
         <LatestNews
-          latestArticle={state?.latestArticle}
+          latestArticle={featuredArticle?.data[0]}
           estimateArticleReadTime={estimateArticleReadTime}
-        ></LatestNews>
+        />
         <OtherArticle
+          articleIdToExclude={featuredArticle?.data[0]?.id}
           loading={state.loading}
           error={state.error}
           errorMessage={state.message}
-          articles={state?.articles}
-          initialArticle={articles?.data}
+          initialArticle={state?.articles}
+          articles={articles?.data}
           loadArticles={loadArticles}
           paginationLimit={state?.paginationData?.limit as number}
           totalArticleCreated={state?.paginationData?.total as number}
@@ -59,22 +55,26 @@ const currentLanguage = Router.locale as string;
 
 export const getServerSideProps = async ({ locale }: any) => {
   const paginationStart = 0;
-  const paginationLimit = 3;
-  const [articles, homeSEO, allArticles] = await Promise.all([
-    api.get(
-      `/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&locale=${locale}`
-    ),
-    api.get(`/api/homepage?locale=${locale}&populate=*`),
-    api.get(`/api/articles?locale=${locale}&populate=*`)
-  ]);
+  const paginationLimit = 9;
+
+  let featuredArticle;
+  featuredArticle = await api.get(`/api/articles?locale=${locale}&populate=*&filters[featured][$eq]=Yes`)
+  if (featuredArticle.data.data.length === 0) featuredArticle = await api.get(`/api/articles?locale=${locale}&populate=*&sort=id:desc`);
+
+
+  const featuredArticleId = featuredArticle.data.data[0]?.id;
+  const articles =   await api.get(`/api/articles?locale=${locale}&populate=*&pagination[start]=${paginationStart}&pagination[limit]=${paginationLimit}&filters[id][$ne]=${featuredArticleId}`)
+  const allArticles = await api.get(`/api/articles?locale=${locale}&populate=*&filters[id][$ne]=${featuredArticleId}`)
+  
+  
 
   return {
     props: {
       articles: articles?.data,
       allArticles: allArticles.data,
-      homeSEO: homeSEO?.data,
-      ...(await serverSideTranslations(locale, ['common']))
+      featuredArticle:featuredArticle.data,
+     ...(await serverSideTranslations(locale, ['common']))
     },
-    //revalidate: 1
+   
   };
 };

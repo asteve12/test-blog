@@ -8,7 +8,8 @@ import { BlogForm } from "./form"
 
 type IMain = {
     profilePics: string,
-    username:string
+    username: string,
+    featuredArticleId:number
 }
 
 
@@ -31,7 +32,7 @@ export const Main = (props:IMain) => {
        </Link>
         
         <Box w="100%">
-        <BlogForm  name={props?.username} profilePics={props?.profilePics} />
+        <BlogForm featuredArticleId={props.featuredArticleId} name={props?.username} profilePics={props?.profilePics} />
             
 </Box>
        

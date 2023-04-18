@@ -1,4 +1,4 @@
-import { Box, Image, Flex, VStack, Text,HStack, Heading } from "@chakra-ui/react"
+import { Box, Image, Flex, VStack, Text,HStack, Heading,Stack} from "@chakra-ui/react"
 import { BlogTitle } from "@/shared/blogTitlteCard"
 import { TimerCard } from "@/shared/TimeCard"
 import { CustomIcons } from "@/util/customIcon"
@@ -7,6 +7,7 @@ import { GrFacebookOption } from "react-icons/gr"
 import { GrTwitter } from "react-icons/gr"
 import { AiFillLinkedin } from "react-icons/ai"
 import { RiWhatsappFill } from "react-icons/ri"
+import { estimateArticleReadTime } from "@/util/estimateReadTime"
 
 
 
@@ -15,14 +16,51 @@ import { RiWhatsappFill } from "react-icons/ri"
 
 
 
+type Content = {
+   BannerImg: string,
+    blogHeader: string,
+    blogContent: string,
+    summary: string,
+    category:string
+}
 
-export const Content = () => {
+
+const styles = {
+    previewHeaderStyle: {
+        
+        marginBottom: "0px",
+        color:"#2D2B4A",
+        textAlign:'left',
+        mt:"0px",
+        mb:"10px",
+        fontFamily:"satoshi black",
+        fontWeight:"900",
+        fontSize:["4rem",'5rem', '6rem']
+        
+    },
+    previewHeaderSummaryStyle: {
+        fontSize: "2rem",
+        mb: "20px",
+        mt:"10px"
+        
+    }
+}
+
+
+
+
+
+
+export const Content = ({ BannerImg, blogHeader, blogContent,summary,category }: Content) => {
+    console.log("Asteve12",blogContent)
+
+    const timeToRead = estimateArticleReadTime(blogContent)
     const socials = [{
         name: "facebook",
         icons:GrFacebookOption
     },
     {
-        name: "twitter",
+        name: "twitter",    
         icons:GrTwitter
         },
         {
@@ -39,39 +77,57 @@ export const Content = () => {
     ]
 
 
-    const Blogs = [
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        },
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        },
-        {
-            Header: "How to connect a wallet to  a web3 platform",
-            Content: `Hosting a successful webinar is not an impossible task once you put the right things in place. When done right, webinars can help build 
-            your brand and establish you as an authority
-            in your industry. If you’re looking forward
-             to hosting a successful webinar, here are some tips to guide you through the process.`,
-            
-        }
-    ]
+  
 
 
     return (
-        <Box  w="100%"  pt="1%" pl="5%" pr="5%" bg="#fbfbfd"  minH="100vh">
-            <Image  w="1216px"  h="420px"  borderRadius="16px"  objectFit="cover"  maxW="100%" alt="preview" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSe5dr3-AcwXUWan1KdkGnXSynd2QgiOu6pdnYNdrJDjA&s"></Image>
-            <Flex>
-            <VStack pl="5%" pt="30px"  gap="10px">
+        <Box w="100%"
+            pt="1%" pl="5%" pr="5%"
+            bg="#fbfbfd" minH="100vh">
+            <Box
+                w="100%"
+                paddingTop="40%"
+                position="relative"
+            
+                boxSizing="border-box"
+                
+                
+            >
+
+                <Image
+                    position="absolute"
+                    top="0" 
+                    bottom= "0"
+                    left= "0"
+                    right ="0"
+                    w="100%"
+                    h="100%"
+                    objectFit="cover"
+                    borderRadius="10px"
+              //h={["250px", "320px", "420px", "100%"]}
+                //paddingBottom="66.7%"
+                //borderRadius="16px" objectFit="cover"
+                    //maxW="100%"
+                    alt="preview"
+                src={BannerImg}></Image>
+            </Box>
+           
+            <Flex
+             w="100%"
+             flexDirection={['column-reverse', 'column-reverse','column-reverse' ,'row']}
+             alignItems={['start','start', 'start']}
+             justifyContent={['start', null]}
+             pl={["0px","0px","2%"]}
+             pt="30px"
+             position="relative"
+             h="auto"
+            >
+                <Stack
+                    ml={["30px"]}
+                 position="sticky" top="0px" pl={["0px", "0px", "0%"]} 
+                    spacing="25px" direction={['row', 'row', 'row', 'column']} mr="30px"
+                    pt="30px"
+                >
                     <Text color="#666481" fontWeight="700"  fontSize="20px">
                         Share
                         </Text>
@@ -83,29 +139,23 @@ export const Content = () => {
                                 }}
                                 Icon={eachIcons.icons} ></CustomIcons>)
                         }
-                </VStack>
+                </Stack>
                 
 
                 <Box pl="5%" pt="30px">
+                   
                     <HStack>
-                        <BlogTitle  title="What is a defi wallet"></BlogTitle>
-                        <TimerCard timetoRead="5"></TimerCard>
+                        <BlogTitle  title={category}></BlogTitle>
+                        <TimerCard timetoRead={timeToRead}></TimerCard>
                     </HStack>
+                        {/* @ts-ignore */}
+                    <Heading  {...styles.previewHeaderStyle as HeadingProps} >{blogHeader}</Heading>
+                    <Text   {...styles.previewHeaderSummaryStyle} >{summary}</Text>
+                    <Box    className="blogContainer"   dangerouslySetInnerHTML={{ __html: blogContent }}/>
 
-                    <VStack gap="20px" mt="20px" w="802px">
-                        {
-                            Blogs.map((eachBlog) => (
-                                <Box>
-                                    <Heading  fontSize="36px" mb="10px">
-                                        {eachBlog.Header}
-                                    </Heading>
-                                    <Text  color="#666481" fontSize="21px">
-                                        {eachBlog.Content}
-                                    </Text>
-                            </Box>
-                            ))
-                        }
-                </VStack>
+                
+
+                   
                 </Box>
             </Flex>
         

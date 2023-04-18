@@ -41,7 +41,7 @@ export const Header = ({searchForBlog}:IHeader) => {
               marginRight:"16px"
             }} Icon={CiSearch} />}
           />
-          <Input onChange={searchForBlog} fontSize="16px" pl="30px"  display="flex" alignItems="center" borderRadius="50px" w="100%" h="100%" type='tel' placeholder='Search Blog' />
+          <Input onChange={searchForBlog} fontSize="16px" pl="30px"  display="flex" alignItems="center" borderRadius="50px" w="100%" h="100%" type='text' placeholder='Search Blog' />
         </InputGroup>
       </Stack>
       <Link href="/admin/add-article">

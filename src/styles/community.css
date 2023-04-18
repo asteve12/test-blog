@@ -1,8 +1,9 @@
 .community-container {
   padding-top: 5rem;
+
 }
 .community-text {
-  width: 52rem;
+  width: 100%;
   margin: 0.8rem auto 4rem;
 }
 .community-cards-container {
@@ -12,9 +13,10 @@
   margin: 0 auto;
   padding-bottom: 15rem;
   gap: 2.4rem;
+  width:100%;
 }
 .community-header {
-  width: 81rem;
+  width: 100%;
   margin: 0 auto;
 
 }
@@ -22,7 +24,7 @@
   font-family: satoshi;
   font-weight: 700;
   line-height: 9rem;
-  font-size: 7.2rem;
+  font-size: 7rem;
   font-family: "satoshi black";
   color:#2D2B4A
 }
@@ -34,7 +36,8 @@
   color: #717171;
 }
 .community-card {
-  width: 18.3rem;
+  width: 183px;
+  max-width: 200px;
   min-height: 31.3rem;
   background: #fbfbfd;
   border-radius: 0.8rem;
@@ -42,14 +45,20 @@
   transition: all 500ms ease;
   border: 1px solid transparent;
   cursor: pointer;
+  margin-right:20px ;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.community-card:hover {
+/* .community-card:hover {
   border: 1px solid #ea445a;
-}
+} */
 .community-card-icon {
-  width: 5.6rem;
-  height: 5.6rem;
+ 
+  height: 30px;
   margin: 0 3rem 2.4rem 4.3rem;
 }
 .community-card-h {
@@ -87,17 +96,25 @@ color:  #666481;
 .visit-now-h {
   font-family:satoshi;
   font-weight: 800;
-  font-size: 1.6rem;
+  font-size: 15px;
   line-height: 2rem;
   background: linear-gradient(89.85deg, #da151e -1.04%, #ff515a 99.88%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  border: solid 1px #EA445A;
+  width: 120px;
+  height:40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 30px;
 }
 .visit-icon {
   width: 1.2rem;
   height: 1.2rem;
   margin-top: 0.4rem;
+  display: none;
 }
 #cards-icon {
   display: none;
@@ -106,6 +123,10 @@ color:  #666481;
 @media screen and (max-width: 1023px) {
   .community-cards-container {
     padding-bottom: 8rem;
+  }
+
+  .community-h{
+    font-size:6em;
   }
 }
 
@@ -117,7 +138,7 @@ color:  #666481;
     padding-top: 9rem;
   }
   .community-header {
-    width: 45rem;
+    width: 100%;
     margin: 0 auto 1rem;
   }
   .community-h {
@@ -133,7 +154,7 @@ color:  #666481;
   .cards-icon {
     align-items: center;
     align-content: center;
-    width: 45rem;
+    width: 100%;
     margin: 4rem auto;
     justify-content: space-evenly;
   }
@@ -141,6 +162,9 @@ color:  #666481;
     margin: 0;
     width: 4rem;
     height: 4rem;
+    display:flex;
+    justify-content: center;
+  
   }
   .community-cards-container {
     flex-direction: column;
@@ -150,6 +174,6 @@ color:  #666481;
 
 @media screen and (max-width: 485px) {
   .community-text {
-    width: 40rem;
+    width: 100%;
   }
 }

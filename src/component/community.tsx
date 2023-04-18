@@ -1,5 +1,6 @@
 import React from 'react';
 import Redarrow from '../../public/img/arrow-right.svg';
+  
 // import Redarrow from "../../assets/img/arrow-right.svg";
 //import Twitter from "../../public/img/twitter-community.svg";
 //import Discord from "../../public/img/discord-community.svg";
@@ -9,7 +10,7 @@ import Redarrow from '../../public/img/arrow-right.svg';
 
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import { Image } from '@chakra-ui/react';
+import { Heading, Image,Text,Box, Flex, SimpleGrid} from '@chakra-ui/react';
 
 const community = () => {
   const { t } = useTranslation('common');
@@ -62,22 +63,59 @@ const community = () => {
   ];
 
   return (
-    <div className="community-container">
-      <div className="community-header center">
-        <h1 className="margin-0 community-h">{t('community.join_community')}</h1>
-      </div>
+    <Box className="community-container" fontFamily="satoshi" mt="50px"  boxSizing='border-box' > 
+      <Heading
+        //className="margin-0 community-h"
+        textAlign="center"
+       
+        fontFamily="satoshi black"
+        fontSize={['3.2rem', '4.2rem', '5.2rem', '7.2rem']}>{t('community.join_community')}</Heading>
 
-      <div className="community-text center">
-        <p className="margin-0 community-p">{t('community.hype')}</p>
-      </div>
+      {/* <div className="community-header center">
+      </div> */}
 
-      <div id="cards-none" className="community-cards-container flex">
+      <Text 
+        ml="auto"
+        mr="auto"
+        mb="30px"
+      textAlign="center"
+        w={["60%", "55%", "40%"]} color="#666481" 
+         display="block" fontSize={["1.4rem", "1.5rem", "1.6rem", "1.8rem"]}>{t('community.hype')}</Text>
+
+
+      {/* <div  className="community-text center">
+      </div> */}
+
+      <Box
+        id="cards-none"
+        //className="community-cards-container flex"
+        
+        display="flex"
+        justifyContent="center" 
+        w="100%" flexWrap="nowrap"
+      >
+        <SimpleGrid 
+          spacing={["0rem", "8rem", "20px", "10rem"]}
+         
+          alignItems="center"
+          w={["100%", "80%", "80%", "52%"]}
+          minChildWidth={["389px","100px","160px","100px"]}
+          ml="auto"
+          mr="auto"
+         
+          
+        >
+        
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
           return (
             <Link href={socialLink} key={id} className="community-card">
-              <div className="community-card-icon twitter-card-icon">
-                <Image src={image} alt="socials logo 12" />
-              </div>
+              <Flex alignItems="center" justifyContent="center" w="100%"
+                mb="10px"
+                
+              >
+              
+                <Image  w="40px" h="40px" mb="10px" ml="auto" mr="auto" src={image} alt="socials logo 12" />
+              </Flex>
 
               <div className="community-card-header center">
                 <h3 className="margin-0 community-card-h">{header}</h3>
@@ -102,9 +140,12 @@ const community = () => {
             </Link>
           );
         })}
-      </div>
+      </SimpleGrid>
+      </Box>
 
-      <div id="cards-icon">
+     
+
+      <Box id="cards-icon"  w={['',"100%"]}>
         <div className="cards-icon flex">
           {communityCard.map(({ id, image, socialLink }) => {
             return (
@@ -117,8 +158,8 @@ const community = () => {
             );
           })}
         </div>
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

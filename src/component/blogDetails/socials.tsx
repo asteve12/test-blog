@@ -22,9 +22,14 @@ import {
 
 
 
+type Socials = {
+  containerHeight:string | undefined
+}
 
-export const Socials = () => {
+
+export const Socials = (props:Socials) => {
    const url =  window.location.href
+console.log("contHeight",props.containerHeight)
 
   
   const socials = [
@@ -53,7 +58,13 @@ export const Socials = () => {
   ];
 
   return (
-    <Stack  pl={["0px", "0px", "5%"]} pt="0px" 
+    <Box display="block" w="100px" position="relative"
+    
+   
+    // @ts-ignore
+      h={["auto", "auto",props.containerHeight && parseInt(props.containerHeight)]}
+       mt={["30px", "30px", "0px", "0px"]}>
+       <Stack  position="sticky" top="0px" pl={["0px", "0px", "5%"]} pt="0px" 
       spacing="25px" direction={['row', 'row', 'column']}     mr="30px">
       
       <Text  fontFamily="satoshi black" textAlign={["left", "center", "center"]} color="#666481"
@@ -76,5 +87,7 @@ export const Socials = () => {
        
       ))}
     </Stack>
+    </Box>
+   
   );
 };
