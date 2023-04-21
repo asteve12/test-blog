@@ -24,18 +24,31 @@ import { api } from '@/axios';
 import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 
-
 import { useRouter } from 'next/router';
 import { usePreventHydrationError } from '@/hooks/usePreventHydrationError';
 import { SessionProvider } from "next-auth/react";
+import Seo from "@/component/seo";
 
 
 const myFont = localFont({src:"../assets/fonts/Satoshi_Complete/Fonts/OTF/Satoshi-Regular.otf"})
 
 function App({ Component, pageProps }: AppProps) {
-  const { data, session } = pageProps;
+  const { data, session,article} = pageProps;
+  const title = article?.attributes?.title;
+  const summary =  article?.attributes?.summary;
+  const imagePath = article?.attributes?.image
+  const articleContent = article?.attributes?.content;
+
+  const seo = {
+    metaTitle: title,
+    metaDescription: summary,
+    shareImage: imagePath,
+    article: articleContent
+  };
+  
   const Router = useRouter()
   console.log("Router",Router,session)
+  console.log("pageProps",pageProps)
 
   const favIconsPath = data?.data?.attributes?.favicon?.data?.attributes?.url;
   const { initialise } = usePreventHydrationError();
@@ -53,6 +66,7 @@ function App({ Component, pageProps }: AppProps) {
           rel="shortcut icon"
           href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
         />
+        <Seo {...seo} />
       </Head>
       <main className={myFont.className}>
       <Component {...pageProps} />

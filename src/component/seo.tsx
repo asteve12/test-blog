@@ -12,7 +12,7 @@ const Seo = (SEO: ISeo) => {
 
   console.log('seo details',SEO)
   return (
-    <Head>
+    <>
 
       {SEO.metaTitle && (
         <>
@@ -37,7 +37,7 @@ const Seo = (SEO: ISeo) => {
       )}
       {SEO.article && <meta property="og:type" content="article" />}
       <meta name="twitter:card" content="summary_large_image" />
-    </Head>
+    </>
   );
 };
 
