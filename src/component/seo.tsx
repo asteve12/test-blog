@@ -16,12 +16,11 @@ const Seo = (SEO: ISeo) => {
     <>
 
 <NextSeo
-title={SEO.metaTitle}
-description={SEO.metaDescription}
+
 
       openGraph={{
         type: 'website',
-        //url: 'https://www.example.com/page',
+       
         title: SEO.metaTitle,
         description: SEO.metaDescription,
         images: [
@@ -30,7 +29,7 @@ description={SEO.metaDescription}
             width: 800,
             height: 600,
             alt: 'Og Image Alt',
-          },
+          }
           
         ],
       }}
