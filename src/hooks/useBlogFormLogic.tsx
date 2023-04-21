@@ -336,10 +336,11 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
      //event handler handle for unLoad
     async function unLoadHandler(event: BeforeUnloadEvent) {
        const isEligibleForDraft =  madeUpdate.current === true || refDraftId.current ? true :false
-       
-         if (edit && convertEditToDraft === true && !publish.current && isEligibleForDraft && deleteDraftStatus) {
-            console.log("refDraftId",refDraftId)
-            stopFurtherDraftSave.current = true
+
+    console.log("hello world",edit, convertEditToDraft , !publish.current,isEligibleForDraft,
+    deleteDraftStatus)
+       if (edit && convertEditToDraft === true && !publish.current && isEligibleForDraft && !deleteDraftStatus) {
+           stopFurtherDraftSave.current = true
              alert("saving article as draft")
              saveDraftCallCount.current = 0;
              draftArticleId.current = undefined;
@@ -619,14 +620,9 @@ if (fieldName === "featured") {
 
 
     const removeUnwantedString = (value: string, unwantedString: string): string => {
-        console.log("un2",value,unwantedString)
-    
         let htmlString = value.replace(unwantedString,"")
-
         return  htmlString
-          
-        
-    }
+}
 
    
 
@@ -652,23 +648,10 @@ if (fieldName === "featured") {
         if (edit && !isEditRenderSucess) return;
         
 
-        // alert("update blog content")
-        console.log("proceeding",fieldObject)
+      
 
         updateFormikFields(fieldObject)
-        
-         //@ts-ignore
-         //updateBlogContent.calls = updateBlogContent.calls + 1;
-        // if (saveDraftCallCount === 1 && !draftArticleId) return;
-
-
-        // //alert("update")
-      
-        // saveAsDraftHandler(value, currentValues)()
-        
-        // setSaveDraftCallCount((prev)=> prev +1)
        
-
        
  
        
@@ -676,8 +659,7 @@ if (fieldName === "featured") {
     }; 
 
 
-
-    const deleteDraft = async (draftId:string,onPageCall?:boolean) => {
+const deleteDraft = async (draftId:string,onPageCall?:boolean) => {
         try {
             if (onPageCall) {
                 setDeleteDraftStatus(true)

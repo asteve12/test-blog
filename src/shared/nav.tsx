@@ -127,7 +127,7 @@ export const NavHeader = ({ handleSubsribeRequest,
       <>
         <header id="header" className="header-row flex flex-center w-100  ">
           <nav className="header-nav">
-            <div className="flex flex-between flex-center">
+            <div className=" navBox">
               <div className="nav-logo">
               <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
                   <span className="nav-logo-link">
@@ -142,54 +142,9 @@ export const NavHeader = ({ handleSubsribeRequest,
                 </Link>
               </div>
 
-              {/* <ul className="nav-list attendees-nav-padding flex flex-between">
-
-                <li className="inner-nav-list">
-                < Link  href="https://gruve.events/">
-
-                <div
-                  className="nav-link"
-                  //onClick={() => changeMode(MODE.Attendees)}
-                  >
-                   
-                      <div
-                         style={{textAlign:"center"}}
-                    className={`event-attendees nav-link-item ${
-                      mode === MODE.Attendees ? "active-event" : ""
-                    }`}
-                    >
-                       {t('navHeader.eventAttendeedTxt')}
-                    {/* <Trans i18nKey="navHeader.eventAttendeedTxt">
-                      For Event Attendees
-                    </Trans> 
-                  </div>
-                  </div>
-                </Link>
-               
-                
-              </li>
-
-                <li className="inner-nav-list">
-                  <Link href="https://gruve.events/">
-
-                  <div
-                  className="nav-link"
-                  //onClick={() => changeMode(MODE.Creators)}
-                >
-                      <div
-                        style={{textAlign:"center"}}
-                    className={`event-attendees nav-link-item ${
-                      mode === MODE.Creators ? "active-event" : ""
-                    }`}
-                  >
-                    {t('navHeader.eventCreatorsText')}
-                  </div>
-                </div>
-                  </Link>
-               
-              </li>
-            </ul> */}
-               <ul className="nav-list attendees-nav-padding flex flex-between">
+             
+               <ul className="nav-list attendees-nav-padding flex flex-between" 
+              >
                 <li className="inner-nav-list">
                   <div className="nav-link">
                     <span className={`event-attendees nav-link-item`}>
@@ -234,10 +189,10 @@ export const NavHeader = ({ handleSubsribeRequest,
           </nav>
         </header>
 
-        <header id="mob-header" className="">
+        {/* <header id="mob-header" className="">
           <div className="flex flex-center flex-between mob-header">
             <div className="nav-logo">
-              {/* eslint-disable-next-line */}
+             
               <a href="https://" className="nav-logo-link">
                 <img src={Logo} loading="lazy" alt="" />
               </a>
@@ -245,7 +200,7 @@ export const NavHeader = ({ handleSubsribeRequest,
 
             <div className="switch">
               <div className="inner-nav-list">
-                {/* eslint-disable-next-line */}
+              
                 <div className="nav-link">
                   <span className={`event-attendees switch-item nav-link-item `}>
                     Switch to Attendees
@@ -254,7 +209,7 @@ export const NavHeader = ({ handleSubsribeRequest,
               </div>
             </div>
           </div>
-        </header>
+        </header> */}
       </>
     );
 
