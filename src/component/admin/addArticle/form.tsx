@@ -280,8 +280,18 @@ export const BlogForm = (props: IBlogForm) => {
         </Flex>
         <Box  w={["100%","100%","796px"]}>
 
-        <Input fontSize="15px"  w="100%"  ref={ref} onChange={uploadSelectedImage} type="file" visibility="hidden"></Input>
-        <Input fontSize="15px"  w="100%"  ref={thumbNailRef} onChange={uploadSelectedThumbNail} type="file" visibility="hidden"></Input>
+        <Input 
+        fontSize="15px"  
+        w="100%"  
+        ref={ref} onChange={uploadSelectedImage} type="file" 
+        visibility="hidden"
+        accept=".jpg, .jpeg, .png,.webp"
+        />
+        <Input fontSize="15px"  w="100%"  ref={thumbNailRef} onChange={uploadSelectedThumbNail} 
+        type="file" 
+        visibility="hidden"
+        accept=".jpg, .jpeg, .png"
+        />
             <FormLabel fontSize="15px">Title</FormLabel>
             <Input
                 h="40px"
