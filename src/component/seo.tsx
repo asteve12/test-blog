@@ -17,23 +17,17 @@ const Seo = (SEO: ISeo) => {
 
 <title>{SEO.metaTitle}</title>
           <meta property="og:title" content={SEO.metaTitle} />
-          {/* <meta name="twitter:title" content={SEO.metaTitle} /> */}
-          <meta name="description" content={SEO.metaDescription} />
-          <meta property="og:description" content={SEO.metaDescription} />
-          {/* <meta name="twitter:description" content={SEO.metaDescription} /> */}
-          <meta property="og:image" content={SEO.shareImage} />
-          {/* <meta name="twitter:image" content={SEO.shareImage} /> */}
-          <meta name="image" content={SEO.shareImage} />
+         <meta name="description" content={SEO.metaDescription} />
+        <meta property="og:image" content={SEO.shareImage} />
+      
           <meta property="og:type" content="article" />
-         {/* <meta name="twitter:card" content={SEO.shareImage} /> */}
-
-         {/* twitter meta tags */}
+    {/* twitter meta tags */}
          <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:site" content="@gruvetickets" />
+  <meta name="twitter:site" content="@gruvetickets" />
 <meta name="twitter:title" content={SEO.metaTitle}/>
 <meta name="twitter:description" content={SEO.metaDescription}/>
       <meta name="twitter:image" content={SEO.shareImage}/>
-         <meta name="twitter:card" content="summary_large_image"/>
+        
  
 
   
