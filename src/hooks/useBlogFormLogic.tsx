@@ -69,6 +69,11 @@ type currentValue = {
 
 }
 
+type currentFieldRefObject = {
+    [key:string]:currentValue,
+    
+}
+
 
 
 export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
@@ -103,8 +108,8 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     const [isEditRenderSucess, setEditRenderSucess] = useState(false)
     const trackDraft =  useRef(false)
     //const [currentFieldValue, setCurrentField] = useState({})
-    
-    const currentFieldValue = useRef({
+
+    const formField = {
         title: "",
         image: "",
         blogContent: "",
@@ -112,7 +117,13 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         summary: "",
         featured: "",
         thumbNail:""
+    }
+    
+    const currentFieldValue = useRef<currentFieldRefObject >({
+        ENGLISH:{...formField},
+        FRENCH:{...formField}
     })
+
     const [category, setAllCategory] = useState<any[]>([])
      const publish = useRef(false)
     const refDraftId = useRef<null>()
@@ -204,12 +215,12 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                         draftArticleId.current = response?.data.data[0].id
                         refDraftId.current = response?.data.data[0].id
                         console.log("blogData", blogData)
-                        const { content, image, title,summary,category,featured} = blogData
+                        const { content, image, title,summary,category,featured,thumbNail} = blogData
                         // alert("draft")
                       
                         const currentField = formikObject.values[currentLanguage]
                         console.log("draft error  344", currentField,{blogContent:content, image, title})
-                            formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category,featured})   
+                            formikObject.setFieldValue(currentLanguage, {blogContent:content, image, thumbNail,title,summary,category,featured})   
                             setIsDraftRenderSucces(true)
                     }
                     
@@ -261,11 +272,11 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     const blogData = response?.data?.data[0]?.attributes
                     setCurrentId(response?.data.data[0].id)
                   
-                    const { content, image, title, summary, category, featured } = blogData
+                    const { content, image, title, summary, category, featured,thumbNail} = blogData
                     
                         const currentField = formikObject.values[currentLanguage]
-                        formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category,featured})   
-                     console.log("testingEdit",currentLanguage, {blogContent:content, image, title,summary,category,featured},currentField)
+                        formikObject.setFieldValue(currentLanguage, {blogContent:content, image, title,summary,category,featured,thumbNail})   
+
                    
                         setEditRenderSucess(true)
                 })
@@ -451,9 +462,9 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
         const fieldName = e.target.name;
         let enteredValue = e.target.value;
 
-      console.log("hi steve",e.target.checked )
 
-        if (fieldName === "featured") {
+
+if (fieldName === "featured") {
             if (!e.target.checked && e.target.checked === false  ) enteredValue = "No";
             else if (e.target.checked && e.target.checked === true) enteredValue = "Yes";
             
@@ -482,11 +493,11 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
             
         }
 
-        if (fieldName !== "image") currentFieldValue.current = fieldValue  as currentValue ; 
+        if (fieldName !== "image") currentFieldValue.current[currentLanguage] = fieldValue  as currentValue ; 
         if (fieldName === "image") {
             const isThumbNailIMageAdded = formikObject.values[currentLanguage]["thumbNail"]
             
-            const fieldValue = { ...currentFieldValue.current, [fieldName]: enteredValue }
+            const fieldValue = { ...currentFieldValue.current[currentLanguage], [fieldName]: enteredValue }
             draftData.current = fieldValue as currentValue;
             formikObject.setFieldValue(currentLanguage, fieldValue)
 
@@ -869,11 +880,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
                     
                 };
                 response = await api.post("/api/articles", data_for_upload)
-                // refDraftId.current = null
-                // draftArticleId.current =null;
-                // setSaveDraftCallCount(0)
-
-                // saveAsDraftHandler.flush()
+              
             }
            
             if (response?.status === 200) {
@@ -952,11 +959,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
 //delete image 
     async function deleteImage<imgadataType>(imageData: imgadataType) {
          const timestamp = Math.floor(Date.now() / 1000);
-        // const params = {
-        //     api_key: apiKey,
-        //     public_id: publicId,
-        //     timestamp: timestamp,
-        // }
+      
         const delete_image_response = await api.post(`https://api.cloudinary.com/v1_1/dy9d8uotq/image/destroy`)
         return delete_image_response
 } 

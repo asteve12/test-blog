@@ -61,10 +61,12 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article,info,otherArticle,singl
   const articleDescription = article?.attributes?.description;
   const seo = {
     metaTitle: title,
-    metaDescription: articleDescription,
+    metaDescription: summary,
     shareImage: imagePath,
-    article: true
+    article: articleContent
   };
+
+  console.log("seo analyse",seo)
 
   const useArticleDetailsLogicParams = {
     paginationInterval: 3,
