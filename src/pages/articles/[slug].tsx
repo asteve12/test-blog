@@ -84,7 +84,7 @@ const BlogDetails: NextPage<BlogDetailPage> = ({ article,info,otherArticle,singl
   return (
     <Layout  draft={[]} showHeader={true} showLoginHeader={false}>
       
-      <Seo {...seo} />
+      {/* <Seo {...seo} /> */}
       <Box  w="100%"  pt="30px" pl="7.8%" pr="7%" >
         <BlogDetailHeader baseUrl={baseUrl} imagePath={imagePath}></BlogDetailHeader>
         <BlogDetailContent

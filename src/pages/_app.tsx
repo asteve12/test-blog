@@ -53,13 +53,21 @@ function App({ Component, pageProps }: AppProps) {
   const favIconsPath = data?.data?.attributes?.favicon?.data?.attributes?.url;
   const { initialise } = usePreventHydrationError();
 
-  if (!initialise) return <></>;
+  if (!initialise) return  <Head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charSet="utf-8" />
+<link
+  rel="shortcut icon"
+  href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
+/>
+<Seo {...seo} />
+</Head>;
   // if(Router.pathname === "/admin" &&  session)
 
   return (
     <SessionProvider  session={session}>
     <ChakraProvider>
-      <Head>
+      {/* <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
         <link
@@ -67,7 +75,7 @@ function App({ Component, pageProps }: AppProps) {
           href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
         />
         <Seo {...seo} />
-      </Head>
+      </Head> */}
       <main className={myFont.className}>
       <Component {...pageProps} />
       </main>
