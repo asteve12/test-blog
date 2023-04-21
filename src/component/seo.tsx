@@ -16,6 +16,9 @@ const Seo = (SEO: ISeo) => {
     <>
 
 <NextSeo
+title={SEO.metaTitle}
+description={SEO.metaDescription}
+
       openGraph={{
         type: 'website',
         //url: 'https://www.example.com/page',
