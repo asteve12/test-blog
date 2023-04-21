@@ -1,4 +1,6 @@
 import localFont from "@next/font/local"
+import { NextSeo } from 'next-seo';
+
 
 
 //@ts-ignore
@@ -54,7 +56,9 @@ function App({ Component, pageProps }: AppProps) {
   const { initialise } = usePreventHydrationError();
 
   if (!initialise) return  <Head>
-    <Seo {...seo} />
+ <Seo  {...seo}/>
+
+    
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charSet="utf-8" />
 <link
