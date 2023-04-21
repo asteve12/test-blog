@@ -10,7 +10,7 @@ type ISeo = {
 
 const Seo = (SEO: ISeo) => {
 
-  console.log('seo details',SEO)
+
   return (
     <>
 
@@ -36,7 +36,7 @@ const Seo = (SEO: ISeo) => {
         </>
       )}
       {SEO.article && <meta property="og:type" content="article" />}
-      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:card" content={SEO.shareImage} />
     </>
   );
 };
