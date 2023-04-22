@@ -121,7 +121,7 @@ export const NavHeader = ({ handleSubsribeRequest,
       display="inline"
       fontSize="14px"
       bg="#DF374D"
-      w={["90%","80%"]}
+      w={["95%","80%"]}
       h="56px"
       borderRadius="1000px"
       color="white"
@@ -261,7 +261,7 @@ export const NavHeader = ({ handleSubsribeRequest,
   return (
     
     <Flex w="100%" justifyContent="space-between" pl={"1%"} pr="2%" 
-     fontFamily="satoshi"  position="relative"   >
+     fontFamily="satoshi"  position="relative"    >
       <Box zIndex={1000} w="100%" h="auto"  position="absolute">
       {showSubscribeModal === true && <WaitlistModal closeSubscribeModal={closeSubscribeModal}></WaitlistModal>}
 
@@ -283,7 +283,7 @@ export const NavHeader = ({ handleSubsribeRequest,
                     />
                   </span>
      
-        <Menu styles={mobilestyles} customBurgerIcon={<HiMenuAlt2></HiMenuAlt2>}>
+        <Menu styles={mobilestyles} customBurgerIcon={<Image src={"/blog/logo.svg"}/>}>
           <Flex pl={["0px","30px"]} w="150px" h="90px">
             <Image src="/img/navLogo.svg" alt="gruve logo" />
           </Flex>
