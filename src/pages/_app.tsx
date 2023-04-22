@@ -1,7 +1,5 @@
 import localFont from "@next/font/local"
-import { NextSeo } from 'next-seo';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 //@ts-ignore
 import type { AppProps } from 'next/app';

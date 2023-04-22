@@ -20,6 +20,7 @@ export default function Home(props: any) {
   const Router = useRouter();
 const currentLanguage = Router.locale as string;
   let { articles, allArticles,featuredArticle} = props;
+  console.log("featuredArticle",featuredArticle)
 
   const paginationData = articles?.meta?.pagination;
 
