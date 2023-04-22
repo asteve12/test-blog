@@ -324,14 +324,7 @@ export const useBlogFormLogic = (props: IuseBlogFormLogic) => {
     }, [])
 
 
-    //reload the page 
-    function handleRouteChangeComplete() {
-        if (edit && convertEditToDraft === true && !publish.current && refDraftId.current) {
-            
-           Router.reload()
-        }
-       
-   }
+   
  
      //event handler handle for unLoad
     async function unLoadHandler(event: BeforeUnloadEvent) {
@@ -470,34 +463,17 @@ if (fieldName === "featured") {
             else if (e.target.checked && e.target.checked === true) enteredValue = "Yes";
             
         }
-          
-       
-        const currentValues = formikObject.values[currentLanguage]
-        console.log("formikText",enteredValue )
-        const fieldValue = {...currentValues, [fieldName]: enteredValue }
+     const currentValues = formikObject.values[currentLanguage]
+     const fieldValue = {...currentValues, [fieldName]: enteredValue }
          
-        
-
-        console.log("checkForm",saveDraftCallCount.current,!draftArticleId.current)
-    
-        if (fieldName === "image" || "title" || "category" || "summary" || "blogContent" || "featured"  || "thumbNail") {
+    if (fieldName === "image" || "title" || "category" || "summary" || "blogContent" || "featured"  || "thumbNail") {
             if (saveDraftCallCount.current === 1 && !draftArticleId.current) return;
-           
-            console.log("values,")
-            saveAsDraftHandler("",{...formikObject.values[currentLanguage], [fieldName]: enteredValue })()
+           saveAsDraftHandler("",{...formikObject.values[currentLanguage], [fieldName]: enteredValue })()
             saveDraftCallCount.current = saveDraftCallCount.current + 1
-            //draftData.current = {...formikObject.values[currentLanguage], [fieldName]: enteredValue }
-            console.log("valuestestingedit33",{...formikObject.values[currentLanguage], [fieldName]: enteredValue })
-            //setSaveDraftCallCount((prev)=> prev +1)
-           
-            
-            
         }
 
         if (fieldName !== "image") currentFieldValue.current[currentLanguage] = fieldValue  as currentValue ; 
         if (fieldName === "image") {
-            const isThumbNailIMageAdded = formikObject.values[currentLanguage]["thumbNail"]
-            
             const fieldValue = { ...currentFieldValue.current[currentLanguage], [fieldName]: enteredValue }
             draftData.current = fieldValue as currentValue;
             formikObject.setFieldValue(currentLanguage, fieldValue)

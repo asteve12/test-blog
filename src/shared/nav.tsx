@@ -19,6 +19,7 @@ import { WaitlistModal } from '@/component/waitlistModal';
 
 
 
+
 const mobilestyles = {
   bmBurgerButton: {
     position: 'relative',
@@ -94,11 +95,11 @@ export const NavHeader = ({ handleSubsribeRequest,
     fallback: false
   });
   const router = useRouter()
-  // const regex = /^(https?|http):\/\/([\w-]+(\.[\w-]+)*)(\/[\w-]+)*\/?(\.[\w-]+)?(\?.*)?(#[\w-]+)?$/
+
 
   const isHomePage = router.asPath === "/"
 
-  console.log('homepage',isHomePage,process.env.NEXT_PUBLIC_Landing_page_URL)
+
 
   
 
@@ -108,15 +109,19 @@ export const NavHeader = ({ handleSubsribeRequest,
   const isEmailValid =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValue as string)
   const Loader = <BeatLoader color="white" />
 
-  const submitBtn =  <Flex display="flex !important" justifyContent="center" mt="40px" w="100%">
+  const submitBtn =  <Flex  
+  position="fixed" 
+  display="flex !important" 
+  bottom="10px"
+  justifyContent="center" mt="40px" w="100%">
     <Button
-      isDisabled={!isEmailValid}
+      //isDisabled={!isEmailValid}
       colorScheme="none"
       position="relative"
       display="inline"
       fontSize="14px"
       bg="#DF374D"
-      w={["100%","80%"]}
+      w={["90%","80%"]}
       h="56px"
       borderRadius="1000px"
       color="white"
@@ -241,7 +246,8 @@ export const NavHeader = ({ handleSubsribeRequest,
 
   return (
     
-    <Flex w="100%" justifyContent="space-between" pl="1%" pr="2%"  fontFamily="satoshi"  position="relative">
+    <Flex w="100%" justifyContent="space-between" pl={"1%"} pr="2%" 
+     fontFamily="satoshi"  position="relative"   >
       <Box zIndex={1000} w="100%" h="auto"  position="absolute">
       {showSubscribeModal === true && <WaitlistModal closeSubscribeModal={closeSubscribeModal}></WaitlistModal>}
 
@@ -264,7 +270,7 @@ export const NavHeader = ({ handleSubsribeRequest,
                   </span>
      
         <Menu styles={mobilestyles} customBurgerIcon={<HiMenuAlt2></HiMenuAlt2>}>
-          <Flex pl="30px" w="200px" h="90px">
+          <Flex pl={["0px","30px"]} w="150px" h="90px">
             <Image src="/img/navLogo.svg" alt="gruve logo" />
           </Flex>
         
@@ -297,40 +303,7 @@ export const NavHeader = ({ handleSubsribeRequest,
             
           />
 
-          {/* <Box p={['10px', '30px']} w="100%" fontFamily="satoshi">
-            <Text fontSize={'3rem'} color="#666481">
-              For event attendees
-            </Text>
-            <Divider color="#E1E1E8" mt="25px" mb="25px"></Divider>
-            <Text
-              mb="25px"
-              fontWeight="bold"
-              fontSize={'3rem'}
-              fontFamily="satoshi"
-              color="#EA445A"
-            >
-              For event creators
-            </Text>
-
-            <Box w="100%" minH="136px" bg="#FFEFD5" borderRadius="8px" p="12px" position="relative">
-              <Heading fontSize={'2rem'} fontWeight="700" mt="10px" color="#06060B">
-                View Blog Articles
-              </Heading>
-              <Text w="190px" mt="10px" fontSize={'2rem'} color="#666481">
-                Get the best of articles to help you and also the latest news around events
-                happening around you
-              </Text>
-              <Box position="absolute" bottom="0px" right="0px">
-                <Image
-                  objectFit="cover"
-                  width={'9.563rem'}
-                  height={'9.563rem'}
-                  src="/img/slideImg.svg"
-                  alt=""
-                />
-              </Box>
-            </Box>
-          </Box> */}
+       
          
         </Menu>
       </div>
