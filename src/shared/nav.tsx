@@ -173,23 +173,37 @@ export const NavHeader = ({ handleSubsribeRequest,
                <ul className="nav-list attendees-nav-padding flex flex-between" 
               >
                 <li className="inner-nav-list">
-                  <div className="nav-link">
-                    <span 
+                {/*  */}
+                {/*  */}
+               
+                  <div className="nav-link" >
+                    
+                  <Link   href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=attendee`}>
+
+                  <span 
+                  style={{color:"#666481"}}
                    // className={`event-attendees nav-link-item`}
+                   
                     >
                       {t('navHeader.eventAttendeedTxt')}
                       
                     </span>
+                </Link>
+                    
                   </div>
                 </li>
 
                 <li className="inner-nav-list">
                   <div className="nav-link">
+                    <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=creator`}>
                     <span 
                     //className={`event-attendees nav-link-item `}
+                    style={{color:"#666481"}}
                     >
                       {t('navHeader.eventCreatorsText')}
                     </span>
+                    </Link>
+                   
                   </div>
                 </li>
               </ul> 
