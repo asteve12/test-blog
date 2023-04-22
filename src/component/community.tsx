@@ -129,7 +129,7 @@ const community = () => {
               <div className="community-card-link">
                 <div className="visit-now flex">
                   <div className="visit-now-text">
-                    <h3 className="margin-0 visit-now-h">{linkText}</h3>
+                    <h3 >{linkText}</h3>
                   </div>
 
                   <span className="visit-icon">

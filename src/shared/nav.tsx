@@ -89,10 +89,21 @@ type NavHeader = {
 export const NavHeader = ({ handleSubsribeRequest,
   errorMessage, isSubmitting, formValue,
   mode, setMode, handleSubscribeBxChange,closeSubscribeModal,showSubscribeModal }: NavHeader) => {
-  const [isDesktopScreen] = useMediaQuery('(min-width: 823px)', {
+  const [isDesktopScreen] = useMediaQuery('(min-width: 924px)', {
     ssr: true,
     fallback: false
   });
+  const router = useRouter()
+  // const regex = /^(https?|http):\/\/([\w-]+(\.[\w-]+)*)(\/[\w-]+)*\/?(\.[\w-]+)?(\?.*)?(#[\w-]+)?$/
+
+  const isHomePage = router.asPath === "/"
+
+  console.log('homepage',isHomePage,process.env.NEXT_PUBLIC_Landing_page_URL)
+
+  
+
+    
+
   const { changeLanguage, currentLanguage, t, languageOption } = useNavHeaderLogic();
   const isEmailValid =  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formValue as string)
   const Loader = <BeatLoader color="white" />
@@ -129,7 +140,7 @@ export const NavHeader = ({ handleSubsribeRequest,
           <nav className="header-nav">
             <div className=" navBox">
               <div className="nav-logo">
-              <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
+                {isHomePage ? <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
                   <span className="nav-logo-link">
                     <Image
                       mt={['25px', '0px']}
@@ -139,7 +150,18 @@ export const NavHeader = ({ handleSubsribeRequest,
                       alt="gruve logo"
                     />
                   </span>
-                </Link>
+                </Link>:<Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
+                  <span className="nav-logo-link">
+                    <Image
+                      mt={['25px', '0px']}
+                      width="145px"
+                      height="60px"
+                      src="/img/navLogo.svg"
+                      alt="gruve logo"
+                    />
+                  </span>
+                </Link> }
+              
               </div>
 
              
@@ -147,7 +169,9 @@ export const NavHeader = ({ handleSubsribeRequest,
               >
                 <li className="inner-nav-list">
                   <div className="nav-link">
-                    <span className={`event-attendees nav-link-item`}>
+                    <span 
+                   // className={`event-attendees nav-link-item`}
+                    >
                       {t('navHeader.eventAttendeedTxt')}
                       
                     </span>
@@ -156,7 +180,9 @@ export const NavHeader = ({ handleSubsribeRequest,
 
                 <li className="inner-nav-list">
                   <div className="nav-link">
-                    <span className={`event-attendees nav-link-item `}>
+                    <span 
+                    //className={`event-attendees nav-link-item `}
+                    >
                       {t('navHeader.eventCreatorsText')}
                     </span>
                   </div>
