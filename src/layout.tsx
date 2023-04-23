@@ -53,7 +53,9 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
   </Box>
   </Flex>
 
-  const componentWhenshowSideBar_False = <>{children}<Box mb={["150px", null, null, null]}><Community></Community></Box><Box display={['none', 'none', 'block']}><Loop
+  const componentWhenshowSideBar_False = <>{children}<Box mb={["150px", null, null, null]}>
+    <Community></Community></Box><Box display={['block']}>
+      <Loop
   showSubscribeModal={showSubscribeModal}
     onChange={handleSubscribeBxChange}
     formValue={subscribeValue}
@@ -63,7 +65,9 @@ export const Layout = ({ showLoginHeader,children, showHeader, showSideBar,draft
     closeSubscribeModal={closeSubscribeModal}
     handleSubscribeBxChange={handleSubscribeBxChange}
     isFormFilled={isFormFilled}
-  ></Loop></Box><Footer />
+  ></Loop>
+  
+  </Box><Footer />
   </>
   
   return (

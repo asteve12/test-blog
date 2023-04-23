@@ -42,13 +42,18 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
     const Loader = <BeatLoader color="white" />
 
     
-    const SubmitBtn = <Button w={['187px']} 
+    const SubmitBtn = <Button 
+    w={["96%","80%","60%","187px"]}
+    ml={["auto","auto",null]}
+    mr={["auto","auto",null]} 
+    mt={["30px","30px","30px","0px"]}
+    
     
     bottom="0px"
     //isDisabled={!isEmailValid} 
     onClick={props.handleSubsribeRequest} 
     fontFamily="satoshi" h="67px" fontSize="17px"
-  rounded="100px" bg="#EA445A !important" ml="10px">
+  rounded="100px" bg="#EA445A !important" >
   {props.isSubmitting === "SUBMITTING" ? Loader:t('blog.loop_form_button_getStarted')}
 </Button>
 
@@ -59,6 +64,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
     <Flex
             w={['100%', '100%', '100%', '100%', '692px']}
             justifyContent="center"
+            flexDirection={["column","column","column","row"]}
             mt="25px"
             ml="auto"
             mr="auto"
@@ -67,41 +73,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
         position="relative"
       
       >
-        <Flex w={['100%', '80%', '80%', '692px']}  display={["block","block","none","none"]}>
-
-        <Nav  className="flex-column" style={{width:"100%"}}>
-        <Box fontSize="16px" fontWeight="400" mb="15px" >
-            <Nav.Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=attendee`} style={{width:"100%", color:"#666481"}}>
-              <Text color="#66648 !important">
-              For event attendees
-              </Text>
-              
-              </Nav.Link>
-        </Box>
-
-        <Box ml="10px" w="100%" background="#666481" border="solid 0.5px #E1E1E8"/>
-
-        <Box fontSize="16px" fontWeight="400" mb="15px" mt="15px">
-        <Nav.Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=creator`} style={{width:"100%", color:"#666481"}}>For event creators</Nav.Link>
-        </Box>
-
-
-        <Box w={["100%","343px"]}  h="60px" >
-        <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}`}>
-        
-        <Image objectFit="cover" src="/blog/bannerimg.svg"/>
-        </Link>
-       
-          
-        </Box>
-          
- 
-    
-  
-     
-    </Nav>
-
-        </Flex>
+      
 
 
         
@@ -120,8 +92,11 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
 
       </Flex>
       <Input
-      display={["none","none","block","block"]}
-        w="60%"
+      display={["block"]}
+        w={['90%',"80%","60%"]}
+        ml={["auto","auto",null]}
+        mr={["auto","auto",null]}
+        
         h="67px"
         rounded="5px"
         placeholder={`${t('blog.loop_input_placeholder')}`}

@@ -16,7 +16,19 @@ h5,
 p,
 span {
   caret-color: transparent;
-} */
+} 
+
+
+.*/
+
+.Dropdown-control{
+  padding: 27px !important;
+  padding-top: 5px !important;
+  /* padding-left: 50px;
+  padding-right: -10px; */
+  
+
+}
 
 
 .navBox{

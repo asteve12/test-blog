@@ -8,6 +8,7 @@ import LinkedIndark from '../../public/img/linkedin-dark.svg';
 import Tiktokdark from '../../public/img/tiktok-dark.svg';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
+import { Box } from '@chakra-ui/react';
 
 const footer = () => {
   const { t } = useTranslation('common');
@@ -15,71 +16,69 @@ const footer = () => {
   const darkNav = [
     {
       id: 1,
-      text: t('footer.first_footer_items')
-    },
-    {
-      id: 2,
-      text: t('footer.Faq')
+      text: t('footer.first_footer_items'),
+      link:"https://blog.gruve.events/"
     },
     {
       id: 3,
-      text: t('footer.about')
+      text: t('footer.about'),
+      link:"https://gruve.events/"
     }
   ];
   const darkIcons = [
+    // {
+    //   id: 1,
+    //   icon: Fbdark,
+    //   socialLink: ''
+    // },
     {
       id: 1,
-      icon: Fbdark,
-      socialLink: ''
+      icon: Igdark,
+      socialLink: 'https://www.instagram.com/gruvetickets/'
     },
     {
       id: 2,
-      icon: Igdark,
-      socialLink: ''
-    },
-    {
-      id: 3,
       icon: Twitterdark,
       socialLink: 'https://twitter.com/gruvetickets'
     },
     {
-      id: 4,
+      id: 3,
       icon: Discordark,
       socialLink: 'https://discord.gg/PYzVKPJ6'
     },
     {
-      id: 5,
+      id: 4,
       icon: LinkedIndark,
       socialLink: 'https://www.linkedin.com/company/gruve-tickets/'
     }
   ];
   const smIcons = [
+    // {
+    //   id: 1,
+    //   icon: Fbdark,
+    //   socialLink: '',
+    //   iconText: 'Facebook'
+    // },
     {
       id: 1,
-      icon: Fbdark,
-      socialLink: '',
-      iconText: 'Facebook'
-    },
-    {
-      id: 2,
       icon: Igdark,
-      socialLink: '',
+      socialLink: 'https://www.instagram.com/gruvetickets/',
       iconText: 'Instagram'
     },
     {
-      id: 3,
+      id: 2,
       icon: Twitterdark,
       socialLink: 'https://twitter.com/gruvetickets',
       iconText: 'Twitter'
     },
     {
-      id: 4,
+      id: 3,
       icon: Discordark,
       socialLink: 'https://discord.gg/PYzVKPJ6',
       iconText: 'Discord'
     },
     {
-      id: 5,
+      id: 4,
       icon: LinkedIndark,
       socialLink: 'https://www.linkedin.com/company/gruve-tickets/',
       iconText: 'LinkedIn'
@@ -91,17 +90,20 @@ const footer = () => {
       <div id="copyright-lg" className="footer-dark">
         <div className="footer-dark-content">
           <div className="footer-dark-logo">
-            <Image src={Darklogo} alt="" />
+            <Image src={Darklogo} alt="" /> 
           </div>
 
-          <div className="dark-footer-nav flex flex-between">
-            {darkNav.map(({ id, text }) => {
+          <div className="dark-footer-nav flex flex-between ">
+            {darkNav.map(({ id, text,link}) => {
               return (
-                <a key={id} href="https://" className="dark-footer-link">
+                <Box mr="1rem">
+                  <a key={id} href={`${link}`} className="dark-footer-link"  >
                   <div className="dark-footer-text">
                     <h3 className="margin-0 copyright-h dark-footer-h">{text}</h3>
                   </div>
                 </a>
+                </Box>
+                
               );
             })}
           </div>
@@ -110,7 +112,7 @@ const footer = () => {
             {darkIcons.map(({ id, icon, socialLink }) => {
               return (
                 <div key={id} className="dark-footer-icon fb-dark">
-                  <a href={socialLink} target="_blank" rel="noopener noreferrer">
+                  <a href={socialLink} target="_blank" >
                     <Image src={icon} alt="" />
                   </a>
                 </div>
@@ -119,7 +121,11 @@ const footer = () => {
 
             <div className="dark-circle">
               <div className="tiktok-dark-container">
+                <a href="https://www.tiktok.com/@gruvetickets" target='_blank'>
                 <Image src={Tiktokdark} alt="" />
+                </a>
+                
+               
               </div>
             </div>
           </div>
@@ -134,9 +140,9 @@ const footer = () => {
 
           <div className="copyright-container">
             <div className="sm-footer-nav w-100 flex flex-between">
-              {darkNav.map(({ id, text }) => {
+              {darkNav.map(({ id, text,link }) => {
                 return (
-                  <a key={id} href="https://" className="dark-footer-link">
+                  <a key={id} href={`${link}`} className="dark-footer-link">
                     <div className="dark-footer-text">
                       <h3 className="margin-0 copyright-h dark-footer-h">{text}</h3>
                     </div>
@@ -151,7 +157,7 @@ const footer = () => {
                   return (
                     <div key={id} className="flex footer-nav-icon flex-center">
                       <div className="dark-footer-icon fb-dark">
-                        <a href={socialLink} target="_blank" rel="noopener noreferrer">
+                        <a href={socialLink} target="_blank" >
                           <Image src={icon} alt="" />
                         </a>
                       </div>
