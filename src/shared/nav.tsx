@@ -14,6 +14,8 @@ import { MODE } from './enum';
 import { JoinWaitlist } from './joinWaitlist';
 import { BeatLoader } from 'react-spinners';
 import { WaitlistModal } from '@/component/waitlistModal';
+import { Nav } from 'react-bootstrap';
+
 
 
 
@@ -23,10 +25,10 @@ import { WaitlistModal } from '@/component/waitlistModal';
 const mobilestyles = {
   bmBurgerButton: {
     position: 'relative',
-    width: '36px',
-    height: '30px',
+    width: '2rem',
+    height: '1.2rem',
     left: '0px',
-    top: '36px'
+    top: '39px'
   },
   bmBurgerBars: {
     background: '#373a47'
@@ -113,7 +115,12 @@ export const NavHeader = ({ handleSubsribeRequest,
   position="fixed" 
   display="flex !important" 
   bottom="10px"
-  justifyContent="center" mt="40px" w="100%">
+  justifyContent={["left","center"]} 
+  mt="40px" 
+  w="100%"
+  
+  >
+
     <Button
       //isDisabled={!isEmailValid}
       colorScheme="none"
@@ -121,14 +128,21 @@ export const NavHeader = ({ handleSubsribeRequest,
       display="inline"
       fontSize="14px"
       bg="#DF374D"
-      w={["95%","80%"]}
+      w={["96%","57%"]}
+      mr="auto"
+  
+      boxSizing='border-box'
       h="56px"
       borderRadius="1000px"
       color="white"
-      onClick={handleSubsribeRequest}
+      //onClick={handleSubsribeRequest}
+    
     >
+      <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/#join-the-hype`}  style={{color:"white"}}>
+      {isSubmitting === "SUBMITTING" ? Loader:t('navHeader.waitlist')}
+      </Link>
 
-{isSubmitting === "SUBMITTING" ? Loader:t('navHeader.waitlist')}
+
 
     </Button>
   </Flex>
@@ -145,7 +159,7 @@ export const NavHeader = ({ handleSubsribeRequest,
           <nav className="header-nav">
             <div className=" navBox">
               <div className="nav-logo">
-                {isHomePage ? <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
+              <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
                   <span className="nav-logo-link">
                     <Image
                       mt={['25px', '0px']}
@@ -155,17 +169,7 @@ export const NavHeader = ({ handleSubsribeRequest,
                       alt="gruve logo"
                     />
                   </span>
-                </Link>:<Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
-                  <span className="nav-logo-link">
-                    <Image
-                      mt={['25px', '0px']}
-                      width="145px"
-                      height="60px"
-                      src="/img/navLogo.svg"
-                      alt="gruve logo"
-                    />
-                  </span>
-                </Link> }
+                </Link>
               
               </div>
 
@@ -173,16 +177,13 @@ export const NavHeader = ({ handleSubsribeRequest,
                <ul className="nav-list attendees-nav-padding flex flex-between" 
               >
                 <li className="inner-nav-list">
-                {/*  */}
-                {/*  */}
-               
-                  <div className="nav-link" >
+                <div className="nav-link" >
                     
                   <Link   href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=attendee`}>
 
                   <span 
                   style={{color:"#666481"}}
-                   // className={`event-attendees nav-link-item`}
+              
                    
                     >
                       {t('navHeader.eventAttendeedTxt')}
@@ -213,7 +214,7 @@ export const NavHeader = ({ handleSubsribeRequest,
                   <span className="nav-blog-item" style={{color:"#EA445A",fontWeight:"bold"}}>
                     <Link href="/">{t('navHeader.blogNav')}</Link>
                   </span>
-                  <span className="nav-language-items">
+                  <span className="nav-language-items"  >
                     <Dropdown
                       className="hide-border align-center"
                       controlClassName="hide-border align-center"
@@ -262,20 +263,24 @@ export const NavHeader = ({ handleSubsribeRequest,
     
     <Flex w="100%" justifyContent="space-between" pl={"1%"} pr="2%" 
      fontFamily="satoshi"  position="relative"    >
-      <Box zIndex={1000} w="100%" h="auto"  position="absolute">
+      <Box zIndex={1000} w="100%" h="auto"  position="absolute" >
       {showSubscribeModal === true && <WaitlistModal closeSubscribeModal={closeSubscribeModal}></WaitlistModal>}
 
      </Box>
       <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
+        
         <Image mt="25px" width="145px" height="60px" src="/img/navLogo.svg" alt="gruve logo" />
       </Link>
 
       
       
       <div style={{ display: "flex",zIndex:"10",position:"relative"}}>
-          <span className="nav-language-items" style={{paddingTop:"15px"}}>
+        
+          <span className="nav-language-items" 
+          style={{paddingTop:"15px"}} 
+          >
                     <Dropdown
-                      className="hide-border align-center"
+                      //className="hide-border align-center"
                       controlClassName="hide-border align-center"
                       options={languageOption}
                       onChange={(selectedLanguage) => changeLanguage(selectedLanguage)}
@@ -283,12 +288,52 @@ export const NavHeader = ({ handleSubsribeRequest,
                     />
                   </span>
      
-        <Menu styles={mobilestyles} customBurgerIcon={<Image src={"/blog/logo.svg"}/>}>
-          <Flex pl={["0px","30px"]} w="150px" h="90px">
-            <Image src="/img/navLogo.svg" alt="gruve logo" />
+        <Menu styles={mobilestyles} customBurgerIcon={<Image w="60px" h="60px"  src={"/blog/logo.svg"}/>}>
+          <Flex pl={["0px","0px"]} w="120px" h="90px" >
+            <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
+            <Image src="/img/navLogo.svg"  w="100px" alt="gruve logo" />
+            </Link>
+           
           </Flex>
+
+          <Flex w={['100%', '100%', '100%', '692px']}   display={["block","block","block","none"]}>
+
+<Nav  className="flex-column" style={{width:"97%"}}>
+<Box fontSize="16px" fontWeight="400" mb="15px"  >
+    <Nav.Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=attendee`} style={{width:"100%", color:"#666481"}}>
+      <Text color="#66648 !important">
+      For event attendees
+      </Text>
+      
+      </Nav.Link>
+</Box>
+
+<Box ml="10px" w="100%" background="#666481" border="solid 0.5px #E1E1E8"/>
+
+<Box fontSize="16px" fontWeight="400" mb="15px" mt="15px">
+<Nav.Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}?mode=creator`} style={{width:"100%", color:"#666481"}}>For event creators</Nav.Link>
+</Box>
+
+
+<Box w={["100%","60%"]}  mt="30px" mb="25%" h="60px" >
+<Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}`}>
+
+<Image objectFit="cover" w="100%" src="/blog/bannerimg.svg"/>
+</Link>
+
+  
+</Box>
+  
+
+
+
+
+</Nav>
+
+</Flex>
+{submitBtn}
         
-          <JoinWaitlist
+          {/* <JoinWaitlist
             handleSubscribeBxChange={handleSubscribeBxChange}
             formValue={formValue}
             isSubmitting={isSubmitting}
@@ -315,7 +360,7 @@ export const NavHeader = ({ handleSubsribeRequest,
 
             customSubmitComponent={submitBtn}
             
-          />
+          /> */}
 
        
          

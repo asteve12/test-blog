@@ -32,11 +32,14 @@ export const Loop = (props:ILoop) => {
 
   return (
     <>
+    
       {props.showSubscribeModal === true && <WaitlistModal 
         closeSubscribeModal={props.closeSubscribeModal} ></WaitlistModal>}
-    <Box width="100%"  zIndex="1"  h={["auto", "auto", "600px", "900px"]} position="relative" >
+    <Box width="100%"  zIndex="1"  h={[ "600px", "900px"]} position="relative" >
+      
    
       <Box  position="absolute" h="100%"   w="100%" >
+        
       <Img
         w="100%"
        objectFit="cover"
@@ -74,18 +77,23 @@ export const Loop = (props:ILoop) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Box ml="auto" mr="auto" w="100%">
-          <Heading id="join-the-hype" fontFamily="satoshi black" textAlign="center"
-            fontWeight="900" fontSize={["5rem","5rem","5rem","10rem"]} mb="5px">
+        <Box ml="auto" mr="auto" w={["80%","80%","80%","100%"]}>
+          <Heading 
+           ml="auto" mr="auto" 
+          id="join-the-hype" 
+          fontFamily="satoshi black" textAlign="center"
+            fontWeight="900" 
+            fontSize={["4rem","4rem","4rem","10rem"]} 
+            mb="5px">
             {t('blog.loop_header')}
           </Heading>
           <Text
             
-            w="566px"
+            w={["100%","566px"]}
             maxW="100%"
             ml="auto" mr="auto" mb="15px"
             fontFamily="satoshi"
-            textAlign="center" fontWeight="400" fontSize="18px">
+            textAlign="center" fontWeight="400" fontSize={["1.8rem"]}>
             {t('blog.loop_text')}
             </Text>
             

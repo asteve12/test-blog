@@ -98,7 +98,7 @@ const community = () => {
           spacing={["0rem", "8rem", "20px", "10rem"]}
          
           alignItems="center"
-          w={["100%", "80%", "80%", "52%"]}
+          w={["100%", "80%", "80%", "82%"]}
           minChildWidth={["389px","100px","160px","100px"]}
           ml="auto"
           mr="auto"
@@ -114,7 +114,8 @@ const community = () => {
                 
               >
               
-                <Image  w="40px" h="40px" mb="10px" ml="auto" mr="auto" src={image} alt="socials logo 12" />
+                <Image  w="40px" h="40px" mb="10px" ml="auto" mr="auto" 
+                src={image} alt="socials logo 12" />
               </Flex>
 
               <div className="community-card-header center">

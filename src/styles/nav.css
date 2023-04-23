@@ -10,7 +10,7 @@
 }
 
 .nav-language-items {
-  font-size: 16px;
+  font-size: 1.6rem;
   margin-right: 3rem;
   color: #666481;
   font-family: Satoshi;
@@ -204,6 +204,8 @@
 
 .hide-border {
   border: none !important;
+  position: relative;
+  top:6px
 }
 
 

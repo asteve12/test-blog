@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 //@ts-ignore
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react';
+import logo from "../../public/img/navLogo.svg"
 
 //@ts-ignore
 import qs from 'qs';
@@ -48,21 +49,20 @@ function App({ Component, pageProps }: AppProps) {
   
   const Router = useRouter()
   console.log("Router",Router,session)
-  console.log("pageProps",pageProps)
+ 
 
   const favIconsPath = data?.data?.attributes?.favicon?.data?.attributes?.url;
+  console.log("pageProps",`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`)
   const { initialise } = usePreventHydrationError();
 
   if (!initialise) return  <Head>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
  <Seo  {...seo}/>
 
     
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+ <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta charSet="utf-8" />
-<link
-  rel="shortcut icon"
-  href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
-/>
+
 
 </Head>;
   // if(Router.pathname === "/admin" &&  session)
@@ -70,15 +70,11 @@ function App({ Component, pageProps }: AppProps) {
   return (
     <SessionProvider  session={session}>
     <ChakraProvider>
-      {/* <Head>
+      <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
           <meta charSet="utf-8" />
-        <link
-          rel="shortcut icon"
-          href={`${process.env.NEXT_PUBLIC_STRAPI_API_URL}${favIconsPath}`}
-        />
-        <Seo {...seo} />
-      </Head> */}
+      
+      </Head>
       <main className={myFont.className}>
       <Component {...pageProps} />
       </main>
