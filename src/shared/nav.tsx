@@ -135,7 +135,7 @@ export const NavHeader = ({ handleSubsribeRequest,
       h="56px"
       borderRadius="1000px"
       color="white"
-      //onClick={handleSubsribeRequest}
+      onClick={closeSubscribeModal}
     
     >
       <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/#join-the-hype`}  style={{color:"white"}}>
