@@ -316,14 +316,17 @@ export const NavHeader = ({ handleSubsribeRequest,
 </Box>
 
 
-<Box w={["100%","60%"]}  mt="30px" mb="25%" h="60px" >
+<Button 
+onClick={()=> router.reload()}
+w={["100%","60%"]} 
+ mt="30px" mb="25%" h="60px" >
 <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}`}>
 
 <Image objectFit="cover" w="100%" src="/blog/bannerimg.svg"/>
 </Link>
 
   
-</Box>
+</Button>
   
 
 
