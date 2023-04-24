@@ -43,14 +43,14 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
 
     
     const SubmitBtn = <Button 
-    w={["96%","80%","60%","187px"]}
+    w={["96%","96%","60%","187px"]}
     ml={["auto","auto",null]}
     mr={["auto","auto",null]} 
     mt={["30px","30px","30px","0px"]}
     
     
     bottom="0px"
-    //isDisabled={!isEmailValid} 
+      isDisabled={!isEmailValid} 
     onClick={props.handleSubsribeRequest} 
     fontFamily="satoshi" h="67px" fontSize="17px"
   rounded="100px" bg="#EA445A !important" >
@@ -85,15 +85,17 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
       
         > 
 
-
-           {/* {props.formValue  && !isEmailValid && <Text ml="30px" mt="-20px" color="red" fontSize="13px">
+<Box >
+            {props.formValue  && !isEmailValid && <Text ml="0px" mt="-20px" color="red" fontSize="13px">
                 email is not valid
-           </Text> } */}
+           </Text> }
 
+            </Box>
+         
       </Flex>
       <Input
       display={["block"]}
-        w={['90%',"80%","60%"]}
+        w={['95%',"95%","60%"]}
         ml={["auto","auto",null]}
         mr={["auto","auto",null]}
         
@@ -114,7 +116,8 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
         data-formName="subscribe"
 
             />
-         
+           
+          
             
       {/* render subit button */}
       {props.customSubmitComponent ?  props.customSubmitComponent:SubmitBtn}
@@ -122,6 +125,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
       {props.errorMessage}</Text>}
 
       </Flex>
+    
       
  
 

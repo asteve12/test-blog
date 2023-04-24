@@ -159,7 +159,7 @@ export const NavHeader = ({ handleSubsribeRequest,
           <nav className="header-nav">
             <div className=" navBox">
               <div className="nav-logo">
-              <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
+              <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`} >
                   <span className="nav-logo-link">
                     <Image
                       mt={['25px', '0px']}
@@ -168,6 +168,7 @@ export const NavHeader = ({ handleSubsribeRequest,
                       src="/img/navLogo.svg"
                       alt="gruve logo"
                     />
+                    
                   </span>
                 </Link>
               
@@ -267,7 +268,7 @@ export const NavHeader = ({ handleSubsribeRequest,
       {showSubscribeModal === true && <WaitlistModal closeSubscribeModal={closeSubscribeModal}></WaitlistModal>}
 
      </Box>
-      <Link href={`/${currentLanguage !== 'en' ? currentLanguage : ''}`}>
+      <Link href={`${process.env.NEXT_PUBLIC_Landing_page_URL}`}>
         
         <Image mt="25px" width="145px" height="60px" src="/img/navLogo.svg" alt="gruve logo" />
       </Link>

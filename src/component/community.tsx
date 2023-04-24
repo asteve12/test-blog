@@ -1,19 +1,14 @@
 import React from 'react';
 import Redarrow from '../../public/img/arrow-right.svg';
-  
-// import Redarrow from "../../assets/img/arrow-right.svg";
-//import Twitter from "../../public/img/twitter-community.svg";
-//import Discord from "../../public/img/discord-community.svg";
-//import LinkedIn from "../../public/img/linkedin-community.svg";
-// import Tiktok from "../../assets/img/tiktok-community.svg";
-//import IG from "../../public/img/instagram-community.svg";
-
 import { useTranslation } from 'react-i18next';
 import Link from 'next/link';
-import { Heading, Image,Text,Box, Flex, SimpleGrid} from '@chakra-ui/react';
+import { Heading, Image,Text,Box, Flex, SimpleGrid,
+   useQuery, useMediaQuery} from '@chakra-ui/react';
 
 const community = () => {
   const { t } = useTranslation('common');
+  const [isBetween600And900] = useMediaQuery("(min-width: 750px) and (max-width: 936px)");
+  
   const communityCard = [
     {
       id: 1,
@@ -94,22 +89,24 @@ const community = () => {
         justifyContent="center" 
         w="100%" flexWrap="nowrap"
       >
-        <SimpleGrid 
-          spacing={["0rem", "8rem", "20px", "10rem"]}
+        {isBetween600And900  ? <SimpleGrid 
+        columns={[3]}
+           spacing={"4rem"}
          
-          alignItems="center"
-          w={["100%", "80%", "80%", "82%"]}
-          minChildWidth={["389px","100px","160px","100px"]}
-          ml="auto"
-          mr="auto"
+          // alignItems={["space-between","center"]}
+          // w={["100%", "80%", "80%", "82%"]}
+          // minChildWidth={["389px","100px","160px","100px"]}
+          // ml="auto"
+          // mr="auto"
          
           
         >
         
+        
         {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
           return (
-            <Link href={socialLink} key={id} className="community-card">
-              <Flex alignItems="center" justifyContent="center" w="100%"
+            <Link href={socialLink} key={id} className="community-card" >
+              <Flex alignItems="center" justifyContent="center" mr="10px" w="100%"
                 mb="10px"
                 
               >
@@ -141,7 +138,57 @@ const community = () => {
             </Link>
           );
         })}
-      </SimpleGrid>
+      </SimpleGrid>:<SimpleGrid 
+        columns={[3,3,4]}
+           spacing={"4rem"}
+         
+          // alignItems={["space-between","center"]}
+          // w={["100%", "80%", "80%", "82%"]}
+          // minChildWidth={["389px","100px","160px","100px"]}
+          // ml="auto"
+          // mr="auto"
+         
+          
+        >
+        
+        
+        {communityCard.map(({ id, image, header, text, linkText, linkImage, socialLink }) => {
+          return (
+            <Link href={socialLink} key={id} className="community-card" >
+              <Flex alignItems="center" justifyContent="center" mr="10px" w="100%"
+                mb="10px"
+                
+              >
+              
+                <Image  w="40px" h="40px" mb="10px" ml="auto" mr="auto" 
+                src={image} alt="socials logo 12" />
+              </Flex>
+
+              <div className="community-card-header center">
+                <h3 className="margin-0 community-card-h">{header}</h3>
+              </div>
+
+              <div className="community-card-text center">
+                <p className="margin-0 community-card-p">{text}</p>
+              </div>
+
+              {/* eslint-disable-next-line */}
+              <div className="community-card-link">
+                <div className="visit-now flex">
+                  <div className="visit-now-text">
+                    <h3 >{linkText}</h3>
+                  </div>
+
+                  <span className="visit-icon">
+                    <Image src={linkImage} loading="lazy" alt="" />
+                  </span>
+                </div>
+              </div>
+            </Link>
+          );
+        })}
+      </SimpleGrid>}
+        
       </Box>
 
      
