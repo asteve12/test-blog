@@ -316,7 +316,8 @@ export const NavHeader = ({ handleSubsribeRequest,
 </Box>
 
 
-<Button 
+<Box
+display="block"
 onClick={()=> router.reload()}
 w={["100%","60%"]} 
  mt="30px" mb="25%" h="60px" >
@@ -326,7 +327,7 @@ w={["100%","60%"]}
 </Link>
 
   
-</Button>
+</Box>
   
 
 
