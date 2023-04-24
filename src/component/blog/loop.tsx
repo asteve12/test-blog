@@ -38,7 +38,7 @@ export const Loop = (props:ILoop) => {
     <Box width="100%"  zIndex="1"  h={[ "600px", "900px"]} position="relative" >
       
    
-      <Box  position="absolute" h="100%"   w="100%" >
+      <Box  position="absolute" h="100%"   w="100%"  >
         
       <Img
         w="100%"
@@ -77,7 +77,7 @@ export const Loop = (props:ILoop) => {
         alignItems="center"
         justifyContent="center"
       >
-        <Box ml="auto" mr="auto" w={["80%","80%","80%","100%"]}>
+        <Box ml="auto" mr="auto" w={["100%","100%","100%","100%"]}>
           <Heading 
            ml="auto" mr="auto" 
           id="join-the-hype" 
@@ -88,6 +88,8 @@ export const Loop = (props:ILoop) => {
             {t('blog.loop_header')}
           </Heading>
           <Text
+          pl="7%"
+          pr="7%"
             
             w={["100%","566px"]}
             maxW="100%"

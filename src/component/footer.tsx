@@ -8,7 +8,7 @@ import LinkedIndark from '../../public/img/linkedin-dark.svg';
 import Tiktokdark from '../../public/img/tiktok-dark.svg';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import { Box } from '@chakra-ui/react';
+import { Box, Flex } from '@chakra-ui/react';
 
 const footer = () => {
   const { t } = useTranslation('common');
@@ -139,7 +139,7 @@ const footer = () => {
           </div>
 
           <div className="copyright-container">
-            <div className="sm-footer-nav w-100 flex flex-between">
+            <Flex justifyContent="space-between" className="sm-footer-nav w-100 flex ">
               {darkNav.map(({ id, text,link }) => {
                 return (
                   <a key={id} href={`${link}`} className="dark-footer-link">
@@ -149,7 +149,7 @@ const footer = () => {
                   </a>
                 );
               })}
-            </div>
+            </Flex>
 
             <div className="sm-footer-icons">
               <div className="sm-footer-icon1 flex flex-between flex-wrap">
