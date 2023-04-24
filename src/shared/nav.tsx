@@ -121,6 +121,8 @@ export const NavHeader = ({ handleSubsribeRequest,
   
   >
 
+   
+    <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/#join-the-hype`}  style={{color:"white"}}>
     <Button
       //isDisabled={!isEmailValid}
       colorScheme="none"
@@ -138,13 +140,13 @@ export const NavHeader = ({ handleSubsribeRequest,
        onClick={()=> router.reload()}
     
     >
-      <Link href={`${process.env.NEXT_PUBLIC_BLOG_VISITOR_URL}/#join-the-hype`}  style={{color:"white"}}>
-      {isSubmitting === "SUBMITTING" ? Loader:t('navHeader.waitlist')}
-      </Link>
+     
 
-
+     {isSubmitting === "SUBMITTING" ? Loader:t('navHeader.waitlist')}
 
     </Button>
+      
+      </Link>
   </Flex>
   
   
