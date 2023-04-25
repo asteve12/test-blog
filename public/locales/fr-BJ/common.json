@@ -143,9 +143,7 @@
     "join_hype": "Rejoignez le battage médiatique"
   },
   "footer": {
-    "first_footer_items": "Notre blog",
-    "Faq": "FAQ",
-    "about": "À propos de Gruve",
+    "first_footer_items": "Blog",
     "copyright": "Copyright 2023 Mine"
   },
   "EmailModal": {
