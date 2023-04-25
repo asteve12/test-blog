@@ -8,7 +8,7 @@ import LinkedIndark from '../../public/img/linkedin-dark.svg';
 import Tiktokdark from '../../public/img/tiktok-dark.svg';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Center } from '@chakra-ui/react';
 
 const footer = () => {
   const { t } = useTranslation('common');
@@ -18,7 +18,7 @@ const footer = () => {
       id: 1,
       text: t('footer.first_footer_items'),
       link: 'https://blog.gruve.events/'
-    },
+    }
   ];
   const darkIcons = [
     // {
@@ -91,13 +91,13 @@ const footer = () => {
           <div className="dark-footer-nav flex flex-between ">
             {darkNav.map(({ id, text, link }) => {
               return (
-                <Box mr="1rem">
+                <Center m="auto">
                   <a key={id} href={`${link}`} className="dark-footer-link">
                     <div className="dark-footer-text">
                       <h3 className="margin-0 copyright-h dark-footer-h">{text}</h3>
                     </div>
                   </a>
-                </Box>
+                </Center>
               );
             })}
           </div>
@@ -131,7 +131,7 @@ const footer = () => {
           </div>
 
           <div className="copyright-container">
-            <Flex justifyContent="space-between" className="sm-footer-nav w-100 flex ">
+            <Center>
               {darkNav.map(({ id, text, link }) => {
                 return (
                   <a key={id} href={`${link}`} className="dark-footer-link">
@@ -141,7 +141,7 @@ const footer = () => {
                   </a>
                 );
               })}
-            </Flex>
+            </Center>
 
             <div className="sm-footer-icons">
               <div className="sm-footer-icon1 flex flex-between flex-wrap">
