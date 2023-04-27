@@ -43,7 +43,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
 
     
     const SubmitBtn = <Button 
-    w={["96%","96%","60%","187px"]}
+    w={["96%","80%","60%","187px"]}
     ml={["auto","auto",null]}
     mr={["auto","auto",null]} 
     mt={["30px","30px","30px","0px"]}
@@ -96,7 +96,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
       </Flex>
       <Input
       display={["block"]}
-        w={['95%',"95%","60%"]}
+        w={['95%',"80%","60%"]}
         ml={["auto","auto",null]}
         mr={["auto","auto",null]}
         
