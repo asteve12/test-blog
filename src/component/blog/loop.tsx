@@ -35,7 +35,13 @@ export const Loop = (props:ILoop) => {
     
       {props.showSubscribeModal === true && <WaitlistModal 
         closeSubscribeModal={props.closeSubscribeModal} ></WaitlistModal>}
-    <Box width="100%"  zIndex="1"  h={[ "600px", "900px"]} position="relative" >
+    <Box 
+    width="100%"  
+    zIndex="1"  
+    h={[ "600px", "900px"]} 
+    position="relative"
+   
+     >
       
    
       <Box  position="absolute" h="100%"   w="100%"  >

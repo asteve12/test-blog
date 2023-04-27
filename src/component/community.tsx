@@ -37,15 +37,15 @@ const community = () => {
       linkImage: Redarrow,
       socialLink: 'https://www.linkedin.com/company/gruve-tickets/'
     },
-    // {
-    //   id: 4,
-    //   image: Tiktok,
-    //   header: "Tiktok",
-    //   text: "Follow us in tiktok and let's get gruvvy!",
-    //   linkText: "Visit now",
-    //   linkImage: Redarrow,
-    //   socialLink: "",
-    // },
+    {
+      id: 4,
+      image: "/img/tiktok-dark.svg",
+      header: "Tiktok",
+      text: "Follow us in tiktok and let's get gruvvy!",
+      linkText: "Visit now",
+      linkImage: Redarrow,
+      socialLink: "https://www.tiktok.com/@gruvetickets",
+    },
     {
       id: 5,
       image: '/img/instagram-community.svg',

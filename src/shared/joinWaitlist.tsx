@@ -62,7 +62,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
 
     return   <FormControl >
     <Flex
-            w={['100%', '100%', '100%', '100%', '692px']}
+            w={['95%', '100%', '100%', '100%', '692px']}
             justifyContent="center"
             flexDirection={["column","column","column","row"]}
             mt="25px"
@@ -82,6 +82,7 @@ export const JoinWaitlist = (props: JoinWaitlist) => {
           position="absolute"
           ml="10%"
           top="90px"
+          
       
         > 
 
