@@ -91,7 +91,7 @@ export const Loop = (props:ILoop) => {
           pl="7%"
           pr="7%"
             
-            w={["100%","566px"]}
+            w={["100%","60%"]}
             maxW="100%"
             ml="auto" mr="auto" mb="15px"
             fontFamily="satoshi"
