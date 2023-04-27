@@ -143,9 +143,7 @@
     "join_hype": "Join The Hype"
   },
   "footer": {
-    "first_footer_items": "Our Blog",
-    "Faq": "FAQs",
-    "about": "About Gruve",
+    "first_footer_items": "Blog",
     "copyright": "Copyright 2023 Gruve"
   },
   "EmailModal": {

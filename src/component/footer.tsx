@@ -8,7 +8,7 @@ import LinkedIndark from '../../public/img/linkedin-dark.svg';
 import Tiktokdark from '../../public/img/tiktok-dark.svg';
 import { useTranslation } from 'react-i18next';
 import Image from 'next/image';
-import { Box, Flex } from '@chakra-ui/react';
+import { Box, Flex, Center } from '@chakra-ui/react';
 
 const footer = () => {
   const { t } = useTranslation('common');
@@ -17,12 +17,7 @@ const footer = () => {
     {
       id: 1,
       text: t('footer.first_footer_items'),
-      link:"https://blog.gruve.events/"
-    },
-    {
-      id: 3,
-      text: t('footer.about'),
-      link:"https://gruve.events/"
+      link: 'https://blog.gruve.events/'
     }
   ];
   const darkIcons = [
@@ -90,20 +85,19 @@ const footer = () => {
       <div id="copyright-lg" className="footer-dark">
         <div className="footer-dark-content">
           <div className="footer-dark-logo">
-            <Image src={Darklogo} alt="" /> 
+            <Image src={Darklogo} alt="" />
           </div>
 
           <div className="dark-footer-nav flex flex-between ">
-            {darkNav.map(({ id, text,link}) => {
+            {darkNav.map(({ id, text, link }) => {
               return (
-                <Box mr="1rem">
-                  <a key={id} href={`${link}`} className="dark-footer-link"  >
-                  <div className="dark-footer-text">
-                    <h3 className="margin-0 copyright-h dark-footer-h">{text}</h3>
-                  </div>
-                </a>
-                </Box>
-                
+                <Center m="auto">
+                  <a key={id} href={`${link}`} className="dark-footer-link">
+                    <div className="dark-footer-text">
+                      <h3 className="margin-0 copyright-h dark-footer-h">{text}</h3>
+                    </div>
+                  </a>
+                </Center>
               );
             })}
           </div>
@@ -112,7 +106,7 @@ const footer = () => {
             {darkIcons.map(({ id, icon, socialLink }) => {
               return (
                 <div key={id} className="dark-footer-icon fb-dark">
-                  <a href={socialLink} target="_blank" >
+                  <a href={socialLink} target="_blank">
                     <Image src={icon} alt="" />
                   </a>
                 </div>
@@ -121,11 +115,9 @@ const footer = () => {
 
             <div className="dark-circle">
               <div className="tiktok-dark-container">
-                <a href="https://www.tiktok.com/@gruvetickets" target='_blank'>
-                <Image src={Tiktokdark} alt="" />
+                <a href="https://www.tiktok.com/@gruvetickets" target="_blank">
+                  <Image src={Tiktokdark} alt="" />
                 </a>
-                
-               
               </div>
             </div>
           </div>
@@ -139,8 +131,8 @@ const footer = () => {
           </div>
 
           <div className="copyright-container">
-            <Flex justifyContent="space-between" className="sm-footer-nav w-100 flex ">
-              {darkNav.map(({ id, text,link }) => {
+            <Center>
+              {darkNav.map(({ id, text, link }) => {
                 return (
                   <a key={id} href={`${link}`} className="dark-footer-link">
                     <div className="dark-footer-text">
@@ -149,7 +141,7 @@ const footer = () => {
                   </a>
                 );
               })}
-            </Flex>
+            </Center>
 
             <div className="sm-footer-icons">
               <div className="sm-footer-icon1 flex flex-between flex-wrap">
@@ -157,7 +149,7 @@ const footer = () => {
                   return (
                     <div key={id} className="flex footer-nav-icon flex-center">
                       <div className="dark-footer-icon fb-dark">
-                        <a href={socialLink} target="_blank" >
+                        <a href={socialLink} target="_blank">
                           <Image src={icon} alt="" />
                         </a>
                       </div>
@@ -187,7 +179,6 @@ const footer = () => {
           </div>
         </div>
       </div>
-      {/* <footer className="footerX">&copy; {t('footer.copyright')}</footer> */}
     </>
   );
 };
